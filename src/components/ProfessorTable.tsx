@@ -21,14 +21,14 @@ interface ProfessorTableProps {
     initialProfessors: Professor[];
 }
 
-type SortKey = "teaching_rating" | "proctoring_rating" | null;
+type SortKey = "name" | "teaching_rating" | "proctoring_rating" | null;
 type SortDirection = "asc" | "desc";
 
 export function ProfessorTable({ initialProfessors }: ProfessorTableProps) {
     const router = useRouter();
     const [searchQuery, setSearchQuery] = useState("");
-    const [sortKey, setSortKey] = useState<SortKey>(null);
-    const [sortDirection, setSortDirection] = useState<SortDirection>("desc");
+    const [sortKey, setSortKey] = useState<SortKey>("name");
+    const [sortDirection, setSortDirection] = useState<SortDirection>("asc");
 
     const [selectedProfessor, setSelectedProfessor] = useState<{ id: string; name: string } | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -39,9 +39,10 @@ export function ProfessorTable({ initialProfessors }: ProfessorTableProps) {
             // Toggle direction if same key
             setSortDirection(sortDirection === "asc" ? "desc" : "asc");
         } else {
-            // New key, default to desc (highest rating first usually makes sense)
+            // New key
             setSortKey(key);
-            setSortDirection("desc");
+            // Default to desc for ratings, asc for name
+            setSortDirection(key === "name" ? "asc" : "desc");
         }
     };
 
@@ -88,9 +89,9 @@ export function ProfessorTable({ initialProfessors }: ProfessorTableProps) {
     const SortIcon = ({ active, direction }: { active: boolean; direction: SortDirection }) => {
         if (!active) return null;
         return direction === "asc" ? (
-            <ArrowUp size={12} className="inline ml-1 text-gray-800" />
+             <ArrowUp size={12} className="inline ml-1 text-gray-800" />
         ) : (
-            <ArrowDown size={12} className="inline ml-1 text-gray-800" />
+             <ArrowDown size={12} className="inline ml-1 text-gray-800" />
         );
     };
 
@@ -117,7 +118,12 @@ export function ProfessorTable({ initialProfessors }: ProfessorTableProps) {
                 <table className="w-full text-left text-sm border-collapse">
                     <thead>
                         <tr className="border-b border-gray-200/50">
-                            <th className="py-3 pr-4 font-normal text-gray-400 w-1/3">Name</th>
+                            <th 
+                                className="py-3 pr-4 font-normal text-gray-400 w-1/3 cursor-pointer select-none hover:text-gray-600 transition-colors"
+                                onClick={() => handleSort("name")}
+                            >
+                                Name <SortIcon active={sortKey === "name"} direction={sortDirection} />
+                            </th>
                             {/* <th className="py-3 px-4 font-normal text-gray-400">Department</th> */}
                             <th
                                 className="py-3 px-4 font-normal text-gray-400 cursor-pointer select-none hover:text-gray-600 transition-colors"

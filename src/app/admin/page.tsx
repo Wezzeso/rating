@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { supabase } from "@/lib/supabase";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { Check, X, LogOut } from "lucide-react";
+import { Check, X, LogOut, ArrowUp, ArrowDown } from "lucide-react";
 
 interface Professor {
     id: string;
@@ -13,6 +13,9 @@ interface Professor {
     created_at: string;
 }
 
+type SortKey = "name" | "department" | "created_at";
+type SortDirection = "asc" | "desc";
+
 export default function AdminPage() {
     const router = useRouter();
     const [session, setSession] = useState<any>(null);
@@ -20,6 +23,8 @@ export default function AdminPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [professors, setProfessors] = useState<Professor[]>([]);
+    const [sortKey, setSortKey] = useState<SortKey>("name");
+    const [sortDirection, setSortDirection] = useState<SortDirection>("asc");
 
     useEffect(() => {
         // Check active session
@@ -55,6 +60,26 @@ export default function AdminPage() {
             setProfessors(data || []);
         }
     };
+
+    const handleSort = (key: SortKey) => {
+        if (sortKey === key) {
+            setSortDirection(sortDirection === "asc" ? "desc" : "asc");
+        } else {
+            setSortKey(key);
+            setSortDirection("asc");
+        }
+    };
+
+    const sortedProfessors = useMemo(() => {
+        return [...professors].sort((a, b) => {
+            const aValue = a[sortKey];
+            const bValue = b[sortKey];
+
+            if (aValue < bValue) return sortDirection === "asc" ? -1 : 1;
+            if (aValue > bValue) return sortDirection === "asc" ? 1 : -1;
+            return 0;
+        });
+    }, [professors, sortKey, sortDirection]);
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -110,6 +135,15 @@ export default function AdminPage() {
             toast.success("Suggestion rejected");
             setProfessors((prev) => prev.filter((p) => p.id !== id));
         }
+    };
+
+    const SortIcon = ({ active, direction }: { active: boolean; direction: SortDirection }) => {
+        if (!active) return null;
+        return direction === "asc" ? (
+            <ArrowUp size={14} className="inline ml-1" />
+        ) : (
+            <ArrowDown size={14} className="inline ml-1" />
+        );
     };
 
     if (loading) {
@@ -186,13 +220,25 @@ export default function AdminPage() {
                             <table className="w-full text-left">
                                 <thead className="bg-gray-50 text-xs uppercase text-gray-500 font-medium">
                                     <tr>
-                                        <th className="px-6 py-3">Name</th>
-                                        <th className="px-6 py-3">Department</th>
+                                        <th
+                                            className="px-6 py-3 cursor-pointer select-none hover:text-gray-700 hover:bg-gray-100 transition-colors"
+                                            onClick={() => handleSort("name")}
+                                        >
+                                            Name
+                                            <SortIcon active={sortKey === "name"} direction={sortDirection} />
+                                        </th>
+                                        <th
+                                            className="px-6 py-3 cursor-pointer select-none hover:text-gray-700 hover:bg-gray-100 transition-colors"
+                                            onClick={() => handleSort("department")}
+                                        >
+                                            Department
+                                            <SortIcon active={sortKey === "department"} direction={sortDirection} />
+                                        </th>
                                         <th className="px-6 py-3 text-right">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-gray-200">
-                                    {professors.map((p) => (
+                                    {sortedProfessors.map((p) => (
                                         <tr key={p.id} className="hover:bg-gray-50">
                                             <td className="px-6 py-4 font-medium text-gray-900">{p.name}</td>
                                             <td className="px-6 py-4 text-gray-600">{p.department}</td>
