@@ -1,6 +1,30 @@
-import { createClient } from '@supabase/supabase-js';
+import { createBrowserClient } from '@supabase/ssr';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+/**
+ * Browser-side Supabase client.
+ * Uses cookies for session storage (instead of localStorage),
+ * so the server can verify auth state via middleware and Server Actions.
+ * Only use in "use client" components.
+ * 
+ * Lazily initialized to avoid crashes during SSR prerendering.
+ */
+let _supabase: ReturnType<typeof createBrowserClient> | null = null;
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+export function getSupabase() {
+    if (!_supabase) {
+        _supabase = createBrowserClient(
+            process.env.NEXT_PUBLIC_SUPABASE_URL!,
+            process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+        );
+    }
+    return _supabase;
+}
+
+/** @deprecated Use getSupabase() instead. Kept for backward compatibility. */
+export const supabase = typeof window !== 'undefined'
+    ? createBrowserClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL!,
+        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    )
+    : (null as any);
+

@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { X } from "lucide-react";
-import { supabase } from "@/lib/supabase";
 import { toast } from "sonner";
+import { suggestProfessor } from "@/app/actions";
 
 interface SuggestModalProps {
     isOpen: boolean;
@@ -25,22 +25,16 @@ export function SuggestModal({ isOpen, onClose }: SuggestModalProps) {
         setIsSubmitting(true);
 
         try {
-            const { error } = await supabase.from("professors").insert({
-                name,
-                department: "General",
-                is_approved: false,
-            });
+            const result = await suggestProfessor({ name });
 
-            if (error) {
-                toast.error("Failed to submit suggestion. Please try again.");
-                console.error(error);
+            if (!result.success) {
+                toast.error(result.error || "Failed to submit suggestion.");
             } else {
                 toast.success("Professor suggested! Pending approval.");
                 onClose();
                 setName("");
             }
-        } catch (err) {
-            console.error(err);
+        } catch {
             toast.error("An unexpected error occurred.");
         } finally {
             setIsSubmitting(false);
@@ -70,6 +64,7 @@ export function SuggestModal({ isOpen, onClose }: SuggestModalProps) {
                             type="text"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
+                            maxLength={100}
                             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-black focus:border-black"
                             placeholder="e.g. Dr. Jane Doe"
                         />

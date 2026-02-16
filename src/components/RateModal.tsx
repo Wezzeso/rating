@@ -1,10 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Star, X } from "lucide-react";
-import { supabase } from "@/lib/supabase";
 import { toast } from "sonner";
-import { v4 as uuidv4 } from "uuid";
+import { submitRating } from "@/app/actions";
 
 interface RateModalProps {
     professor: {
@@ -21,15 +20,6 @@ export function RateModal({ professor, isOpen, onClose, onSuccess }: RateModalPr
     const [proctoringRating, setProctoringRating] = useState(0);
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    useEffect(() => {
-        // Ensure fingerprint exists
-        let fp = localStorage.getItem("vibe_rater_id");
-        if (!fp) {
-            fp = uuidv4();
-            localStorage.setItem("vibe_rater_id", fp);
-        }
-    }, []);
-
     if (!isOpen) return null;
 
     const handleSubmit = async () => {
@@ -39,33 +29,24 @@ export function RateModal({ professor, isOpen, onClose, onSuccess }: RateModalPr
         }
 
         setIsSubmitting(true);
-        const fingerprint = localStorage.getItem("vibe_rater_id");
 
         try {
-            const { error } = await supabase.from("ratings").insert({
-                professor_id: professor.id,
-                user_fingerprint: fingerprint,
-                teaching: teachingRating === 0 ? null : teachingRating,
-                proctoring: proctoringRating === 0 ? null : proctoringRating,
+            const result = await submitRating({
+                professorId: professor.id,
+                teachingScore: teachingRating === 0 ? null : teachingRating,
+                proctoringScore: proctoringRating === 0 ? null : proctoringRating,
             });
 
-            if (error) {
-                if (error.code === "23505") {
-                    toast.error("You have already rated this professor.");
-                } else {
-                    toast.error("An error occurred. Please try again.");
-                    console.error(error);
-                }
+            if (!result.success) {
+                toast.error(result.error || "An error occurred.");
             } else {
                 toast.success("Rating submitted!");
                 onSuccess();
                 onClose();
-                // Reset local state if needed, though unmount logic handles it typically
                 setTeachingRating(0);
                 setProctoringRating(0);
             }
-        } catch (err) {
-            console.error(err);
+        } catch {
             toast.error("An unexpected error occurred.");
         } finally {
             setIsSubmitting(false);

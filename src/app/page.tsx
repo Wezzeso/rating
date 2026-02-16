@@ -1,9 +1,10 @@
 import { ProfessorTable } from "@/components/ProfessorTable";
-import { supabase } from "@/lib/supabase";
+import { createServerSupabaseClient } from "@/lib/supabase-server";
 
 export const revalidate = 0; // Disable caching for now to see updates
 
 export default async function Home() {
+  const supabase = await createServerSupabaseClient();
   const { data: professors, error } = await supabase.rpc(
     "get_professors_with_ratings"
   );

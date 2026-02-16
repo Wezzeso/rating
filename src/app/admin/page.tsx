@@ -1,10 +1,12 @@
 "use client";
 
 import { useState, useEffect, useMemo } from "react";
-import { supabase } from "@/lib/supabase";
+import { getSupabase } from "@/lib/supabase";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Check, X, LogOut, ArrowUp, ArrowDown } from "lucide-react";
+import { approveProfessor, rejectProfessor, fetchPendingProfessors } from "@/app/actions";
+import type { Session } from "@supabase/supabase-js";
 
 interface Professor {
     id: string;
@@ -18,7 +20,7 @@ type SortDirection = "asc" | "desc";
 
 export default function AdminPage() {
     const router = useRouter();
-    const [session, setSession] = useState<any>(null);
+    const [session, setSession] = useState<Session | null>(null);
     const [loading, setLoading] = useState(true);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -27,37 +29,31 @@ export default function AdminPage() {
     const [sortDirection, setSortDirection] = useState<SortDirection>("asc");
 
     useEffect(() => {
+        const sb = getSupabase();
         // Check active session
-        supabase.auth.getSession().then(({ data: { session } }) => {
-            setSession(session);
-            if (session) fetchUnapproved(session); // Fetch immediately if session exists
+        sb.auth.getSession().then(({ data: { session: s } }: { data: { session: Session | null } }) => {
+            setSession(s);
+            if (s) loadPendingProfessors();
             setLoading(false);
         });
 
         // Listen for auth changes
         const {
             data: { subscription },
-        } = supabase.auth.onAuthStateChange((_event, session) => {
-            setSession(session);
-            if (session) fetchUnapproved(session);
+        } = sb.auth.onAuthStateChange((_event: string, s: Session | null) => {
+            setSession(s);
+            if (s) loadPendingProfessors();
         });
 
         return () => subscription.unsubscribe();
     }, []);
 
-    const fetchUnapproved = async (currentSession: any) => {
-        if (!currentSession) return;
-        const { data, error } = await supabase
-            .from("professors")
-            .select("*")
-            .eq("is_approved", false)
-            .order("created_at", { ascending: false });
-
-        if (error) {
-            toast.error("Error fetching suggestions");
-            console.error(error);
+    const loadPendingProfessors = async () => {
+        const result = await fetchPendingProfessors();
+        if (!result.success) {
+            toast.error(result.error || "Error fetching suggestions");
         } else {
-            setProfessors(data || []);
+            setProfessors(result.data || []);
         }
     };
 
@@ -84,7 +80,7 @@ export default function AdminPage() {
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
-        const { error } = await supabase.auth.signInWithPassword({
+        const { error } = await getSupabase().auth.signInWithPassword({
             email,
             password,
         });
@@ -96,41 +92,32 @@ export default function AdminPage() {
             toast.success("Logged in successfully");
             setEmail("");
             setPassword("");
-            // Loading state will be handled by auth listener
         }
     };
 
     const handleLogout = async () => {
-        await supabase.auth.signOut();
+        await getSupabase().auth.signOut();
         toast.success("Logged out");
         setProfessors([]);
     };
 
     const handleApprove = async (id: string) => {
-        const { error } = await supabase
-            .from("professors")
-            .update({ is_approved: true })
-            .eq("id", id);
-
-        if (error) {
-            toast.error("Failed to approve");
+        const result = await approveProfessor(id);
+        if (!result.success) {
+            toast.error(result.error || "Failed to approve");
         } else {
             toast.success("Professor approved");
             setProfessors((prev) => prev.filter((p) => p.id !== id));
-            router.refresh(); // Update client cache regarding approved list somewhere else if needed
+            router.refresh();
         }
     };
 
     const handleReject = async (id: string) => {
         if (!confirm("Are you sure you want to reject (delete) this suggestion?")) return;
 
-        const { error } = await supabase
-            .from("professors")
-            .delete()
-            .eq("id", id);
-
-        if (error) {
-            toast.error("Failed to reject");
+        const result = await rejectProfessor(id);
+        if (!result.success) {
+            toast.error(result.error || "Failed to reject");
         } else {
             toast.success("Suggestion rejected");
             setProfessors((prev) => prev.filter((p) => p.id !== id));
