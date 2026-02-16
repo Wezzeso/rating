@@ -6,10 +6,31 @@ import crypto from 'crypto';
 
 // ---------------------------------------------------------------------------
 // Rate Limiting (in-memory, per-instance — sufficient for most deployments)
+// For production at scale, consider Redis/Upstash for distributed rate limiting.
 // ---------------------------------------------------------------------------
 const rateLimitMap = new Map<string, number[]>();
 
+// Periodic cleanup to prevent memory leaks — runs every 60 seconds
+let lastCleanup = Date.now();
+const CLEANUP_INTERVAL_MS = 60_000;
+
+function cleanupRateLimitMap(windowMs: number) {
+    const now = Date.now();
+    if (now - lastCleanup < CLEANUP_INTERVAL_MS) return;
+    lastCleanup = now;
+
+    for (const [key, timestamps] of rateLimitMap.entries()) {
+        const filtered = timestamps.filter((t) => now - t < windowMs);
+        if (filtered.length === 0) {
+            rateLimitMap.delete(key);
+        } else {
+            rateLimitMap.set(key, filtered);
+        }
+    }
+}
+
 function checkRateLimit(key: string, maxRequests: number, windowMs: number): boolean {
+    cleanupRateLimitMap(windowMs);
     const now = Date.now();
     const timestamps = rateLimitMap.get(key) || [];
     const filtered = timestamps.filter((t) => now - t < windowMs);
@@ -25,6 +46,9 @@ function checkRateLimit(key: string, maxRequests: number, windowMs: number): boo
 // Helpers
 // ---------------------------------------------------------------------------
 
+/** UUID v4 format regex for input validation. */
+const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
 /** Get a hashed client identifier from the request IP. */
 async function getClientFingerprint(): Promise<string> {
     const headersList = await headers();
@@ -33,7 +57,13 @@ async function getClientFingerprint(): Promise<string> {
         headersList.get('x-real-ip') ||
         'unknown';
 
-    const salt = process.env.FINGERPRINT_SALT || 'teacher-rating-default-salt';
+    const salt = process.env.FINGERPRINT_SALT;
+    if (!salt) {
+        throw new Error(
+            'Missing FINGERPRINT_SALT environment variable. ' +
+            'Add a random secret string to .env.local (e.g. FINGERPRINT_SALT=your-random-secret-here).'
+        );
+    }
     return crypto.createHash('sha256').update(`${ip}:${salt}`).digest('hex');
 }
 
@@ -93,7 +123,7 @@ export async function submitRating(data: {
         const { professorId, teachingScore, proctoringScore } = data;
 
         // --- Validation ---
-        if (!professorId || typeof professorId !== 'string') {
+        if (!professorId || typeof professorId !== 'string' || !UUID_REGEX.test(professorId)) {
             return { success: false, error: 'Invalid professor ID.' };
         }
         if (teachingScore === null && proctoringScore === null) {

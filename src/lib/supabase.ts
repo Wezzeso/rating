@@ -20,11 +20,22 @@ export function getSupabase() {
     return _supabase;
 }
 
-/** @deprecated Use getSupabase() instead. Kept for backward compatibility. */
+/**
+ * @deprecated Use getSupabase() instead.
+ * This named export is kept only for backward compatibility.
+ * It will throw a helpful error if used on the server.
+ */
 export const supabase = typeof window !== 'undefined'
     ? createBrowserClient(
         process.env.NEXT_PUBLIC_SUPABASE_URL!,
         process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
     )
-    : (null as any);
+    : new Proxy({} as ReturnType<typeof createBrowserClient>, {
+        get() {
+            throw new Error(
+                'Cannot use the `supabase` export on the server. ' +
+                'Use `createServerSupabaseClient()` from `@/lib/supabase-server` instead.'
+            );
+        },
+    });
 

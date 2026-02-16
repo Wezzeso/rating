@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Check, X, LogOut, ArrowUp, ArrowDown } from "lucide-react";
 import { approveProfessor, rejectProfessor, fetchPendingProfessors } from "@/app/actions";
-import type { Session } from "@supabase/supabase-js";
+import type { Session, User } from "@supabase/supabase-js";
 
 interface Professor {
     id: string;
@@ -30,11 +30,18 @@ export default function AdminPage() {
 
     useEffect(() => {
         const sb = getSupabase();
-        // Check active session
-        sb.auth.getSession().then(({ data: { session: s } }: { data: { session: Session | null } }) => {
-            setSession(s);
-            if (s) loadPendingProfessors();
-            setLoading(false);
+        // Verify auth with server (getUser validates the JWT, unlike getSession)
+        sb.auth.getUser().then(({ data: { user } }: { data: { user: User | null } }) => {
+            if (user) {
+                sb.auth.getSession().then(({ data: { session: s } }: { data: { session: Session | null } }) => {
+                    setSession(s);
+                    if (s) loadPendingProfessors();
+                    setLoading(false);
+                });
+            } else {
+                setSession(null);
+                setLoading(false);
+            }
         });
 
         // Listen for auth changes
