@@ -94,9 +94,21 @@ async function verifyAdmin(): Promise<{ isAdmin: true; email: string } | { isAdm
 
 /** Validate a professor name: 2–100 characters, letters/spaces/hyphens/periods/apostrophes. */
 function validateName(name: string): { valid: true; cleaned: string } | { valid: false; error: string } {
-    const cleaned = name.trim();
+    let cleaned = name.trim().replace(/\s+/g, ' ');
     if (cleaned.length < 2) return { valid: false, error: 'Name must be at least 2 characters.' };
     if (cleaned.length > 100) return { valid: false, error: 'Name must be 100 characters or fewer.' };
+
+    // Require at least two words (name + surname)
+    const parts = cleaned.split(' ');
+    if (parts.length < 2) {
+        return { valid: false, error: 'Please provide the full name (both first name and surname).' };
+    }
+
+    // Auto-format: Title Case each word (handles hyphenated parts as well)
+    cleaned = parts.map(word => {
+        return word.split('-').map(part => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()).join('-');
+    }).join(' ');
+
     // Allow letters (any script), spaces, hyphens, periods, apostrophes
     if (!/^[\p{L}\s.\-']+$/u.test(cleaned)) {
         return { valid: false, error: 'Name contains invalid characters. Only letters, spaces, hyphens, periods, and apostrophes are allowed.' };
