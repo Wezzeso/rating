@@ -49,13 +49,44 @@ function checkRateLimit(key: string, maxRequests: number, windowMs: number): boo
 /** UUID v4 format regex for input validation. */
 const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
-/** Get a hashed client identifier from the request IP. */
-async function getClientFingerprint(): Promise<string> {
+/** Get the raw client IP address. */
+async function getClientIp(): Promise<string> {
     const headersList = await headers();
-    const ip =
+    return (
         headersList.get('x-forwarded-for')?.split(',')[0]?.trim() ||
         headersList.get('x-real-ip') ||
-        'unknown';
+        'unknown'
+    );
+}
+
+/** Check if the IP is a known proxy or VPN. */
+async function isIpProxy(ip: string): Promise<boolean> {
+    if (ip === 'unknown' || ip === '127.0.0.1' || ip === '::1') return false;
+
+    try {
+        const controller = new AbortController();
+        // 2-second timeout to avoid hanging requests if the API is slow
+        const timeoutId = setTimeout(() => controller.abort(), 2000);
+
+        const res = await fetch(`https://blackbox.ipinfo.app/lookup/${ip}`, {
+            signal: controller.signal
+        });
+        clearTimeout(timeoutId);
+
+        if (!res.ok) return false;
+
+        const text = await res.text();
+        return text.trim() === 'Y';
+    } catch (err) {
+        // If the API fails or times out, we fail open (allow the request) so legitimate users aren't blocked by downtime
+        console.error('[isIpProxy] API error:', err);
+        return false;
+    }
+}
+
+/** Get a hashed client identifier from the request IP. */
+async function getClientFingerprint(): Promise<string> {
+    const ip = await getClientIp();
 
     const salt = process.env.FINGERPRINT_SALT;
     if (!salt) {
@@ -148,8 +179,14 @@ export async function submitRating(data: {
             return { success: false, error: 'Proctoring score must be between 1 and 5.' };
         }
 
-        // --- Rate Limiting ---
+        // --- Rate Limiting & Proxy Check ---
+        const ip = await getClientIp();
         const fingerprint = await getClientFingerprint();
+
+        if (await isIpProxy(ip)) {
+            return { success: false, error: 'Proxy or VPN detected. Please disable it to submit a rating.' };
+        }
+
         if (!checkRateLimit(`rate:${fingerprint}`, 5, 60_000)) {
             return { success: false, error: 'Too many ratings. Please try again in a minute.' };
         }
@@ -209,8 +246,14 @@ export async function suggestProfessor(data: {
         }
         const cleanedName = nameResult.cleaned;
 
-        // --- Rate Limiting ---
+        // --- Rate Limiting & Proxy Check ---
+        const ip = await getClientIp();
         const fingerprint = await getClientFingerprint();
+
+        if (await isIpProxy(ip)) {
+            return { success: false, error: 'Proxy or VPN detected. Please disable it to submit a suggestion.' };
+        }
+
         if (!checkRateLimit(`suggest:${fingerprint}`, 3, 60_000)) {
             return { success: false, error: 'Too many suggestions. Please try again in a minute.' };
         }
