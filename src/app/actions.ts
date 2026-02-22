@@ -298,7 +298,7 @@ export async function rejectProfessor(id: string): Promise<{ success: boolean; e
  */
 export async function fetchPendingProfessors(): Promise<{
     success: boolean;
-    data?: { id: string; name: string; department: string; created_at: string }[];
+    data?: { id: string; name: string; department: string; created_at: string; aitu_verified: boolean | null; is_duplicate: boolean | null }[];
     error?: string;
 }> {
     try {
@@ -310,7 +310,7 @@ export async function fetchPendingProfessors(): Promise<{
         const admin = createAdminClient();
         const { data, error } = await admin
             .from('professors')
-            .select('*')
+            .select('id, name, department, created_at, aitu_verified, is_duplicate')
             .eq('is_approved', false)
             .order('created_at', { ascending: false });
 
@@ -323,5 +323,162 @@ export async function fetchPendingProfessors(): Promise<{
     } catch (err) {
         console.error('[fetchPendingProfessors] Unexpected error');
         return { success: false, error: 'An unexpected error occurred.' };
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Teacher Verification (AITU API + Duplicate Check)
+// ---------------------------------------------------------------------------
+
+const AITU_TEACHER_API =
+    'https://du.astanait.edu.kz:8765/astanait-teacher-module/api/v1/teacher/pps/get-all-teachers';
+
+interface AITUTeacher {
+    id: number;
+    userId: number;
+    nameKz: string;
+    surnameKz: string;
+    patronymicKz: string;
+    department: { id: number; titleEn: string; titleRu: string; titleKz: string } | null;
+}
+
+interface AITUApiResponse {
+    total_number: number;
+    number_of_pages: number;
+    list: AITUTeacher[];
+    current_page: number;
+}
+
+/**
+ * Verify a teacher name against the AITU teacher database.
+ * Splits the name into parts and queries the API with each part.
+ * Saves the result to the DB so it doesn't need to be re-checked.
+ * Requires authenticated admin.
+ */
+export async function verifyTeacherInAITU(professorId: string, name: string): Promise<{
+    success: boolean;
+    existsInAITU: boolean;
+    matches: { nameKz: string; surnameKz: string; department: string | null }[];
+    error?: string;
+}> {
+    try {
+        const adminCheck = await verifyAdmin();
+        if (!adminCheck.isAdmin) {
+            return { success: false, existsInAITU: false, matches: [], error: adminCheck.error };
+        }
+
+        if (!professorId || !UUID_REGEX.test(professorId)) {
+            return { success: false, existsInAITU: false, matches: [], error: 'Invalid professor ID.' };
+        }
+
+        const parts = name.trim().split(/\s+/).filter(Boolean);
+        if (parts.length === 0) {
+            return { success: false, existsInAITU: false, matches: [], error: 'Name is empty.' };
+        }
+
+        // Query the API with each name part in parallel
+        const allMatches = new Map<number, AITUTeacher>();
+
+        const results = await Promise.all(
+            parts.map(async (part) => {
+                try {
+                    const url = `${AITU_TEACHER_API}?fullName=${encodeURIComponent(part)}`;
+                    const res = await fetch(url);
+                    if (!res.ok) return [];
+                    const data: AITUApiResponse = await res.json();
+                    return data.list || [];
+                } catch {
+                    return [];
+                }
+            })
+        );
+
+        // Merge into a single map keyed by teacher id
+        for (const list of results) {
+            for (const teacher of list) {
+                allMatches.set(teacher.id, teacher);
+            }
+        }
+
+        const matchesArr = Array.from(allMatches.values()).map((t) => ({
+            nameKz: t.nameKz,
+            surnameKz: t.surnameKz,
+            department: t.department?.titleEn ?? null,
+        }));
+
+        const existsInAITU = matchesArr.length > 0;
+
+        // Save result to DB so we don't re-check next time
+        const admin = createAdminClient();
+        await admin
+            .from('professors')
+            .update({ aitu_verified: existsInAITU })
+            .eq('id', professorId);
+
+        return {
+            success: true,
+            existsInAITU,
+            matches: matchesArr,
+        };
+    } catch (err) {
+        console.error('[verifyTeacherInAITU] Error:', err);
+        return { success: false, existsInAITU: false, matches: [], error: 'Failed to reach AITU API.' };
+    }
+}
+
+/**
+ * Check if a professor with a similar name already exists (approved) in the DB.
+ * Saves the result to the DB so it doesn't need to be re-checked.
+ * Requires authenticated admin.
+ */
+export async function checkDuplicateInDB(professorId: string, name: string): Promise<{
+    success: boolean;
+    isDuplicate: boolean;
+    existingName?: string;
+    error?: string;
+}> {
+    try {
+        const adminCheck = await verifyAdmin();
+        if (!adminCheck.isAdmin) {
+            return { success: false, isDuplicate: false, error: adminCheck.error };
+        }
+
+        if (!professorId || !UUID_REGEX.test(professorId)) {
+            return { success: false, isDuplicate: false, error: 'Invalid professor ID.' };
+        }
+
+        const cleaned = name.trim();
+        if (!cleaned) {
+            return { success: false, isDuplicate: false, error: 'Name is empty.' };
+        }
+
+        const admin = createAdminClient();
+        const { data, error } = await admin
+            .from('professors')
+            .select('name')
+            .eq('is_approved', true)
+            .ilike('name', cleaned);
+
+        if (error) {
+            console.error('[checkDuplicateInDB] Error:', error.message);
+            return { success: false, isDuplicate: false, error: 'Database query failed.' };
+        }
+
+        const isDuplicate = !!(data && data.length > 0);
+
+        // Save result to DB
+        await admin
+            .from('professors')
+            .update({ is_duplicate: isDuplicate })
+            .eq('id', professorId);
+
+        if (isDuplicate) {
+            return { success: true, isDuplicate: true, existingName: data[0].name };
+        }
+
+        return { success: true, isDuplicate: false };
+    } catch (err) {
+        console.error('[checkDuplicateInDB] Error:', err);
+        return { success: false, isDuplicate: false, error: 'Unexpected error.' };
     }
 }

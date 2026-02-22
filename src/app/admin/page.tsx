@@ -1,11 +1,30 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useCallback, Fragment } from "react";
 import { getSupabase } from "@/lib/supabase";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { Check, X, LogOut, ArrowUp, ArrowDown } from "lucide-react";
-import { approveProfessor, rejectProfessor, fetchPendingProfessors } from "@/app/actions";
+import {
+    Check,
+    X,
+    LogOut,
+    ArrowUp,
+    ArrowDown,
+    RefreshCw,
+    Loader2,
+    AlertTriangle,
+    CheckCircle2,
+    XCircle,
+    ChevronDown,
+    ChevronRight,
+} from "lucide-react";
+import {
+    approveProfessor,
+    rejectProfessor,
+    fetchPendingProfessors,
+    verifyTeacherInAITU,
+    checkDuplicateInDB,
+} from "@/app/actions";
 import type { Session, User } from "@supabase/supabase-js";
 
 interface Professor {
@@ -13,9 +32,20 @@ interface Professor {
     name: string;
     department: string;
     created_at: string;
+    aitu_verified: boolean | null;
+    is_duplicate: boolean | null;
 }
 
-type SortKey = "name" | "department" | "created_at";
+interface VerificationStatus {
+    loading: boolean;
+    existsInAITU: boolean | null;
+    isDuplicate: boolean | null;
+    matches: { nameKz: string; surnameKz: string; department: string | null }[];
+    existingName?: string;
+    error?: string;
+}
+
+type SortKey = "name" | "department" | "created_at" | "status";
 type SortDirection = "asc" | "desc";
 
 export default function AdminPage() {
@@ -27,10 +57,83 @@ export default function AdminPage() {
     const [professors, setProfessors] = useState<Professor[]>([]);
     const [sortKey, setSortKey] = useState<SortKey>("name");
     const [sortDirection, setSortDirection] = useState<SortDirection>("asc");
+    const [verificationMap, setVerificationMap] = useState<Record<string, VerificationStatus>>({});
+    const [expandedRow, setExpandedRow] = useState<string | null>(null);
+
+    // Verify a single professor against AITU API + duplicate check
+    const verifyProfessor = useCallback(async (prof: Professor) => {
+        setVerificationMap((prev) => ({
+            ...prev,
+            [prof.id]: { loading: true, existsInAITU: null, isDuplicate: null, matches: [] },
+        }));
+
+        try {
+            const [aituResult, dupResult] = await Promise.all([
+                verifyTeacherInAITU(prof.id, prof.name),
+                checkDuplicateInDB(prof.id, prof.name),
+            ]);
+
+            // Update local professor data with the saved results
+            setProfessors((prev) =>
+                prev.map((p) =>
+                    p.id === prof.id
+                        ? {
+                            ...p,
+                            aitu_verified: aituResult.success ? aituResult.existsInAITU : p.aitu_verified,
+                            is_duplicate: dupResult.success ? dupResult.isDuplicate : p.is_duplicate,
+                        }
+                        : p
+                )
+            );
+
+            setVerificationMap((prev) => ({
+                ...prev,
+                [prof.id]: {
+                    loading: false,
+                    existsInAITU: aituResult.success ? aituResult.existsInAITU : null,
+                    isDuplicate: dupResult.success ? dupResult.isDuplicate : null,
+                    matches: aituResult.matches || [],
+                    existingName: dupResult.existingName,
+                    error: aituResult.error || dupResult.error || undefined,
+                },
+            }));
+        } catch {
+            setVerificationMap((prev) => ({
+                ...prev,
+                [prof.id]: {
+                    loading: false,
+                    existsInAITU: null,
+                    isDuplicate: null,
+                    matches: [],
+                    error: "Verification failed",
+                },
+            }));
+        }
+    }, []);
+
+    // Verify only professors that haven't been checked yet
+    const verifyUnchecked = useCallback(
+        (profs: Professor[]) => {
+            const unchecked = profs.filter(
+                (p) =>
+                    (p.aitu_verified === null || p.aitu_verified === undefined) ||
+                    (p.is_duplicate === null || p.is_duplicate === undefined)
+            );
+            unchecked.forEach((p) => verifyProfessor(p));
+        },
+        [verifyProfessor]
+    );
+
+    // Re-verify all professors (force re-check)
+    const verifyAll = useCallback(
+        (profs: Professor[]) => {
+            profs.forEach((p) => verifyProfessor(p));
+        },
+        [verifyProfessor]
+    );
 
     useEffect(() => {
         const sb = getSupabase();
-        // Verify auth with server (getUser validates the JWT, unlike getSession)
         sb.auth.getUser().then(({ data: { user } }: { data: { user: User | null } }) => {
             if (user) {
                 sb.auth.getSession().then(({ data: { session: s } }: { data: { session: Session | null } }) => {
@@ -44,7 +147,6 @@ export default function AdminPage() {
             }
         });
 
-        // Listen for auth changes
         const {
             data: { subscription },
         } = sb.auth.onAuthStateChange((_event: string, s: Session | null) => {
@@ -53,6 +155,7 @@ export default function AdminPage() {
         });
 
         return () => subscription.unsubscribe();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const loadPendingProfessors = async () => {
@@ -60,7 +163,27 @@ export default function AdminPage() {
         if (!result.success) {
             toast.error(result.error || "Error fetching suggestions");
         } else {
-            setProfessors(result.data || []);
+            const profs = (result.data || []) as Professor[];
+            setProfessors(profs);
+
+            // Initialize verification status from cached DB values
+            const initialMap: Record<string, VerificationStatus> = {};
+            profs.forEach((p) => {
+                const hasAitu = p.aitu_verified !== null && p.aitu_verified !== undefined;
+                const hasDup = p.is_duplicate !== null && p.is_duplicate !== undefined;
+                if (hasAitu || hasDup) {
+                    initialMap[p.id] = {
+                        loading: false,
+                        existsInAITU: hasAitu ? p.aitu_verified : null,
+                        isDuplicate: hasDup ? p.is_duplicate : null,
+                        matches: [],
+                    };
+                }
+            });
+            setVerificationMap(initialMap);
+
+            // Only verify unchecked professors
+            verifyUnchecked(profs);
         }
     };
 
@@ -73,25 +196,38 @@ export default function AdminPage() {
         }
     };
 
+    const getStatusScore = (prof: Professor): number => {
+        const v = verificationMap[prof.id];
+        const dupStatus = v?.isDuplicate ?? prof.is_duplicate;
+        if (dupStatus) return 3;
+        // Use cached DB value if verification map doesn't have it
+        const aituStatus = v?.existsInAITU ?? prof.aitu_verified;
+        if (v?.loading) return 0;
+        if (aituStatus === true) return 1;
+        if (aituStatus === false) return 2;
+        return 0;
+    };
+
     const sortedProfessors = useMemo(() => {
         return [...professors].sort((a, b) => {
-            const aValue = a[sortKey];
-            const bValue = b[sortKey];
-
+            if (sortKey === "status") {
+                const aScore = getStatusScore(a);
+                const bScore = getStatusScore(b);
+                return sortDirection === "asc" ? aScore - bScore : bScore - aScore;
+            }
+            const aValue = a[sortKey as keyof Professor] ?? "";
+            const bValue = b[sortKey as keyof Professor] ?? "";
             if (aValue < bValue) return sortDirection === "asc" ? -1 : 1;
             if (aValue > bValue) return sortDirection === "asc" ? 1 : -1;
             return 0;
         });
-    }, [professors, sortKey, sortDirection]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [professors, sortKey, sortDirection, verificationMap]);
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
-        const { error } = await getSupabase().auth.signInWithPassword({
-            email,
-            password,
-        });
-
+        const { error } = await getSupabase().auth.signInWithPassword({ email, password });
         if (error) {
             toast.error(error.message);
             setLoading(false);
@@ -106,6 +242,7 @@ export default function AdminPage() {
         await getSupabase().auth.signOut();
         toast.success("Logged out");
         setProfessors([]);
+        setVerificationMap({});
     };
 
     const handleApprove = async (id: string) => {
@@ -115,20 +252,87 @@ export default function AdminPage() {
         } else {
             toast.success("Professor approved");
             setProfessors((prev) => prev.filter((p) => p.id !== id));
+            const copy = { ...verificationMap };
+            delete copy[id];
+            setVerificationMap(copy);
             router.refresh();
         }
     };
 
     const handleReject = async (id: string) => {
         if (!confirm("Are you sure you want to reject (delete) this suggestion?")) return;
-
         const result = await rejectProfessor(id);
         if (!result.success) {
             toast.error(result.error || "Failed to reject");
         } else {
             toast.success("Suggestion rejected");
             setProfessors((prev) => prev.filter((p) => p.id !== id));
+            const copy = { ...verificationMap };
+            delete copy[id];
+            setVerificationMap(copy);
         }
+    };
+
+    const getRowBgClass = (prof: Professor): string => {
+        const v = verificationMap[prof.id];
+        if (v?.loading) return "";
+        const dupStatus = v?.isDuplicate ?? prof.is_duplicate;
+        if (dupStatus) return "bg-yellow-50";
+        const aituStatus = v?.existsInAITU ?? prof.aitu_verified;
+        if (aituStatus === true) return "bg-green-50";
+        if (aituStatus === false) return "bg-red-50";
+        return "";
+    };
+
+    const StatusBadge = ({ prof }: { prof: Professor }) => {
+        const v = verificationMap[prof.id];
+        if (v?.loading) {
+            return (
+                <span className="inline-flex items-center gap-1 text-xs text-gray-400">
+                    <Loader2 size={14} className="animate-spin" />
+                    Checking…
+                </span>
+            );
+        }
+        if (v?.error && v.existsInAITU === null && prof.aitu_verified === null) {
+            return (
+                <span className="inline-flex items-center gap-1 text-xs text-gray-500">
+                    <AlertTriangle size={14} />
+                    Error
+                </span>
+            );
+        }
+        const dupStatus = v?.isDuplicate ?? prof.is_duplicate;
+        if (dupStatus) {
+            return (
+                <span className="inline-flex items-center gap-1 text-xs font-medium text-yellow-700">
+                    <AlertTriangle size={14} />
+                    Duplicate
+                </span>
+            );
+        }
+        const aituStatus = v?.existsInAITU ?? prof.aitu_verified;
+        if (aituStatus === true) {
+            return (
+                <span className="inline-flex items-center gap-1 text-xs font-medium text-green-700">
+                    <CheckCircle2 size={14} />
+                    Verified
+                </span>
+            );
+        }
+        if (aituStatus === false) {
+            return (
+                <span className="inline-flex items-center gap-1 text-xs font-medium text-red-700">
+                    <XCircle size={14} />
+                    Not Found
+                </span>
+            );
+        }
+        return (
+            <span className="inline-flex items-center gap-1 text-xs text-gray-400">
+                —
+            </span>
+        );
     };
 
     const SortIcon = ({ active, direction }: { active: boolean; direction: SortDirection }) => {
@@ -139,6 +343,8 @@ export default function AdminPage() {
             <ArrowDown size={14} className="inline ml-1" />
         );
     };
+
+    // --- Render ---
 
     if (loading) {
         return (
@@ -188,27 +394,53 @@ export default function AdminPage() {
 
     return (
         <div className="min-h-screen bg-gray-50 p-6">
-            <div className="max-w-5xl mx-auto">
+            <div className="max-w-6xl mx-auto">
                 <div className="flex justify-between items-center mb-8">
                     <h1 className="text-2xl font-bold text-gray-900">Admin Dashboard</h1>
-                    <button
-                        onClick={handleLogout}
-                        className="flex items-center gap-2 text-sm text-gray-600 hover:text-red-600 transition-colors"
-                    >
-                        <LogOut size={16} />
-                        Logout
-                    </button>
+                    <div className="flex items-center gap-3">
+                        <button
+                            onClick={() => verifyAll(professors)}
+                            className="flex items-center gap-1.5 text-sm text-gray-600 hover:text-blue-600 transition-colors px-3 py-1.5 rounded-md hover:bg-blue-50"
+                            title="Re-verify all teachers"
+                        >
+                            <RefreshCw size={15} />
+                            Re-verify All
+                        </button>
+                        <button
+                            onClick={handleLogout}
+                            className="flex items-center gap-2 text-sm text-gray-600 hover:text-red-600 transition-colors"
+                        >
+                            <LogOut size={16} />
+                            Logout
+                        </button>
+                    </div>
+                </div>
+
+                {/* Legend */}
+                <div className="flex flex-wrap gap-4 mb-4 text-xs text-gray-600">
+                    <span className="flex items-center gap-1.5">
+                        <span className="w-3 h-3 rounded-sm bg-green-200 border border-green-300 inline-block"></span>
+                        Found in AITU
+                    </span>
+                    <span className="flex items-center gap-1.5">
+                        <span className="w-3 h-3 rounded-sm bg-red-200 border border-red-300 inline-block"></span>
+                        Not found in AITU
+                    </span>
+                    <span className="flex items-center gap-1.5">
+                        <span className="w-3 h-3 rounded-sm bg-yellow-200 border border-yellow-300 inline-block"></span>
+                        Duplicate in DB
+                    </span>
                 </div>
 
                 <div className="bg-white rounded-lg shadow overflow-hidden">
                     <div className="px-6 py-4 border-b border-gray-200">
-                        <h2 className="font-semibold text-gray-800">Pending Approvals ({professors.length})</h2>
+                        <h2 className="font-semibold text-gray-800">
+                            Pending Approvals ({professors.length})
+                        </h2>
                     </div>
 
                     {professors.length === 0 ? (
-                        <div className="p-8 text-center text-gray-500">
-                            No pending suggestions.
-                        </div>
+                        <div className="p-8 text-center text-gray-500">No pending suggestions.</div>
                     ) : (
                         <div className="overflow-x-auto">
                             <table className="w-full text-left">
@@ -223,6 +455,13 @@ export default function AdminPage() {
                                         </th>
                                         <th
                                             className="px-6 py-3 cursor-pointer select-none hover:text-gray-700 hover:bg-gray-100 transition-colors"
+                                            onClick={() => handleSort("status")}
+                                        >
+                                            Status
+                                            <SortIcon active={sortKey === "status"} direction={sortDirection} />
+                                        </th>
+                                        <th
+                                            className="px-6 py-3 cursor-pointer select-none hover:text-gray-700 hover:bg-gray-100 transition-colors"
                                             onClick={() => handleSort("department")}
                                         >
                                             Department
@@ -232,30 +471,110 @@ export default function AdminPage() {
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-gray-200">
-                                    {sortedProfessors.map((p) => (
-                                        <tr key={p.id} className="hover:bg-gray-50">
-                                            <td className="px-6 py-4 font-medium text-gray-900">{p.name}</td>
-                                            <td className="px-6 py-4 text-gray-600">{p.department}</td>
-                                            <td className="px-6 py-4 text-right">
-                                                <div className="flex justify-end gap-2">
-                                                    <button
-                                                        onClick={() => handleApprove(p.id)}
-                                                        className="p-1.5 rounded-full bg-green-100 text-green-600 hover:bg-green-200 transition-colors"
-                                                        title="Approve"
-                                                    >
-                                                        <Check size={18} />
-                                                    </button>
-                                                    <button
-                                                        onClick={() => handleReject(p.id)}
-                                                        className="p-1.5 rounded-full bg-red-100 text-red-600 hover:bg-red-200 transition-colors"
-                                                        title="Reject"
-                                                    >
-                                                        <X size={18} />
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    ))}
+                                    {sortedProfessors.map((p) => {
+                                        const v = verificationMap[p.id];
+                                        const isExpanded = expandedRow === p.id;
+                                        const hasMatches = v && v.matches.length > 0;
+
+                                        return (
+                                            <Fragment key={p.id}>
+                                                <tr
+                                                    className={`${getRowBgClass(p)} ${hasMatches ? "cursor-pointer" : ""} transition-colors`}
+                                                    onClick={() =>
+                                                        hasMatches && setExpandedRow(isExpanded ? null : p.id)
+                                                    }
+                                                >
+                                                    <td className="px-6 py-4">
+                                                        <div className="flex items-center gap-2">
+                                                            {hasMatches && (
+                                                                isExpanded ? (
+                                                                    <ChevronDown size={14} className="text-gray-400 shrink-0" />
+                                                                ) : (
+                                                                    <ChevronRight size={14} className="text-gray-400 shrink-0" />
+                                                                )
+                                                            )}
+                                                            <div>
+                                                                <span className="font-medium text-gray-900">
+                                                                    {p.name}
+                                                                </span>
+                                                                {v?.isDuplicate && v.existingName && (
+                                                                    <span className="block text-xs text-yellow-600 mt-0.5">
+                                                                        Already exists as &quot;{v.existingName}&quot;
+                                                                    </span>
+                                                                )}
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td className="px-6 py-4">
+                                                        <StatusBadge prof={p} />
+                                                    </td>
+                                                    <td className="px-6 py-4 text-gray-600">{p.department}</td>
+                                                    <td className="px-6 py-4 text-right">
+                                                        <div className="flex justify-end gap-2">
+                                                            <button
+                                                                onClick={(e) => {
+                                                                    e.stopPropagation();
+                                                                    verifyProfessor(p);
+                                                                }}
+                                                                className="p-1.5 rounded-full bg-blue-100 text-blue-600 hover:bg-blue-200 transition-colors"
+                                                                title="Re-verify"
+                                                            >
+                                                                <RefreshCw size={16} />
+                                                            </button>
+                                                            <button
+                                                                onClick={(e) => {
+                                                                    e.stopPropagation();
+                                                                    handleApprove(p.id);
+                                                                }}
+                                                                className="p-1.5 rounded-full bg-green-100 text-green-600 hover:bg-green-200 transition-colors"
+                                                                title="Approve"
+                                                            >
+                                                                <Check size={18} />
+                                                            </button>
+                                                            <button
+                                                                onClick={(e) => {
+                                                                    e.stopPropagation();
+                                                                    handleReject(p.id);
+                                                                }}
+                                                                className="p-1.5 rounded-full bg-red-100 text-red-600 hover:bg-red-200 transition-colors"
+                                                                title="Reject"
+                                                            >
+                                                                <X size={18} />
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                                {/* Expanded row showing AITU matches */}
+                                                {isExpanded && hasMatches && (
+                                                    <tr key={`${p.id}-details`} className="bg-gray-50">
+                                                        <td colSpan={4} className="px-6 py-3">
+                                                            <p className="text-xs font-medium text-gray-500 mb-2">
+                                                                AITU Matches ({v.matches.length}):
+                                                            </p>
+                                                            <div className="space-y-1">
+                                                                {v.matches.map((m, i) => (
+                                                                    <div
+                                                                        key={i}
+                                                                        className="text-xs text-gray-700 bg-white rounded px-3 py-1.5 border border-gray-200 flex items-center justify-between"
+                                                                    >
+                                                                        <span className="font-medium">
+                                                                            {m.nameKz} {m.surnameKz}
+                                                                        </span>
+                                                                        {m.department && (
+                                                                            <span className="text-gray-400 ml-3 truncate max-w-[300px]">
+                                                                                {m.department}
+                                                                            </span>
+                                                                        )}
+                                                                    </div>
+                                                                ))}
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                )}
+                                            </Fragment>
+                                        );
+                                    })}
                                 </tbody>
                             </table>
                         </div>
