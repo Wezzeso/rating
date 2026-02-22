@@ -1,6 +1,6 @@
 'use server';
 
-import { createServerSupabaseClient, createAdminClient } from '@/lib/supabase-server';
+import { createAdminClient } from '@/lib/supabase-server';
 import { headers } from 'next/headers';
 import crypto from 'crypto';
 
@@ -98,29 +98,65 @@ async function getClientFingerprint(): Promise<string> {
     return crypto.createHash('sha256').update(`${ip}:${salt}`).digest('hex');
 }
 
-/** Check whether the currently authenticated user is an admin. */
-async function verifyAdmin(): Promise<{ isAdmin: true; email: string } | { isAdmin: false; error: string }> {
-    const supabase = await createServerSupabaseClient();
-    const { data: { user }, error } = await supabase.auth.getUser();
-
-    if (error || !user?.email) {
-        return { isAdmin: false, error: 'Not authenticated' };
+/** Check whether the currently authenticated user is an admin by reading a secure cookie. */
+async function verifyAdmin(): Promise<{ isAdmin: true } | { isAdmin: false; error: string }> {
+    const adminPassword = process.env.ADMIN_PASSWORD;
+    if (!adminPassword) {
+        return { isAdmin: false, error: 'ADMIN_PASSWORD environment variable is not set.' };
     }
 
-    const adminEmails = (process.env.ADMIN_EMAILS || '')
-        .split(',')
-        .map((e) => e.trim().toLowerCase())
-        .filter(Boolean);
+    const { cookies } = await import('next/headers');
+    const cookieStore = await cookies();
+    const providedHash = cookieStore.get('admin_token')?.value;
 
-    if (adminEmails.length === 0) {
-        return { isAdmin: false, error: 'No admin emails configured on the server.' };
+    const expectedHash = crypto.createHash('sha256').update(`${adminPassword}:${process.env.FINGERPRINT_SALT}`).digest('hex');
+
+    if (!providedHash || providedHash !== expectedHash) {
+        return { isAdmin: false, error: 'Insufficient permissions or invalid admin token' };
     }
 
-    if (!adminEmails.includes(user.email.toLowerCase())) {
-        return { isAdmin: false, error: 'Insufficient permissions' };
+    return { isAdmin: true };
+}
+
+/** Server action to log in as admin via a UI form */
+export async function loginAsAdmin(password: string): Promise<{ success: boolean; error?: string }> {
+    const adminPassword = process.env.ADMIN_PASSWORD;
+    if (!adminPassword) {
+        return { success: false, error: 'Server misconfiguration: ADMIN_PASSWORD not set.' };
     }
 
-    return { isAdmin: true, email: user.email };
+    if (password !== adminPassword) {
+        return { success: false, error: 'Invalid password' };
+    }
+
+    const { cookies } = await import('next/headers');
+    const cookieStore = await cookies();
+
+    const expectedHash = crypto.createHash('sha256').update(`${adminPassword}:${process.env.FINGERPRINT_SALT}`).digest('hex');
+
+    // Set a lightweight cookie with the hashed password. 
+    cookieStore.set('admin_token', expectedHash, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'lax',
+        path: '/',
+        maxAge: 60 * 60 * 24 * 7 // 1 week
+    });
+
+    return { success: true };
+}
+
+export async function logoutAdmin(): Promise<{ success: boolean }> {
+    const { cookies } = await import('next/headers');
+    const cookieStore = await cookies();
+    cookieStore.delete('admin_token');
+    return { success: true };
+}
+
+/** Check if the current session is an admin (Used by client-components) */
+export async function checkAdminAuth(): Promise<{ isAdmin: boolean }> {
+    const authRecord = await verifyAdmin();
+    return { isAdmin: authRecord.isAdmin };
 }
 
 /** Validate a professor name: 2–100 characters, letters/spaces/hyphens/periods/apostrophes. */

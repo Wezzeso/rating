@@ -1,40 +1,30 @@
-import { createBrowserClient } from '@supabase/ssr';
-
 /**
- * Browser-side Supabase client.
- * Uses cookies for session storage (instead of localStorage),
- * so the server can verify auth state via middleware and Server Actions.
- * Only use in "use client" components.
- * 
- * Lazily initialized to avoid crashes during SSR prerendering.
+ * Supabase Auth/JWTs have been disabled in this project.
+ * You cannot use a client-side Supabase instance.
+ * All fetches and mutations must be done securely on the server
+ * via Next.js Server Actions using the `service_role` key.
  */
-let _supabase: ReturnType<typeof createBrowserClient> | null = null;
-
 export function getSupabase() {
-    if (!_supabase) {
-        _supabase = createBrowserClient(
-            process.env.NEXT_PUBLIC_SUPABASE_URL!,
-            process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-        );
-    }
-    return _supabase;
+    throw new Error(
+        'Client-side Supabase calls are disabled. ' +
+        'Use Server Actions from `src/app/actions.ts` to perform database operations.'
+    );
 }
 
 /**
- * @deprecated Use getSupabase() instead.
- * This named export is kept only for backward compatibility.
- * It will throw a helpful error if used on the server.
+ * @deprecated Use Server Actions instead.
  */
 export const supabase = typeof window !== 'undefined'
-    ? createBrowserClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-    )
-    : new Proxy({} as ReturnType<typeof createBrowserClient>, {
+    ? new Proxy({}, {
+        get() {
+            throw new Error('Supabase client is disabled.');
+        },
+    })
+    : new Proxy({}, {
         get() {
             throw new Error(
                 'Cannot use the `supabase` export on the server. ' +
-                'Use `createServerSupabaseClient()` from `@/lib/supabase-server` instead.'
+                'Use Server Actions instead.'
             );
         },
     });

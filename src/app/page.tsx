@@ -1,10 +1,10 @@
 import { ProfessorTable } from "@/components/ProfessorTable";
-import { createServerSupabaseClient } from "@/lib/supabase-server";
+import { createAdminClient } from "@/lib/supabase-server";
 
 export const revalidate = 60; // Cache for 60 seconds to prevent DoS via repeated page loads
 
 export default async function Home() {
-  const supabase = await createServerSupabaseClient();
+  const supabase = createAdminClient();
   const { data: professors, error } = await supabase.rpc(
     "get_professors_with_ratings"
   );

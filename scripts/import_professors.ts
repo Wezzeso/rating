@@ -7,15 +7,11 @@ import dotenv from "dotenv";
 dotenv.config({ path: path.resolve(process.cwd(), ".env.local") });
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
 if (!supabaseUrl || !supabaseKey) {
-    console.error("Missing Supabase credentials in .env.local");
+    console.error("Missing SUPABASE_SERVICE_ROLE_KEY credentials in .env.local");
     process.exit(1);
-}
-
-if (!process.env.SUPABASE_SERVICE_ROLE_KEY) {
-    console.warn("⚠️  SUPABASE_SERVICE_ROLE_KEY not found — falling back to anon key (may fail due to RLS).");
 }
 
 const supabase = createClient(supabaseUrl, supabaseKey);
