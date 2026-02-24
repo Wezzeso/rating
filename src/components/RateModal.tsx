@@ -18,7 +18,24 @@ interface RateModalProps {
 export function RateModal({ professor, isOpen, onClose, onSuccess }: RateModalProps) {
     const [teachingRating, setTeachingRating] = useState(0);
     const [proctoringRating, setProctoringRating] = useState(0);
+    const [selectedTags, setSelectedTags] = useState<string[]>([]);
     const [isSubmitting, setIsSubmitting] = useState(false);
+
+    const AVAILABLE_TAGS = [
+        "Pray for your Scholorship", "Retake", "AI Strict", "Tough but fair", "You are cooked lil bro", "Attendance is key", "Chill vibes", "Best teacher", "Extra credit", "Psychological Horror", "Participation matters", "Respect is key", "+swag +rep", "Favourite teacher", "Fair game", "Hard grader", "cringe"
+    ];
+
+    const toggleTag = (tag: string) => {
+        if (selectedTags.includes(tag)) {
+            setSelectedTags(selectedTags.filter(t => t !== tag));
+        } else {
+            if (selectedTags.length < 3) {
+                setSelectedTags([...selectedTags, tag]);
+            } else {
+                toast.error("You can only select up to 3 tags.");
+            }
+        }
+    };
 
     if (!isOpen) return null;
 
@@ -35,6 +52,7 @@ export function RateModal({ professor, isOpen, onClose, onSuccess }: RateModalPr
                 professorId: professor.id,
                 teachingScore: teachingRating === 0 ? null : teachingRating,
                 proctoringScore: proctoringRating === 0 ? null : proctoringRating,
+                tags: selectedTags,
             });
 
             if (!result.success) {
@@ -45,6 +63,7 @@ export function RateModal({ professor, isOpen, onClose, onSuccess }: RateModalPr
                 onClose();
                 setTeachingRating(0);
                 setProctoringRating(0);
+                setSelectedTags([]);
             }
         } catch {
             toast.error("An unexpected error occurred.");
@@ -116,6 +135,30 @@ export function RateModal({ professor, isOpen, onClose, onSuccess }: RateModalPr
                                     />
                                 </button>
                             ))}
+                        </div>
+                    </div>
+
+                    {/* Tags Selection */}
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                            Tags (Select up to 3)
+                        </label>
+                        <div className="flex flex-wrap gap-2">
+                            {AVAILABLE_TAGS.map((tag) => {
+                                const isSelected = selectedTags.includes(tag);
+                                return (
+                                    <button
+                                        key={tag}
+                                        onClick={() => toggleTag(tag)}
+                                        className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors border ${isSelected
+                                            ? "bg-black text-white border-black"
+                                            : "bg-white text-gray-600 border-gray-200 hover:border-gray-300 hover:bg-gray-50"
+                                            }`}
+                                    >
+                                        {tag}
+                                    </button>
+                                );
+                            })}
                         </div>
                     </div>
 

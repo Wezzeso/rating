@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { StarRating } from "@/components/ui/StarRating";
 import { ArrowDown, ArrowUp, Plus } from "lucide-react";
+import { Analytics } from "@vercel/analytics/next"
 import { RateModal } from "./RateModal";
 import { SuggestModal } from "./SuggestModal";
 import { useRouter } from "next/navigation";
@@ -15,6 +16,7 @@ interface Professor {
     teaching_count: number;
     proctoring_rating: number;
     proctoring_count: number;
+    top_tags: string[];
 }
 
 interface ProfessorTableProps {
@@ -89,9 +91,9 @@ export function ProfessorTable({ initialProfessors }: ProfessorTableProps) {
     const SortIcon = ({ active, direction }: { active: boolean; direction: SortDirection }) => {
         if (!active) return null;
         return direction === "asc" ? (
-             <ArrowUp size={12} className="inline ml-1 text-gray-800" />
+            <ArrowUp size={12} className="inline ml-1 text-gray-800" />
         ) : (
-             <ArrowDown size={12} className="inline ml-1 text-gray-800" />
+            <ArrowDown size={12} className="inline ml-1 text-gray-800" />
         );
     };
 
@@ -118,7 +120,7 @@ export function ProfessorTable({ initialProfessors }: ProfessorTableProps) {
                 <table className="w-full text-left text-sm border-collapse">
                     <thead>
                         <tr className="border-b border-gray-200/50">
-                            <th 
+                            <th
                                 className="py-3 pr-4 font-normal text-gray-400 w-1/3 cursor-pointer select-none hover:text-gray-600 transition-colors"
                                 onClick={() => handleSort("name")}
                             >
@@ -137,6 +139,7 @@ export function ProfessorTable({ initialProfessors }: ProfessorTableProps) {
                             >
                                 Proctoring <SortIcon active={sortKey === "proctoring_rating"} direction={sortDirection} />
                             </th>
+                            <th className="py-3 px-4 hidden md:table-cell font-normal text-gray-400">Top Tags</th>
                             <th className="py-3 pl-4 font-normal text-gray-400">Action</th>
                         </tr>
                     </thead>
@@ -158,6 +161,19 @@ export function ProfessorTable({ initialProfessors }: ProfessorTableProps) {
                                     <div className="flex items-center gap-2">
                                         <StarRating rating={prof.proctoring_rating} />
                                         <span className="text-xs text-gray-400">({prof.proctoring_count})</span>
+                                    </div>
+                                </td>
+                                <td className="py-3 px-4 hidden md:table-cell w-1/4">
+                                    <div className="flex flex-wrap gap-1.5">
+                                        {prof.top_tags && prof.top_tags.length > 0 ? (
+                                            prof.top_tags.map(tag => (
+                                                <span key={tag} className="px-2 py-0.5 bg-gray-100 text-gray-600 rounded-md text-[10px] sm:text-xs border border-gray-200 whitespace-nowrap">
+                                                    {tag}
+                                                </span>
+                                            ))
+                                        ) : (
+                                            <span className="text-xs text-gray-400 italic">No tags</span>
+                                        )}
                                     </div>
                                 </td>
                                 <td className="py-3 pl-4">

@@ -197,9 +197,10 @@ export async function submitRating(data: {
     professorId: string;
     teachingScore: number | null;
     proctoringScore: number | null;
+    tags?: string[];
 }): Promise<{ success: boolean; error?: string }> {
     try {
-        const { professorId, teachingScore, proctoringScore } = data;
+        const { professorId, teachingScore, proctoringScore, tags } = data;
 
         // --- Validation ---
         if (!professorId || typeof professorId !== 'string' || !UUID_REGEX.test(professorId)) {
@@ -213,6 +214,11 @@ export async function submitRating(data: {
         }
         if (proctoringScore !== null && (!Number.isInteger(proctoringScore) || proctoringScore < 1 || proctoringScore > 5)) {
             return { success: false, error: 'Proctoring score must be between 1 and 5.' };
+        }
+
+        const tagsToInsert = tags ? tags.filter(t => t.trim().length > 0) : [];
+        if (tagsToInsert.length > 3) {
+            return { success: false, error: 'You can only select up to 3 tags.' };
         }
 
         // --- Rate Limiting & Proxy Check ---
@@ -247,6 +253,7 @@ export async function submitRating(data: {
             user_fingerprint: fingerprint,
             teaching: teachingScore,
             proctoring: proctoringScore,
+            tags: tagsToInsert.length > 0 ? tagsToInsert : null,
         });
 
         if (insertError) {

@@ -12,9 +12,11 @@ export interface Rating {
   user_fingerprint: string;
   teaching_score: number;
   proctoring_score: number;
+  tags?: string[];
 }
 
 export interface ProfessorWithRating extends Professor {
   avg_teaching_score: number | null;
   avg_proctoring_score: number | null;
+  top_tags?: string[];
 }
