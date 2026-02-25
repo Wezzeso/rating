@@ -43,8 +43,8 @@ AS $$
     count(r.proctoring) as proctoring_count,
     ARRAY(
       SELECT tag
-      FROM unnest(array_agg(r.tags)) AS unnested_tags(tag)
-      WHERE tag IS NOT NULL
+      FROM public.ratings r2, unnest(r2.tags) as tag
+      WHERE r2.professor_id = p.id
       GROUP BY tag
       ORDER BY count(*) DESC
       LIMIT 3

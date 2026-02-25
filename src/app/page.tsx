@@ -1,5 +1,6 @@
 import { ProfessorTable } from "@/components/ProfessorTable";
 import { createAdminClient } from "@/lib/supabase-server";
+import { Suspense } from "react";
 
 export const revalidate = 60; // Cache for 60 seconds to prevent DoS via repeated page loads
 
@@ -19,13 +20,15 @@ export default async function Home() {
   }
 
   return (
-    <main className="min-h-screen py-16 px-4 sm:px-6">
+    <div className="py-8 sm:py-16 px-4 sm:px-6 w-full ">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-semibold mb-8 text-gray-900 tracking-tight">
+        <h1 className="text-3xl font-semibold mb-6 sm:mb-8 text-gray-900 dark:text-white tracking-tight">
           Professor Ratings
         </h1>
-        <ProfessorTable initialProfessors={approvedProfessors} />
+        <Suspense fallback={<div className="py-8 text-center text-gray-500">Loading professors...</div>}>
+          <ProfessorTable initialProfessors={approvedProfessors} />
+        </Suspense>
       </div>
-    </main>
+    </div>
   );
 }

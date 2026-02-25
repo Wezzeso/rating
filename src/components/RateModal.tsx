@@ -73,26 +73,26 @@ export function RateModal({ professor, isOpen, onClose, onSuccess }: RateModalPr
     };
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-            <div className="w-full max-w-md bg-white rounded-lg shadow-xl p-6 relative animate-in fade-in zoom-in-95 duration-200">
+        <div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center bg-black/50 backdrop-blur-sm p-0 sm:p-4 transition-opacity">
+            <div className="w-full max-w-md bg-white dark:bg-gray-950 rounded-t-2xl sm:rounded-lg shadow-xl p-6 relative max-h-[90vh] overflow-y-auto animate-in slide-in-from-bottom sm:slide-in-from-bottom-0 sm:fade-in sm:zoom-in-95 duration-200 ">
                 <button
                     onClick={onClose}
-                    className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
+                    className="absolute top-4 right-4 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 "
                 >
                     <X size={20} />
                 </button>
 
-                <h2 className="text-xl font-semibold text-gray-900 mb-1">
+                <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-1 ">
                     Rate {professor.name}
                 </h2>
-                <p className="text-gray-500 text-sm mb-6">
+                <p className="text-gray-500 dark:text-gray-400 text-sm mb-6 ">
                     Share your experience anonymously.
                 </p>
 
                 <div className="space-y-6">
                     {/* Teaching Rating */}
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 ">
                             Teaching
                         </label>
                         <div className="flex gap-1">
@@ -106,8 +106,8 @@ export function RateModal({ professor, isOpen, onClose, onSuccess }: RateModalPr
                                         size={28}
                                         className={`${star <= teachingRating
                                             ? "fill-yellow-400 text-yellow-400"
-                                            : "fill-transparent text-gray-300 hover:text-yellow-400"
-                                            }`}
+                                            : "fill-transparent text-gray-300 dark:text-gray-600 hover:text-yellow-400 dark:hover:text-yellow-400"
+                                            } `}
                                     />
                                 </button>
                             ))}
@@ -116,7 +116,7 @@ export function RateModal({ professor, isOpen, onClose, onSuccess }: RateModalPr
 
                     {/* Proctoring Rating */}
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 ">
                             Proctoring
                         </label>
                         <div className="flex gap-1">
@@ -130,8 +130,8 @@ export function RateModal({ professor, isOpen, onClose, onSuccess }: RateModalPr
                                         size={28}
                                         className={`${star <= proctoringRating
                                             ? "fill-yellow-400 text-yellow-400"
-                                            : "fill-transparent text-gray-300 hover:text-yellow-400"
-                                            }`}
+                                            : "fill-transparent text-gray-300 dark:text-gray-600 hover:text-yellow-400 dark:hover:text-yellow-400"
+                                            } `}
                                     />
                                 </button>
                             ))}
@@ -140,7 +140,7 @@ export function RateModal({ professor, isOpen, onClose, onSuccess }: RateModalPr
 
                     {/* Tags Selection */}
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 mt-4 sm:mt-0 ">
                             Tags (Select up to 3)
                         </label>
                         <div className="flex flex-wrap gap-2">
@@ -150,9 +150,9 @@ export function RateModal({ professor, isOpen, onClose, onSuccess }: RateModalPr
                                     <button
                                         key={tag}
                                         onClick={() => toggleTag(tag)}
-                                        className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors border ${isSelected
-                                            ? "bg-black text-white border-black"
-                                            : "bg-white text-gray-600 border-gray-200 hover:border-gray-300 hover:bg-gray-50"
+                                        className={`px-3 py-1.5 rounded-full text-xs font-medium  border ${isSelected
+                                            ? "bg-black dark:bg-white text-white dark:text-gray-900 border-black dark:border-white"
+                                            : "bg-white dark:bg-transparent text-gray-600 dark:text-gray-400 border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-900"
                                             }`}
                                     >
                                         {tag}
@@ -162,13 +162,15 @@ export function RateModal({ professor, isOpen, onClose, onSuccess }: RateModalPr
                         </div>
                     </div>
 
-                    <button
-                        onClick={handleSubmit}
-                        disabled={isSubmitting}
-                        className="w-full bg-black text-white py-2.5 rounded-md font-medium text-sm hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                    >
-                        {isSubmitting ? "Submitting..." : "Submit Rating"}
-                    </button>
+                    <div className="pt-2 sticky bottom-0 bg-white dark:bg-gray-950 sm:static ">
+                        <button
+                            onClick={handleSubmit}
+                            disabled={isSubmitting}
+                            className="w-full bg-black dark:bg-white text-white dark:text-gray-900 py-3 sm:py-2.5 rounded-xl sm:rounded-md font-medium text-sm hover:bg-gray-800 dark:hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed "
+                        >
+                            {isSubmitting ? "Submitting..." : "Submit Rating"}
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
