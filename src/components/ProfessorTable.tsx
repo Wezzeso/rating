@@ -6,6 +6,7 @@ import { ArrowDown, ArrowUp, Plus } from "lucide-react";
 import { Analytics } from "@vercel/analytics/next"
 import { RateModal } from "./RateModal";
 import { SuggestModal } from "./SuggestModal";
+import { InfoModal } from "./InfoModal";
 import { useRouter, useSearchParams } from "next/navigation";
 
 interface Professor {
@@ -40,8 +41,9 @@ export function ProfessorTable({ initialProfessors }: ProfessorTableProps) {
         }
     }, [searchParams]);
 
-    const [selectedProfessor, setSelectedProfessor] = useState<{ id: string; name: string } | null>(null);
+    const [selectedProfessor, setSelectedProfessor] = useState<Professor | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isInfoModalOpen, setIsInfoModalOpen] = useState(false);
     const [isSuggestModalOpen, setIsSuggestModalOpen] = useState(false);
 
     const handleSort = (key: SortKey) => {
@@ -56,9 +58,14 @@ export function ProfessorTable({ initialProfessors }: ProfessorTableProps) {
         }
     };
 
-    const handleRateClick = (professor: { id: string; name: string }) => {
+    const handleRateClick = (professor: Professor) => {
         setSelectedProfessor(professor);
         setIsModalOpen(true);
+    };
+
+    const handleInfoClick = (professor: Professor) => {
+        setSelectedProfessor(professor);
+        setIsInfoModalOpen(true);
     };
 
     const handleRateSuccess = () => {
@@ -183,12 +190,20 @@ export function ProfessorTable({ initialProfessors }: ProfessorTableProps) {
                             >
                                 <td className="sm:py-3 pr-4 font-medium text-gray-900 dark:text-white flex justify-between items-center sm:table-cell">
                                     <span className="text-lg sm:text-sm">{prof.name}</span>
-                                    <button
-                                        onClick={() => handleRateClick(prof)}
-                                        className="text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white text-sm font-medium  sm:hidden border border-gray-200 dark:border-gray-700 rounded-md px-3 py-1 bg-white dark:bg-gray-800 shadow-sm"
-                                    >
-                                        Rate
-                                    </button>
+                                    <div className="flex gap-2 sm:hidden">
+                                        <button
+                                            onClick={() => handleInfoClick(prof)}
+                                            className="text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white text-sm font-medium border border-gray-200 dark:border-gray-700 rounded-md px-3 py-1 bg-white dark:bg-gray-800 shadow-sm"
+                                        >
+                                            Info
+                                        </button>
+                                        <button
+                                            onClick={() => handleRateClick(prof)}
+                                            className="text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white text-sm font-medium border border-gray-200 dark:border-gray-700 rounded-md px-3 py-1 bg-white dark:bg-gray-800 shadow-sm"
+                                        >
+                                            Rate
+                                        </button>
+                                    </div>
                                 </td>
                                 {/* <td className="py-3 px-4 text-gray-600 font-normal">{prof.department}</td> */}
                                 <td className="py-1 px-0 sm:py-3 sm:px-4 flex items-center justify-between sm:table-cell mt-2 sm:mt-0">
@@ -219,12 +234,20 @@ export function ProfessorTable({ initialProfessors }: ProfessorTableProps) {
                                     </div>
                                 </td>
                                 <td className="py-3 pl-4 hidden sm:table-cell text-right sm:text-left">
-                                    <button
-                                        onClick={() => handleRateClick(prof)}
-                                        className="text-gray-400 dark:text-gray-500 hover:text-gray-800 dark:hover:text-gray-300 text-xs underline decoration-gray-300 dark:decoration-gray-600 underline-offset-2 "
-                                    >
-                                        Rate
-                                    </button>
+                                    <div className="flex gap-3 justify-end sm:justify-start">
+                                        <button
+                                            onClick={() => handleInfoClick(prof)}
+                                            className="text-gray-400 dark:text-gray-500 hover:text-gray-800 dark:hover:text-gray-300 text-xs underline decoration-gray-300 dark:decoration-gray-600 underline-offset-2"
+                                        >
+                                            Info
+                                        </button>
+                                        <button
+                                            onClick={() => handleRateClick(prof)}
+                                            className="text-gray-400 dark:text-gray-500 hover:text-gray-800 dark:hover:text-gray-300 text-xs underline decoration-gray-300 dark:decoration-gray-600 underline-offset-2"
+                                        >
+                                            Rate
+                                        </button>
+                                    </div>
                                 </td>
                             </tr>
                         ))}
@@ -240,12 +263,19 @@ export function ProfessorTable({ initialProfessors }: ProfessorTableProps) {
             </div>
 
             {selectedProfessor && (
-                <RateModal
-                    professor={selectedProfessor}
-                    isOpen={isModalOpen}
-                    onClose={() => setIsModalOpen(false)}
-                    onSuccess={handleRateSuccess}
-                />
+                <>
+                    <RateModal
+                        professor={selectedProfessor}
+                        isOpen={isModalOpen}
+                        onClose={() => setIsModalOpen(false)}
+                        onSuccess={handleRateSuccess}
+                    />
+                    <InfoModal
+                        professor={selectedProfessor}
+                        isOpen={isInfoModalOpen}
+                        onClose={() => setIsInfoModalOpen(false)}
+                    />
+                </>
             )}
 
             <SuggestModal

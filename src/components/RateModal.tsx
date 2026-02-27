@@ -73,8 +73,14 @@ export function RateModal({ professor, isOpen, onClose, onSuccess }: RateModalPr
     };
 
     return (
-        <div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center bg-black/50 backdrop-blur-sm p-0 sm:p-4 transition-opacity">
-            <div className="w-full max-w-md bg-white dark:bg-gray-950 rounded-t-2xl sm:rounded-lg shadow-xl p-6 relative max-h-[90vh] overflow-y-auto animate-in slide-in-from-bottom sm:slide-in-from-bottom-0 sm:fade-in sm:zoom-in-95 duration-200 ">
+        <div
+            className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center bg-black/50 backdrop-blur-sm p-0 sm:p-4 transition-opacity"
+            onClick={onClose}
+        >
+            <div
+                className="w-full max-w-md bg-white dark:bg-gray-950 rounded-t-2xl sm:rounded-lg shadow-xl p-6 relative max-h-[90vh] overflow-y-auto animate-in slide-in-from-bottom sm:slide-in-from-bottom-0 sm:fade-in sm:zoom-in-95 duration-200"
+                onClick={(e) => e.stopPropagation()}
+            >
                 <button
                     onClick={onClose}
                     className="absolute top-4 right-4 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 "
