@@ -18,6 +18,7 @@ interface Professor {
     proctoring_rating: number;
     proctoring_count: number;
     top_tags: string[];
+    disciplines?: string[];
 }
 
 interface ProfessorTableProps {
@@ -188,21 +189,30 @@ export function ProfessorTable({ initialProfessors }: ProfessorTableProps) {
                                 key={prof.id}
                                 className="group border-b border-gray-100/80 dark:border-gray-800/80 hover:bg-gray-50 dark:hover:bg-gray-900/50  flex flex-col sm:table-row py-4 sm:py-0"
                             >
-                                <td className="sm:py-3 pr-4 font-medium text-gray-900 dark:text-white flex justify-between items-center sm:table-cell">
-                                    <span className="text-lg sm:text-sm">{prof.name}</span>
-                                    <div className="flex gap-2 sm:hidden">
-                                        <button
-                                            onClick={() => handleInfoClick(prof)}
-                                            className="text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white text-sm font-medium border border-gray-200 dark:border-gray-700 rounded-md px-3 py-1 bg-white dark:bg-gray-800 shadow-sm"
-                                        >
-                                            Info
-                                        </button>
-                                        <button
-                                            onClick={() => handleRateClick(prof)}
-                                            className="text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white text-sm font-medium border border-gray-200 dark:border-gray-700 rounded-md px-3 py-1 bg-white dark:bg-gray-800 shadow-sm"
-                                        >
-                                            Rate
-                                        </button>
+                                <td className="sm:py-3 pr-4 font-medium text-gray-900 dark:text-white flex flex-col justify-center sm:table-cell">
+                                    <div className="flex justify-between items-center w-full">
+                                        <div>
+                                            <div className="text-lg sm:text-sm">{prof.name}</div>
+                                            {prof.disciplines && prof.disciplines.length > 0 && (
+                                                <div className="text-xs text-gray-500 dark:text-gray-400 font-normal mt-0.5">
+                                                    {prof.disciplines.join(", ")}
+                                                </div>
+                                            )}
+                                        </div>
+                                        <div className="flex gap-2 sm:hidden">
+                                            <button
+                                                onClick={() => handleInfoClick(prof)}
+                                                className="text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white text-sm font-medium border border-gray-200 dark:border-gray-700 rounded-md px-3 py-1 bg-white dark:bg-gray-800 shadow-sm"
+                                            >
+                                                Info
+                                            </button>
+                                            <button
+                                                onClick={() => handleRateClick(prof)}
+                                                className="text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white text-sm font-medium border border-gray-200 dark:border-gray-700 rounded-md px-3 py-1 bg-white dark:bg-gray-800 shadow-sm"
+                                            >
+                                                Rate
+                                            </button>
+                                        </div>
                                     </div>
                                 </td>
                                 {/* <td className="py-3 px-4 text-gray-600 font-normal">{prof.department}</td> */}

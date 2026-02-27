@@ -27,9 +27,27 @@ export function Header() {
                         </div>
                         <span className="text-xl font-bold tracking-tight text-gray-900 dark:text-white group-hover:text-gray-700 dark:group-hover:text-gray-300  truncate max-w-[200px] sm:max-w-none">Rate your professor</span>
                     </Link>
+
+                    <nav className="hidden sm:flex items-center ml-8 space-x-6">
+                        <Link
+                            href="/groups"
+                            className="text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors"
+                        >
+                            Find My Group
+                        </Link>
+                    </nav>
                 </div>
 
                 <div className="flex items-center gap-4">
+                    {/* Mobile Navigation */}
+                    <nav className="sm:hidden flex items-center mr-2">
+                        <Link
+                            href="/groups"
+                            className="text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors"
+                        >
+                            Groups
+                        </Link>
+                    </nav>
                     {mounted && (
                         <button
                             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
