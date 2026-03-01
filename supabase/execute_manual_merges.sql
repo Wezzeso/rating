@@ -17,24 +17,7 @@ BEGIN
     FOR pair IN 
         SELECT * FROM (VALUES
             -- 1. Swapped Names
-            ('Aitolkyn Sagynbayeva', 'Sagynbayeva Aitolkyn'),
-            ('Alimzhan Yessenov', 'Yessenov Alimzhan'),
-            ('Alisher Amirov', 'Amirov Alisher'),
-            ('Dana Tolegen', 'Tolegen Dana'),
-            ('Gulsim Tulepova', 'Tulepova Gulsim'),
-            ('Inkar Jubatchanova', 'Jubatchanova Inkar'),
-            ('Kamila Zhakupova', 'Zhakupova Kamila'),
-            ('Laura Nurtazina', 'Nurtazina Laura'),
-            ('Moldir Toleubek', 'Toleubek Moldir'),
-            ('Zamart Ramazanova', 'Ramazanova Zamart'),
-            
-            -- 2. Typos & Spelling variations
-            ('Akhmetbekova Assel', 'Akhmetbekova Asel'),
-            ('Yelemes Tolkynay', 'Elemes Tolkynay'),
-            ('Assem Kusmanova', 'Kusmanova Asem'),
-            ('Madi Kanagat', 'Madi Kaganat'),
-            ('Maiya Abzhaparova', 'Maiya Abzharapova'),
-            ('Ormanova Assel', 'Omanova Assel')
+            ('Daniyar Amantaev', 'Daniyar Amantayev')
     ) AS s(primary_name, duplicate_name)
     LOOP
         -- Find primary ID by name (case insensitive)
