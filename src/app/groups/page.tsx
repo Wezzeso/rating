@@ -1,5 +1,7 @@
 import { createAdminClient } from "@/lib/supabase-server";
-import teachersDataFile from "../../../teachers_data.json";
+import teachersData1 from "../../../teachers_data_1st_trim.json";
+import teachersData2 from "../../../teachers_data_2nd _trim.json";
+import teachersData3 from "../../../teachers_data.json";
 import { GroupPageClient } from "@/components/GroupPageClient";
 import { Suspense } from "react";
 
@@ -20,20 +22,36 @@ export default async function GroupsPage() {
         return <div>Error loading data</div>;
     }
 
-    const teachersData = teachersDataFile as any[];
+    const t1Data = teachersData1 as any[];
+    const t2Data = teachersData2 as any[];
+    const t3Data = teachersData3 as any[];
 
-    // Extract unique groups from the JSON
-    const allGroups = Array.from(
-        new Set(
-            teachersData.flatMap((teacher: any) => teacher.groups || [])
-        )
-    ).sort() as string[]; // Sort alphabetically
+    // Extract unique groups from the JSONs
+    const t1Groups = Array.from(
+        new Set(t1Data.flatMap((teacher: any) => teacher.groups || []))
+    ).sort() as string[];
+
+    const t2Groups = Array.from(
+        new Set(t2Data.flatMap((teacher: any) => teacher.groups || []))
+    ).sort() as string[];
+
+    const t3Groups = Array.from(
+        new Set(t3Data.flatMap((teacher: any) => teacher.groups || []))
+    ).sort() as string[];
 
     return (
         <Suspense fallback={<div className="py-8 text-center text-gray-500">Loading groups...</div>}>
             <GroupPageClient
-                allGroups={allGroups}
-                teacherGroupMap={teachersData}
+                trimestersData={{
+                    "1": t1Data,
+                    "2": t2Data,
+                    "3": t3Data,
+                }}
+                trimestersGroups={{
+                    "1": t1Groups,
+                    "2": t2Groups,
+                    "3": t3Groups,
+                }}
                 approvedProfessors={approvedProfessors}
             />
         </Suspense>

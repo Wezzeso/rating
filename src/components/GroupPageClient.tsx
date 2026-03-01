@@ -22,22 +22,35 @@ interface Professor {
 }
 
 interface GroupPageClientProps {
-    allGroups: string[];
-    teacherGroupMap: TeacherData[];
+    trimestersData: {
+        "1": TeacherData[];
+        "2": TeacherData[];
+        "3": TeacherData[];
+    };
+    trimestersGroups: {
+        "1": string[];
+        "2": string[];
+        "3": string[];
+    };
     approvedProfessors: Professor[];
 }
 
-export function GroupPageClient({ allGroups, teacherGroupMap, approvedProfessors }: GroupPageClientProps) {
+export function GroupPageClient({ trimestersData, trimestersGroups, approvedProfessors }: GroupPageClientProps) {
+    const [selectedTrimester, setSelectedTrimester] = useState<"1" | "2" | "3">("3");
     const [selectedGroup, setSelectedGroup] = useState<string>("");
     const [searchQuery, setSearchQuery] = useState("");
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
+    // Get current trimester's groups and data
+    const currentGroups = trimestersGroups[selectedTrimester];
+    const currentTeacherData = trimestersData[selectedTrimester];
+
     // Filter groups based on search query
     const filteredGroups = useMemo(() => {
-        return allGroups.filter((group) =>
+        return currentGroups.filter((group) =>
             group.toLowerCase().includes(searchQuery.toLowerCase())
         );
-    }, [allGroups, searchQuery]);
+    }, [currentGroups, searchQuery]);
 
     // Handle group selection
     const handleSelectGroup = (group: string) => {
@@ -50,7 +63,7 @@ export function GroupPageClient({ allGroups, teacherGroupMap, approvedProfessors
     const groupTeachers = useMemo(() => {
         if (!selectedGroup) return [];
 
-        const relevantTeachers = teacherGroupMap
+        const relevantTeachers = currentTeacherData
             .filter((teacher) => teacher.groups.includes(selectedGroup));
 
         // Filter our allProfessors (from Supabase) by the names we found
@@ -76,7 +89,7 @@ export function GroupPageClient({ allGroups, teacherGroupMap, approvedProfessors
                 disciplines: match ? match.disciplines : []
             };
         });
-    }, [selectedGroup, teacherGroupMap, approvedProfessors]);
+    }, [selectedGroup, currentTeacherData, approvedProfessors]);
 
 
     return (
@@ -85,9 +98,24 @@ export function GroupPageClient({ allGroups, teacherGroupMap, approvedProfessors
                 <h1 className="text-3xl font-semibold mb-2 text-gray-900 dark:text-white tracking-tight">
                     Find My Group
                 </h1>
-                <p className="text-gray-500 dark:text-gray-400 mb-8 text-sm sm:text-base">
+                <p className="text-gray-500 dark:text-gray-400 mb-6 text-sm sm:text-base">
                     Select your group to see the ratings of all your teachers.
                 </p>
+
+                <div className="mb-6 flex gap-2">
+                    {(["1", "2", "3"] as const).map((trim) => (
+                        <button
+                            key={trim}
+                            onClick={() => setSelectedTrimester(trim)}
+                            className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${selectedTrimester === trim
+                                ? "bg-gray-900 text-white dark:bg-white dark:text-gray-900"
+                                : "bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-700 dark:hover:bg-gray-700"
+                                }`}
+                        >
+                            Trimester {trim}
+                        </button>
+                    ))}
+                </div>
 
                 <div className="relative mb-8 z-20 max-w-md">
                     <label htmlFor="group-search" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -143,13 +171,13 @@ export function GroupPageClient({ allGroups, teacherGroupMap, approvedProfessors
                 {selectedGroup ? (
                     <div className="mt-8 animate-in fade-in duration-300">
                         <h2 className="text-xl font-medium mb-6 text-gray-800 dark:text-gray-200">
-                            Teachers for {selectedGroup}
+                            Teachers for {selectedGroup} (Trimester {selectedTrimester})
                         </h2>
                         {groupTeachers.length > 0 ? (
                             <ProfessorTable initialProfessors={groupTeachers} />
                         ) : (
                             <div className="text-center py-12 text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-gray-900/50 rounded-lg border border-gray-100 dark:border-gray-800">
-                                No teacher ratings found for this group.
+                                No teacher ratings found for this group in Trimester {selectedTrimester}.
                             </div>
                         )}
                     </div>

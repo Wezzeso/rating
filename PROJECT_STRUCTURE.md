@@ -25,6 +25,7 @@ Teacher Rating/
 ├── package-lock.json            # Locked dependency tree
 ├── postcss.config.mjs           # PostCSS configuration
 ├── README.md                    # Project readme
+├── teachers_data.json           # Extracted teacher schedule and group data
 └── tsconfig.json                # TypeScript compiler options
 ```
 
@@ -42,6 +43,7 @@ Teacher Rating/
 | **`postcss.config.mjs`** | Registers the `@tailwindcss/postcss` plugin (Tailwind CSS v4 integration). |
 | **`next-env.d.ts`** | Auto-generated TypeScript declarations for Next.js. |
 | **`README.md`** | Project readme (1.4 KB). |
+| **`teachers_data.json`** | Static data file extracted from PDF schedule containing teacher disciplines and groups. |
 
 ---
 
@@ -69,6 +71,7 @@ Teacher Rating/
 
 | File | Description |
 |------|-------------|
+| **`generate_normalization_sql.js`** | Generates SQL statements for normalizing professor data and merging duplicates by analyzing fuzzy matches. |
 | **`import_professors.ts`** | Bulk import script that reads a `professors.csv` file (expected columns: `name`, `department`) and inserts rows into the `professors` table via Supabase. Uses the service role key (falls back to anon key with a warning). Auto-approves imported professors (`is_approved: true`). Loads env vars from `.env.local`. |
 
 ---
@@ -80,21 +83,32 @@ src/
 ├── app/                         # Next.js App Router pages & actions
 │   ├── admin/
 │   │   └── page.tsx             # Admin dashboard page
+│   ├── groups/
+│   │   └── page.tsx             # Groups finder page
+│   ├── privacy/
+│   │   └── page.tsx             # Privacy policy
+│   ├── terms/
+│   │   └── page.tsx             # Terms of service
 │   ├── actions.ts               # Server actions (all business logic)
-│   ├── favicon.ico              # Site favicon
 │   ├── globals.css              # Global styles & Tailwind imports
+│   ├── icon.svg                 # Application icon
 │   ├── layout.tsx               # Root layout component
 │   └── page.tsx                 # Home page (professor ratings list)
 ├── components/                  # React components
+│   ├── layout/
+│   │   ├── Header.tsx           # Site header
+│   │   └── Footer.tsx           # Site footer
 │   ├── ui/
 │   │   └── StarRating.tsx       # Reusable star-rating display
+│   ├── GroupPageClient.tsx      # Client logic for groups page
+│   ├── InfoModal.tsx            # Modal for displaying information
 │   ├── ProfessorTable.tsx       # Main professor ratings table
 │   ├── RateModal.tsx            # Modal for submitting a rating
-│   └── SuggestModal.tsx         # Modal for suggesting a new professor
-├── lib/                         # Supabase client utilities
-│   ├── supabase.ts              # Browser-side Supabase client
-│   └── supabase-server.ts       # Server-side Supabase clients
-└── proxy.ts                     # Request proxy (auth session refresh)
+│   ├── SuggestModal.tsx         # Modal for suggesting a new professor
+│   └── ThemeProvider.tsx        # Next-themes provider
+└── lib/                         # Supabase client utilities
+    ├── supabase.ts              # Browser-side Supabase client
+    └── supabase-server.ts       # Server-side Supabase clients
 ```
 
 ### `src/app/` — Pages & Server Actions
@@ -104,7 +118,10 @@ src/
 | **`layout.tsx`** | Root layout. Loads the **Inter** font from Google Fonts, applies it with `antialiased`. Includes the **Sonner** `<Toaster />` for toast notifications. Sets page metadata: title "Professor Ratings", description "Rate and review professors". |
 | **`globals.css`** | Imports Tailwind CSS (`@import "tailwindcss"`). Defines CSS custom properties `--background: #FFFFFF`, `--foreground: #37352F` (dark charcoal). Registers Tailwind theme inline tokens for colors and `font-sans: Inter`. |
 | **`page.tsx`** | **Home page** (server component). Calls the `get_professors_with_ratings` Supabase RPC, filters to approved professors only, and renders `<ProfessorTable>`. Caches for 60 seconds (`revalidate = 60`) to prevent DoS via excessive page loads. |
-| **`favicon.ico`** | Site favicon (26 KB). |
+| **`icon.svg`** | Site application icon. |
+| **`groups/page.tsx`** | **Groups page** (server component). Displays teacher schedule data and allows users to find their groups. |
+| **`privacy/page.tsx`** | Privacy policy page. |
+| **`terms/page.tsx`** | Terms of service page. |
 
 ### `src/app/admin/` — Admin Dashboard
 
@@ -136,6 +153,11 @@ The core business logic file. All mutations go through these `'use server'` func
 | **`ProfessorTable.tsx`** | Main data table component (200 lines, client component). Displays professors with sortable columns: Name, Teaching rating, Proctoring rating. Each row shows star ratings and a "Rate" button. Supports sorting by name, teaching, proctoring, and count in ascending/descending order. Includes a "Suggest a Professor" button. Opens `RateModal` and `SuggestModal` as needed. Refreshes data via `router.refresh()` after successful actions. |
 | **`RateModal.tsx`** | Modal dialog (134 lines) for submitting a rating. Presents two 5-star selectors (Teaching, Proctoring). At least one category must be rated. Calls `submitRating` server action. Shows loading state and toast feedback. |
 | **`SuggestModal.tsx`** | Modal dialog (85 lines) for suggesting a new professor. Simple text input for name (max 100 chars). Calls `suggestProfessor` server action. Shows loading state and toast feedback. |
+| **`InfoModal.tsx`** | Informational modal dialog for providing additional context or details to users. |
+| **`GroupPageClient.tsx`** | Client component for the groups page, managing state and interactions for searching and filtering groups. |
+| **`ThemeProvider.tsx`** | Next-themes provider component for enabling light and dark modes across the app. |
+| **`layout/Header.tsx`** | Site header providing navigation and branding. |
+| **`layout/Footer.tsx`** | Site footer with links to privacy, terms, and copyright information. |
 
 ### `src/components/ui/` — UI Primitives
 
@@ -150,12 +172,6 @@ The core business logic file. All mutations go through these `'use server'` func
 | **`supabase.ts`** | **Browser-side** Supabase client (42 lines). Creates a `@supabase/ssr` browser client using public env vars (`NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`). Provides `getSupabase()` (lazy singleton) and a deprecated `supabase` named export that throws on accidental server-side usage via a `Proxy`. |
 | **`supabase-server.ts`** | **Server-side** Supabase clients (59 lines). `createServerSupabaseClient()` — creates a cookie-aware server client for Server Components/Actions (uses `@supabase/ssr`). `createAdminClient()` — creates a service-role client that bypasses RLS, requires `SUPABASE_SERVICE_ROLE_KEY` env var. |
 
-### `src/proxy.ts` — Request Proxy
-
-| File | Description |
-|------|-------------|
-| **`proxy.ts`** | Next.js 16 request proxy (replaces deprecated `middleware.ts`). Intercepts all non-static requests and refreshes the Supabase auth session by calling `supabase.auth.getUser()` (validates with the Supabase Auth server, not just local storage). Ensures Server Actions always have fresh auth cookies. Excludes static files, images, and favicon from processing. |
-
 ---
 
 ## `supabase/` — Database Schema & Migrations
@@ -167,6 +183,13 @@ The core business logic file. All mutations go through these `'use server'` func
 | **`rating_updates.sql`** | **Migration** (51 lines). Makes `teaching` and `proctoring` columns nullable to support partial ratings (rate only one category). Updates constraints to allow NULL or range 1–5. Updates the RPC to also return `teaching_count` and `proctoring_count`. |
 | **`security_fixes.sql`** | **Security hardening migration** (104 lines). Forces `is_approved = false` on INSERT (prevents bypass). Restricts UPDATE/DELETE to authenticated users. Removes public INSERT on ratings (all inserts via service role). Hides `user_fingerprint` from public by creating a `ratings_public` view. Updates RPC to use `SECURITY DEFINER`. |
 | **`consolidated_migration.sql`** | **Authoritative consolidated migration** (150 lines). Single file that creates the correct schema from scratch. Drops all old policies, creates finalised RLS policies, defines the `ratings_public` view, and creates the `get_professors_with_ratings()` RPC with `SECURITY DEFINER` and `SET search_path = public` for injection protection. This is the recommended migration to run for new deployments. |
+| **`add_aitu_verified.sql`** | Migration to add an `aitu_verified` column or similar verification badge to professor records. |
+| **`add_tags.sql`** | Migration to support tags or categories for professors. |
+| **`cleanup_professors.sql`** | Script for cleaning up temporary or bad professor data. |
+| **`find_fuzzy_duplicates.sql`** | Script to identify potential duplicate professor records based on fuzzy string matching. |
+| **`execute_manual_merges.sql`** | Runs manual merge operations for specific duplicate professor records. |
+| **`merge_professors.sql`** | Utility functions/queries for merging duplicate professor records into one. |
+| **`merge_3_duplicates.sql`** | Specific script targeting merging of 3 duplicates into a single record. |
 
 ---
 

@@ -1,0 +1,7363 @@
+[
+    {
+        "teacherName": "Abay Rakhman",
+        "disciplines": [
+            "Design and Analysis of Algorithms"
+        ],
+        "groups": [
+            "SE-2409",
+            "SE-2410",
+            "SE-2411",
+            "SE-2412",
+            "SE-2413",
+            "SE-2414",
+            "SE-2415",
+            "SE-2416",
+            "SE-2417",
+            "SE-2418",
+            "SE-2420"
+        ]
+    },
+    {
+        "teacherName": "Abdashim Dumankhan",
+        "disciplines": [
+            "Foreign Language 1"
+        ],
+        "groups": [
+            "CS-2501",
+            "CS-2502",
+            "CS-2503",
+            "CS-2504",
+            "CS-2505",
+            "CS-2506",
+            "CS-2507",
+            "CS-2508",
+            "CS-2509",
+            "CS-2510",
+            "CS-2511",
+            "CS-2512",
+            "CS-2513",
+            "CS-2514",
+            "CS-2515",
+            "CS-2516",
+            "CS-2517",
+            "CS-2518",
+            "CS-2519",
+            "CS-2520",
+            "CS-2521",
+            "CS-2522",
+            "CS-2523",
+            "CS-2524",
+            "CS-2525",
+            "CS-2526",
+            "CS-2527",
+            "CS-2528",
+            "CS-2529",
+            "CS-2530",
+            "IT-2501",
+            "IT-2502",
+            "IT-2503",
+            "IT-2504",
+            "IT-2505",
+            "IT-2506",
+            "IT-2507",
+            "IT-2508",
+            "IT-2509",
+            "IT-2510",
+            "IT-2511",
+            "IT-2512",
+            "IT-2513",
+            "IT-2514",
+            "IT-2515",
+            "IT-2516",
+            "SE-2501",
+            "SE-2502",
+            "SE-2503",
+            "SE-2504",
+            "SE-2505",
+            "SE-2506",
+            "SE-2507",
+            "SE-2508",
+            "SE-2509",
+            "SE-2510",
+            "SE-2511",
+            "SE-2512",
+            "SE-2513",
+            "SE-2514",
+            "SE-2515",
+            "SE-2516",
+            "SE-2517",
+            "SE-2518",
+            "SE-2519",
+            "SE-2520",
+            "SE-2521",
+            "SE-2522",
+            "SE-2523",
+            "SE-2524",
+            "SE-2525",
+            "SE-2526",
+            "SE-2527",
+            "SE-2528",
+            "SE-2529",
+            "SE-2530",
+            "SE-2531",
+            "SE-2532",
+            "SE-2533",
+            "SE-2534",
+            "SE-2535",
+            "SE-2536",
+            "SE-2537",
+            "SE-2538",
+            "SE-2539",
+            "SE-2540",
+            "SE-2541",
+            "SE-2542"
+        ]
+    },
+    {
+        "teacherName": "Abdiramanov Orisbay",
+        "disciplines": [
+            "Digital Logic Design",
+            "Operating Systems and Computer Networks"
+        ],
+        "groups": [
+            "BDA-2401",
+            "BDA-2402",
+            "CS-2425",
+            "CS-2427",
+            "CS-2428",
+            "CS-2430",
+            "CS-2433",
+            "CS-2434",
+            "CS-2435",
+            "CS-2436"
+        ]
+    },
+    {
+        "teacherName": "Abdirmanov Orisbay",
+        "disciplines": [
+            "Operating Systems and Computer Networks"
+        ],
+        "groups": [
+            "BDA-2401",
+            "BDA-2402"
+        ]
+    },
+    {
+        "teacherName": "Absadykov Daniyar",
+        "disciplines": [
+            "Linear Algebra"
+        ],
+        "groups": [
+            "SE-2507",
+            "SE-2508",
+            "SE-2509",
+            "SE-2510",
+            "SE-2511",
+            "SE-2512",
+            "SE-2513",
+            "SE-2514"
+        ]
+    },
+    {
+        "teacherName": "Abutalipova Shynar",
+        "disciplines": [
+            "Linear Algebra"
+        ],
+        "groups": [
+            "SE-2504",
+            "SE-2505",
+            "SE-2506",
+            "SE-2507",
+            "SE-2508",
+            "SE-2509",
+            "SE-2510",
+            "SE-2511",
+            "SE-2512",
+            "SE-2513",
+            "SE-2514",
+            "SE-2515",
+            "SE-2516",
+            "SE-2517",
+            "SE-2518"
+        ]
+    },
+    {
+        "teacherName": "Aidana Aidynkyzy",
+        "disciplines": [
+            "Design and Analysis of Algorithms"
+        ],
+        "groups": [
+            "SE-2430",
+            "SE-2431",
+            "SE-2432",
+            "SE-2433",
+            "SE-2434",
+            "SE-2435",
+            "SE-2436",
+            "SE-2437",
+            "SE-2438",
+            "SE-2439"
+        ]
+    },
+    {
+        "teacherName": "Aidarbekov Aidiye",
+        "disciplines": [
+            "Advanced screenwriting for media projects",
+            "Sustainable Development and Media Technology"
+        ],
+        "groups": [
+            "MT-2401M",
+            "MT-2402M"
+        ]
+    },
+    {
+        "teacherName": "Aiganym Jaras",
+        "disciplines": [
+            "Business Project (Simulation)",
+            "Introduction to Finance"
+        ],
+        "groups": [
+            "ITE-2501",
+            "SE-2401",
+            "SE-2402",
+            "SE-2404",
+            "SE-2405",
+            "SE-2408",
+            "SE-2409",
+            "SE-2411",
+            "SE-2412",
+            "SE-2414",
+            "SE-2415",
+            "SE-2416",
+            "SE-2417",
+            "SE-2420",
+            "SE-2422",
+            "SE-2424",
+            "SE-2425",
+            "SE-2426",
+            "SE-2430"
+        ]
+    },
+    {
+        "teacherName": "Aigerim Amirova",
+        "disciplines": [
+            "Project Stakeholder Management"
+        ],
+        "groups": [
+            "PM-2401M",
+            "PM-2402M"
+        ]
+    },
+    {
+        "teacherName": "Aigerim Kussainova",
+        "disciplines": [
+            "Probability Theory",
+            "Probability and Statistics"
+        ],
+        "groups": [
+            "BDA-2401",
+            "BDA-2402",
+            "BDA-2403",
+            "ST-2403",
+            "ST-2404",
+            "ST-2405",
+            "ST-2406"
+        ]
+    },
+    {
+        "teacherName": "Aigul Adamova",
+        "disciplines": [
+            "Scientific research methods"
+        ],
+        "groups": [
+            "AI-2501D",
+            "IT-2501D"
+        ]
+    },
+    {
+        "teacherName": "Aimukhambetov Olzhas",
+        "disciplines": [
+            "Design and Analysis of Algorithms",
+            "Introduction to Functional programming"
+        ],
+        "groups": [
+            "IT-2406",
+            "IT-2407",
+            "IT-2408",
+            "IT-2409",
+            "IT-2410",
+            "SE-2422",
+            "SE-2423",
+            "SE-2424",
+            "SE-2425",
+            "SE-2426",
+            "SE-2427",
+            "SE-2428",
+            "SE-2429",
+            "SE-2430",
+            "SE-2431",
+            "SE-2432",
+            "SE-2433",
+            "SE-2434",
+            "SE-2435",
+            "SE-2436",
+            "SE-2437",
+            "SE-2438",
+            "SE-2439"
+        ]
+    },
+    {
+        "teacherName": "Ainur Bakenova",
+        "disciplines": [
+            "Foreign Language 1"
+        ],
+        "groups": [
+            "CS-2516",
+            "CS-2517",
+            "CS-2518",
+            "CS-2519",
+            "CS-2520",
+            "CS-2521",
+            "CS-2522",
+            "CS-2523",
+            "CS-2524",
+            "CS-2525",
+            "CS-2526",
+            "CS-2527",
+            "CS-2528",
+            "CS-2529",
+            "CS-2530",
+            "SE-2501",
+            "SE-2502",
+            "SE-2503",
+            "SE-2504",
+            "SE-2505",
+            "SE-2506",
+            "SE-2507",
+            "SE-2508",
+            "SE-2509",
+            "SE-2510",
+            "SE-2511",
+            "SE-2512",
+            "SE-2513",
+            "SE-2514",
+            "SE-2515",
+            "SE-2531",
+            "SE-2532",
+            "SE-2533",
+            "SE-2534",
+            "SE-2535",
+            "SE-2536",
+            "SE-2537",
+            "SE-2538",
+            "SE-2539",
+            "SE-2540",
+            "SE-2541",
+            "SE-2542"
+        ]
+    },
+    {
+        "teacherName": "Aisulu Kasekeyeva",
+        "disciplines": [
+            "Big Data Methods and Tools"
+        ],
+        "groups": [
+            "ADA-2401M",
+            "ADA-2402M",
+            "ADA-2403M",
+            "ADA-2404M",
+            "ADA-2405M"
+        ]
+    },
+    {
+        "teacherName": "Aitolkin Sagynbayeva",
+        "disciplines": [
+            "Business Model & Intellectual Property",
+            "Marketing for Entrepreneurship"
+        ],
+        "groups": [
+            "ITE-2401"
+        ]
+    },
+    {
+        "teacherName": "Aizhan Maibalayeva",
+        "disciplines": [
+            "Russian Language 1"
+        ],
+        "groups": [
+            "CS-2418",
+            "CS-2419",
+            "EE-2401",
+            "EE-2402",
+            "SE-2410",
+            "SE-2411"
+        ]
+    },
+    {
+        "teacherName": "Akbota Abutalipova",
+        "disciplines": [
+            "Russian Language 1"
+        ],
+        "groups": [
+            "BDA-2409",
+            "CS-2401",
+            "CS-2413",
+            "CS-2414",
+            "CS-2415",
+            "CS-2416",
+            "CS-2436",
+            "CS-2437",
+            "CS-2438",
+            "CS-2439",
+            "IT-2407",
+            "IT-2408",
+            "SE-2408",
+            "SE-2424"
+        ]
+    },
+    {
+        "teacherName": "Akhitova Riza",
+        "disciplines": [
+            "Advanced Graphics and Interaction",
+            "Media, Technology & Culture"
+        ],
+        "groups": [
+            "MT-2401M",
+            "MT-2402M",
+            "MT-2501M"
+        ]
+    },
+    {
+        "teacherName": "Akhmed-Zaki Dinara",
+        "disciplines": [
+            "Mathematics for Computational Science",
+            "Mathematics for data science"
+        ],
+        "groups": [
+            "ADA-2501M",
+            "ADA-2502M",
+            "ADA-2503M",
+            "ADA-2504M",
+            "CS-2501M"
+        ]
+    },
+    {
+        "teacherName": "Akhmetbekova Asel",
+        "disciplines": [
+            "Foreign language (professional)"
+        ],
+        "groups": [
+            "CSE-2505M",
+            "CSE-2506M",
+            "CSE-2507M",
+            "PM-2501M"
+        ]
+    },
+    {
+        "teacherName": "Akhmetvalieva I.",
+        "disciplines": [
+            "Russian Language 1"
+        ],
+        "groups": [
+            "BDA-2401",
+            "BDA-2402",
+            "CS-2401",
+            "CS-2406",
+            "CS-2407",
+            "CS-2416",
+            "CS-2418",
+            "CS-2419",
+            "CS-2427",
+            "CS-2432",
+            "CS-2433",
+            "CS-2434",
+            "CS-2435",
+            "CS-2437",
+            "CS-2438",
+            "CS-2439",
+            "EE-2405",
+            "EE-2406",
+            "MT-2401",
+            "MT-2402",
+            "SE-2406",
+            "SE-2407",
+            "SE-2408",
+            "SE-2409",
+            "SE-2410",
+            "SE-2411",
+            "SE-2412",
+            "SE-2413",
+            "SE-2414",
+            "SE-2415",
+            "SE-2417",
+            "SE-2418",
+            "SE-2420",
+            "SE-2421",
+            "SE-2422",
+            "SE-2423",
+            "SE-2429",
+            "SE-2430",
+            "SE-2433"
+        ]
+    },
+    {
+        "teacherName": "Akmaral Kuatbayeva",
+        "disciplines": [
+            "Artificial intelligence and machine learning"
+        ],
+        "groups": [
+            "CSE-2401M",
+            "CSE-2402M",
+            "CSE-2403M",
+            "CSE-2404M",
+            "CSE-2405M",
+            "CSE-2406M"
+        ]
+    },
+    {
+        "teacherName": "Akzharkyn Zholmyrza",
+        "disciplines": [
+            "Information and Communication Technologies"
+        ],
+        "groups": [
+            "ITM-2501",
+            "ITM-2502",
+            "ITM-2503",
+            "ITM-2504",
+            "ST-2501",
+            "ST-2502",
+            "ST-2503",
+            "ST-2504",
+            "ST-2505",
+            "ST-2506",
+            "ST-2507",
+            "ST-2508"
+        ]
+    },
+    {
+        "teacherName": "Albatyrova Merey",
+        "disciplines": [
+            "Physics 1"
+        ],
+        "groups": [
+            "EE-2501",
+            "EE-2502",
+            "EE-2503",
+            "EE-2504",
+            "EE-2505",
+            "EE-2506",
+            "EE-2507",
+            "EE-2508",
+            "EE-2509",
+            "EE-2510",
+            "EE-2511"
+        ]
+    },
+    {
+        "teacherName": "Aldaberdikyzy Aydin",
+        "disciplines": [
+            "Foreign Language 1"
+        ],
+        "groups": [
+            "AIB-2501",
+            "AIB-2502",
+            "AIB-2503",
+            "BDA-2501",
+            "BDA-2502",
+            "BDA-2503",
+            "BDA-2504",
+            "BDA-2505",
+            "BDA-2506",
+            "BDA-2507",
+            "BDA-2508",
+            "BDA-2509",
+            "BDA-2510",
+            "BDA-2511",
+            "BDA-2512",
+            "BDA-2513",
+            "DPA-2501",
+            "DPA-2502",
+            "IT-2501",
+            "IT-2502",
+            "IT-2503",
+            "IT-2504",
+            "IT-2505",
+            "IT-2506",
+            "IT-2507",
+            "IT-2508",
+            "MT-2501",
+            "MT-2502",
+            "MT-2503",
+            "MT-2504",
+            "MT-2505",
+            "MT-2506",
+            "MT-2507",
+            "SE-2501",
+            "SE-2502",
+            "SE-2503",
+            "SE-2504",
+            "SE-2505",
+            "SE-2506",
+            "SE-2507",
+            "SE-2508",
+            "SE-2509",
+            "SE-2510",
+            "SE-2511",
+            "SE-2512",
+            "SE-2513",
+            "SE-2514",
+            "SE-2515",
+            "SE-2516",
+            "SE-2517",
+            "SE-2518",
+            "SE-2519",
+            "SE-2520",
+            "SE-2521",
+            "SE-2522",
+            "SE-2523",
+            "SE-2524",
+            "SE-2525",
+            "SE-2526",
+            "SE-2527",
+            "SE-2528",
+            "SE-2529",
+            "SE-2530",
+            "SE-2531",
+            "SE-2532",
+            "SE-2533",
+            "SE-2534",
+            "SE-2535",
+            "SE-2536",
+            "SE-2537",
+            "SE-2538",
+            "SE-2539",
+            "SE-2540",
+            "SE-2541",
+            "SE-2542",
+            "SST-2501",
+            "SST-2502",
+            "ST-2501",
+            "ST-2502",
+            "ST-2503",
+            "ST-2504",
+            "ST-2505",
+            "ST-2506",
+            "ST-2507",
+            "ST-2508",
+            "ST-2509",
+            "ST-2510"
+        ]
+    },
+    {
+        "teacherName": "Alexandra Nam",
+        "disciplines": [
+            "Foreign Language 1"
+        ],
+        "groups": [
+            "AIB-2501",
+            "AIB-2502",
+            "AIB-2503",
+            "BDA-2501",
+            "BDA-2502",
+            "BDA-2503",
+            "BDA-2504",
+            "BDA-2505",
+            "BDA-2506",
+            "BDA-2507",
+            "BDA-2508",
+            "BDA-2509",
+            "BDA-2510",
+            "BDA-2511",
+            "BDA-2512",
+            "BDA-2513",
+            "DPA-2501",
+            "DPA-2502",
+            "EE-2501",
+            "EE-2502",
+            "EE-2503",
+            "EE-2504",
+            "EE-2505",
+            "EE-2506",
+            "EE-2507",
+            "EE-2508",
+            "EE-2509",
+            "EE-2510",
+            "EE-2511",
+            "IT-2501",
+            "IT-2502",
+            "IT-2503",
+            "IT-2504",
+            "IT-2505",
+            "IT-2506",
+            "IT-2507",
+            "IT-2508",
+            "SE-2516",
+            "SE-2517",
+            "SE-2518",
+            "SE-2519",
+            "SE-2520",
+            "SE-2521",
+            "SE-2522",
+            "SE-2523",
+            "SE-2524",
+            "SE-2525",
+            "SE-2526",
+            "SE-2527",
+            "SE-2528",
+            "SE-2529",
+            "SE-2530",
+            "SE-2531",
+            "SE-2532",
+            "SE-2533",
+            "SE-2534",
+            "SE-2535",
+            "SE-2536",
+            "SE-2537",
+            "SE-2538",
+            "SE-2539",
+            "SE-2540",
+            "SE-2541",
+            "SE-2542",
+            "ST-2501",
+            "ST-2502",
+            "ST-2503",
+            "ST-2504",
+            "ST-2505",
+            "ST-2506",
+            "ST-2507",
+            "ST-2508",
+            "ST-2509",
+            "ST-2510"
+        ]
+    },
+    {
+        "teacherName": "Alimkhanova Dinara",
+        "disciplines": [
+            "Foreign Language 1",
+            "Academic Writing"
+        ],
+        "groups": [
+            "AIB-2501",
+            "AIB-2502",
+            "AIB-2503",
+            "BDA-2501",
+            "BDA-2502",
+            "BDA-2503",
+            "BDA-2504",
+            "BDA-2505",
+            "BDA-2506",
+            "BDA-2507",
+            "BDA-2508",
+            "BDA-2509",
+            "BDA-2510",
+            "BDA-2511",
+            "BDA-2512",
+            "BDA-2513",
+            "CS-2501",
+            "CS-2502",
+            "CS-2503",
+            "CS-2504",
+            "CS-2505",
+            "CS-2506",
+            "CS-2507",
+            "CS-2508",
+            "CS-2509",
+            "CS-2510",
+            "CS-2511",
+            "CS-2512",
+            "CS-2513",
+            "CS-2514",
+            "CS-2515",
+            "DPA-2501",
+            "DPA-2502",
+            "EE-2501",
+            "EE-2502",
+            "EE-2503",
+            "EE-2504",
+            "EE-2505",
+            "EE-2506",
+            "EE-2507",
+            "EE-2508",
+            "EE-2509",
+            "EE-2510",
+            "EE-2511",
+            "MT-2501",
+            "MT-2502",
+            "MT-2503",
+            "MT-2504",
+            "MT-2505",
+            "MT-2506",
+            "MT-2507",
+            "SE-2516",
+            "SE-2517",
+            "SE-2518",
+            "SE-2519",
+            "SE-2520",
+            "SE-2521",
+            "SE-2522",
+            "SE-2523",
+            "SE-2524",
+            "SE-2525",
+            "SE-2526",
+            "SE-2527",
+            "SE-2528",
+            "SE-2529",
+            "SE-2530",
+            "ST-2501",
+            "ST-2502",
+            "ST-2503",
+            "ST-2504",
+            "ST-2505",
+            "ST-2506",
+            "ST-2507",
+            "ST-2508",
+            "ST-2509",
+            "ST-2510",
+            "AI-2501D",
+            "IT-2501D",
+            "PM-2501D"
+        ]
+    },
+    {
+        "teacherName": "Alimzhan Yessenov",
+        "disciplines": [
+            "Digital Logic Design",
+            "Introduction to Computing and Programming"
+        ],
+        "groups": [
+            "CS-2437",
+            "CS-2438",
+            "CS-2439",
+            "CS-2440",
+            "IoT-2501",
+            "IoT-2502",
+            "IoT-2503",
+            "ST-2508",
+            "ST-2509",
+            "ST-2510"
+        ]
+    },
+    {
+        "teacherName": "Alimzhanov Almas",
+        "disciplines": [
+            "Programming for data analysis and databases"
+        ],
+        "groups": [
+            "ADA-2501M",
+            "ADA-2502M",
+            "ADA-2503M",
+            "ADA-2504M"
+        ]
+    },
+    {
+        "teacherName": "Aliya Ayazbayeva",
+        "disciplines": [
+            "Foreign Language 1",
+            "Foreign language (professional)"
+        ],
+        "groups": [
+            "CS-2501",
+            "CS-2502",
+            "CS-2503",
+            "CS-2504",
+            "CS-2505",
+            "CS-2506",
+            "CS-2507",
+            "CS-2508",
+            "CS-2509",
+            "CS-2510",
+            "CS-2511",
+            "CS-2512",
+            "CS-2513",
+            "CS-2514",
+            "CS-2515",
+            "CS-2516",
+            "CS-2517",
+            "CS-2518",
+            "CS-2519",
+            "CS-2520",
+            "CS-2521",
+            "CS-2522",
+            "CS-2523",
+            "CS-2524",
+            "CS-2525",
+            "CS-2526",
+            "CS-2527",
+            "CS-2528",
+            "CS-2529",
+            "CS-2530",
+            "ITM-2501",
+            "ITM-2502",
+            "ITM-2503",
+            "ITM-2504",
+            "SE-2501",
+            "SE-2502",
+            "SE-2503",
+            "SE-2504",
+            "SE-2505",
+            "SE-2506",
+            "SE-2507",
+            "SE-2508",
+            "SE-2509",
+            "SE-2510",
+            "SE-2511",
+            "SE-2512",
+            "SE-2513",
+            "SE-2514",
+            "SE-2515",
+            "SE-2516",
+            "SE-2517",
+            "SE-2518",
+            "SE-2519",
+            "SE-2520",
+            "SE-2521",
+            "SE-2522",
+            "SE-2523",
+            "SE-2524",
+            "SE-2525",
+            "SE-2526",
+            "SE-2527",
+            "SE-2528",
+            "SE-2529",
+            "SE-2530",
+            "CS-2501M",
+            "DPA-2501M",
+            "PM-2502M",
+            "PM-2503M"
+        ]
+    },
+    {
+        "teacherName": "Alkhabay Bakgeldi",
+        "disciplines": [
+            "Computer Organisation and Architecture",
+            "Database Management Systems"
+        ],
+        "groups": [
+            "BDA-2402",
+            "BDA-2403",
+            "BDA-2404",
+            "BDA-2405",
+            "BDA-2406",
+            "BDA-2407",
+            "CS-2438",
+            "CS-2439"
+        ]
+    },
+    {
+        "teacherName": "Almas Ospanov",
+        "disciplines": [
+            "Software Design Patterns"
+        ],
+        "groups": [
+            "SE-2401",
+            "SE-2402",
+            "SE-2403",
+            "SE-2404",
+            "SE-2405",
+            "SE-2406",
+            "SE-2407",
+            "SE-2408",
+            "SE-2409",
+            "SE-2410",
+            "SE-2411",
+            "SE-2412",
+            "SE-2413",
+            "SE-2414",
+            "SE-2415",
+            "SE-2416",
+            "SE-2417",
+            "SE-2418",
+            "SE-2419",
+            "SE-2420",
+            "SE-2421",
+            "SE-2422",
+            "SE-2423",
+            "SE-2424",
+            "SE-2425",
+            "SE-2426",
+            "SE-2427",
+            "SE-2428",
+            "SE-2429",
+            "SE-2430",
+            "SE-2431",
+            "SE-2432",
+            "SE-2433",
+            "SE-2434",
+            "SE-2435",
+            "SE-2436",
+            "SE-2437",
+            "SE-2438",
+            "SE-2439"
+        ]
+    },
+    {
+        "teacherName": "Alzhanova Gaukhar",
+        "disciplines": [
+            "Cultural Studies"
+        ],
+        "groups": [
+            "BDA-2511",
+            "BDA-2512",
+            "BDA-2513",
+            "IT-2501",
+            "IT-2502",
+            "IT-2503",
+            "IT-2504",
+            "IT-2505",
+            "IT-2506",
+            "IT-2507",
+            "IT-2508",
+            "IT-2509",
+            "IT-2510",
+            "IT-2511",
+            "IT-2512",
+            "IT-2513",
+            "IT-2514",
+            "IT-2515",
+            "IT-2516"
+        ]
+    },
+    {
+        "teacherName": "Amanbekkyzy Adina",
+        "disciplines": [
+            "Introduction to Statistics and Data Analysis",
+            "Probability Theory"
+        ],
+        "groups": [
+            "BDA-2407",
+            "BDA-2408",
+            "BDA-2409",
+            "DJ-2401",
+            "DJ-2402"
+        ]
+    },
+    {
+        "teacherName": "Amangeldi Arystan",
+        "disciplines": [
+            "Digital Electronics"
+        ],
+        "groups": [
+            "EE-2401",
+            "EE-2402",
+            "EE-2403",
+            "EE-2404",
+            "EE-2405",
+            "EE-2406",
+            "EE-2407",
+            "EE-2408"
+        ]
+    },
+    {
+        "teacherName": "Amanzholova Zhemma",
+        "disciplines": [
+            "Russian Language 1"
+        ],
+        "groups": [
+            "BDA-2403",
+            "BDA-2404",
+            "CS-2406",
+            "CS-2407",
+            "CS-2426",
+            "CS-2427",
+            "IT-2403",
+            "IT-2404",
+            "IoT-2401",
+            "IoT-2402",
+            "SE-2402",
+            "SE-2417",
+            "SE-2423",
+            "SE-2431"
+        ]
+    },
+    {
+        "teacherName": "Amirov Alisher",
+        "disciplines": [
+            "Digital Logic Design"
+        ],
+        "groups": [
+            "CS-2405",
+            "CS-2406",
+            "CS-2407",
+            "CS-2408",
+            "CS-2409",
+            "CS-2410",
+            "CS-2411",
+            "CS-2412"
+        ]
+    },
+    {
+        "teacherName": "Anar Rakhymzhanova",
+        "disciplines": [
+            "Probability and Statistics"
+        ],
+        "groups": [
+            "IoT-2401",
+            "IoT-2402",
+            "MCS-2401",
+            "ST-2401",
+            "ST-2402",
+            "ST-2403",
+            "ST-2404",
+            "ST-2405",
+            "ST-2406"
+        ]
+    },
+    {
+        "teacherName": "Anel Nurkanat",
+        "disciplines": [
+            "Sociology"
+        ],
+        "groups": [
+            "AIB-2501",
+            "AIB-2502",
+            "AIB-2503",
+            "CS-2525",
+            "CS-2526",
+            "CS-2527",
+            "CS-2528",
+            "CS-2529",
+            "CS-2530",
+            "CS-2531",
+            "CS-2532",
+            "CS-2533",
+            "CS-2534",
+            "CS-2535",
+            "DPA-2501",
+            "DPA-2502",
+            "IoT-2501",
+            "IoT-2502",
+            "IoT-2503",
+            "SST-2501",
+            "SST-2502"
+        ]
+    },
+    {
+        "teacherName": "Arailym Tleubayeva",
+        "disciplines": [
+            "Programming for AI"
+        ],
+        "groups": [
+            "AAI-2501M",
+            "AAI-2502M",
+            "AAI-2503M",
+            "AAI-2504M",
+            "AAI-2505M",
+            "AAI-2506M"
+        ]
+    },
+    {
+        "teacherName": "Aray Rakhimzhanova",
+        "disciplines": [
+            "Foreign Language 1"
+        ],
+        "groups": [
+            "CS-2501",
+            "CS-2502",
+            "CS-2503",
+            "CS-2504",
+            "CS-2505",
+            "CS-2506",
+            "CS-2507",
+            "CS-2508",
+            "CS-2509",
+            "CS-2510",
+            "CS-2511",
+            "CS-2512",
+            "CS-2513",
+            "CS-2514",
+            "CS-2515",
+            "CS-2516",
+            "CS-2517",
+            "CS-2518",
+            "CS-2519",
+            "CS-2520",
+            "CS-2521",
+            "CS-2522",
+            "CS-2523",
+            "CS-2524",
+            "CS-2525",
+            "CS-2526",
+            "CS-2527",
+            "CS-2528",
+            "CS-2529",
+            "CS-2530",
+            "CS-2531",
+            "CS-2532",
+            "CS-2533",
+            "CS-2534",
+            "CS-2535",
+            "EE-2501",
+            "EE-2502",
+            "EE-2503",
+            "EE-2504",
+            "EE-2505",
+            "EE-2506",
+            "EE-2507",
+            "EE-2508",
+            "EE-2509",
+            "EE-2510",
+            "EE-2511",
+            "IoT-2501",
+            "IoT-2502",
+            "IoT-2503",
+            "MCS-2501",
+            "MCS-2502",
+            "MCS-2503",
+            "ST-2501",
+            "ST-2502",
+            "ST-2503",
+            "ST-2504",
+            "ST-2505",
+            "ST-2506",
+            "ST-2507",
+            "ST-2508",
+            "ST-2509",
+            "ST-2510"
+        ]
+    },
+    {
+        "teacherName": "Armanova Asyltas",
+        "disciplines": [
+            "Operating Systems"
+        ],
+        "groups": [
+            "CS-2415",
+            "CS-2416"
+        ]
+    },
+    {
+        "teacherName": "Aruova Aliya",
+        "disciplines": [
+            "Calculus 1"
+        ],
+        "groups": [
+            "ST-2501",
+            "ST-2502",
+            "ST-2503",
+            "ST-2504",
+            "ST-2505",
+            "ST-2506",
+            "ST-2507",
+            "ST-2508",
+            "ST-2509",
+            "ST-2510"
+        ]
+    },
+    {
+        "teacherName": "Aruzhan Ali",
+        "disciplines": [
+            "WEB Technologies 1 (Front End)"
+        ],
+        "groups": [
+            "SE-2410",
+            "SE-2411",
+            "SE-2412",
+            "SE-2413",
+            "SE-2414",
+            "SE-2415",
+            "SE-2416",
+            "SE-2417",
+            "SE-2418"
+        ]
+    },
+    {
+        "teacherName": "Asaubai Al-Tarazi",
+        "disciplines": [
+            "Analytic methods in Computer Science"
+        ],
+        "groups": [
+            "SE-2410",
+            "SE-2411",
+            "SE-2412",
+            "SE-2413",
+            "SE-2414",
+            "SE-2415",
+            "SE-2416",
+            "SE-2417",
+            "SE-2418",
+            "SE-2419",
+            "SE-2420"
+        ]
+    },
+    {
+        "teacherName": "Ashraf Osman Ibrahim Elsayed",
+        "disciplines": [
+            "Secure Software Architecture and Design"
+        ],
+        "groups": [
+            "SSE-2501M",
+            "SSE-2502M"
+        ]
+    },
+    {
+        "teacherName": "Askhar Mussa",
+        "disciplines": [
+            "Operating Systems"
+        ],
+        "groups": [
+            "CS-2424",
+            "CS-2425",
+            "CS-2426"
+        ]
+    },
+    {
+        "teacherName": "Assel Alimzhan",
+        "disciplines": [
+            "WEB Technologies 1 (Front End)"
+        ],
+        "groups": [
+            "SE-2427",
+            "SE-2428",
+            "SE-2429",
+            "SE-2430",
+            "SE-2431",
+            "SE-2432",
+            "SE-2433",
+            "SE-2434"
+        ]
+    },
+    {
+        "teacherName": "Assel Salkenova",
+        "disciplines": [
+            "Foreign Language 1"
+        ],
+        "groups": [
+            "BDA-2501",
+            "BDA-2502",
+            "BDA-2503",
+            "BDA-2504",
+            "BDA-2505",
+            "BDA-2506",
+            "BDA-2507",
+            "BDA-2508",
+            "BDA-2509",
+            "BDA-2510",
+            "BDA-2511",
+            "BDA-2512",
+            "BDA-2513",
+            "CS-2501",
+            "CS-2502",
+            "CS-2503",
+            "CS-2504",
+            "CS-2505",
+            "CS-2506",
+            "CS-2507",
+            "CS-2508",
+            "CS-2509",
+            "CS-2510",
+            "CS-2511",
+            "CS-2512",
+            "CS-2513",
+            "CS-2514",
+            "CS-2515",
+            "CS-2516",
+            "CS-2517",
+            "CS-2518",
+            "CS-2519",
+            "CS-2520",
+            "CS-2521",
+            "CS-2522",
+            "CS-2523",
+            "CS-2524",
+            "CS-2525",
+            "CS-2526",
+            "CS-2527",
+            "CS-2528",
+            "CS-2529",
+            "CS-2530",
+            "EE-2501",
+            "EE-2502",
+            "EE-2503",
+            "EE-2504",
+            "EE-2505",
+            "EE-2506",
+            "EE-2507",
+            "EE-2508",
+            "EE-2509",
+            "EE-2510",
+            "EE-2511",
+            "IT-2501",
+            "IT-2502",
+            "IT-2503",
+            "IT-2504",
+            "IT-2505",
+            "IT-2506",
+            "IT-2507",
+            "IT-2508",
+            "IT-2509",
+            "IT-2510",
+            "IT-2511",
+            "IT-2512",
+            "IT-2513",
+            "IT-2514",
+            "IT-2515",
+            "IT-2516",
+            "MCS-2501",
+            "MCS-2502",
+            "MCS-2503"
+        ]
+    },
+    {
+        "teacherName": "Assel Seksenbayeva",
+        "disciplines": [
+            "Foreign Language 1"
+        ],
+        "groups": [
+            "CS-2501",
+            "CS-2502",
+            "CS-2503",
+            "CS-2504",
+            "CS-2505",
+            "CS-2506",
+            "CS-2507",
+            "CS-2508",
+            "CS-2509",
+            "CS-2510",
+            "CS-2511",
+            "CS-2512",
+            "CS-2513",
+            "CS-2514",
+            "CS-2515",
+            "CS-2516",
+            "CS-2517",
+            "CS-2518",
+            "CS-2519",
+            "CS-2520",
+            "CS-2521",
+            "CS-2522",
+            "CS-2523",
+            "CS-2524",
+            "CS-2525",
+            "CS-2526",
+            "CS-2527",
+            "CS-2528",
+            "CS-2529",
+            "CS-2530",
+            "CS-2531",
+            "CS-2532",
+            "CS-2533",
+            "CS-2534",
+            "CS-2535",
+            "DJ-2501",
+            "DJ-2502",
+            "DJ-2503",
+            "EE-2501",
+            "EE-2502",
+            "EE-2503",
+            "EE-2504",
+            "EE-2505",
+            "EE-2506",
+            "EE-2507",
+            "EE-2508",
+            "EE-2509",
+            "EE-2510",
+            "EE-2511",
+            "IoT-2501",
+            "IoT-2502",
+            "IoT-2503",
+            "SE-2501",
+            "SE-2502",
+            "SE-2503",
+            "SE-2504",
+            "SE-2505",
+            "SE-2506",
+            "SE-2507",
+            "SE-2508",
+            "SE-2509",
+            "SE-2510",
+            "SE-2511",
+            "SE-2512",
+            "SE-2513",
+            "SE-2514",
+            "SE-2515",
+            "SE-2516",
+            "SE-2517",
+            "SE-2518",
+            "SE-2519",
+            "SE-2520",
+            "SE-2521",
+            "SE-2522",
+            "SE-2523",
+            "SE-2524",
+            "SE-2525",
+            "SE-2526",
+            "SE-2527",
+            "SE-2528",
+            "SE-2529",
+            "SE-2530",
+            "SE-2531",
+            "SE-2532",
+            "SE-2533",
+            "SE-2534",
+            "SE-2535",
+            "SE-2536",
+            "SE-2537",
+            "SE-2538",
+            "SE-2539",
+            "SE-2540",
+            "SE-2541",
+            "SE-2542"
+        ]
+    },
+    {
+        "teacherName": "Assemgul Sarsembayeva",
+        "disciplines": [
+            "Foundations of Journalism"
+        ],
+        "groups": [
+            "DJ-2501",
+            "DJ-2502",
+            "DJ-2503"
+        ]
+    },
+    {
+        "teacherName": "Aubakir Samal",
+        "disciplines": [
+            "Foreign Language 1",
+            "Foreign language (professional)"
+        ],
+        "groups": [
+            "CS-2516",
+            "CS-2517",
+            "CS-2518",
+            "CS-2519",
+            "CS-2520",
+            "CS-2521",
+            "CS-2522",
+            "CS-2523",
+            "CS-2524",
+            "CS-2525",
+            "CS-2526",
+            "CS-2527",
+            "CS-2528",
+            "CS-2529",
+            "CS-2530",
+            "DPA-2501",
+            "DPA-2502",
+            "IT-2509",
+            "IT-2510",
+            "IT-2511",
+            "IT-2512",
+            "IT-2513",
+            "IT-2514",
+            "IT-2515",
+            "IT-2516",
+            "MT-2501",
+            "MT-2502",
+            "MT-2503",
+            "MT-2504",
+            "MT-2505",
+            "MT-2506",
+            "MT-2507",
+            "SE-2501",
+            "SE-2502",
+            "SE-2503",
+            "SE-2504",
+            "SE-2505",
+            "SE-2506",
+            "SE-2507",
+            "SE-2508",
+            "SE-2509",
+            "SE-2510",
+            "SE-2511",
+            "SE-2512",
+            "SE-2513",
+            "SE-2514",
+            "SE-2515",
+            "SE-2531",
+            "SE-2532",
+            "SE-2533",
+            "SE-2534",
+            "SE-2535",
+            "SE-2536",
+            "SE-2537",
+            "SE-2538",
+            "SE-2539",
+            "SE-2540",
+            "SE-2541",
+            "SE-2542",
+            "AAI-2504M",
+            "AAI-2505M",
+            "AAI-2506M"
+        ]
+    },
+    {
+        "teacherName": "Auzhanova Assel",
+        "disciplines": [
+            "History of Kazakhstan (State Exam)"
+        ],
+        "groups": [
+            "MCS-2501",
+            "MCS-2502",
+            "MCS-2503",
+            "MT-2506",
+            "MT-2507"
+        ]
+    },
+    {
+        "teacherName": "Aynur Basheyeva",
+        "disciplines": [
+            "Discrete Mathematics"
+        ],
+        "groups": [
+            "CS-2534",
+            "CS-2535",
+            "SST-2501",
+            "SST-2502"
+        ]
+    },
+    {
+        "teacherName": "Azhikhan Aidana",
+        "disciplines": [
+            "Calculus 1"
+        ],
+        "groups": [
+            "SE-2529",
+            "SE-2530",
+            "SE-2531",
+            "SE-2532",
+            "SE-2533",
+            "SE-2534",
+            "SE-2535",
+            "SE-2536"
+        ]
+    },
+    {
+        "teacherName": "Azhmoldayev Gaziz",
+        "disciplines": [
+            "AI Essentials: Theory and Applications"
+        ],
+        "groups": [
+            "AAI-2501M",
+            "AAI-2502M",
+            "AAI-2503M"
+        ]
+    },
+    {
+        "teacherName": "Azibek Balzhan",
+        "disciplines": [
+            "Signals and Systems"
+        ],
+        "groups": [
+            "EE-2401",
+            "EE-2402",
+            "EE-2403",
+            "EE-2404",
+            "EE-2405",
+            "EE-2406",
+            "EE-2407",
+            "EE-2408",
+            "IoT-2401",
+            "IoT-2402"
+        ]
+    },
+    {
+        "teacherName": "Azimbayev Baurzhan",
+        "disciplines": [
+            "Information and Communication Technologies"
+        ],
+        "groups": [
+            "BDA-2513",
+            "CS-2501",
+            "CS-2502",
+            "CS-2503",
+            "CS-2504",
+            "CS-2505",
+            "CS-2506",
+            "CS-2507",
+            "CS-2508",
+            "CS-2509",
+            "CS-2510",
+            "CS-2511",
+            "CS-2512"
+        ]
+    },
+    {
+        "teacherName": "Azimbayeva Gulzhan",
+        "disciplines": [
+            "History of Kazakhstan (State Exam)",
+            "Higher Education Pedagogy"
+        ],
+        "groups": [
+            "IT-2511",
+            "IT-2512",
+            "MT-2503",
+            "MT-2504",
+            "MT-2505",
+            "AAI-2506M",
+            "ADA-2501M",
+            "ADA-2502M",
+            "ADA-2503M",
+            "ADA-2504M",
+            "CS-2501M",
+            "DPA-2501M"
+        ]
+    },
+    {
+        "teacherName": "Baisarina Zhazira",
+        "disciplines": [
+            "Cultural Studies"
+        ],
+        "groups": [
+            "BDA-2501",
+            "BDA-2502",
+            "BDA-2503",
+            "BDA-2504",
+            "BDA-2505",
+            "BDA-2506",
+            "BDA-2507",
+            "BDA-2508",
+            "BDA-2509",
+            "BDA-2510",
+            "MCS-2501",
+            "MCS-2502",
+            "MCS-2503",
+            "MT-2501",
+            "MT-2502",
+            "MT-2503",
+            "MT-2504",
+            "MT-2505",
+            "MT-2506",
+            "MT-2507"
+        ]
+    },
+    {
+        "teacherName": "Baitulakov Anuar",
+        "disciplines": [
+            "Introduction to Computing and Programming"
+        ],
+        "groups": [
+            "EE-2501",
+            "EE-2502",
+            "EE-2503",
+            "EE-2504",
+            "EE-2505",
+            "EE-2506",
+            "EE-2507",
+            "EE-2508",
+            "EE-2509",
+            "EE-2510",
+            "EE-2511"
+        ]
+    },
+    {
+        "teacherName": "Bakayeva Bakyt",
+        "disciplines": [
+            "Information and Communication Technologies"
+        ],
+        "groups": [
+            "CS-2526",
+            "CS-2527",
+            "CS-2528",
+            "CS-2529",
+            "CS-2530",
+            "CS-2531",
+            "CS-2532",
+            "CS-2533",
+            "CS-2534",
+            "CS-2535",
+            "SE-2501",
+            "SE-2502"
+        ]
+    },
+    {
+        "teacherName": "Balziya Aldosh",
+        "disciplines": [
+            "Computer Networks",
+            "Operating Systems and Computer Networks"
+        ],
+        "groups": [
+            "BDA-2407",
+            "BDA-2408",
+            "CS-2429",
+            "CS-2430",
+            "CS-2431",
+            "CS-2432"
+        ]
+    },
+    {
+        "teacherName": "Basheyeva Zhuldyz",
+        "disciplines": [
+            "Information and Communication Technologies"
+        ],
+        "groups": [
+            "CS-2513",
+            "CS-2514",
+            "CS-2515",
+            "CS-2516",
+            "CS-2517",
+            "CS-2518",
+            "CS-2519",
+            "CS-2520",
+            "CS-2521",
+            "CS-2522",
+            "CS-2523",
+            "CS-2524",
+            "CS-2525"
+        ]
+    },
+    {
+        "teacherName": "Batalov Kairat",
+        "disciplines": [
+            "History of Kazakhstan (State Exam)"
+        ],
+        "groups": [
+            "IT-2505",
+            "IT-2506",
+            "IT-2507",
+            "IT-2508",
+            "IT-2509",
+            "IT-2510"
+        ]
+    },
+    {
+        "teacherName": "Batkuldin Alisher",
+        "disciplines": [
+            "Digital Logic Design"
+        ],
+        "groups": [
+            "CS-2413",
+            "CS-2414",
+            "CS-2415",
+            "CS-2416",
+            "CS-2417",
+            "CS-2418",
+            "CS-2419",
+            "CS-2420"
+        ]
+    },
+    {
+        "teacherName": "Batkuldinova Kamila",
+        "disciplines": [
+            "Computer Graphics Fundamentals"
+        ],
+        "groups": [
+            "IT-2401",
+            "IT-2402",
+            "IT-2403",
+            "IT-2404",
+            "IT-2405",
+            "IT-2406",
+            "IT-2407",
+            "IT-2408",
+            "IT-2409",
+            "IT-2410"
+        ]
+    },
+    {
+        "teacherName": "Bayandy Sarsembayev",
+        "disciplines": [
+            "Analog Electronics",
+            "Digital Electronics"
+        ],
+        "groups": [
+            "EE-2401",
+            "EE-2402",
+            "EE-2403",
+            "EE-2404",
+            "EE-2405",
+            "EE-2406",
+            "EE-2407",
+            "EE-2408",
+            "ST-2401",
+            "ST-2402",
+            "ST-2403",
+            "ST-2404",
+            "ST-2405",
+            "ST-2406"
+        ]
+    },
+    {
+        "teacherName": "Bibigul Aidarkhanova",
+        "disciplines": [
+            "Accounting & Financial Management"
+        ],
+        "groups": [
+            "AIB-2401",
+            "AIB-2402",
+            "ITE-2401",
+            "ITM-2401",
+            "ITM-2402"
+        ]
+    },
+    {
+        "teacherName": "Birzhan Ayanbayev",
+        "disciplines": [
+            "Calculus 1"
+        ],
+        "groups": [
+            "BDA-2510",
+            "BDA-2511",
+            "BDA-2512",
+            "BDA-2513",
+            "IT-2501",
+            "IT-2502"
+        ]
+    },
+    {
+        "teacherName": "Bolatbek Rysbayevich",
+        "disciplines": [
+            "Case study in computational sciences"
+        ],
+        "groups": [
+            "CS-2401M"
+        ]
+    },
+    {
+        "teacherName": "Boranbai Zhandos",
+        "disciplines": [
+            "Operating Systems"
+        ],
+        "groups": [
+            "SE-2423",
+            "SE-2424",
+            "SE-2425"
+        ]
+    },
+    {
+        "teacherName": "Boranbay Zhandos",
+        "disciplines": [
+            "Computer Networks"
+        ],
+        "groups": [
+            "CS-2425",
+            "CS-2426",
+            "CS-2427",
+            "CS-2428"
+        ]
+    },
+    {
+        "teacherName": "Borashova Sholpan",
+        "disciplines": [
+            "Business Project (Simulation)"
+        ],
+        "groups": [
+            "ITE-2501",
+            "ITE-2502"
+        ]
+    },
+    {
+        "teacherName": "Bukaeva Mira",
+        "disciplines": [
+            "Calculus 1"
+        ],
+        "groups": [
+            "BDA-2501",
+            "BDA-2502",
+            "BDA-2503",
+            "BDA-2504",
+            "BDA-2505",
+            "BDA-2506",
+            "BDA-2507",
+            "BDA-2508",
+            "BDA-2509"
+        ]
+    },
+    {
+        "teacherName": "Burbekova Saule",
+        "disciplines": [
+            "Foreign Language 1"
+        ],
+        "groups": [
+            "BDA-2501",
+            "BDA-2502",
+            "BDA-2503",
+            "BDA-2504",
+            "BDA-2505",
+            "BDA-2506",
+            "BDA-2507",
+            "BDA-2508",
+            "BDA-2509",
+            "BDA-2510",
+            "BDA-2511",
+            "BDA-2512",
+            "BDA-2513",
+            "CS-2501",
+            "CS-2502",
+            "CS-2503",
+            "CS-2504",
+            "CS-2505",
+            "CS-2506",
+            "CS-2507",
+            "CS-2508",
+            "CS-2509",
+            "CS-2510",
+            "CS-2511",
+            "CS-2512",
+            "CS-2513",
+            "CS-2514",
+            "CS-2515",
+            "MT-2501",
+            "MT-2502",
+            "MT-2503",
+            "MT-2504",
+            "MT-2505",
+            "MT-2506",
+            "MT-2507"
+        ]
+    },
+    {
+        "teacherName": "Chigambayeva Diana",
+        "disciplines": [
+            "Calculus 1"
+        ],
+        "groups": [
+            "SE-2501",
+            "SE-2502",
+            "SE-2503",
+            "SE-2504",
+            "SE-2505",
+            "SE-2506"
+        ]
+    },
+    {
+        "teacherName": "Daniyar Amantayev",
+        "disciplines": [
+            "WEB Technologies 1 (Front End)"
+        ],
+        "groups": [
+            "SE-2419",
+            "SE-2420",
+            "SE-2421",
+            "SE-2422",
+            "SE-2423",
+            "SE-2424",
+            "SE-2425",
+            "SE-2426"
+        ]
+    },
+    {
+        "teacherName": "Dariya Tulekbayeva",
+        "disciplines": [
+            "Russian Language 1"
+        ],
+        "groups": [
+            "BDA-2405",
+            "BDA-2406",
+            "CS-2410",
+            "CS-2417",
+            "CS-2430",
+            "CS-2431",
+            "CS-2440",
+            "EE-2403",
+            "EE-2404",
+            "IT-2405",
+            "IT-2406",
+            "ITM-2401",
+            "ITM-2402",
+            "MCS-2401",
+            "MT-2403",
+            "MT-2404",
+            "SE-2405",
+            "SE-2409",
+            "SE-2412",
+            "SE-2413",
+            "SE-2419",
+            "SE-2420",
+            "SE-2425",
+            "SE-2426",
+            "SE-2427",
+            "ST-2401",
+            "ST-2402"
+        ]
+    },
+    {
+        "teacherName": "Dauren Sagidollauly",
+        "disciplines": [
+            "Operating Systems"
+        ],
+        "groups": [
+            "CS-2419",
+            "CS-2420",
+            "CS-2421",
+            "CS-2422",
+            "CS-2423"
+        ]
+    },
+    {
+        "teacherName": "Daurenova Zhansaya",
+        "disciplines": [
+            "Calculus"
+        ],
+        "groups": [
+            "MT-2505",
+            "MT-2506",
+            "MT-2507"
+        ]
+    },
+    {
+        "teacherName": "Diana Bolatova",
+        "disciplines": [
+            "Linear Algebra"
+        ],
+        "groups": [
+            "SE-2535",
+            "SE-2536",
+            "SE-2537",
+            "SE-2538",
+            "SE-2539",
+            "SE-2540",
+            "SE-2541",
+            "SE-2542"
+        ]
+    },
+    {
+        "teacherName": "Dinayeva Bekzat",
+        "disciplines": [
+            "Kazakh Language 1"
+        ],
+        "groups": [
+            "CS-2406",
+            "CS-2407",
+            "CS-2408",
+            "CS-2409",
+            "CS-2410",
+            "CS-2427",
+            "CS-2428",
+            "CS-2429",
+            "CS-2430",
+            "CS-2431",
+            "CS-2432",
+            "CS-2433",
+            "CS-2439",
+            "CS-2440",
+            "DJ-2401",
+            "DJ-2402",
+            "IT-2401",
+            "IT-2402",
+            "IT-2403",
+            "IT-2404",
+            "IT-2405",
+            "IT-2406",
+            "SE-2401",
+            "SE-2402",
+            "SE-2403",
+            "SE-2404",
+            "SE-2406",
+            "SE-2407",
+            "SE-2409",
+            "SE-2420",
+            "SE-2421",
+            "SE-2422",
+            "SE-2423",
+            "SE-2424",
+            "SE-2425",
+            "SE-2426",
+            "SE-2427"
+        ]
+    },
+    {
+        "teacherName": "Duman Adilet",
+        "disciplines": [
+            "Discrete Mathematics"
+        ],
+        "groups": [
+            "CS-2507",
+            "CS-2508",
+            "CS-2509",
+            "CS-2510",
+            "CS-2511",
+            "CS-2512",
+            "CS-2513",
+            "CS-2514",
+            "CS-2515",
+            "CS-2532",
+            "CS-2533"
+        ]
+    },
+    {
+        "teacherName": "Elmira Gerfanova",
+        "disciplines": [
+            "Foreign Language 1",
+            "Foreign language (professional)"
+        ],
+        "groups": [
+            "CS-2501",
+            "CS-2502",
+            "CS-2503",
+            "CS-2504",
+            "CS-2505",
+            "CS-2506",
+            "CS-2507",
+            "CS-2508",
+            "CS-2509",
+            "CS-2510",
+            "CS-2511",
+            "CS-2512",
+            "CS-2513",
+            "CS-2514",
+            "CS-2515",
+            "CS-2516",
+            "CS-2517",
+            "CS-2518",
+            "CS-2519",
+            "CS-2520",
+            "CS-2521",
+            "CS-2522",
+            "CS-2523",
+            "CS-2524",
+            "CS-2525",
+            "CS-2526",
+            "CS-2527",
+            "CS-2528",
+            "CS-2529",
+            "CS-2530",
+            "EE-2501",
+            "EE-2502",
+            "EE-2503",
+            "EE-2504",
+            "EE-2505",
+            "EE-2506",
+            "EE-2507",
+            "EE-2508",
+            "EE-2509",
+            "EE-2510",
+            "EE-2511",
+            "ST-2501",
+            "ST-2502",
+            "ST-2503",
+            "ST-2504",
+            "ST-2505",
+            "ST-2506",
+            "ST-2507",
+            "ST-2508",
+            "ST-2509",
+            "ST-2510",
+            "DBAIT-2501M",
+            "MT-2501M",
+            "SSE-2501M",
+            "SSE-2502M"
+        ]
+    },
+    {
+        "teacherName": "Esirkepov Sharafatdin",
+        "disciplines": [
+            "Introduction to Computing and Programming"
+        ],
+        "groups": [
+            "EE-2508",
+            "EE-2509",
+            "EE-2510",
+            "EE-2511"
+        ]
+    },
+    {
+        "teacherName": "Gaukhar Yeshenkulova",
+        "disciplines": [
+            "Business Administration"
+        ],
+        "groups": [
+            "AIB-2501",
+            "AIB-2502",
+            "AIB-2503",
+            "DPA-2501",
+            "DPA-2502",
+            "ITM-2501",
+            "ITM-2502",
+            "ITM-2503",
+            "ITM-2504"
+        ]
+    },
+    {
+        "teacherName": "Glazyrina Natalya",
+        "disciplines": [
+            "Advanced Computer Networks Security"
+        ],
+        "groups": [
+            "SSE-2401M"
+        ]
+    },
+    {
+        "teacherName": "Gulsim Tulepova",
+        "disciplines": [
+            "Electronics"
+        ],
+        "groups": [
+            "IoT-2401",
+            "IoT-2402",
+            "ST-2401",
+            "ST-2402",
+            "ST-2403",
+            "ST-2404",
+            "ST-2405",
+            "ST-2406"
+        ]
+    },
+    {
+        "teacherName": "Ibadildin Nurkhat",
+        "disciplines": [
+            "Project management"
+        ],
+        "groups": [
+            "PM-2501M",
+            "PM-2502M",
+            "PM-2503M"
+        ]
+    },
+    {
+        "teacherName": "Ibraeva Aigerim",
+        "disciplines": [
+            "Foreign Language 1"
+        ],
+        "groups": [
+            "CS-2501",
+            "CS-2502",
+            "CS-2503",
+            "CS-2504",
+            "CS-2505",
+            "CS-2506",
+            "CS-2507",
+            "CS-2508",
+            "CS-2509",
+            "CS-2510",
+            "CS-2511",
+            "CS-2512",
+            "CS-2513",
+            "CS-2514",
+            "CS-2515"
+        ]
+    },
+    {
+        "teacherName": "Ibraeva Dayana",
+        "disciplines": [
+            "Foundation of Screenwriting"
+        ],
+        "groups": [
+            "MT-2401",
+            "MT-2402",
+            "MT-2403",
+            "MT-2404",
+            "MT-2405",
+            "MT-2406"
+        ]
+    },
+    {
+        "teacherName": "Ibraheem Shayea",
+        "disciplines": [
+            "Computer Networks"
+        ],
+        "groups": [
+            "CS-2401",
+            "CS-2402",
+            "CS-2403",
+            "CS-2404",
+            "CS-2405",
+            "CS-2406",
+            "CS-2407",
+            "CS-2408",
+            "CS-2409",
+            "CS-2410",
+            "CS-2411",
+            "CS-2412",
+            "CS-2413",
+            "CS-2414",
+            "CS-2415",
+            "CS-2416",
+            "CS-2417",
+            "CS-2418",
+            "CS-2419",
+            "CS-2420",
+            "CS-2421",
+            "CS-2422",
+            "CS-2423",
+            "CS-2424",
+            "CS-2425",
+            "CS-2426",
+            "CS-2427",
+            "CS-2428",
+            "CS-2429",
+            "CS-2430",
+            "CS-2431",
+            "CS-2432",
+            "CS-2433",
+            "CS-2434",
+            "CS-2435",
+            "CS-2436",
+            "CS-2437",
+            "CS-2438",
+            "CS-2439",
+            "CS-2440"
+        ]
+    },
+    {
+        "teacherName": "Ibrayeva Aigerim",
+        "disciplines": [
+            "Foreign Language 1"
+        ],
+        "groups": [
+            "BDA-2501",
+            "BDA-2502",
+            "BDA-2503",
+            "BDA-2504",
+            "BDA-2505",
+            "BDA-2506",
+            "BDA-2507",
+            "BDA-2508",
+            "BDA-2509",
+            "BDA-2510",
+            "BDA-2511",
+            "BDA-2512",
+            "BDA-2513",
+            "CS-2501",
+            "CS-2502",
+            "CS-2503",
+            "CS-2504",
+            "CS-2505",
+            "CS-2506",
+            "CS-2507",
+            "CS-2508",
+            "CS-2509",
+            "CS-2510",
+            "CS-2511",
+            "CS-2512",
+            "CS-2513",
+            "CS-2514",
+            "CS-2515",
+            "DPA-2501",
+            "DPA-2502",
+            "ITM-2501",
+            "ITM-2502",
+            "ITM-2503",
+            "ITM-2504",
+            "IoT-2501",
+            "IoT-2502",
+            "IoT-2503",
+            "SE-2501",
+            "SE-2502",
+            "SE-2503",
+            "SE-2504",
+            "SE-2505",
+            "SE-2506",
+            "SE-2507",
+            "SE-2508",
+            "SE-2509",
+            "SE-2510",
+            "SE-2511",
+            "SE-2512",
+            "SE-2513",
+            "SE-2514",
+            "SE-2515",
+            "SE-2516",
+            "SE-2517",
+            "SE-2518",
+            "SE-2519",
+            "SE-2520",
+            "SE-2521",
+            "SE-2522",
+            "SE-2523",
+            "SE-2524",
+            "SE-2525",
+            "SE-2526",
+            "SE-2527",
+            "SE-2528",
+            "SE-2529",
+            "SE-2530"
+        ]
+    },
+    {
+        "teacherName": "Iliyas Tursynbek",
+        "disciplines": [
+            "Digital Electronics"
+        ],
+        "groups": [
+            "EE-2401",
+            "EE-2402",
+            "EE-2403",
+            "EE-2404",
+            "EE-2405",
+            "EE-2406",
+            "EE-2407",
+            "EE-2408"
+        ]
+    },
+    {
+        "teacherName": "Imangaliyev Almas",
+        "disciplines": [
+            "History of Kazakhstan (State Exam)"
+        ],
+        "groups": [
+            "BDA-2507",
+            "BDA-2508",
+            "IT-2502",
+            "IT-2503",
+            "IT-2504"
+        ]
+    },
+    {
+        "teacherName": "Imran Khaider",
+        "disciplines": [
+            "Introduction to Programming 1"
+        ],
+        "groups": [
+            "IT-2514",
+            "IT-2515",
+            "IT-2516"
+        ]
+    },
+    {
+        "teacherName": "Isakov Almas",
+        "disciplines": [
+            "Operating Systems"
+        ],
+        "groups": [
+            "CS-2427",
+            "CS-2428",
+            "CS-2429"
+        ]
+    },
+    {
+        "teacherName": "Ishanova Ayelita",
+        "disciplines": [
+            "Foreign Language 1"
+        ],
+        "groups": [
+            "CS-2501",
+            "CS-2502",
+            "CS-2503",
+            "CS-2504",
+            "CS-2505",
+            "CS-2506",
+            "CS-2507",
+            "CS-2508",
+            "CS-2509",
+            "CS-2510",
+            "CS-2511",
+            "CS-2512",
+            "CS-2513",
+            "CS-2514",
+            "CS-2515",
+            "CS-2516",
+            "CS-2517",
+            "CS-2518",
+            "CS-2519",
+            "CS-2520",
+            "CS-2521",
+            "CS-2522",
+            "CS-2523",
+            "CS-2524",
+            "CS-2525",
+            "CS-2526",
+            "CS-2527",
+            "CS-2528",
+            "CS-2529",
+            "CS-2530",
+            "EE-2501",
+            "EE-2502",
+            "EE-2503",
+            "EE-2504",
+            "EE-2505",
+            "EE-2506",
+            "EE-2507",
+            "EE-2508",
+            "EE-2509",
+            "EE-2510",
+            "EE-2511",
+            "ITM-2501",
+            "ITM-2502",
+            "ITM-2503",
+            "ITM-2504",
+            "MCS-2501",
+            "MCS-2502",
+            "MCS-2503",
+            "SE-2501",
+            "SE-2502",
+            "SE-2503",
+            "SE-2504",
+            "SE-2505",
+            "SE-2506",
+            "SE-2507",
+            "SE-2508",
+            "SE-2509",
+            "SE-2510",
+            "SE-2511",
+            "SE-2512",
+            "SE-2513",
+            "SE-2514",
+            "SE-2515",
+            "ST-2501",
+            "ST-2502",
+            "ST-2503",
+            "ST-2504",
+            "ST-2505",
+            "ST-2506",
+            "ST-2507",
+            "ST-2508",
+            "ST-2509",
+            "ST-2510"
+        ]
+    },
+    {
+        "teacherName": "Ishmukhambetov Nariman",
+        "disciplines": [
+            "Foreign Language 1"
+        ],
+        "groups": [
+            "CS-2501",
+            "CS-2502",
+            "CS-2503",
+            "CS-2504",
+            "CS-2505",
+            "CS-2506",
+            "CS-2507",
+            "CS-2508",
+            "CS-2509",
+            "CS-2510",
+            "CS-2511",
+            "CS-2512",
+            "CS-2513",
+            "CS-2514",
+            "CS-2515",
+            "CS-2516",
+            "CS-2517",
+            "CS-2518",
+            "CS-2519",
+            "CS-2520",
+            "CS-2521",
+            "CS-2522",
+            "CS-2523",
+            "CS-2524",
+            "CS-2525",
+            "CS-2526",
+            "CS-2527",
+            "CS-2528",
+            "CS-2529",
+            "CS-2530",
+            "CS-2531",
+            "CS-2532",
+            "CS-2533",
+            "CS-2534",
+            "CS-2535",
+            "IT-2509",
+            "IT-2510",
+            "IT-2511",
+            "IT-2512",
+            "IT-2513",
+            "IT-2514",
+            "IT-2515",
+            "IT-2516",
+            "SE-2501",
+            "SE-2502",
+            "SE-2503",
+            "SE-2504",
+            "SE-2505",
+            "SE-2506",
+            "SE-2507",
+            "SE-2508",
+            "SE-2509",
+            "SE-2510",
+            "SE-2511",
+            "SE-2512",
+            "SE-2513",
+            "SE-2514",
+            "SE-2515",
+            "SE-2516",
+            "SE-2517",
+            "SE-2518",
+            "SE-2519",
+            "SE-2520",
+            "SE-2521",
+            "SE-2522",
+            "SE-2523",
+            "SE-2524",
+            "SE-2525",
+            "SE-2526",
+            "SE-2527",
+            "SE-2528",
+            "SE-2529",
+            "SE-2530",
+            "SE-2531",
+            "SE-2532",
+            "SE-2533",
+            "SE-2534",
+            "SE-2535",
+            "SE-2536",
+            "SE-2537",
+            "SE-2538",
+            "SE-2539",
+            "SE-2540",
+            "SE-2541",
+            "SE-2542"
+        ]
+    },
+    {
+        "teacherName": "Ismailov Nurlan",
+        "disciplines": [
+            "Graph Theory and Networks"
+        ],
+        "groups": [
+            "BDA-2401",
+            "BDA-2402",
+            "BDA-2403",
+            "BDA-2404",
+            "BDA-2405",
+            "BDA-2406",
+            "BDA-2407",
+            "BDA-2408",
+            "BDA-2409"
+        ]
+    },
+    {
+        "teacherName": "Issakhanova Assel",
+        "disciplines": [
+            "Psychology of Management"
+        ],
+        "groups": [
+            "AAI-2501M",
+            "AAI-2502M",
+            "AAI-2503M",
+            "AAI-2504M",
+            "AAI-2505M",
+            "AAI-2506M",
+            "CS-2501M",
+            "CSE-2501M",
+            "CSE-2502M",
+            "CSE-2503M",
+            "CSE-2504M",
+            "CSE-2505M",
+            "CSE-2506M",
+            "CSE-2507M",
+            "DBAIT-2501M",
+            "DPA-2501M",
+            "MT-2501M",
+            "PM-2501M",
+            "PM-2502M",
+            "PM-2503M",
+            "SSE-2501M",
+            "SSE-2502M"
+        ]
+    },
+    {
+        "teacherName": "Jampeissova Zhanar",
+        "disciplines": [
+            "History of Kazakhstan (State Exam)"
+        ],
+        "groups": [
+            "BDA-2509",
+            "BDA-2510",
+            "BDA-2511",
+            "BDA-2512",
+            "BDA-2513",
+            "IT-2501"
+        ]
+    },
+    {
+        "teacherName": "Jandigulov Abdygali",
+        "disciplines": [
+            "Linear Algebra"
+        ],
+        "groups": [
+            "SE-2519",
+            "SE-2520",
+            "SE-2521",
+            "SE-2522",
+            "SE-2523",
+            "SE-2524",
+            "SE-2525",
+            "SE-2526"
+        ]
+    },
+    {
+        "teacherName": "Kaibassova Dinara",
+        "disciplines": [
+            "Advanced databases"
+        ],
+        "groups": [
+            "CSE-2501M",
+            "CSE-2502M",
+            "CSE-2503M",
+            "CSE-2504M",
+            "CSE-2505M",
+            "CSE-2506M",
+            "CSE-2507M"
+        ]
+    },
+    {
+        "teacherName": "Kairbek Nurbay",
+        "disciplines": [
+            "Computer Organisation and Architecture",
+            "Database Management Systems"
+        ],
+        "groups": [
+            "BDA-2401",
+            "CS-2440",
+            "IT-2405",
+            "IT-2406",
+            "IT-2407",
+            "IT-2408",
+            "IT-2409",
+            "IT-2410"
+        ]
+    },
+    {
+        "teacherName": "Kaiyr Aizada",
+        "disciplines": [
+            "Calculus 1"
+        ],
+        "groups": [
+            "SE-2504",
+            "SE-2505",
+            "SE-2506",
+            "SE-2510",
+            "SE-2511",
+            "SE-2512",
+            "SE-2513",
+            "SE-2514",
+            "SE-2515",
+            "SE-2522",
+            "SE-2523"
+        ]
+    },
+    {
+        "teacherName": "Kali Marzhan",
+        "disciplines": [
+            "Computer Networks",
+            "Operating Systems"
+        ],
+        "groups": [
+            "CS-2433",
+            "CS-2434",
+            "CS-2435",
+            "CS-2436",
+            "CS-2437",
+            "CS-2438",
+            "CS-2440",
+            "SE-2426",
+            "SE-2427",
+            "SE-2428"
+        ]
+    },
+    {
+        "teacherName": "Kalikova Aigerim",
+        "disciplines": [
+            "Digital Logic Design"
+        ],
+        "groups": [
+            "CS-2425",
+            "CS-2426",
+            "CS-2427",
+            "CS-2428",
+            "CS-2429",
+            "CS-2430",
+            "CS-2431",
+            "CS-2432"
+        ]
+    },
+    {
+        "teacherName": "Kalzhan Bakhtiyar",
+        "disciplines": [
+            "Parallelization of Algorithms"
+        ],
+        "groups": [
+            "MCS-2401"
+        ]
+    },
+    {
+        "teacherName": "Kamal Imran Mohd Sharif",
+        "disciplines": [
+            "Operations Management"
+        ],
+        "groups": [
+            "AIB-2401",
+            "AIB-2402"
+        ]
+    },
+    {
+        "teacherName": "Kamila Zhakupova",
+        "disciplines": [
+            "WEB Technologies 1 (Front End)"
+        ],
+        "groups": [
+            "SE-2401",
+            "SE-2402",
+            "SE-2403",
+            "SE-2404",
+            "SE-2405",
+            "SE-2406",
+            "SE-2407",
+            "SE-2408",
+            "SE-2409"
+        ]
+    },
+    {
+        "teacherName": "Kamiyeva Gulmira",
+        "disciplines": [
+            "Kazakh Language 1"
+        ],
+        "groups": [
+            "AIB-2401",
+            "AIB-2402",
+            "CS-2410",
+            "CS-2411",
+            "CS-2412",
+            "CS-2413",
+            "CS-2414",
+            "CS-2415",
+            "CS-2416",
+            "CS-2417",
+            "CS-2426",
+            "CS-2427",
+            "CS-2428",
+            "CS-2429",
+            "CS-2439",
+            "CS-2440",
+            "MT-2401",
+            "MT-2402",
+            "MT-2403",
+            "MT-2404",
+            "MT-2405",
+            "SE-2410",
+            "SE-2411",
+            "SE-2412",
+            "SE-2414",
+            "SE-2415",
+            "SE-2416",
+            "SE-2417",
+            "SE-2418",
+            "SE-2419",
+            "SE-2428",
+            "SE-2429",
+            "SE-2430",
+            "SE-2431",
+            "SE-2432",
+            "SE-2433",
+            "SE-2434"
+        ]
+    },
+    {
+        "teacherName": "Kantureyeva Mansia",
+        "disciplines": [
+            "Theory of Artificial Intelligence and Computational Intelligent Systems"
+        ],
+        "groups": [
+            "AI-2501D"
+        ]
+    },
+    {
+        "teacherName": "Karatai Asiya",
+        "disciplines": [
+            "Probability Theory"
+        ],
+        "groups": [
+            "BDA-2407",
+            "BDA-2408",
+            "BDA-2409"
+        ]
+    },
+    {
+        "teacherName": "Karimova Togzhan",
+        "disciplines": [
+            "Foreign Language 1"
+        ],
+        "groups": [
+            "BDA-2501",
+            "BDA-2502",
+            "BDA-2503",
+            "BDA-2504",
+            "BDA-2505",
+            "BDA-2506",
+            "BDA-2507",
+            "BDA-2508",
+            "BDA-2509",
+            "BDA-2510",
+            "BDA-2511",
+            "BDA-2512",
+            "BDA-2513",
+            "MT-2501",
+            "MT-2502",
+            "MT-2503",
+            "MT-2504",
+            "MT-2505",
+            "MT-2506",
+            "MT-2507",
+            "SST-2501",
+            "SST-2502"
+        ]
+    },
+    {
+        "teacherName": "Karpenko Matvey",
+        "disciplines": [
+            "Operating Systems"
+        ],
+        "groups": [
+            "CS-2430",
+            "CS-2431",
+            "SE-2407",
+            "SE-2408"
+        ]
+    },
+    {
+        "teacherName": "Kashkimbayeva Nurzhamal",
+        "disciplines": [
+            "Applied Software Development Project"
+        ],
+        "groups": [
+            "CSE-2401M",
+            "CSE-2402M",
+            "CSE-2403M",
+            "CSE-2404M",
+            "CSE-2405M",
+            "CSE-2406M"
+        ]
+    },
+    {
+        "teacherName": "Kassabek Samat",
+        "disciplines": [
+            "Calculus 1"
+        ],
+        "groups": [
+            "EE-2501",
+            "EE-2502",
+            "EE-2503",
+            "EE-2504",
+            "EE-2505",
+            "EE-2506",
+            "EE-2507",
+            "EE-2508",
+            "EE-2509",
+            "EE-2510",
+            "EE-2511"
+        ]
+    },
+    {
+        "teacherName": "Kassenov Khanat",
+        "disciplines": [
+            "Higher Education Pedagogy"
+        ],
+        "groups": [
+            "AAI-2501M",
+            "AAI-2502M",
+            "AAI-2503M",
+            "AAI-2504M",
+            "AAI-2505M",
+            "DBAIT-2501M",
+            "MT-2501M",
+            "PM-2501M",
+            "PM-2502M",
+            "PM-2503M",
+            "SSE-2501M",
+            "SSE-2502M"
+        ]
+    },
+    {
+        "teacherName": "Kazbekova Diana",
+        "disciplines": [
+            "Introduction to Programming 1"
+        ],
+        "groups": [
+            "IT-2506",
+            "IT-2507",
+            "IT-2508",
+            "IT-2509",
+            "IT-2510",
+            "IT-2511",
+            "IT-2512",
+            "IT-2513"
+        ]
+    },
+    {
+        "teacherName": "Kenzhegali Nurgaliyev",
+        "disciplines": [
+            "Introduction to Programming 1"
+        ],
+        "groups": [
+            "SE-2533",
+            "SE-2534",
+            "SE-2535",
+            "SE-2536",
+            "SE-2537",
+            "SE-2538",
+            "SE-2539"
+        ]
+    },
+    {
+        "teacherName": "Kenzhetaev Khakim",
+        "disciplines": [
+            "Foreign Language 1"
+        ],
+        "groups": [
+            "CS-2516",
+            "CS-2517",
+            "CS-2518",
+            "CS-2519",
+            "CS-2520",
+            "CS-2521",
+            "CS-2522",
+            "CS-2523",
+            "CS-2524",
+            "CS-2525",
+            "CS-2526",
+            "CS-2527",
+            "CS-2528",
+            "CS-2529",
+            "CS-2530",
+            "DJ-2501",
+            "DJ-2502",
+            "DJ-2503",
+            "IT-2501",
+            "IT-2502",
+            "IT-2503",
+            "IT-2504",
+            "IT-2505",
+            "IT-2506",
+            "IT-2507",
+            "IT-2508",
+            "IT-2509",
+            "IT-2510",
+            "IT-2511",
+            "IT-2512",
+            "IT-2513",
+            "IT-2514",
+            "IT-2515",
+            "IT-2516",
+            "SE-2501",
+            "SE-2502",
+            "SE-2503",
+            "SE-2504",
+            "SE-2505",
+            "SE-2506",
+            "SE-2507",
+            "SE-2508",
+            "SE-2509",
+            "SE-2510",
+            "SE-2511",
+            "SE-2512",
+            "SE-2513",
+            "SE-2514",
+            "SE-2515",
+            "SE-2516",
+            "SE-2517",
+            "SE-2518",
+            "SE-2519",
+            "SE-2520",
+            "SE-2521",
+            "SE-2522",
+            "SE-2523",
+            "SE-2524",
+            "SE-2525",
+            "SE-2526",
+            "SE-2527",
+            "SE-2528",
+            "SE-2529",
+            "SE-2530",
+            "SE-2531",
+            "SE-2532",
+            "SE-2533",
+            "SE-2534",
+            "SE-2535",
+            "SE-2536",
+            "SE-2537",
+            "SE-2538",
+            "SE-2539",
+            "SE-2540",
+            "SE-2541",
+            "SE-2542"
+        ]
+    },
+    {
+        "teacherName": "Khabiyev Zhangirhan",
+        "disciplines": [
+            "Calculus"
+        ],
+        "groups": [
+            "DPA-2501",
+            "DPA-2502",
+            "ITE-2501",
+            "ITE-2502"
+        ]
+    },
+    {
+        "teacherName": "Khaidarova Nurgul",
+        "disciplines": [
+            "Political Science"
+        ],
+        "groups": [
+            "DPA-2501",
+            "DPA-2502",
+            "ITM-2504"
+        ]
+    },
+    {
+        "teacherName": "Khaimuldin Askar",
+        "disciplines": [
+            "Introduction to Programming 1"
+        ],
+        "groups": [
+            "SE-2528",
+            "SE-2529",
+            "SE-2530",
+            "SE-2531",
+            "SE-2532"
+        ]
+    },
+    {
+        "teacherName": "Khaimuldin Nursultan",
+        "disciplines": [
+            "Design and Analysis of Algorithms"
+        ],
+        "groups": [
+            "SE-2401",
+            "SE-2402",
+            "SE-2403",
+            "SE-2404",
+            "SE-2405",
+            "SE-2406",
+            "SE-2407",
+            "SE-2408",
+            "SE-2409",
+            "SE-2410",
+            "SE-2411",
+            "SE-2412",
+            "SE-2413",
+            "SE-2414",
+            "SE-2415",
+            "SE-2416",
+            "SE-2417",
+            "SE-2418",
+            "SE-2419",
+            "SE-2420",
+            "SE-2421"
+        ]
+    },
+    {
+        "teacherName": "khatova Zhannur",
+        "disciplines": [
+            "Electronics"
+        ],
+        "groups": [
+            "ST-2401",
+            "ST-2402",
+            "ST-2403",
+            "ST-2404",
+            "ST-2405",
+            "ST-2406"
+        ]
+    },
+    {
+        "teacherName": "Konakbayev Olzhas",
+        "disciplines": [
+            "Digital Logic Design"
+        ],
+        "groups": [
+            "CS-2401",
+            "CS-2402",
+            "CS-2403",
+            "CS-2404",
+            "IoT-2401",
+            "IoT-2402"
+        ]
+    },
+    {
+        "teacherName": "Kosherbayeva Aigul",
+        "disciplines": [
+            "Agile project management practices",
+            "Models and methods in project management"
+        ],
+        "groups": [
+            "IT-2501D",
+            "PM-2501D"
+        ]
+    },
+    {
+        "teacherName": "Kospakov Aituar",
+        "disciplines": [
+            "Psychology"
+        ],
+        "groups": [
+            "CS-2524",
+            "CS-2525",
+            "CS-2526",
+            "CS-2527",
+            "CS-2528",
+            "CS-2529",
+            "CS-2530",
+            "CS-2531",
+            "CS-2532",
+            "CS-2533",
+            "CS-2534",
+            "CS-2535",
+            "EE-2501",
+            "EE-2502",
+            "EE-2503",
+            "EE-2504",
+            "EE-2505",
+            "EE-2506",
+            "EE-2507",
+            "EE-2508",
+            "EE-2509",
+            "EE-2510",
+            "EE-2511",
+            "ST-2404",
+            "ST-2405",
+            "ST-2406"
+        ]
+    },
+    {
+        "teacherName": "Kozhakhmet Zhaksylyk",
+        "disciplines": [
+            "Introduction to Programming 1"
+        ],
+        "groups": [
+            "SE-2521",
+            "SE-2522",
+            "SE-2523",
+            "SE-2524",
+            "SE-2525",
+            "SE-2526",
+            "SE-2527"
+        ]
+    },
+    {
+        "teacherName": "Kukhaeva Zarina",
+        "disciplines": [
+            "Physics 1"
+        ],
+        "groups": [
+            "EE-2501",
+            "EE-2502",
+            "EE-2503",
+            "EE-2504",
+            "EE-2505",
+            "EE-2506",
+            "EE-2507",
+            "EE-2508",
+            "EE-2509",
+            "EE-2510",
+            "EE-2511"
+        ]
+    },
+    {
+        "teacherName": "Kulbayeva Laura",
+        "disciplines": [
+            "Operating Systems"
+        ],
+        "groups": [
+            "SE-2411",
+            "SE-2412",
+            "SE-2413",
+            "SE-2414",
+            "SE-2415",
+            "SE-2417",
+            "SE-2418",
+            "SE-2419",
+            "SE-2431",
+            "SE-2432"
+        ]
+    },
+    {
+        "teacherName": "Kulmuratova Aitolkyn",
+        "disciplines": [
+            "Operating Systems and Computer Networks"
+        ],
+        "groups": [
+            "BDA-2405",
+            "BDA-2406"
+        ]
+    },
+    {
+        "teacherName": "Kusmanova Asem",
+        "disciplines": [
+            "Sociology"
+        ],
+        "groups": [
+            "CS-2501",
+            "CS-2502",
+            "CS-2503",
+            "DJ-2501",
+            "DJ-2502",
+            "DJ-2503",
+            "ITE-2501",
+            "ITE-2502",
+            "ITM-2501",
+            "ITM-2502",
+            "ITM-2503",
+            "ITM-2504",
+            "ST-2501",
+            "ST-2502",
+            "ST-2503",
+            "ST-2504",
+            "ST-2505",
+            "ST-2506",
+            "ST-2507",
+            "ST-2508",
+            "ST-2509",
+            "ST-2510"
+        ]
+    },
+    {
+        "teacherName": "Kutpanova Zarina",
+        "disciplines": [
+            "Information and Communication Technologies"
+        ],
+        "groups": [
+            "SE-2527",
+            "SE-2528",
+            "SE-2529",
+            "SE-2530",
+            "SE-2531",
+            "SE-2532",
+            "SE-2533",
+            "SE-2534",
+            "SE-2535",
+            "SE-2536",
+            "SE-2537",
+            "SE-2538"
+        ]
+    },
+    {
+        "teacherName": "Kydyrbekova Aigerim",
+        "disciplines": [
+            "Introduction to Programming"
+        ],
+        "groups": [
+            "CS-2511",
+            "CS-2512",
+            "CS-2513",
+            "CS-2514",
+            "CS-2515"
+        ]
+    },
+    {
+        "teacherName": "Kyzyrkanov Abzal",
+        "disciplines": [
+            "Database Management Systems"
+        ],
+        "groups": [
+            "CS-2409",
+            "CS-2410",
+            "CS-2411",
+            "CS-2412",
+            "CS-2413",
+            "CS-2414",
+            "CS-2415",
+            "CS-2416"
+        ]
+    },
+    {
+        "teacherName": "Latuta Konstantin",
+        "disciplines": [
+            "Introduction to Programming 1"
+        ],
+        "groups": [
+            "MT-2501",
+            "MT-2502",
+            "MT-2503",
+            "MT-2504",
+            "MT-2505",
+            "MT-2506",
+            "MT-2507"
+        ]
+    },
+    {
+        "teacherName": "Lisnevsky Rostislav",
+        "disciplines": [
+            "Systems Analysis and Design"
+        ],
+        "groups": [
+            "SSE-2401M"
+        ]
+    },
+    {
+        "teacherName": "Maiya Abzhaparova",
+        "disciplines": [
+            "Foreign Language 1",
+            "Foreign language (professional)"
+        ],
+        "groups": [
+            "SE-2501",
+            "SE-2502",
+            "SE-2503",
+            "SE-2504",
+            "SE-2505",
+            "SE-2506",
+            "SE-2507",
+            "SE-2508",
+            "SE-2509",
+            "SE-2510",
+            "SE-2511",
+            "SE-2512",
+            "SE-2513",
+            "SE-2514",
+            "SE-2515",
+            "SE-2516",
+            "SE-2517",
+            "SE-2518",
+            "SE-2519",
+            "SE-2520",
+            "SE-2521",
+            "SE-2522",
+            "SE-2523",
+            "SE-2524",
+            "SE-2525",
+            "SE-2526",
+            "SE-2527",
+            "SE-2528",
+            "SE-2529",
+            "SE-2530",
+            "SE-2531",
+            "SE-2532",
+            "SE-2533",
+            "SE-2534",
+            "SE-2535",
+            "SE-2536",
+            "SE-2537",
+            "SE-2538",
+            "SE-2539",
+            "SE-2540",
+            "SE-2541",
+            "SE-2542",
+            "CSE-2501M",
+            "CSE-2502M",
+            "CSE-2503M",
+            "CSE-2504M"
+        ]
+    },
+    {
+        "teacherName": "Makasheva Teili",
+        "disciplines": [
+            "Operating Systems"
+        ],
+        "groups": [
+            "SE-2401",
+            "SE-2402",
+            "SE-2403",
+            "SE-2404",
+            "SE-2405",
+            "SE-2406"
+        ]
+    },
+    {
+        "teacherName": "Makhmetova Kuralay",
+        "disciplines": [
+            "WEB Technologies 1 (Front End)"
+        ],
+        "groups": [
+            "IT-2401",
+            "IT-2402",
+            "IT-2403",
+            "IT-2404",
+            "IT-2405",
+            "IT-2406",
+            "IT-2407",
+            "IT-2408",
+            "IT-2409",
+            "IT-2410",
+            "SE-2435",
+            "SE-2436"
+        ]
+    },
+    {
+        "teacherName": "Malikova Zhanar",
+        "disciplines": [
+            "Russian Language 1"
+        ],
+        "groups": [
+            "CS-2404",
+            "CS-2405",
+            "CS-2424",
+            "CS-2425",
+            "EE-2407",
+            "EE-2408",
+            "IT-2401",
+            "IT-2402",
+            "SE-2401",
+            "SE-2404",
+            "SE-2416",
+            "SE-2436",
+            "SE-2437",
+            "ST-2403",
+            "ST-2404"
+        ]
+    },
+    {
+        "teacherName": "Malysheva Ksenia",
+        "disciplines": [
+            "Information and Communication Technologies"
+        ],
+        "groups": [
+            "DJ-2501",
+            "EE-2501",
+            "EE-2502",
+            "EE-2503",
+            "EE-2504",
+            "EE-2505",
+            "EE-2506",
+            "EE-2507",
+            "EE-2508",
+            "EE-2509",
+            "EE-2510",
+            "EE-2511",
+            "ITE-2501",
+            "MT-2507"
+        ]
+    },
+    {
+        "teacherName": "Mamytova Saule",
+        "disciplines": [
+            "History of Kazakhstan (State Exam)"
+        ],
+        "groups": [
+            "BDA-2501",
+            "BDA-2502",
+            "BDA-2503",
+            "BDA-2504",
+            "BDA-2505",
+            "BDA-2506"
+        ]
+    },
+    {
+        "teacherName": "Maulenova G.",
+        "disciplines": [
+            "Kazakh Language 1"
+        ],
+        "groups": [
+            "BDA-2401",
+            "BDA-2402",
+            "BDA-2403",
+            "BDA-2404",
+            "BDA-2405",
+            "BDA-2406",
+            "BDA-2407",
+            "BDA-2408",
+            "BDA-2409",
+            "CS-2401",
+            "CS-2402",
+            "CS-2403",
+            "CS-2404",
+            "CS-2418",
+            "CS-2419",
+            "CS-2420",
+            "CS-2421",
+            "CS-2431",
+            "CS-2432",
+            "CS-2433",
+            "CS-2434",
+            "CS-2435",
+            "DJ-2401",
+            "IT-2401",
+            "IT-2402",
+            "IT-2403",
+            "IT-2404",
+            "IT-2405",
+            "IT-2406",
+            "IT-2407",
+            "IT-2408",
+            "IT-2409",
+            "ITE-2401",
+            "ITM-2401",
+            "ITM-2402",
+            "SE-2401",
+            "SE-2402",
+            "SE-2403",
+            "SE-2406",
+            "SE-2409",
+            "SE-2414",
+            "SE-2420",
+            "SE-2421",
+            "SE-2422",
+            "SE-2423",
+            "SE-2424",
+            "SE-2425",
+            "SE-2426",
+            "ST-2405"
+        ]
+    },
+    {
+        "teacherName": "Maxat Kassen",
+        "disciplines": [
+            "Public Policy and e-Government"
+        ],
+        "groups": [
+            "DPA-2501M"
+        ]
+    },
+    {
+        "teacherName": "Meirbekova Bibinur",
+        "disciplines": [
+            "Mathematics for AI"
+        ],
+        "groups": [
+            "AIB-2501",
+            "AIB-2502",
+            "AIB-2503"
+        ]
+    },
+    {
+        "teacherName": "Menlibekova Gulbakhyt",
+        "disciplines": [
+            "Psychology of Management"
+        ],
+        "groups": [
+            "AAI-2501M",
+            "AAI-2502M",
+            "AAI-2503M",
+            "AAI-2504M",
+            "AAI-2505M",
+            "AAI-2506M",
+            "CS-2501M",
+            "DBAIT-2501M",
+            "DPA-2501M",
+            "MT-2501M",
+            "SSE-2501M",
+            "SSE-2502M"
+        ]
+    },
+    {
+        "teacherName": "Mergen Duisenov",
+        "disciplines": [
+            "Public Policy Analysis and Evaluation"
+        ],
+        "groups": [
+            "DPA-2401M"
+        ]
+    },
+    {
+        "teacherName": "Merzetkhan Akerke",
+        "disciplines": [
+            "Calculus",
+            "Discrete Mathematics"
+        ],
+        "groups": [
+            "CS-2513",
+            "CS-2514",
+            "CS-2515",
+            "CS-2524",
+            "CS-2525",
+            "CS-2526",
+            "CS-2527",
+            "DJ-2501",
+            "DJ-2502",
+            "DJ-2503",
+            "ITM-2503"
+        ]
+    },
+    {
+        "teacherName": "Min Soo Hahn",
+        "disciplines": [
+            "Analytic methods in Computer Science"
+        ],
+        "groups": [
+            "BDA-2401",
+            "BDA-2402",
+            "BDA-2403",
+            "BDA-2404",
+            "BDA-2405",
+            "BDA-2406",
+            "BDA-2407",
+            "BDA-2408",
+            "BDA-2409",
+            "SE-2401",
+            "SE-2402",
+            "SE-2403",
+            "SE-2404",
+            "SE-2405",
+            "SE-2406",
+            "SE-2407",
+            "SE-2408",
+            "SE-2409",
+            "SE-2410",
+            "SE-2411",
+            "SE-2412",
+            "SE-2413",
+            "SE-2414",
+            "SE-2415",
+            "SE-2416",
+            "SE-2417",
+            "SE-2418",
+            "SE-2419",
+            "SE-2420",
+            "SE-2421",
+            "SE-2422",
+            "SE-2423",
+            "SE-2424",
+            "SE-2425",
+            "SE-2426",
+            "SE-2427",
+            "SE-2428",
+            "SE-2429"
+        ]
+    },
+    {
+        "teacherName": "Mirzagalikova Botagoz",
+        "disciplines": [
+            "Information and Communication Technologies"
+        ],
+        "groups": [
+            "IT-2509",
+            "IT-2510",
+            "IT-2511",
+            "IT-2512",
+            "IT-2513",
+            "IT-2514",
+            "IT-2515",
+            "IT-2516"
+        ]
+    },
+    {
+        "teacherName": "Mohamed Ibrahim",
+        "disciplines": [
+            "Enterprise IT Architecture"
+        ],
+        "groups": [
+            "ITM-2401",
+            "ITM-2402"
+        ]
+    },
+    {
+        "teacherName": "Mohammadzadeh Ardashir",
+        "disciplines": [
+            "Case study on data Analytics"
+        ],
+        "groups": [
+            "ADA-2401M",
+            "ADA-2402M",
+            "ADA-2403M",
+            "ADA-2404M",
+            "ADA-2405M"
+        ]
+    },
+    {
+        "teacherName": "Mohammed Ahmed Saleh",
+        "disciplines": [
+            "Software Resilience and Risk Assessment"
+        ],
+        "groups": [
+            "SSE-2401M"
+        ]
+    },
+    {
+        "teacherName": "Mukhambetzhan Manshuk",
+        "disciplines": [
+            "Discrete Mathematics"
+        ],
+        "groups": [
+            "CS-2516",
+            "CS-2517",
+            "CS-2518",
+            "CS-2528",
+            "CS-2529",
+            "CS-2530",
+            "CS-2531"
+        ]
+    },
+    {
+        "teacherName": "Mukhamedina Anara",
+        "disciplines": [
+            "Linear Algebra"
+        ],
+        "groups": [
+            "SE-2523",
+            "SE-2524",
+            "SE-2525",
+            "SE-2526",
+            "SE-2529",
+            "SE-2530",
+            "SE-2531",
+            "SE-2532"
+        ]
+    },
+    {
+        "teacherName": "Mukhidenov Diyar",
+        "disciplines": [
+            "Software Design Patterns"
+        ],
+        "groups": [
+            "SE-2422",
+            "SE-2423",
+            "SE-2424",
+            "SE-2425",
+            "SE-2426",
+            "SE-2427",
+            "SE-2429",
+            "SE-2431",
+            "SE-2433",
+            "SE-2434",
+            "SE-2435",
+            "SE-2436",
+            "SE-2437",
+            "SE-2438",
+            "SE-2439"
+        ]
+    },
+    {
+        "teacherName": "Mukhmetov Olzhas",
+        "disciplines": [
+            "Physics"
+        ],
+        "groups": [
+            "ST-2507",
+            "ST-2508",
+            "ST-2509",
+            "ST-2510"
+        ]
+    },
+    {
+        "teacherName": "Mukhtar Karazym",
+        "disciplines": [
+            "Analytic Geometry"
+        ],
+        "groups": [
+            "IT-2404",
+            "IT-2405",
+            "IT-2406",
+            "IT-2407",
+            "IT-2408",
+            "IT-2409"
+        ]
+    },
+    {
+        "teacherName": "Mukushev Medet",
+        "disciplines": [
+            "Machine Learning for Business"
+        ],
+        "groups": [
+            "DBAIT-2501M"
+        ]
+    },
+    {
+        "teacherName": "Mukusheva Saniya",
+        "disciplines": [
+            "Operating Systems"
+        ],
+        "groups": [
+            "CS-2435",
+            "CS-2436",
+            "CS-2437",
+            "CS-2438"
+        ]
+    },
+    {
+        "teacherName": "Murat Akhmetov",
+        "disciplines": [
+            "Operating Systems"
+        ],
+        "groups": [
+            "SE-2433",
+            "SE-2434",
+            "SE-2435"
+        ]
+    },
+    {
+        "teacherName": "Muratov Dias",
+        "disciplines": [
+            "Cinematography & Digital Editing"
+        ],
+        "groups": [
+            "MT-2401",
+            "MT-2402",
+            "MT-2403",
+            "MT-2404",
+            "MT-2405",
+            "MT-2406"
+        ]
+    },
+    {
+        "teacherName": "Myrzagalieva Aigul",
+        "disciplines": [
+            "Linear Algebra"
+        ],
+        "groups": [
+            "SE-2527",
+            "SE-2528",
+            "SE-2529",
+            "SE-2530",
+            "SE-2531",
+            "SE-2532"
+        ]
+    },
+    {
+        "teacherName": "Myrzaliyev Dias",
+        "disciplines": [
+            "Calculus"
+        ],
+        "groups": [
+            "ITM-2501",
+            "ITM-2502",
+            "ITM-2504"
+        ]
+    },
+    {
+        "teacherName": "Narzhol Orleu",
+        "disciplines": [
+            "Discrete Mathematics"
+        ],
+        "groups": [
+            "CS-2532",
+            "CS-2533",
+            "CS-2534"
+        ]
+    },
+    {
+        "teacherName": "Niyazova R.S.",
+        "disciplines": [
+            "Physics Inferred Neural Networks"
+        ],
+        "groups": [
+            "CS-2401M"
+        ]
+    },
+    {
+        "teacherName": "Nurgaliyeva Symbat",
+        "disciplines": [
+            "Database Management Systems"
+        ],
+        "groups": [
+            "CS-2401",
+            "CS-2402",
+            "CS-2403",
+            "CS-2404",
+            "CS-2405",
+            "CS-2406",
+            "CS-2407",
+            "CS-2408"
+        ]
+    },
+    {
+        "teacherName": "Nurgul Kisikova",
+        "disciplines": [
+            "Making decisions based on data"
+        ],
+        "groups": [
+            "ADA-2401M",
+            "ADA-2402M",
+            "ADA-2403M",
+            "ADA-2404M",
+            "ADA-2405M"
+        ]
+    },
+    {
+        "teacherName": "Nurlankyzy A.",
+        "disciplines": [
+            "Introduction to Programming 1"
+        ],
+        "groups": [
+            "SE-2501",
+            "SE-2502",
+            "SE-2503",
+            "SE-2504"
+        ]
+    },
+    {
+        "teacherName": "Nurlybek Taubakabyl",
+        "disciplines": [
+            "Introduction to Programming 1"
+        ],
+        "groups": [
+            "SE-2513",
+            "SE-2514",
+            "SE-2515",
+            "SE-2516",
+            "SE-2517",
+            "SE-2518",
+            "SE-2519",
+            "SE-2520"
+        ]
+    },
+    {
+        "teacherName": "Nurseitova Altyn",
+        "disciplines": [
+            "Calculus 1"
+        ],
+        "groups": [
+            "IT-2503",
+            "IT-2504",
+            "IT-2505",
+            "IT-2506"
+        ]
+    },
+    {
+        "teacherName": "Nursultan Mahanov",
+        "disciplines": [
+            "AI Essentials: Theory and Applications"
+        ],
+        "groups": [
+            "AAI-2501M",
+            "AAI-2502M",
+            "AAI-2503M",
+            "AAI-2504M",
+            "AAI-2505M",
+            "AAI-2506M"
+        ]
+    },
+    {
+        "teacherName": "Nursulu Belessova",
+        "disciplines": [
+            "Psychology",
+            "Psychology of Management"
+        ],
+        "groups": [
+            "CS-2501",
+            "CS-2502",
+            "CS-2503",
+            "CS-2504",
+            "CS-2505",
+            "CS-2506",
+            "CS-2507",
+            "CS-2508",
+            "CS-2509",
+            "CS-2510",
+            "CS-2511",
+            "CS-2512",
+            "CS-2513",
+            "CS-2514",
+            "CS-2515",
+            "CS-2516",
+            "CS-2517",
+            "CS-2518",
+            "CS-2519",
+            "CS-2520",
+            "CS-2521",
+            "CS-2522",
+            "CS-2523",
+            "ST-2401",
+            "ST-2402",
+            "ST-2403",
+            "PM-2502M",
+            "PM-2503M"
+        ]
+    },
+    {
+        "teacherName": "Nurtas Nadirov",
+        "disciplines": [
+            "Introduction to Programming"
+        ],
+        "groups": [
+            "BDA-2501",
+            "BDA-2502",
+            "BDA-2503",
+            "BDA-2504",
+            "BDA-2505",
+            "BDA-2506",
+            "BDA-2507",
+            "BDA-2508",
+            "BDA-2509",
+            "BDA-2510"
+        ]
+    },
+    {
+        "teacherName": "Nurtazina Laura",
+        "disciplines": [
+            "Linear Algebra"
+        ],
+        "groups": [
+            "SE-2521",
+            "SE-2522"
+        ]
+    },
+    {
+        "teacherName": "Olzhabayeva Aruzhan",
+        "disciplines": [
+            "Foreign Language 1"
+        ],
+        "groups": [
+            "BDA-2501",
+            "BDA-2502",
+            "BDA-2503",
+            "BDA-2504",
+            "BDA-2505",
+            "BDA-2506",
+            "BDA-2507",
+            "BDA-2508",
+            "BDA-2509",
+            "BDA-2510",
+            "BDA-2511",
+            "BDA-2512",
+            "BDA-2513",
+            "EE-2501",
+            "EE-2502",
+            "EE-2503",
+            "EE-2504",
+            "EE-2505",
+            "EE-2506",
+            "EE-2507",
+            "EE-2508",
+            "EE-2509",
+            "EE-2510",
+            "EE-2511",
+            "IT-2501",
+            "IT-2502",
+            "IT-2503",
+            "IT-2504",
+            "IT-2505",
+            "IT-2506",
+            "IT-2507",
+            "IT-2508",
+            "IT-2509",
+            "IT-2510",
+            "IT-2511",
+            "IT-2512",
+            "IT-2513",
+            "IT-2514",
+            "IT-2515",
+            "IT-2516",
+            "MCS-2501",
+            "MCS-2502",
+            "MCS-2503",
+            "MT-2501",
+            "MT-2502",
+            "MT-2503",
+            "MT-2504",
+            "MT-2505",
+            "MT-2506",
+            "MT-2507",
+            "SE-2531",
+            "SE-2532",
+            "SE-2533",
+            "SE-2534",
+            "SE-2535",
+            "SE-2536",
+            "SE-2537",
+            "SE-2538",
+            "SE-2539",
+            "SE-2540",
+            "SE-2541",
+            "SE-2542"
+        ]
+    },
+    {
+        "teacherName": "Olzhas Kazhybayev",
+        "disciplines": [
+            "Information and Communication Technologies"
+        ],
+        "groups": [
+            "BDA-2501",
+            "BDA-2502",
+            "BDA-2503",
+            "BDA-2504",
+            "BDA-2505",
+            "BDA-2506",
+            "BDA-2507",
+            "BDA-2508",
+            "BDA-2509",
+            "BDA-2510",
+            "BDA-2511",
+            "BDA-2512",
+            "ST-2509",
+            "ST-2510"
+        ]
+    },
+    {
+        "teacherName": "Omirzak Islam",
+        "disciplines": [
+            "Introduction to Functional programming"
+        ],
+        "groups": [
+            "IT-2401",
+            "IT-2402",
+            "IT-2403",
+            "IT-2404",
+            "IT-2405",
+            "IT-2406",
+            "IT-2407",
+            "IT-2408",
+            "IT-2409",
+            "IT-2410"
+        ]
+    },
+    {
+        "teacherName": "Orazgaliyeva Laura",
+        "disciplines": [
+            "Russian Language 1"
+        ],
+        "groups": [
+            "BDA-2403",
+            "BDA-2404",
+            "BDA-2405",
+            "BDA-2408",
+            "CS-2402",
+            "CS-2403",
+            "CS-2422",
+            "CS-2423",
+            "EE-2403",
+            "EE-2405",
+            "EE-2407",
+            "EE-2408",
+            "IT-2404",
+            "IT-2406",
+            "IT-2407",
+            "IT-2409",
+            "ITM-2402",
+            "IoT-2402",
+            "MCS-2401",
+            "MT-2405",
+            "MT-2406",
+            "SE-2414",
+            "SE-2415",
+            "SE-2426",
+            "SE-2427",
+            "SE-2428",
+            "SE-2429",
+            "SE-2430",
+            "SE-2431",
+            "SE-2432",
+            "SE-2433",
+            "SE-2434",
+            "SE-2438",
+            "SE-2439",
+            "ST-2401",
+            "ST-2402",
+            "ST-2405",
+            "ST-2406"
+        ]
+    },
+    {
+        "teacherName": "Orazova Arailym",
+        "disciplines": [
+            "Introduction to Programming"
+        ],
+        "groups": [
+            "CS-2502",
+            "CS-2503",
+            "CS-2504",
+            "CS-2505",
+            "CS-2506",
+            "CS-2507",
+            "CS-2508",
+            "CS-2509",
+            "CS-2510"
+        ]
+    },
+    {
+        "teacherName": "Ormanov Adilet",
+        "disciplines": [
+            "Information and Communication Technologies"
+        ],
+        "groups": [
+            "AIB-2501",
+            "AIB-2502",
+            "AIB-2503",
+            "DPA-2501",
+            "DPA-2502",
+            "IoT-2501",
+            "IoT-2502",
+            "IoT-2503",
+            "MCS-2501",
+            "MCS-2502",
+            "MCS-2503",
+            "SST-2501",
+            "SST-2502"
+        ]
+    },
+    {
+        "teacherName": "Ormanova Assel",
+        "disciplines": [
+            "Foreign Language 1",
+            "Foreign language (professional)"
+        ],
+        "groups": [
+            "CS-2501",
+            "CS-2502",
+            "CS-2503",
+            "CS-2504",
+            "CS-2505",
+            "CS-2506",
+            "CS-2507",
+            "CS-2508",
+            "CS-2509",
+            "CS-2510",
+            "CS-2511",
+            "CS-2512",
+            "CS-2513",
+            "CS-2514",
+            "CS-2515",
+            "CS-2516",
+            "CS-2517",
+            "CS-2518",
+            "CS-2519",
+            "CS-2520",
+            "CS-2521",
+            "CS-2522",
+            "CS-2523",
+            "CS-2524",
+            "CS-2525",
+            "CS-2526",
+            "CS-2527",
+            "CS-2528",
+            "CS-2529",
+            "CS-2530",
+            "ITM-2501",
+            "ITM-2502",
+            "ITM-2503",
+            "ITM-2504",
+            "SE-2501",
+            "SE-2502",
+            "SE-2503",
+            "SE-2504",
+            "SE-2505",
+            "SE-2506",
+            "SE-2507",
+            "SE-2508",
+            "SE-2509",
+            "SE-2510",
+            "SE-2511",
+            "SE-2512",
+            "SE-2513",
+            "SE-2514",
+            "SE-2515",
+            "SE-2516",
+            "SE-2517",
+            "SE-2518",
+            "SE-2519",
+            "SE-2520",
+            "SE-2521",
+            "SE-2522",
+            "SE-2523",
+            "SE-2524",
+            "SE-2525",
+            "SE-2526",
+            "SE-2527",
+            "SE-2528",
+            "SE-2529",
+            "SE-2530",
+            "AAI-2501M",
+            "AAI-2502M",
+            "AAI-2503M"
+        ]
+    },
+    {
+        "teacherName": "Ospanova Zhanna (GER-1)",
+        "disciplines": [
+            "Foreign Language 1 (German)"
+        ],
+        "groups": [
+            "AIB-2502",
+            "AIB-2503",
+            "BDA-2501",
+            "BDA-2502",
+            "BDA-2504",
+            "BDA-2506",
+            "BDA-2507",
+            "BDA-2508",
+            "BDA-2509",
+            "BDA-2510",
+            "BDA-2511",
+            "BDA-2512"
+        ]
+    },
+    {
+        "teacherName": "Ospanova Zhanna (GER-2)",
+        "disciplines": [
+            "Foreign Language 1 (German)"
+        ],
+        "groups": [
+            "BDA-2512",
+            "CS-2502",
+            "CS-2503",
+            "CS-2504",
+            "CS-2506",
+            "CS-2507",
+            "CS-2510",
+            "CS-2511",
+            "CS-2513",
+            "CS-2514"
+        ]
+    },
+    {
+        "teacherName": "Ospanova Zhanna (GER-3)",
+        "disciplines": [
+            "Foreign Language 1 (German)"
+        ],
+        "groups": [
+            "CS-2516",
+            "CS-2517",
+            "CS-2519",
+            "CS-2520",
+            "CS-2521",
+            "CS-2522",
+            "CS-2523",
+            "CS-2524",
+            "CS-2527",
+            "CS-2528",
+            "CS-2529"
+        ]
+    },
+    {
+        "teacherName": "Ospanova Zhanna (GER-4)",
+        "disciplines": [
+            "Foreign Language 1 (German)"
+        ],
+        "groups": [
+            "CS-2530",
+            "CS-2531",
+            "CS-2532",
+            "CS-2533",
+            "CS-2534",
+            "CS-2535",
+            "DJ-2501",
+            "DJ-2502",
+            "EE-2501"
+        ]
+    },
+    {
+        "teacherName": "Ospanova Zhanna (GER-5)",
+        "disciplines": [
+            "Foreign Language 1 (German)"
+        ],
+        "groups": [
+            "EE-2502",
+            "EE-2503",
+            "EE-2504",
+            "EE-2505",
+            "EE-2506",
+            "EE-2507",
+            "EE-2508"
+        ]
+    },
+    {
+        "teacherName": "Ospanova Zhanna (GER-6)",
+        "disciplines": [
+            "Foreign Language 1 (German)"
+        ],
+        "groups": [
+            "EE-2508",
+            "EE-2509",
+            "EE-2510",
+            "EE-2511",
+            "IT-2502",
+            "IT-2503",
+            "IT-2504",
+            "IoT-2501",
+            "IoT-2503"
+        ]
+    },
+    {
+        "teacherName": "Ospanova Zhanna (GER-7)",
+        "disciplines": [
+            "Foreign Language 1 (German)"
+        ],
+        "groups": [
+            "IT-2505",
+            "IT-2506",
+            "IT-2507",
+            "IT-2508",
+            "IT-2509",
+            "IT-2510",
+            "IT-2511"
+        ]
+    },
+    {
+        "teacherName": "Ostemirova Uldana",
+        "disciplines": [
+            "Discrete Mathematics"
+        ],
+        "groups": [
+            "CS-2501",
+            "CS-2502",
+            "CS-2503",
+            "CS-2504",
+            "CS-2505",
+            "CS-2506"
+        ]
+    },
+    {
+        "teacherName": "Petrov Bogdan",
+        "disciplines": [
+            "Information and Digital Literacy"
+        ],
+        "groups": [
+            "DJ-2401",
+            "DJ-2402"
+        ]
+    },
+    {
+        "teacherName": "Raikhan Madi",
+        "disciplines": [
+            "Analytic Geometry"
+        ],
+        "groups": [
+            "IT-2401",
+            "IT-2402",
+            "IT-2403",
+            "IT-2410",
+            "MCS-2401"
+        ]
+    },
+    {
+        "teacherName": "Rakhimbayeva Zhanar",
+        "disciplines": [
+            "Calculus 1"
+        ],
+        "groups": [
+            "EE-2501",
+            "EE-2502",
+            "EE-2503",
+            "EE-2504",
+            "EE-2505",
+            "EE-2506",
+            "EE-2507",
+            "EE-2508",
+            "EE-2509",
+            "EE-2510",
+            "EE-2511"
+        ]
+    },
+    {
+        "teacherName": "Rakhimzhanova Mira",
+        "disciplines": [
+            "Calculus 1"
+        ],
+        "groups": [
+            "SE-2516",
+            "SE-2517",
+            "SE-2518",
+            "SE-2519",
+            "SE-2520",
+            "SE-2521",
+            "SE-2522",
+            "SE-2523",
+            "SE-2524",
+            "SE-2525",
+            "SE-2526",
+            "SE-2527"
+        ]
+    },
+    {
+        "teacherName": "Rakisheva Tolkyn",
+        "disciplines": [
+            "Foreign Language 1"
+        ],
+        "groups": [
+            "CS-2501",
+            "CS-2502",
+            "CS-2503",
+            "CS-2504",
+            "CS-2505",
+            "CS-2506",
+            "CS-2507",
+            "CS-2508",
+            "CS-2509",
+            "CS-2510",
+            "CS-2511",
+            "CS-2512",
+            "CS-2513",
+            "CS-2514",
+            "CS-2515",
+            "CS-2516",
+            "CS-2517",
+            "CS-2518",
+            "CS-2519",
+            "CS-2520",
+            "CS-2521",
+            "CS-2522",
+            "CS-2523",
+            "CS-2524",
+            "CS-2525",
+            "CS-2526",
+            "CS-2527",
+            "CS-2528",
+            "CS-2529",
+            "CS-2530",
+            "CS-2531",
+            "CS-2532",
+            "CS-2533",
+            "CS-2534",
+            "CS-2535",
+            "IT-2501",
+            "IT-2502",
+            "IT-2503",
+            "IT-2504",
+            "IT-2505",
+            "IT-2506",
+            "IT-2507",
+            "IT-2508",
+            "IT-2509",
+            "IT-2510",
+            "IT-2511",
+            "IT-2512",
+            "IT-2513",
+            "IT-2514",
+            "IT-2515",
+            "IT-2516",
+            "SE-2501",
+            "SE-2502",
+            "SE-2503",
+            "SE-2504",
+            "SE-2505",
+            "SE-2506",
+            "SE-2507",
+            "SE-2508",
+            "SE-2509",
+            "SE-2510",
+            "SE-2511",
+            "SE-2512",
+            "SE-2513",
+            "SE-2514",
+            "SE-2515",
+            "SE-2516",
+            "SE-2517",
+            "SE-2518",
+            "SE-2519",
+            "SE-2520",
+            "SE-2521",
+            "SE-2522",
+            "SE-2523",
+            "SE-2524",
+            "SE-2525",
+            "SE-2526",
+            "SE-2527",
+            "SE-2528",
+            "SE-2529",
+            "SE-2530"
+        ]
+    },
+    {
+        "teacherName": "Rakym Akbota",
+        "disciplines": [
+            "Information and Communication Technologies"
+        ],
+        "groups": [
+            "SE-2503",
+            "SE-2504",
+            "SE-2505",
+            "SE-2506",
+            "SE-2507",
+            "SE-2508",
+            "SE-2509",
+            "SE-2510",
+            "SE-2511",
+            "SE-2512",
+            "SE-2513"
+        ]
+    },
+    {
+        "teacherName": "Ramazanova Zamart",
+        "disciplines": [
+            "Calculus 1"
+        ],
+        "groups": [
+            "SE-2528",
+            "SE-2529",
+            "SE-2530",
+            "SE-2531",
+            "SE-2532",
+            "SE-2533",
+            "SE-2534",
+            "SE-2535",
+            "SE-2536"
+        ]
+    },
+    {
+        "teacherName": "Raskaliyev Timur",
+        "disciplines": [
+            "Mastering Design Thinking"
+        ],
+        "groups": [
+            "AIB-2401",
+            "AIB-2402"
+        ]
+    },
+    {
+        "teacherName": "Ruslan Tormosov",
+        "disciplines": [
+            "Program and Project Portfolio Management"
+        ],
+        "groups": [
+            "PM-2401M",
+            "PM-2402M"
+        ]
+    },
+    {
+        "teacherName": "Rymkul Ismailova",
+        "disciplines": [
+            "Project cost management",
+            "Scientific research methods"
+        ],
+        "groups": [
+            "PM-2401M",
+            "PM-2402M",
+            "PM-2501D"
+        ]
+    },
+    {
+        "teacherName": "Sabira Sapina",
+        "disciplines": [
+            "Kazakh Language 1"
+        ],
+        "groups": [
+            "AIB-2402",
+            "BDA-2406",
+            "BDA-2407",
+            "BDA-2408",
+            "BDA-2409",
+            "CS-2405",
+            "CS-2406",
+            "CS-2407",
+            "CS-2408",
+            "CS-2409",
+            "CS-2421",
+            "CS-2422",
+            "CS-2423",
+            "CS-2424",
+            "CS-2425",
+            "DJ-2401",
+            "DJ-2402",
+            "IT-2407",
+            "IT-2409",
+            "IT-2410",
+            "IoT-2401",
+            "IoT-2402",
+            "MCS-2401",
+            "MT-2406",
+            "SE-2412",
+            "SE-2413",
+            "SE-2414",
+            "SE-2415",
+            "SE-2416",
+            "SE-2417",
+            "SE-2418",
+            "SE-2419",
+            "SE-2436",
+            "SE-2437",
+            "SE-2438",
+            "SE-2439",
+            "ST-2402",
+            "ST-2403",
+            "ST-2405",
+            "ST-2406"
+        ]
+    },
+    {
+        "teacherName": "Sadirmekova Zhanna",
+        "disciplines": [
+            "Fault tolerance and reliability"
+        ],
+        "groups": [
+            "CSE-2401M",
+            "CSE-2402M",
+            "CSE-2403M",
+            "CSE-2404M",
+            "CSE-2405M",
+            "CSE-2406M"
+        ]
+    },
+    {
+        "teacherName": "Sadvakassova Asemgul",
+        "disciplines": [
+            "Introduction to Computing and Programming"
+        ],
+        "groups": [
+            "ST-2501",
+            "ST-2502",
+            "ST-2503",
+            "ST-2504"
+        ]
+    },
+    {
+        "teacherName": "Sagadat Nurmukhammed",
+        "disciplines": [
+            "Operating Systems"
+        ],
+        "groups": [
+            "CS-2417",
+            "CS-2418"
+        ]
+    },
+    {
+        "teacherName": "Sailaukhanov Eldos",
+        "disciplines": [
+            "Operating Systems"
+        ],
+        "groups": [
+            "SE-2436",
+            "SE-2438"
+        ]
+    },
+    {
+        "teacherName": "Sakhipov Aivar",
+        "disciplines": [
+            "Database Management Systems"
+        ],
+        "groups": [
+            "CS-2417",
+            "CS-2418",
+            "CS-2419",
+            "CS-2420",
+            "CS-2421",
+            "CS-2422",
+            "CS-2423"
+        ]
+    },
+    {
+        "teacherName": "Saltanat Algys",
+        "disciplines": [
+            "Introduction to Programming"
+        ],
+        "groups": [
+            "CS-2523",
+            "CS-2524",
+            "CS-2525",
+            "CS-2526",
+            "CS-2527",
+            "CS-2528",
+            "CS-2529",
+            "CS-2530"
+        ]
+    },
+    {
+        "teacherName": "Saltanat Zhalmagambetova",
+        "disciplines": [
+            "Political Science",
+            "Foreign language (professional)"
+        ],
+        "groups": [
+            "DJ-2503",
+            "ITM-2501",
+            "ITM-2502",
+            "ITM-2503",
+            "ADA-2501M",
+            "ADA-2502M",
+            "ADA-2503M",
+            "ADA-2504M"
+        ]
+    },
+    {
+        "teacherName": "Salykova Leila",
+        "disciplines": [
+            "Project Risk Management"
+        ],
+        "groups": [
+            "PM-2401M",
+            "PM-2402M"
+        ]
+    },
+    {
+        "teacherName": "Samat Askhatov",
+        "disciplines": [
+            "Basics of Sound Recording and Editing for Podcasting"
+        ],
+        "groups": [
+            "DJ-2401",
+            "DJ-2402"
+        ]
+    },
+    {
+        "teacherName": "Samat Tankeyev",
+        "disciplines": [
+            "Database Management Systems"
+        ],
+        "groups": [
+            "CS-2424",
+            "CS-2425",
+            "CS-2426",
+            "CS-2427",
+            "CS-2428",
+            "CS-2429",
+            "CS-2430",
+            "CS-2431",
+            "CS-2432"
+        ]
+    },
+    {
+        "teacherName": "Sapash Syrym",
+        "disciplines": [
+            "Operating Systems"
+        ],
+        "groups": [
+            "CS-2413",
+            "CS-2414"
+        ]
+    },
+    {
+        "teacherName": "Sariyev Bakhytzhan",
+        "disciplines": [
+            "Physics 1"
+        ],
+        "groups": [
+            "IoT-2501",
+            "IoT-2502",
+            "IoT-2503"
+        ]
+    },
+    {
+        "teacherName": "Sarsenaly Dinara",
+        "disciplines": [
+            "Calculus"
+        ],
+        "groups": [
+            "DPA-2501",
+            "DPA-2502",
+            "MT-2501",
+            "MT-2502",
+            "MT-2503",
+            "MT-2504",
+            "MT-2505",
+            "MT-2506",
+            "MT-2507"
+        ]
+    },
+    {
+        "teacherName": "Satanov Arstan",
+        "disciplines": [
+            "History of Kazakhstan (State Exam)"
+        ],
+        "groups": [
+            "IT-2513",
+            "IT-2514",
+            "IT-2515",
+            "IT-2516",
+            "MT-2501",
+            "MT-2502"
+        ]
+    },
+    {
+        "teacherName": "Satbayev Syndar",
+        "disciplines": [
+            "Linear Algebra"
+        ],
+        "groups": [
+            "SE-2501",
+            "SE-2502",
+            "SE-2503"
+        ]
+    },
+    {
+        "teacherName": "Saule Shunkeyeva (GER-10)",
+        "disciplines": [
+            "Foreign Language 1 (German)"
+        ],
+        "groups": [
+            "SE-2518",
+            "SE-2519",
+            "SE-2520",
+            "SE-2522",
+            "SE-2523",
+            "SE-2525",
+            "SE-2526",
+            "SE-2527",
+            "SE-2529",
+            "SE-2530",
+            "SE-2531"
+        ]
+    },
+    {
+        "teacherName": "Saule Shunkeyeva (GER-11)",
+        "disciplines": [
+            "Foreign Language 1 (German)"
+        ],
+        "groups": [
+            "SE-2532",
+            "SE-2535",
+            "SE-2536",
+            "SE-2538",
+            "SE-2540",
+            "SE-2541",
+            "SST-2502",
+            "ST-2501",
+            "ST-2502",
+            "ST-2503"
+        ]
+    },
+    {
+        "teacherName": "Saule Shunkeyeva (GER-12)",
+        "disciplines": [
+            "Foreign Language 1 (German)"
+        ],
+        "groups": [
+            "ST-2503",
+            "ST-2504",
+            "ST-2505",
+            "ST-2506",
+            "ST-2508",
+            "ST-2509",
+            "ST-2510"
+        ]
+    },
+    {
+        "teacherName": "Saule Shunkeyeva (GER-8)",
+        "disciplines": [
+            "Foreign Language 1 (German)"
+        ],
+        "groups": [
+            "IT-2511",
+            "IT-2512",
+            "IT-2514",
+            "IT-2515",
+            "IT-2516",
+            "ITE-2502",
+            "ITM-2501",
+            "ITM-2503",
+            "ITM-2504",
+            "MCS-2503",
+            "MT-2505",
+            "MT-2506"
+        ]
+    },
+    {
+        "teacherName": "Saule Shunkeyeva (GER-9)",
+        "disciplines": [
+            "Foreign Language 1 (German)"
+        ],
+        "groups": [
+            "MT-2507",
+            "SE-2502",
+            "SE-2503",
+            "SE-2504",
+            "SE-2505",
+            "SE-2508",
+            "SE-2509",
+            "SE-2511",
+            "SE-2514",
+            "SE-2515",
+            "SE-2516",
+            "SE-2517"
+        ]
+    },
+    {
+        "teacherName": "Sayakulova Zarina",
+        "disciplines": [
+            "Design and Analysis of Algorithms"
+        ],
+        "groups": [
+            "SE-2419",
+            "SE-2421",
+            "SE-2422",
+            "SE-2423",
+            "SE-2424",
+            "SE-2425",
+            "SE-2426",
+            "SE-2427",
+            "SE-2428",
+            "SE-2429"
+        ]
+    },
+    {
+        "teacherName": "Seidin Ariya",
+        "disciplines": [
+            "Foreign Language 1"
+        ],
+        "groups": [
+            "AIB-2501",
+            "AIB-2502",
+            "AIB-2503",
+            "BDA-2501",
+            "BDA-2502",
+            "BDA-2503",
+            "BDA-2504",
+            "BDA-2505",
+            "BDA-2506",
+            "BDA-2507",
+            "BDA-2508",
+            "BDA-2509",
+            "BDA-2510",
+            "BDA-2511",
+            "BDA-2512",
+            "BDA-2513",
+            "EE-2501",
+            "EE-2502",
+            "EE-2503",
+            "EE-2504",
+            "EE-2505",
+            "EE-2506",
+            "EE-2507",
+            "EE-2508",
+            "EE-2509",
+            "EE-2510",
+            "EE-2511",
+            "MCS-2501",
+            "MCS-2502",
+            "MCS-2503",
+            "SE-2516",
+            "SE-2517",
+            "SE-2518",
+            "SE-2519",
+            "SE-2520",
+            "SE-2521",
+            "SE-2522",
+            "SE-2523",
+            "SE-2524",
+            "SE-2525",
+            "SE-2526",
+            "SE-2527",
+            "SE-2528",
+            "SE-2529",
+            "SE-2530",
+            "SE-2531",
+            "SE-2532",
+            "SE-2533",
+            "SE-2534",
+            "SE-2535",
+            "SE-2536",
+            "SE-2537",
+            "SE-2538",
+            "SE-2539",
+            "SE-2540",
+            "SE-2541",
+            "SE-2542",
+            "SST-2501",
+            "SST-2502"
+        ]
+    },
+    {
+        "teacherName": "Seilkhanova Kymbat",
+        "disciplines": [
+            "Computer Networks",
+            "Operating Systems"
+        ],
+        "groups": [
+            "CS-2403",
+            "CS-2404",
+            "CS-2405",
+            "CS-2406",
+            "CS-2407",
+            "CS-2408",
+            "CS-2409",
+            "CS-2410"
+        ]
+    },
+    {
+        "teacherName": "Sembayev Talgat",
+        "disciplines": [
+            "Information and Communication Technologies"
+        ],
+        "groups": [
+            "DJ-2502",
+            "DJ-2503",
+            "ITE-2502",
+            "MT-2501",
+            "MT-2502",
+            "MT-2503",
+            "MT-2504",
+            "MT-2505",
+            "MT-2506"
+        ]
+    },
+    {
+        "teacherName": "Sergaziyev Musslim",
+        "disciplines": [
+            "Probability Theory"
+        ],
+        "groups": [
+            "BDA-2401",
+            "BDA-2402",
+            "BDA-2403"
+        ]
+    },
+    {
+        "teacherName": "Serik Kudaibergenov",
+        "disciplines": [
+            "Calculus 1"
+        ],
+        "groups": [
+            "IT-2515",
+            "IT-2516",
+            "IoT-2501",
+            "IoT-2502",
+            "IoT-2503",
+            "MCS-2501",
+            "MCS-2502",
+            "MCS-2503",
+            "SE-2513",
+            "SE-2514",
+            "SE-2515"
+        ]
+    },
+    {
+        "teacherName": "Shaimerdenova Gaukhar",
+        "disciplines": [
+            "Analytic methods in Computer Science"
+        ],
+        "groups": [
+            "SE-2421",
+            "SE-2423",
+            "SE-2424",
+            "SE-2425",
+            "SE-2426",
+            "SE-2427",
+            "SE-2428",
+            "SE-2429",
+            "SE-2430",
+            "SE-2431",
+            "SE-2432",
+            "SE-2433",
+            "SE-2434",
+            "SE-2435",
+            "SE-2436",
+            "SE-2437",
+            "SE-2438",
+            "SE-2439"
+        ]
+    },
+    {
+        "teacherName": "Shapigulin Bekdaulet",
+        "disciplines": [
+            "Database Management Systems"
+        ],
+        "groups": [
+            "CS-2433",
+            "CS-2434",
+            "CS-2435",
+            "CS-2436",
+            "CS-2437"
+        ]
+    },
+    {
+        "teacherName": "Sharipova Saltanat",
+        "disciplines": [
+            "Introduction to Programming"
+        ],
+        "groups": [
+            "BDA-2511",
+            "BDA-2512",
+            "BDA-2513",
+            "CS-2501"
+        ]
+    },
+    {
+        "teacherName": "Shayakhmetov Alparslan",
+        "disciplines": [
+            "Calculus 1"
+        ],
+        "groups": [
+            "IT-2501",
+            "IT-2502",
+            "SE-2524",
+            "SE-2525",
+            "SE-2526",
+            "SE-2527",
+            "SE-2538",
+            "SE-2539",
+            "SE-2540",
+            "SE-2541",
+            "SE-2542"
+        ]
+    },
+    {
+        "teacherName": "Shin Yongjae (KOR-1)",
+        "disciplines": [
+            "Foreign Language 1 (Korean)"
+        ],
+        "groups": [
+            "AIB-2501",
+            "BDA-2501",
+            "BDA-2502",
+            "BDA-2505",
+            "BDA-2507",
+            "BDA-2508",
+            "BDA-2509",
+            "BDA-2511",
+            "CS-2505"
+        ]
+    },
+    {
+        "teacherName": "Shin Yongjae (KOR-2)",
+        "disciplines": [
+            "Foreign Language 1 (Korean)"
+        ],
+        "groups": [
+            "CS-2506",
+            "CS-2507",
+            "CS-2514",
+            "CS-2516",
+            "CS-2517",
+            "CS-2520",
+            "CS-2522",
+            "CS-2523",
+            "CS-2524",
+            "CS-2526",
+            "CS-2527",
+            "CS-2534",
+            "DJ-2502",
+            "DJ-2503",
+            "EE-2501"
+        ]
+    },
+    {
+        "teacherName": "Shin Yongjae (KOR-3)",
+        "disciplines": [
+            "Foreign Language 1 (Korean)"
+        ],
+        "groups": [
+            "EE-2503",
+            "EE-2504",
+            "EE-2505",
+            "EE-2506",
+            "EE-2508",
+            "EE-2509",
+            "EE-2510",
+            "EE-2511",
+            "IoT-2501"
+        ]
+    },
+    {
+        "teacherName": "Shin Yongjae (KOR-4)",
+        "disciplines": [
+            "Foreign Language 1 (Korean)"
+        ],
+        "groups": [
+            "IT-2502",
+            "IT-2503",
+            "IT-2504",
+            "IT-2506",
+            "IT-2507",
+            "IT-2510",
+            "IT-2511",
+            "IT-2513",
+            "IT-2514",
+            "ITE-2501",
+            "IoT-2502",
+            "IoT-2503"
+        ]
+    },
+    {
+        "teacherName": "Shin Yongjae (KOR-5)",
+        "disciplines": [
+            "Foreign Language 1 (Korean)"
+        ],
+        "groups": [
+            "ITE-2501",
+            "ITM-2502",
+            "MCS-2501",
+            "MCS-2502",
+            "MCS-2503",
+            "MT-2501",
+            "MT-2502",
+            "MT-2503",
+            "MT-2504",
+            "MT-2507",
+            "SE-2502",
+            "SE-2506"
+        ]
+    },
+    {
+        "teacherName": "Shin Yongjae (KOR-6)",
+        "disciplines": [
+            "Foreign Language 1 (Korean)"
+        ],
+        "groups": [
+            "SE-2508",
+            "SE-2509",
+            "SE-2510",
+            "SE-2512",
+            "SE-2513",
+            "SE-2516",
+            "SE-2519",
+            "SE-2527",
+            "SE-2528",
+            "SE-2529",
+            "SE-2530",
+            "SE-2531",
+            "SE-2532",
+            "SE-2535",
+            "SE-2536",
+            "SE-2538",
+            "SE-2539"
+        ]
+    },
+    {
+        "teacherName": "Shin Yongjae (KOR-7)",
+        "disciplines": [
+            "Foreign Language 1 (Korean)"
+        ],
+        "groups": [
+            "ST-2502",
+            "ST-2503",
+            "ST-2504",
+            "ST-2506",
+            "ST-2507",
+            "ST-2508",
+            "ST-2509",
+            "ST-2510"
+        ]
+    },
+    {
+        "teacherName": "Shomenov Toreniyaz",
+        "disciplines": [
+            "Signals and Systems"
+        ],
+        "groups": [
+            "EE-2407",
+            "EE-2408",
+            "IoT-2401",
+            "IoT-2402"
+        ]
+    },
+    {
+        "teacherName": "Shukirova Aliya",
+        "disciplines": [
+            "Generative Algorithms"
+        ],
+        "groups": [
+            "ADA-2401M",
+            "ADA-2402M",
+            "ADA-2403M",
+            "ADA-2404M",
+            "ADA-2405M"
+        ]
+    },
+    {
+        "teacherName": "Shuteyeva Gulnur",
+        "disciplines": [
+            "Computer Organisation and Architecture"
+        ],
+        "groups": [
+            "BDA-2408",
+            "BDA-2409"
+        ]
+    },
+    {
+        "teacherName": "Shyryn Tutkyshbayeva",
+        "disciplines": [
+            "Introduction to Programming"
+        ],
+        "groups": [
+            "CS-2531",
+            "CS-2532",
+            "CS-2533",
+            "CS-2534",
+            "CS-2535",
+            "MCS-2501",
+            "MCS-2502",
+            "MCS-2503"
+        ]
+    },
+    {
+        "teacherName": "Slyamgazhy Ainur",
+        "disciplines": [
+            "Fundamentals of Storytelling: Writing and Technology for Journalists"
+        ],
+        "groups": [
+            "DJ-2401",
+            "DJ-2402"
+        ]
+    },
+    {
+        "teacherName": "Smagul Altynay",
+        "disciplines": [
+            "Russian Language 1"
+        ],
+        "groups": [
+            "AIB-2401",
+            "AIB-2402",
+            "CS-2411",
+            "CS-2412",
+            "CS-2420",
+            "CS-2421",
+            "CS-2432",
+            "CS-2433",
+            "ITE-2401",
+            "MT-2405",
+            "MT-2406",
+            "SE-2406",
+            "SE-2407",
+            "SE-2422",
+            "SE-2438",
+            "SE-2439"
+        ]
+    },
+    {
+        "teacherName": "Smagulova Moldir",
+        "disciplines": [
+            "Foreign Language 1"
+        ],
+        "groups": [
+            "CS-2501",
+            "CS-2502",
+            "CS-2503",
+            "CS-2504",
+            "CS-2505",
+            "CS-2506",
+            "CS-2507",
+            "CS-2508",
+            "CS-2509",
+            "CS-2510",
+            "CS-2511",
+            "CS-2512",
+            "CS-2513",
+            "CS-2514",
+            "CS-2515",
+            "CS-2516",
+            "CS-2517",
+            "CS-2518",
+            "CS-2519",
+            "CS-2520",
+            "CS-2521",
+            "CS-2522",
+            "CS-2523",
+            "CS-2524",
+            "CS-2525",
+            "CS-2526",
+            "CS-2527",
+            "CS-2528",
+            "CS-2529",
+            "CS-2530",
+            "IoT-2501",
+            "IoT-2502",
+            "IoT-2503",
+            "MCS-2501",
+            "MCS-2502",
+            "MCS-2503",
+            "SE-2501",
+            "SE-2502",
+            "SE-2503",
+            "SE-2504",
+            "SE-2505",
+            "SE-2506",
+            "SE-2507",
+            "SE-2508",
+            "SE-2509",
+            "SE-2510",
+            "SE-2511",
+            "SE-2512",
+            "SE-2513",
+            "SE-2514",
+            "SE-2515",
+            "SE-2516",
+            "SE-2517",
+            "SE-2518",
+            "SE-2519",
+            "SE-2520",
+            "SE-2521",
+            "SE-2522",
+            "SE-2523",
+            "SE-2524",
+            "SE-2525",
+            "SE-2526",
+            "SE-2527",
+            "SE-2528",
+            "SE-2529",
+            "SE-2530",
+            "SE-2531",
+            "SE-2532",
+            "SE-2533",
+            "SE-2534",
+            "SE-2535",
+            "SE-2536",
+            "SE-2537",
+            "SE-2538",
+            "SE-2539",
+            "SE-2540",
+            "SE-2541",
+            "SE-2542",
+            "ST-2501",
+            "ST-2502",
+            "ST-2503",
+            "ST-2504",
+            "ST-2505",
+            "ST-2506",
+            "ST-2507",
+            "ST-2508",
+            "ST-2509",
+            "ST-2510"
+        ]
+    },
+    {
+        "teacherName": "Smakova Saida",
+        "disciplines": [
+            "Information and Communication Technologies"
+        ],
+        "groups": [
+            "SE-2514",
+            "SE-2515",
+            "SE-2516",
+            "SE-2517",
+            "SE-2518",
+            "SE-2519",
+            "SE-2520",
+            "SE-2521",
+            "SE-2522",
+            "SE-2523",
+            "SE-2524",
+            "SE-2525",
+            "SE-2526"
+        ]
+    },
+    {
+        "teacherName": "Sovet Sanzhar",
+        "disciplines": [
+            "Linear Algebra"
+        ],
+        "groups": [
+            "SE-2515",
+            "SE-2516",
+            "SE-2517",
+            "SE-2518",
+            "SE-2519",
+            "SE-2520"
+        ]
+    },
+    {
+        "teacherName": "Sultan Abylkairov",
+        "disciplines": [
+            "Linear Algebra"
+        ],
+        "groups": [
+            "SE-2533",
+            "SE-2534",
+            "SE-2535",
+            "SE-2536"
+        ]
+    },
+    {
+        "teacherName": "Svitlana Biloshchytskaya",
+        "disciplines": [
+            "Programming for AI",
+            "Programming for data analysis and databases"
+        ],
+        "groups": [
+            "AAI-2501M",
+            "AAI-2502M",
+            "AAI-2503M",
+            "AAI-2504M",
+            "AAI-2505M",
+            "AAI-2506M",
+            "ADA-2501M",
+            "ADA-2502M",
+            "ADA-2503M",
+            "ADA-2504M"
+        ]
+    },
+    {
+        "teacherName": "Symbat Asimkhanova",
+        "disciplines": [
+            "Business Administration"
+        ],
+        "groups": [
+            "AIB-2501",
+            "AIB-2502",
+            "AIB-2503",
+            "DPA-2501",
+            "DPA-2502",
+            "ITM-2501",
+            "ITM-2502",
+            "ITM-2503",
+            "ITM-2504"
+        ]
+    },
+    {
+        "teacherName": "Syrym Sabyrzhan",
+        "disciplines": [
+            "Introduction to Programming 1"
+        ],
+        "groups": [
+            "SE-2505",
+            "SE-2506",
+            "SE-2507",
+            "SE-2508",
+            "SE-2509",
+            "SE-2510",
+            "SE-2511",
+            "SE-2512"
+        ]
+    },
+    {
+        "teacherName": "Syzdykbayev Kuanysh",
+        "disciplines": [
+            "Operating Systems",
+            "Operating Systems and Computer Networks"
+        ],
+        "groups": [
+            "BDA-2403",
+            "BDA-2404",
+            "SE-2437",
+            "SE-2439",
+            "ST-2401",
+            "ST-2402",
+            "ST-2403",
+            "ST-2404",
+            "ST-2405",
+            "ST-2406"
+        ]
+    },
+    {
+        "teacherName": "Talapiden Kulyash",
+        "disciplines": [
+            "Introduction to Programming"
+        ],
+        "groups": [
+            "CS-2516",
+            "CS-2517",
+            "CS-2518",
+            "CS-2519",
+            "CS-2520",
+            "CS-2521",
+            "CS-2522"
+        ]
+    },
+    {
+        "teacherName": "Tanibergenova Kamila",
+        "disciplines": [
+            "Introduction to Programming"
+        ],
+        "groups": [
+            "SST-2501",
+            "SST-2502"
+        ]
+    },
+    {
+        "teacherName": "Temirgaly Dinmukhamed",
+        "disciplines": [
+            "Software Design Patterns"
+        ],
+        "groups": [
+            "SE-2406",
+            "SE-2407",
+            "SE-2408",
+            "SE-2409",
+            "SE-2410",
+            "SE-2411",
+            "SE-2412",
+            "SE-2413",
+            "SE-2414",
+            "SE-2415",
+            "SE-2416",
+            "SE-2417",
+            "SE-2419",
+            "SE-2420",
+            "SE-2421",
+            "SE-2428",
+            "SE-2430",
+            "SE-2432"
+        ]
+    },
+    {
+        "teacherName": "Temirkhan Maksat",
+        "disciplines": [
+            "Calculus"
+        ],
+        "groups": [
+            "DJ-2501",
+            "DJ-2502",
+            "DJ-2503",
+            "ITE-2501",
+            "ITE-2502",
+            "ITM-2501",
+            "ITM-2502",
+            "ITM-2503",
+            "ITM-2504"
+        ]
+    },
+    {
+        "teacherName": "Tilek Zhumabek",
+        "disciplines": [
+            "Physics"
+        ],
+        "groups": [
+            "ST-2501",
+            "ST-2502",
+            "ST-2503",
+            "ST-2504",
+            "ST-2505",
+            "ST-2506"
+        ]
+    },
+    {
+        "teacherName": "Tleshova Zhibek",
+        "disciplines": [
+            "Higher Education Pedagogy"
+        ],
+        "groups": [
+            "CSE-2501M",
+            "CSE-2502M",
+            "CSE-2503M",
+            "CSE-2504M",
+            "CSE-2505M",
+            "CSE-2506M",
+            "CSE-2507M"
+        ]
+    },
+    {
+        "teacherName": "Tleubay Aizere",
+        "disciplines": [
+            "Introduction to Programming 1"
+        ],
+        "groups": [
+            "IT-2501",
+            "IT-2502",
+            "IT-2503",
+            "IT-2504",
+            "IT-2505",
+            "SE-2540",
+            "SE-2541",
+            "SE-2542"
+        ]
+    },
+    {
+        "teacherName": "Togisova Akerke",
+        "disciplines": [
+            "Operating Systems"
+        ],
+        "groups": [
+            "CS-2410",
+            "CS-2411",
+            "CS-2412"
+        ]
+    },
+    {
+        "teacherName": "Tolegen Dana",
+        "disciplines": [
+            "Computer Networks",
+            "Operating Systems"
+        ],
+        "groups": [
+            "CS-2401",
+            "CS-2402",
+            "CS-2413",
+            "CS-2414",
+            "CS-2415",
+            "CS-2416",
+            "CS-2417",
+            "CS-2418",
+            "SE-2429",
+            "SE-2430"
+        ]
+    },
+    {
+        "teacherName": "Tolegen Oraz",
+        "disciplines": [
+            "Digital Logic Design"
+        ],
+        "groups": [
+            "CS-2433",
+            "CS-2434",
+            "CS-2435",
+            "CS-2436"
+        ]
+    },
+    {
+        "teacherName": "Toleubek Moldir",
+        "disciplines": [
+            "Discrete Mathematics"
+        ],
+        "groups": [
+            "CS-2519",
+            "CS-2520",
+            "CS-2521",
+            "CS-2522",
+            "CS-2523",
+            "CS-2524",
+            "CS-2525",
+            "CS-2526",
+            "CS-2527"
+        ]
+    },
+    {
+        "teacherName": "Tulaeva Sandugash",
+        "disciplines": [
+            "Calculus 1"
+        ],
+        "groups": [
+            "BDA-2507",
+            "BDA-2508",
+            "BDA-2509",
+            "IT-2513",
+            "IT-2514",
+            "IT-2515",
+            "IT-2516",
+            "ST-2507",
+            "ST-2508",
+            "ST-2509",
+            "ST-2510"
+        ]
+    },
+    {
+        "teacherName": "Tulemisova Madina",
+        "disciplines": [
+            "Business Intelligence"
+        ],
+        "groups": [
+            "ITM-2401",
+            "ITM-2402"
+        ]
+    },
+    {
+        "teacherName": "Tursynkozha Ademi",
+        "disciplines": [
+            "Computer Networks"
+        ],
+        "groups": [
+            "CS-2411",
+            "CS-2412",
+            "CS-2419",
+            "CS-2420",
+            "CS-2421",
+            "CS-2422",
+            "CS-2423",
+            "CS-2424",
+            "CS-2439"
+        ]
+    },
+    {
+        "teacherName": "Tuseeva Inara",
+        "disciplines": [
+            "Introduction to Computing and Programming"
+        ],
+        "groups": [
+            "IoT-2503",
+            "ST-2505",
+            "ST-2506",
+            "ST-2507",
+            "ST-2508"
+        ]
+    },
+    {
+        "teacherName": "Tuselbayeva Zhanar",
+        "disciplines": [
+            "Academic Writing",
+            "Foreign Language 1"
+        ],
+        "groups": [
+            "AIB-2401",
+            "AIB-2402",
+            "CS-2501",
+            "CS-2502",
+            "CS-2503",
+            "CS-2504",
+            "CS-2505",
+            "CS-2506",
+            "CS-2507",
+            "CS-2508",
+            "CS-2509",
+            "CS-2510",
+            "CS-2511",
+            "CS-2512",
+            "CS-2513",
+            "CS-2514",
+            "CS-2515",
+            "CS-2516",
+            "CS-2517",
+            "CS-2518",
+            "CS-2519",
+            "CS-2520",
+            "CS-2521",
+            "CS-2522",
+            "CS-2523",
+            "CS-2524",
+            "CS-2525",
+            "CS-2526",
+            "CS-2527",
+            "CS-2528",
+            "CS-2529",
+            "CS-2530",
+            "DJ-2501",
+            "DJ-2502",
+            "DJ-2503",
+            "ITE-2501",
+            "ITE-2502",
+            "ITM-2501",
+            "ITM-2502",
+            "ITM-2503",
+            "ITM-2504",
+            "SE-2501",
+            "SE-2502",
+            "SE-2503",
+            "SE-2504",
+            "SE-2505",
+            "SE-2506",
+            "SE-2507",
+            "SE-2508",
+            "SE-2509",
+            "SE-2510",
+            "SE-2511",
+            "SE-2512",
+            "SE-2513",
+            "SE-2514",
+            "SE-2515",
+            "SE-2516",
+            "SE-2517",
+            "SE-2518",
+            "SE-2519",
+            "SE-2520",
+            "SE-2521",
+            "SE-2522",
+            "SE-2523",
+            "SE-2524",
+            "SE-2525",
+            "SE-2526",
+            "SE-2527",
+            "SE-2528",
+            "SE-2529",
+            "SE-2530"
+        ]
+    },
+    {
+        "teacherName": "Tusupov Akhmet",
+        "disciplines": [
+            "Computer Networks"
+        ],
+        "groups": [
+            "CS-2403",
+            "CS-2404"
+        ]
+    },
+    {
+        "teacherName": "Tyulemisova D.",
+        "disciplines": [
+            "Operating Systems"
+        ],
+        "groups": [
+            "SE-2420",
+            "SE-2421",
+            "SE-2422"
+        ]
+    },
+    {
+        "teacherName": "Ulyukova Gulden",
+        "disciplines": [
+            "Operating Systems"
+        ],
+        "groups": [
+            "CS-2439",
+            "CS-2440"
+        ]
+    },
+    {
+        "teacherName": "Umirov Sandibek",
+        "disciplines": [
+            "Computer Organisation and Architecture"
+        ],
+        "groups": [
+            "IT-2401",
+            "IT-2402",
+            "IT-2403",
+            "IT-2404",
+            "ITE-2401",
+            "ITM-2401",
+            "ITM-2402"
+        ]
+    },
+    {
+        "teacherName": "Urazbekova Aigerim",
+        "disciplines": [
+            "Foreign Language 1"
+        ],
+        "groups": [
+            "EE-2501",
+            "EE-2502",
+            "EE-2503",
+            "EE-2504",
+            "EE-2505",
+            "EE-2506",
+            "EE-2507",
+            "EE-2508",
+            "EE-2509",
+            "EE-2510",
+            "EE-2511",
+            "SE-2501",
+            "SE-2502",
+            "SE-2503",
+            "SE-2504",
+            "SE-2505",
+            "SE-2506",
+            "SE-2507",
+            "SE-2508",
+            "SE-2509",
+            "SE-2510",
+            "SE-2511",
+            "SE-2512",
+            "SE-2513",
+            "SE-2514",
+            "SE-2515",
+            "SE-2516",
+            "SE-2517",
+            "SE-2518",
+            "SE-2519",
+            "SE-2520",
+            "SE-2521",
+            "SE-2522",
+            "SE-2523",
+            "SE-2524",
+            "SE-2525",
+            "SE-2526",
+            "SE-2527",
+            "SE-2528",
+            "SE-2529",
+            "SE-2530",
+            "SE-2531",
+            "SE-2532",
+            "SE-2533",
+            "SE-2534",
+            "SE-2535",
+            "SE-2536",
+            "SE-2537",
+            "SE-2538",
+            "SE-2539",
+            "SE-2540",
+            "SE-2541",
+            "SE-2542",
+            "ST-2501",
+            "ST-2502",
+            "ST-2503",
+            "ST-2504",
+            "ST-2505",
+            "ST-2506",
+            "ST-2507",
+            "ST-2508",
+            "ST-2509",
+            "ST-2510"
+        ]
+    },
+    {
+        "teacherName": "Urpash Shalbolova",
+        "disciplines": [
+            "Program and Project Portfolio Management"
+        ],
+        "groups": [
+            "PM-2401M",
+            "PM-2402M"
+        ]
+    },
+    {
+        "teacherName": "Usipbayev Amirbek",
+        "disciplines": [
+            "Calculus 1"
+        ],
+        "groups": [
+            "SE-2507",
+            "SE-2508",
+            "SE-2509",
+            "SE-2510",
+            "SE-2511",
+            "SE-2512"
+        ]
+    },
+    {
+        "teacherName": "Usserbayeva Gulfiya",
+        "disciplines": [
+            "WEB Technologies 1 (Front End)"
+        ],
+        "groups": [
+            "MT-2401",
+            "MT-2402",
+            "MT-2403",
+            "MT-2404",
+            "MT-2405",
+            "MT-2406",
+            "SE-2439"
+        ]
+    },
+    {
+        "teacherName": "Utanova A.",
+        "disciplines": [
+            "Kazakh Language 1"
+        ],
+        "groups": [
+            "CS-2411",
+            "CS-2412",
+            "CS-2413",
+            "CS-2414",
+            "CS-2415",
+            "CS-2434",
+            "CS-2435",
+            "CS-2436",
+            "CS-2437",
+            "CS-2438",
+            "EE-2401",
+            "EE-2402",
+            "EE-2403",
+            "EE-2404",
+            "EE-2405",
+            "EE-2406",
+            "EE-2407",
+            "EE-2408",
+            "IT-2408",
+            "IT-2409",
+            "IT-2410",
+            "SE-2435",
+            "SE-2436",
+            "SE-2437",
+            "SE-2438",
+            "SE-2439",
+            "ST-2401",
+            "ST-2402",
+            "ST-2403",
+            "ST-2404",
+            "ST-2405",
+            "ST-2406"
+        ]
+    },
+    {
+        "teacherName": "Uyzbayeva Anar",
+        "disciplines": [
+            "Philosophy"
+        ],
+        "groups": [
+            "EE-2401",
+            "EE-2402",
+            "EE-2403",
+            "EE-2404",
+            "EE-2405",
+            "EE-2406",
+            "EE-2407",
+            "EE-2408",
+            "MCS-2401"
+        ]
+    },
+    {
+        "teacherName": "Vacancy 1 - ENG",
+        "disciplines": [
+            "Foreign Language 1"
+        ],
+        "groups": [
+            "BDA-2501",
+            "BDA-2502",
+            "BDA-2503",
+            "BDA-2504",
+            "BDA-2505",
+            "BDA-2506",
+            "BDA-2507",
+            "BDA-2508",
+            "BDA-2509",
+            "BDA-2510",
+            "BDA-2511",
+            "BDA-2512",
+            "BDA-2513",
+            "CS-2501",
+            "CS-2502",
+            "CS-2503",
+            "CS-2504",
+            "CS-2505",
+            "CS-2506",
+            "CS-2507",
+            "CS-2508",
+            "CS-2509",
+            "CS-2510",
+            "CS-2511",
+            "CS-2512",
+            "CS-2513",
+            "CS-2514",
+            "CS-2515",
+            "CS-2531",
+            "CS-2532",
+            "CS-2533",
+            "CS-2534",
+            "CS-2535",
+            "EE-2501",
+            "EE-2502",
+            "EE-2503",
+            "EE-2504",
+            "EE-2505",
+            "EE-2506",
+            "EE-2507",
+            "EE-2508",
+            "EE-2509",
+            "EE-2510",
+            "EE-2511",
+            "IT-2509",
+            "IT-2510",
+            "IT-2511",
+            "IT-2512",
+            "IT-2513",
+            "IT-2514",
+            "IT-2515",
+            "IT-2516"
+        ]
+    },
+    {
+        "teacherName": "Vacancy 1 - SGE",
+        "disciplines": [
+            "Kazakh Language 1"
+        ],
+        "groups": [
+            "EE-2401",
+            "EE-2403",
+            "EE-2404",
+            "EE-2405",
+            "EE-2406",
+            "EE-2407",
+            "EE-2408",
+            "IT-2401",
+            "IT-2402",
+            "IT-2403",
+            "IT-2404",
+            "IT-2405",
+            "IT-2406",
+            "IT-2407"
+        ]
+    },
+    {
+        "teacherName": "Vacancy 2 - ENG",
+        "disciplines": [
+            "Foreign Language 1"
+        ],
+        "groups": [
+            "BDA-2501",
+            "BDA-2502",
+            "BDA-2503",
+            "BDA-2504",
+            "BDA-2505",
+            "BDA-2506",
+            "BDA-2507",
+            "BDA-2508",
+            "BDA-2509",
+            "BDA-2510",
+            "BDA-2511",
+            "BDA-2512",
+            "BDA-2513",
+            "CS-2501",
+            "CS-2502",
+            "CS-2503",
+            "CS-2504",
+            "CS-2505",
+            "CS-2506",
+            "CS-2507",
+            "CS-2508",
+            "CS-2509",
+            "CS-2510",
+            "CS-2511",
+            "CS-2512",
+            "CS-2513",
+            "CS-2514",
+            "CS-2515",
+            "CS-2516",
+            "CS-2517",
+            "CS-2518",
+            "CS-2519",
+            "CS-2520",
+            "CS-2521",
+            "CS-2522",
+            "CS-2523",
+            "CS-2524",
+            "CS-2525",
+            "CS-2526",
+            "CS-2527",
+            "CS-2528",
+            "CS-2529",
+            "CS-2530",
+            "DJ-2501",
+            "DJ-2502",
+            "DJ-2503",
+            "MT-2501",
+            "MT-2502",
+            "MT-2503",
+            "MT-2504",
+            "MT-2505",
+            "MT-2506",
+            "MT-2507",
+            "SE-2501",
+            "SE-2502",
+            "SE-2503",
+            "SE-2504",
+            "SE-2505",
+            "SE-2506",
+            "SE-2507",
+            "SE-2508",
+            "SE-2509",
+            "SE-2510",
+            "SE-2511",
+            "SE-2512",
+            "SE-2513",
+            "SE-2514",
+            "SE-2515",
+            "SE-2516",
+            "SE-2517",
+            "SE-2518",
+            "SE-2519",
+            "SE-2520",
+            "SE-2521",
+            "SE-2522",
+            "SE-2523",
+            "SE-2524",
+            "SE-2525",
+            "SE-2526",
+            "SE-2527",
+            "SE-2528",
+            "SE-2529",
+            "SE-2530"
+        ]
+    },
+    {
+        "teacherName": "Vacancy 3-ENG",
+        "disciplines": [
+            "Foreign Language 1"
+        ],
+        "groups": [
+            "BDA-2501",
+            "BDA-2502",
+            "BDA-2503",
+            "BDA-2504",
+            "BDA-2505",
+            "BDA-2506",
+            "BDA-2507",
+            "BDA-2508",
+            "BDA-2509",
+            "BDA-2510",
+            "BDA-2511",
+            "BDA-2512",
+            "BDA-2513",
+            "CS-2531",
+            "CS-2532",
+            "CS-2533",
+            "CS-2534",
+            "CS-2535",
+            "MT-2501",
+            "MT-2502",
+            "MT-2503",
+            "MT-2504",
+            "MT-2505",
+            "MT-2506",
+            "MT-2507",
+            "SE-2501",
+            "SE-2502",
+            "SE-2503",
+            "SE-2504",
+            "SE-2505",
+            "SE-2506",
+            "SE-2507",
+            "SE-2508",
+            "SE-2509",
+            "SE-2510",
+            "SE-2511",
+            "SE-2512",
+            "SE-2513",
+            "SE-2514",
+            "SE-2515",
+            "SE-2531",
+            "SE-2532",
+            "SE-2533",
+            "SE-2534",
+            "SE-2535",
+            "SE-2536",
+            "SE-2537",
+            "SE-2538",
+            "SE-2539",
+            "SE-2540",
+            "SE-2541",
+            "SE-2542"
+        ]
+    },
+    {
+        "teacherName": "Vacancy 4-ENG",
+        "disciplines": [
+            "Foreign Language 1"
+        ],
+        "groups": [
+            "BDA-2501",
+            "BDA-2502",
+            "BDA-2503",
+            "BDA-2504",
+            "BDA-2505",
+            "BDA-2506",
+            "BDA-2507",
+            "BDA-2508",
+            "BDA-2509",
+            "BDA-2510",
+            "BDA-2511",
+            "BDA-2512",
+            "BDA-2513",
+            "CS-2501",
+            "CS-2502",
+            "CS-2503",
+            "CS-2504",
+            "CS-2505",
+            "CS-2506",
+            "CS-2507",
+            "CS-2508",
+            "CS-2509",
+            "CS-2510",
+            "CS-2511",
+            "CS-2512",
+            "CS-2513",
+            "CS-2514",
+            "CS-2515",
+            "IT-2501",
+            "IT-2502",
+            "IT-2503",
+            "IT-2504",
+            "IT-2505",
+            "IT-2506",
+            "IT-2507",
+            "IT-2508",
+            "SE-2516",
+            "SE-2517",
+            "SE-2518",
+            "SE-2519",
+            "SE-2520",
+            "SE-2521",
+            "SE-2522",
+            "SE-2523",
+            "SE-2524",
+            "SE-2525",
+            "SE-2526",
+            "SE-2527",
+            "SE-2528",
+            "SE-2529",
+            "SE-2530"
+        ]
+    },
+    {
+        "teacherName": "Vacancy 8 - SGE-CHIN (CHIN-10)",
+        "disciplines": [
+            "Foreign Language 1 (Chinese)"
+        ],
+        "groups": [
+            "SE-2508",
+            "SE-2509",
+            "SE-2510",
+            "SE-2512",
+            "SE-2513",
+            "SE-2515",
+            "SE-2517",
+            "SE-2521",
+            "SE-2522",
+            "SE-2523"
+        ]
+    },
+    {
+        "teacherName": "Vacancy 8 - SGE-CHIN (CHIN-11)",
+        "disciplines": [
+            "Foreign Language 1 (Chinese)"
+        ],
+        "groups": [
+            "SE-2523",
+            "SE-2524",
+            "SE-2528",
+            "SE-2529",
+            "SE-2530",
+            "SE-2534",
+            "SE-2536",
+            "SE-2537",
+            "SE-2538",
+            "SE-2542",
+            "SST-2501"
+        ]
+    },
+    {
+        "teacherName": "Vacancy 8 - SGE-CHIN (CHIN-12)",
+        "disciplines": [
+            "Foreign Language 1 (Chinese)"
+        ],
+        "groups": [
+            "SST-2502",
+            "ST-2501",
+            "ST-2502",
+            "ST-2505",
+            "ST-2506",
+            "ST-2507",
+            "ST-2508",
+            "ST-2509",
+            "ST-2510"
+        ]
+    },
+    {
+        "teacherName": "Vacancy 8 - SGE-CHIN (CHIN-8)",
+        "disciplines": [
+            "Foreign Language 1 (Chinese)"
+        ],
+        "groups": [
+            "ITM-2501",
+            "ITM-2503",
+            "ITM-2504",
+            "MCS-2501",
+            "MCS-2502",
+            "MCS-2503",
+            "MT-2501",
+            "MT-2502"
+        ]
+    },
+    {
+        "teacherName": "Vacancy 8 - SGE-CHIN (CHIN-9)",
+        "disciplines": [
+            "Foreign Language 1 (Chinese)"
+        ],
+        "groups": [
+            "MT-2502",
+            "MT-2503",
+            "MT-2504",
+            "MT-2505",
+            "SE-2501",
+            "SE-2502",
+            "SE-2503",
+            "SE-2505",
+            "SE-2506",
+            "SE-2507"
+        ]
+    },
+    {
+        "teacherName": "Yarulin Didar",
+        "disciplines": [
+            "Digital Logic Design"
+        ],
+        "groups": [
+            "CS-2421",
+            "CS-2422",
+            "CS-2423",
+            "CS-2424"
+        ]
+    },
+    {
+        "teacherName": "Yenglik Dossymkhan",
+        "disciplines": [
+            "Political Science"
+        ],
+        "groups": [
+            "DJ-2501",
+            "DJ-2502",
+            "ITE-2501",
+            "ITE-2502",
+            "IoT-2401",
+            "IoT-2402"
+        ]
+    },
+    {
+        "teacherName": "Yermakhan Sabyrzhan",
+        "disciplines": [
+            "Analytic Geometry"
+        ],
+        "groups": [
+            "IT-2401",
+            "IT-2402",
+            "IT-2403",
+            "IT-2408",
+            "IT-2409",
+            "IT-2410"
+        ]
+    },
+    {
+        "teacherName": "Yerzhan Orazayev",
+        "disciplines": [
+            "AI Essentials: Theory and Applications"
+        ],
+        "groups": [
+            "AAI-2504M",
+            "AAI-2505M",
+            "AAI-2506M"
+        ]
+    },
+    {
+        "teacherName": "Yesmagulova Nurgul",
+        "disciplines": [
+            "Project cost management"
+        ],
+        "groups": [
+            "PM-2401M",
+            "PM-2402M"
+        ]
+    },
+    {
+        "teacherName": "Yespenbetova Dana",
+        "disciplines": [
+            "Information and Communication Technologies"
+        ],
+        "groups": [
+            "IT-2501",
+            "IT-2502",
+            "IT-2503",
+            "IT-2504",
+            "IT-2505",
+            "IT-2506",
+            "IT-2507",
+            "IT-2508",
+            "SE-2539",
+            "SE-2540",
+            "SE-2541",
+            "SE-2542"
+        ]
+    },
+    {
+        "teacherName": "Yessenbek Sanida",
+        "disciplines": [
+            "Computer Networks",
+            "Operating Systems and Computer Networks"
+        ],
+        "groups": [
+            "BDA-2401",
+            "BDA-2402",
+            "BDA-2403",
+            "BDA-2404",
+            "BDA-2405",
+            "BDA-2406",
+            "BDA-2407",
+            "BDA-2408",
+            "BDA-2409",
+            "CS-2405",
+            "CS-2406",
+            "CS-2407",
+            "MT-2401",
+            "MT-2402",
+            "MT-2403",
+            "MT-2404",
+            "MT-2405",
+            "MT-2406"
+        ]
+    },
+    {
+        "teacherName": "Yessimova Kalamkas",
+        "disciplines": [
+            "Foreign Language 1 (Chinese)"
+        ],
+        "groups": [
+            "AIB-2501",
+            "AIB-2502",
+            "AIB-2503",
+            "BDA-2502",
+            "BDA-2503",
+            "BDA-2504",
+            "BDA-2506",
+            "BDA-2507",
+            "BDA-2508",
+            "BDA-2510",
+            "BDA-2511",
+            "BDA-2513",
+            "CS-2501",
+            "CS-2503",
+            "CS-2506",
+            "CS-2508",
+            "CS-2510",
+            "CS-2514",
+            "CS-2516",
+            "CS-2517",
+            "CS-2518",
+            "CS-2519",
+            "CS-2521",
+            "CS-2523",
+            "CS-2525",
+            "CS-2526",
+            "CS-2527",
+            "CS-2528",
+            "CS-2529",
+            "CS-2530",
+            "CS-2531",
+            "CS-2532",
+            "CS-2533",
+            "CS-2535",
+            "DJ-2501",
+            "DJ-2502",
+            "DJ-2503",
+            "EE-2501",
+            "EE-2502",
+            "EE-2503",
+            "EE-2504",
+            "EE-2505",
+            "EE-2506",
+            "EE-2507",
+            "EE-2508",
+            "EE-2509",
+            "EE-2510",
+            "EE-2511",
+            "IT-2501",
+            "IT-2502",
+            "IT-2503",
+            "IT-2504",
+            "IT-2505",
+            "IT-2506",
+            "IT-2507",
+            "IT-2508",
+            "IT-2509",
+            "IT-2510",
+            "IT-2511",
+            "IT-2512",
+            "IT-2513",
+            "IT-2514",
+            "IT-2515",
+            "IT-2516",
+            "ITE-2501",
+            "IoT-2501",
+            "IoT-2503"
+        ]
+    },
+    {
+        "teacherName": "Yevgeniya Verba",
+        "disciplines": [
+            "Foreign Language 1"
+        ],
+        "groups": [
+            "CS-2516",
+            "CS-2517",
+            "CS-2518",
+            "CS-2519",
+            "CS-2520",
+            "CS-2521",
+            "CS-2522",
+            "CS-2523",
+            "CS-2524",
+            "CS-2525",
+            "CS-2526",
+            "CS-2527",
+            "CS-2528",
+            "CS-2529",
+            "CS-2530",
+            "DJ-2501",
+            "DJ-2502",
+            "DJ-2503",
+            "IT-2501",
+            "IT-2502",
+            "IT-2503",
+            "IT-2504",
+            "IT-2505",
+            "IT-2506",
+            "IT-2507",
+            "IT-2508",
+            "IT-2509",
+            "IT-2510",
+            "IT-2511",
+            "IT-2512",
+            "IT-2513",
+            "IT-2514",
+            "IT-2515",
+            "IT-2516",
+            "ITE-2501",
+            "ITE-2502",
+            "ITM-2501",
+            "ITM-2502",
+            "ITM-2503",
+            "ITM-2504",
+            "SE-2501",
+            "SE-2502",
+            "SE-2503",
+            "SE-2504",
+            "SE-2505",
+            "SE-2506",
+            "SE-2507",
+            "SE-2508",
+            "SE-2509",
+            "SE-2510",
+            "SE-2511",
+            "SE-2512",
+            "SE-2513",
+            "SE-2514",
+            "SE-2515",
+            "SE-2516",
+            "SE-2517",
+            "SE-2518",
+            "SE-2519",
+            "SE-2520",
+            "SE-2521",
+            "SE-2522",
+            "SE-2523",
+            "SE-2524",
+            "SE-2525",
+            "SE-2526",
+            "SE-2527",
+            "SE-2528",
+            "SE-2529",
+            "SE-2530",
+            "SE-2531",
+            "SE-2532",
+            "SE-2533",
+            "SE-2534",
+            "SE-2535",
+            "SE-2536",
+            "SE-2537",
+            "SE-2538",
+            "SE-2539",
+            "SE-2540",
+            "SE-2541",
+            "SE-2542"
+        ]
+    },
+    {
+        "teacherName": "Zakirova Alma",
+        "disciplines": [
+            "Operating Systems and Computer Networks"
+        ],
+        "groups": [
+            "MT-2404",
+            "MT-2405",
+            "MT-2406"
+        ]
+    },
+    {
+        "teacherName": "Zhakenov Margulan",
+        "disciplines": [
+            "Introduction to Finance"
+        ],
+        "groups": [
+            "SE-2419",
+            "SE-2428",
+            "SE-2431",
+            "SE-2432",
+            "SE-2433",
+            "SE-2434",
+            "SE-2435",
+            "SE-2436",
+            "SE-2437"
+        ]
+    },
+    {
+        "teacherName": "Zhakipova M.",
+        "disciplines": [
+            "Kazakh Language 1"
+        ],
+        "groups": [
+            "BDA-2401",
+            "BDA-2402",
+            "BDA-2403",
+            "BDA-2404",
+            "BDA-2405",
+            "CS-2401",
+            "CS-2402",
+            "CS-2403",
+            "CS-2404",
+            "CS-2405",
+            "CS-2416",
+            "CS-2417",
+            "CS-2418",
+            "CS-2419",
+            "CS-2420",
+            "CS-2422",
+            "CS-2423",
+            "CS-2424",
+            "CS-2425",
+            "ITE-2401",
+            "ITM-2401",
+            "ITM-2402",
+            "MCS-2401",
+            "MT-2401",
+            "MT-2402",
+            "MT-2403",
+            "MT-2404",
+            "MT-2405",
+            "MT-2406",
+            "SE-2401",
+            "SE-2402",
+            "SE-2403",
+            "SE-2404",
+            "SE-2405",
+            "SE-2406",
+            "SE-2407",
+            "SE-2408",
+            "SE-2409",
+            "SE-2427",
+            "SE-2429",
+            "SE-2430",
+            "SE-2431",
+            "SE-2432",
+            "SE-2433",
+            "SE-2434",
+            "SE-2435"
+        ]
+    },
+    {
+        "teacherName": "Zhaksylyk Tomiris",
+        "disciplines": [
+            "Introduction to Programming (Python)"
+        ],
+        "groups": [
+            "AIB-2501",
+            "AIB-2502",
+            "AIB-2503"
+        ]
+    },
+    {
+        "teacherName": "Zhanadilova Aigul",
+        "disciplines": [
+            "Sociology"
+        ],
+        "groups": [
+            "CS-2504",
+            "CS-2505",
+            "CS-2506",
+            "CS-2507",
+            "CS-2508",
+            "CS-2509",
+            "CS-2510",
+            "CS-2511",
+            "CS-2512",
+            "CS-2513",
+            "CS-2514",
+            "CS-2515",
+            "CS-2516",
+            "CS-2517",
+            "CS-2518",
+            "CS-2519",
+            "CS-2520",
+            "CS-2521",
+            "CS-2522",
+            "CS-2523",
+            "CS-2524"
+        ]
+    },
+    {
+        "teacherName": "Zhandaulet Eldos",
+        "disciplines": [
+            "Analytic methods in Computer Science"
+        ],
+        "groups": [
+            "BDA-2401",
+            "BDA-2402",
+            "BDA-2403",
+            "BDA-2404",
+            "BDA-2405",
+            "BDA-2406",
+            "BDA-2407",
+            "BDA-2408",
+            "BDA-2409",
+            "SE-2401",
+            "SE-2402",
+            "SE-2403",
+            "SE-2404",
+            "SE-2405",
+            "SE-2406",
+            "SE-2407",
+            "SE-2408",
+            "SE-2409",
+            "SE-2422"
+        ]
+    },
+    {
+        "teacherName": "Zhandesh Altyngul",
+        "disciplines": [
+            "Discrete Mathematics"
+        ],
+        "groups": [
+            "CS-2503",
+            "CS-2504",
+            "CS-2505",
+            "CS-2506"
+        ]
+    },
+    {
+        "teacherName": "Zhandos Seraliyev",
+        "disciplines": [
+            "WEB Technologies 1 (Front End)"
+        ],
+        "groups": [
+            "SE-2437",
+            "SE-2438"
+        ]
+    },
+    {
+        "teacherName": "Zhanna Zhassulankyzy",
+        "disciplines": [
+            "Business Project (Simulation)",
+            "Introduction to Finance"
+        ],
+        "groups": [
+            "ITE-2502",
+            "SE-2403",
+            "SE-2406",
+            "SE-2407",
+            "SE-2410",
+            "SE-2413",
+            "SE-2418",
+            "SE-2421",
+            "SE-2423",
+            "SE-2427",
+            "SE-2429",
+            "SE-2438",
+            "SE-2439"
+        ]
+    },
+    {
+        "teacherName": "Zhanshuak Zhaibergenova",
+        "disciplines": [
+            "Computer Networks",
+            "Operating Systems"
+        ],
+        "groups": [
+            "CS-2401",
+            "CS-2402",
+            "CS-2432",
+            "CS-2433",
+            "CS-2434",
+            "SE-2409",
+            "SE-2410",
+            "SE-2416"
+        ]
+    },
+    {
+        "teacherName": "Zharkynbay Bakhyt",
+        "disciplines": [
+            "Probability Theory"
+        ],
+        "groups": [
+            "BDA-2404",
+            "BDA-2405",
+            "BDA-2406"
+        ]
+    },
+    {
+        "teacherName": "Zhenisbayeva Meruert",
+        "disciplines": [
+            "Foreign Language 1"
+        ],
+        "groups": [
+            "BDA-2501",
+            "BDA-2502",
+            "BDA-2503",
+            "BDA-2504",
+            "BDA-2505",
+            "BDA-2506",
+            "BDA-2507",
+            "BDA-2508",
+            "BDA-2509",
+            "BDA-2510",
+            "BDA-2511",
+            "BDA-2512",
+            "BDA-2513",
+            "CS-2501",
+            "CS-2502",
+            "CS-2503",
+            "CS-2504",
+            "CS-2505",
+            "CS-2506",
+            "CS-2507",
+            "CS-2508",
+            "CS-2509",
+            "CS-2510",
+            "CS-2511",
+            "CS-2512",
+            "CS-2513",
+            "CS-2514",
+            "CS-2515",
+            "CS-2516",
+            "CS-2517",
+            "CS-2518",
+            "CS-2519",
+            "CS-2520",
+            "CS-2521",
+            "CS-2522",
+            "CS-2523",
+            "CS-2524",
+            "CS-2525",
+            "CS-2526",
+            "CS-2527",
+            "CS-2528",
+            "CS-2529",
+            "CS-2530",
+            "EE-2501",
+            "EE-2502",
+            "EE-2503",
+            "EE-2504",
+            "EE-2505",
+            "EE-2506",
+            "EE-2507",
+            "EE-2508",
+            "EE-2509",
+            "EE-2510",
+            "EE-2511",
+            "MCS-2501",
+            "MCS-2502",
+            "MCS-2503",
+            "MT-2501",
+            "MT-2502",
+            "MT-2503",
+            "MT-2504",
+            "MT-2505",
+            "MT-2506",
+            "MT-2507"
+        ]
+    },
+    {
+        "teacherName": "Zhetpisbayeva Aliya",
+        "disciplines": [
+            "Analog Electronics"
+        ],
+        "groups": [
+            "EE-2402",
+            "EE-2403",
+            "EE-2404",
+            "EE-2405",
+            "EE-2406",
+            "EE-2407",
+            "EE-2408"
+        ]
+    },
+    {
+        "teacherName": "Zhuldasov Zhanat",
+        "disciplines": [
+            "Calculus 1"
+        ],
+        "groups": [
+            "IT-2507",
+            "IT-2508",
+            "IT-2509",
+            "IT-2510",
+            "IT-2511",
+            "IT-2512",
+            "IT-2513",
+            "IT-2514"
+        ]
+    },
+    {
+        "teacherName": "Zhuldyz Davletbayeva",
+        "disciplines": [
+            "Social Innovation and Digital Transformation of Society"
+        ],
+        "groups": [
+            "DPA-2401M"
+        ]
+    },
+    {
+        "teacherName": "Zhumagaliyeva Guldana",
+        "disciplines": [
+            "Foreign Language 1"
+        ],
+        "groups": [
+            "BDA-2501",
+            "BDA-2502",
+            "BDA-2503",
+            "BDA-2504",
+            "BDA-2505",
+            "BDA-2506",
+            "BDA-2507",
+            "BDA-2508",
+            "BDA-2509",
+            "BDA-2510",
+            "BDA-2511",
+            "BDA-2512",
+            "BDA-2513"
+        ]
+    },
+    {
+        "teacherName": "Zhumasheva Ainur",
+        "disciplines": [
+            "Calculus 1"
+        ],
+        "groups": [
+            "SE-2537",
+            "SE-2538",
+            "SE-2539",
+            "SE-2540",
+            "SE-2541",
+            "SE-2542"
+        ]
+    },
+    {
+        "teacherName": "Zhussupov Askar",
+        "disciplines": [
+            "Russian Language 1"
+        ],
+        "groups": [
+            "BDA-2405",
+            "BDA-2406",
+            "CS-2410",
+            "CS-2417",
+            "CS-2430",
+            "CS-2431",
+            "CS-2440",
+            "EE-2403",
+            "EE-2404",
+            "IT-2405",
+            "IT-2406",
+            "ITM-2401",
+            "ITM-2402",
+            "MCS-2401",
+            "MT-2403",
+            "MT-2404",
+            "SE-2405",
+            "SE-2409",
+            "SE-2412",
+            "SE-2413",
+            "SE-2419",
+            "SE-2420",
+            "SE-2425",
+            "SE-2426",
+            "SE-2427",
+            "ST-2401",
+            "ST-2402"
+        ]
+    },
+    {
+        "teacherName": "Zulkiya Moldakhmetova",
+        "disciplines": [
+            "Russian Language 1"
+        ],
+        "groups": [
+            "BDA-2407",
+            "BDA-2408",
+            "CS-2408",
+            "CS-2409",
+            "CS-2428",
+            "CS-2429",
+            "DJ-2401",
+            "DJ-2402",
+            "IT-2409",
+            "IT-2410",
+            "SE-2403",
+            "SE-2418",
+            "SE-2421",
+            "SE-2435"
+        ]
+    }
+]
