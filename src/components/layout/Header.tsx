@@ -16,20 +16,20 @@ export function Header() {
     }, []);
 
     return (
-        <header className="sticky top-0 z-50 w-full border-b border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-black/80 backdrop-blur-md ">
+        <header className="sticky top-0 z-50 w-full border-b border-gray-200 dark:border-zinc-800 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md ">
             <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-4 sm:px-6 relative">
                 <div className="flex items-center gap-2">
                     <Link href="/" className="flex items-center gap-2 group">
-                        <div className="flex h-8 w-8 items-center justify-center rounded-md bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 transition-transform group-hover:scale-105 p-[4px]">
+                        <div className="flex h-8 w-8 items-center justify-center rounded-md bg-gray-900 dark:bg-zinc-100 text-white dark:text-zinc-900 transition-transform group-hover:scale-105 p-[4px]">
                             <LogoIcon className="h-full w-full" />
                         </div>
-                        <span className="text-xl font-bold tracking-tight text-gray-900 dark:text-white group-hover:text-gray-700 dark:group-hover:text-gray-300  truncate max-w-[200px] sm:max-w-none">Rate your professor</span>
+                        <span className="text-xl font-bold tracking-tight text-gray-900 dark:text-zinc-100 group-hover:text-gray-700 dark:group-hover:text-zinc-300  truncate max-w-[200px] sm:max-w-none">Rate your professor</span>
                     </Link>
 
                     <nav className="hidden sm:flex items-center ml-8 space-x-6">
                         <Link
                             href="/groups"
-                            className="text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors"
+                            className="text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors"
                         >
                             Find My Group
                         </Link>
@@ -41,7 +41,7 @@ export function Header() {
                     <nav className="sm:hidden flex items-center mr-2">
                         <Link
                             href="/groups"
-                            className="text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors"
+                            className="text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors"
                         >
                             Groups
                         </Link>
@@ -49,7 +49,7 @@ export function Header() {
                     {mounted && (
                         <button
                             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                            className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white  p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-900"
+                            className="text-gray-500 dark:text-zinc-400 hover:text-gray-900 dark:hover:text-zinc-100  p-2 rounded-full hover:bg-gray-100 dark:hover:bg-zinc-900"
                             aria-label="Toggle theme"
                             title="Toggle theme"
                         >

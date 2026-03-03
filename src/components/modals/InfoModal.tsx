@@ -68,47 +68,47 @@ export function InfoModal({ professor, isOpen, onClose }: InfoModalProps) {
             onClick={onClose}
         >
             <div
-                className="w-full max-w-md bg-white dark:bg-gray-950 rounded-t-2xl sm:rounded-lg shadow-xl p-6 relative max-h-[90vh] overflow-y-auto animate-in slide-in-from-bottom sm:slide-in-from-bottom-0 sm:fade-in sm:zoom-in-95 duration-200"
+                className="w-full max-w-md bg-white dark:bg-zinc-900 border border-transparent dark:border-zinc-800 rounded-t-2xl sm:rounded-lg shadow-xl p-6 pb-10 sm:pb-6 relative max-h-[90vh] overflow-y-auto animate-in slide-in-from-bottom sm:slide-in-from-bottom-0 sm:fade-in sm:zoom-in-95 duration-200"
                 onClick={(e) => e.stopPropagation()}
             >
                 <button
                     onClick={onClose}
-                    className="absolute top-4 right-4 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300"
+                    className="absolute top-4 right-4 text-gray-400 dark:text-zinc-500 hover:text-gray-600 dark:hover:text-zinc-300"
                 >
                     <X size={20} />
                 </button>
 
                 <div className="flex justify-between items-start mb-1 pr-8">
-                    <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                    <h2 className="text-xl font-semibold text-gray-900 dark:text-zinc-100">
                         {professor.name}
                     </h2>
                     <ShareButton
                         professorId={professor.id}
                         professorName={professor.name}
-                        className="text-gray-400 hover:text-blue-600 dark:text-gray-500 dark:hover:text-blue-400 mt-1"
+                        className="text-gray-400 hover:text-blue-600 dark:text-zinc-500 dark:hover:text-blue-400 mt-1"
                     />
                 </div>
                 <div className="flex flex-col gap-2 mb-6">
                     <div className="flex items-center justify-between text-sm">
-                        <span className="text-gray-500 dark:text-gray-400 font-medium">Teaching:</span>
+                        <span className="text-gray-500 dark:text-zinc-400 font-medium">Teaching:</span>
                         <div className="flex items-center gap-2">
                             <StarRating rating={professor.teaching_rating} />
-                            <span className="text-xs text-gray-400 dark:text-gray-500">({professor.teaching_count} ratings)</span>
+                            <span className="text-xs text-gray-400 dark:text-zinc-500">({professor.teaching_count} ratings)</span>
                         </div>
                     </div>
                     <div className="flex items-center justify-between text-sm">
-                        <span className="text-gray-500 dark:text-gray-400 font-medium">Proctoring:</span>
+                        <span className="text-gray-500 dark:text-zinc-400 font-medium">Proctoring:</span>
                         <div className="flex items-center gap-2">
                             <StarRating rating={professor.proctoring_rating} />
-                            <span className="text-xs text-gray-400 dark:text-gray-500">({professor.proctoring_count} ratings)</span>
+                            <span className="text-xs text-gray-400 dark:text-zinc-500">({professor.proctoring_count} ratings)</span>
                         </div>
                     </div>
                     {professor.top_tags && professor.top_tags.length > 0 && (
                         <div className="mt-2">
-                            <span className="block text-gray-500 dark:text-gray-400 text-sm font-medium mb-1.5">Top Tags:</span>
+                            <span className="block text-gray-500 dark:text-zinc-400 text-sm font-medium mb-1.5">Top Tags:</span>
                             <div className="flex flex-wrap gap-1.5">
                                 {professor.top_tags.map(tag => (
-                                    <span key={tag} className="px-2 py-0.5 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-md text-[10px] sm:text-xs border border-gray-200 dark:border-gray-700 whitespace-nowrap">
+                                    <span key={tag} className="px-2 py-0.5 bg-gray-100 dark:bg-zinc-800 text-gray-600 dark:text-zinc-100 rounded-md text-[10px] sm:text-xs border border-gray-200 dark:border-zinc-700 whitespace-nowrap">
                                         {tag}
                                     </span>
                                 ))}
@@ -117,17 +117,17 @@ export function InfoModal({ professor, isOpen, onClose }: InfoModalProps) {
                     )}
                 </div>
 
-                <div className="space-y-6 pt-4 border-t border-gray-100 dark:border-gray-800">
-                    <h3 className="text-gray-900 dark:text-gray-100 font-medium text-lg mb-4">Schedule Information</h3>
+                <div className="space-y-6 pt-4 border-t border-gray-100 dark:border-zinc-800">
+                    <h3 className="text-gray-900 dark:text-zinc-100 font-medium text-lg mb-4">Schedule Information</h3>
                     {scheduleInfo ? (
                         <>
                             <div>
-                                <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                <h3 className="text-sm font-medium text-gray-700 dark:text-zinc-100 mb-2">
                                     Disciplines
                                 </h3>
                                 <div className="flex flex-wrap gap-2">
                                     {scheduleInfo.disciplines.map((disc, idx) => (
-                                        <span key={idx} className="px-3 py-1.5 rounded-md bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-xs border border-gray-200 dark:border-gray-700">
+                                        <span key={idx} className="px-3 py-1.5 rounded-md bg-gray-100 dark:bg-zinc-800 text-gray-700 dark:text-zinc-100 text-xs border border-gray-200 dark:border-zinc-800">
                                             {disc}
                                         </span>
                                     ))}
@@ -138,12 +138,12 @@ export function InfoModal({ professor, isOpen, onClose }: InfoModalProps) {
                             </div>
 
                             <div>
-                                <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 mt-4 sm:mt-0">
+                                <h3 className="text-sm font-medium text-gray-700 dark:text-zinc-100 mb-2 mt-4 sm:mt-0">
                                     Groups
                                 </h3>
                                 <div className="flex flex-wrap gap-2">
                                     {scheduleInfo.groups.map((group, idx) => (
-                                        <span key={idx} className="px-2.5 py-1 rounded-full text-[11px] font-medium bg-white dark:bg-transparent text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-gray-800">
+                                        <span key={idx} className="px-2.5 py-1 rounded-full text-[11px] font-medium bg-white dark:bg-transparent text-gray-600 dark:text-zinc-400 border border-gray-200 dark:border-zinc-800">
                                             {group}
                                         </span>
                                     ))}
@@ -154,7 +154,7 @@ export function InfoModal({ professor, isOpen, onClose }: InfoModalProps) {
                             </div>
                         </>
                     ) : (
-                        <div className="py-6 text-center text-gray-500 dark:text-gray-400">
+                        <div className="py-6 text-center text-gray-500 dark:text-zinc-400">
                             <p>No specific schedule data found for this professor.</p>
                         </div>
                     )}

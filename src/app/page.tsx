@@ -22,7 +22,7 @@ export default async function Home() {
   return (
     <div className="py-8 sm:py-16 px-4 sm:px-6 w-full ">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-semibold mb-6 sm:mb-8 text-gray-900 dark:text-white tracking-tight">
+        <h1 className="text-3xl font-semibold mb-6 sm:mb-8 text-gray-900 dark:text-zinc-100 tracking-tight">
           Professor Ratings
         </h1>
         <Suspense fallback={<div className="py-8 text-center text-gray-500">Loading professors...</div>}>

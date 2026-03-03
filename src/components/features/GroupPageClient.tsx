@@ -95,10 +95,10 @@ export function GroupPageClient({ trimestersData, trimestersGroups, approvedProf
     return (
         <div className="py-8 sm:py-16 px-4 sm:px-6 w-full h-full flex flex-col antialiased">
             <div className="max-w-4xl mx-auto w-full flex-1">
-                <h1 className="text-3xl font-semibold mb-2 text-gray-900 dark:text-white tracking-tight">
+                <h1 className="text-3xl font-semibold mb-2 text-gray-900 dark:text-zinc-100 tracking-tight">
                     Find My Group
                 </h1>
-                <p className="text-gray-500 dark:text-gray-400 mb-6 text-sm sm:text-base">
+                <p className="text-gray-500 dark:text-zinc-400 mb-6 text-sm sm:text-base">
                     Select your group to see the ratings of all your teachers.
                 </p>
 
@@ -108,8 +108,8 @@ export function GroupPageClient({ trimestersData, trimestersGroups, approvedProf
                             key={trim}
                             onClick={() => setSelectedTrimester(trim)}
                             className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${selectedTrimester === trim
-                                ? "bg-gray-900 text-white dark:bg-white dark:text-gray-900"
-                                : "bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-700 dark:hover:bg-gray-700"
+                                ? "bg-gray-900 text-white dark:bg-white dark:text-zinc-900"
+                                : "bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 dark:bg-zinc-700 dark:text-zinc-100 dark:border-zinc-800 dark:hover:bg-zinc-800"
                                 }`}
                         >
                             Trimester {trim}
@@ -118,7 +118,7 @@ export function GroupPageClient({ trimestersData, trimestersGroups, approvedProf
                 </div>
 
                 <div className="relative mb-8 z-20 max-w-md">
-                    <label htmlFor="group-search" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    <label htmlFor="group-search" className="block text-sm font-medium text-gray-700 dark:text-zinc-100 mb-2">
                         Select Group
                     </label>
                     <div className="relative">
@@ -128,7 +128,7 @@ export function GroupPageClient({ trimestersData, trimestersGroups, approvedProf
                         <input
                             id="group-search"
                             type="text"
-                            className="block w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md leading-5 bg-white dark:bg-gray-800 placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-gray-500 focus:border-gray-500 sm:text-sm text-gray-900 dark:text-white"
+                            className="block w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-zinc-800 rounded-md leading-5 bg-white dark:bg-zinc-700 placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-gray-500 focus:border-gray-500 sm:text-sm text-gray-900 dark:text-zinc-100"
                             placeholder={selectedGroup || "Search for a group (e.g. SE-2413)"}
                             value={searchQuery}
                             onChange={(e) => {
@@ -148,11 +148,11 @@ export function GroupPageClient({ trimestersData, trimestersGroups, approvedProf
                     </div>
 
                     {isDropdownOpen && filteredGroups.length > 0 && (
-                        <div className="absolute z-30 mt-1 w-full bg-white dark:bg-gray-800 shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm border border-gray-200 dark:border-gray-700">
+                        <div className="absolute z-30 mt-1 w-full bg-white dark:bg-zinc-700 shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm border border-gray-200 dark:border-zinc-800">
                             {filteredGroups.map((group) => (
                                 <div
                                     key={group}
-                                    className={`cursor-pointer select-none relative py-2 pl-3 pr-9 hover:bg-gray-100 dark:hover:bg-gray-700 ${selectedGroup === group ? "bg-gray-50 dark:bg-gray-700 font-medium text-gray-900 dark:text-white" : "text-gray-700 dark:text-gray-300"
+                                    className={`cursor-pointer select-none relative py-2 pl-3 pr-9 hover:bg-gray-100 dark:hover:bg-zinc-800 ${selectedGroup === group ? "bg-gray-50 dark:bg-zinc-800/50 font-medium text-gray-900 dark:text-zinc-100" : "text-gray-700 dark:text-zinc-100"
                                         }`}
                                     onClick={() => handleSelectGroup(group)}
                                 >
@@ -162,7 +162,7 @@ export function GroupPageClient({ trimestersData, trimestersGroups, approvedProf
                         </div>
                     )}
                     {isDropdownOpen && filteredGroups.length === 0 && searchQuery && (
-                        <div className="absolute z-30 mt-1 w-full bg-white dark:bg-gray-800 shadow-lg rounded-md py-2 px-3 text-sm text-gray-500 border border-gray-200 dark:border-gray-700">
+                        <div className="absolute z-30 mt-1 w-full bg-white dark:bg-zinc-700 shadow-lg rounded-md py-2 px-3 text-sm text-gray-500 border border-gray-200 dark:border-zinc-800">
                             No groups found matching "{searchQuery}"
                         </div>
                     )}
@@ -170,13 +170,13 @@ export function GroupPageClient({ trimestersData, trimestersGroups, approvedProf
 
                 {selectedGroup ? (
                     <div className="mt-8 animate-in fade-in duration-300">
-                        <h2 className="text-xl font-medium mb-6 text-gray-800 dark:text-gray-200">
+                        <h2 className="text-xl font-medium mb-6 text-gray-800 dark:text-zinc-200">
                             Teachers for {selectedGroup} (Trimester {selectedTrimester})
                         </h2>
                         {groupTeachers.length > 0 ? (
                             <ProfessorTable initialProfessors={groupTeachers} />
                         ) : (
-                            <div className="text-center py-12 text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-gray-900/50 rounded-lg border border-gray-100 dark:border-gray-800">
+                            <div className="text-center py-12 text-gray-500 dark:text-zinc-400 bg-gray-50 dark:bg-zinc-950/50 rounded-lg border border-gray-100 dark:border-zinc-800">
                                 No teacher ratings found for this group in Trimester {selectedTrimester}.
                             </div>
                         )}

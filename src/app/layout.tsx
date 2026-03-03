@@ -20,8 +20,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} antialiased flex flex-col min-h-screen dark:bg-black dark:text-white `}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+      <body className={`${inter.className} antialiased flex flex-col min-h-screen bg-background text-foreground`}>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <Header />
           <main className="flex-1 w-full max-w-5xl mx-auto">{children}</main>
           <Footer />

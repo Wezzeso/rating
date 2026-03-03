@@ -281,7 +281,7 @@ export default function AdminPage() {
         const v = verificationMap[prof.id];
         if (v?.loading) {
             return (
-                <span className="inline-flex items-center gap-1 text-xs text-gray-400 dark:text-gray-500 ">
+                <span className="inline-flex items-center gap-1 text-xs text-gray-400 dark:text-zinc-500 ">
                     <Loader2 size={14} className="animate-spin" />
                     Checking…
                 </span>
@@ -289,7 +289,7 @@ export default function AdminPage() {
         }
         if (v?.error && v.existsInAITU === null && prof.aitu_verified === null) {
             return (
-                <span className="inline-flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400 ">
+                <span className="inline-flex items-center gap-1 text-xs text-gray-500 dark:text-zinc-400 ">
                     <AlertTriangle size={14} />
                     Error
                 </span>
@@ -322,7 +322,7 @@ export default function AdminPage() {
             );
         }
         return (
-            <span className="inline-flex items-center gap-1 text-xs text-gray-400 dark:text-gray-600 ">
+            <span className="inline-flex items-center gap-1 text-xs text-gray-400 dark:text-zinc-600 ">
                 —
             </span>
         );
@@ -342,7 +342,7 @@ export default function AdminPage() {
     if (loading) {
         return (
             <div className="min-h-[70vh] flex items-center justify-center">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900 dark:border-white"></div>
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900 dark:border-zinc-800"></div>
             </div>
         );
     }
@@ -350,22 +350,22 @@ export default function AdminPage() {
     if (!isAuthenticated) {
         return (
             <div className="min-h-[70vh] flex items-center justify-center bg-transparent px-4 py-8">
-                <div className="max-w-md w-full bg-white dark:bg-gray-900 rounded-lg shadow-md p-8 ">
-                    <h2 className="text-2xl font-bold text-center mb-6 text-gray-900 dark:text-white">Admin Login</h2>
+                <div className="max-w-md w-full bg-white dark:bg-zinc-950 rounded-lg shadow-md p-8 ">
+                    <h2 className="text-2xl font-bold text-center mb-6 text-gray-900 dark:text-zinc-100">Admin Login</h2>
                     <form onSubmit={handleLogin} className="space-y-4">
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 ">Password</label>
+                            <label className="block text-sm font-medium text-gray-700 dark:text-zinc-100 ">Password</label>
                             <input
                                 type="password"
                                 required
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
-                                className="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white px-3 py-2 focus:border-black dark:focus:border-gray-500 focus:outline-none focus:ring-1 focus:ring-black dark:focus:ring-gray-500 "
+                                className="mt-1 block w-full rounded-md border border-gray-300 dark:border-zinc-800 bg-white dark:bg-zinc-950 text-gray-900 dark:text-zinc-100 px-3 py-2 focus:border-black dark:focus:border-zinc-500 focus:outline-none focus:ring-1 focus:ring-black dark:focus:ring-zinc-500 "
                             />
                         </div>
                         <button
                             type="submit"
-                            className="w-full bg-black dark:bg-white text-white dark:text-gray-900 py-2 rounded-md hover:bg-gray-800 dark:hover:bg-gray-200 "
+                            className="w-full bg-black dark:bg-white text-white dark:text-zinc-900 py-2 rounded-md hover:bg-gray-800 dark:hover:bg-zinc-200 "
                         >
                             Sign In
                         </button>
@@ -379,11 +379,11 @@ export default function AdminPage() {
         <div className="bg-transparent py-8 px-4 sm:p-6 w-full h-full flex-1">
             <div className="max-w-6xl mx-auto">
                 <div className="flex justify-between items-center mb-8">
-                    <h1 className="text-2xl font-bold text-gray-900 dark:text-white ">Admin Dashboard</h1>
+                    <h1 className="text-2xl font-bold text-gray-900 dark:text-zinc-100 ">Admin Dashboard</h1>
                     <div className="flex items-center gap-3">
                         <button
                             onClick={() => verifyAll(professors)}
-                            className="flex items-center gap-1.5 text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400  px-3 py-1.5 rounded-md hover:bg-blue-50 dark:hover:bg-blue-900/30"
+                            className="flex items-center gap-1.5 text-sm text-gray-600 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-blue-400  px-3 py-1.5 rounded-md hover:bg-blue-50 dark:hover:bg-blue-900/30"
                             title="Re-verify all teachers"
                         >
                             <RefreshCw size={15} />
@@ -391,7 +391,7 @@ export default function AdminPage() {
                         </button>
                         <button
                             onClick={handleLogout}
-                            className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 "
+                            className="flex items-center gap-2 text-sm text-gray-600 dark:text-zinc-400 hover:text-red-600 dark:hover:text-red-400 "
                         >
                             <LogOut size={16} />
                             Logout
@@ -400,7 +400,7 @@ export default function AdminPage() {
                 </div>
 
                 {/* Legend */}
-                <div className="flex flex-wrap gap-4 mb-4 text-xs text-gray-600 dark:text-gray-400 ">
+                <div className="flex flex-wrap gap-4 mb-4 text-xs text-gray-600 dark:text-zinc-400 ">
                     <span className="flex items-center gap-1.5">
                         <span className="w-3 h-3 rounded-sm bg-green-200 dark:bg-green-900 border border-green-300 dark:border-green-700 inline-block"></span>
                         Found in AITU
@@ -415,36 +415,36 @@ export default function AdminPage() {
                     </span>
                 </div>
 
-                <div className="bg-white dark:bg-gray-900 rounded-lg shadow overflow-hidden ">
-                    <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-800 ">
-                        <h2 className="font-semibold text-gray-800 dark:text-gray-200 ">
+                <div className="bg-white dark:bg-zinc-950 rounded-lg shadow overflow-hidden ">
+                    <div className="px-6 py-4 border-b border-gray-200 dark:border-zinc-800 ">
+                        <h2 className="font-semibold text-gray-800 dark:text-zinc-200 ">
                             Pending Approvals ({professors.length})
                         </h2>
                     </div>
 
                     {professors.length === 0 ? (
-                        <div className="p-8 text-center text-gray-500 dark:text-gray-400 ">No pending suggestions.</div>
+                        <div className="p-8 text-center text-gray-500 dark:text-zinc-400 ">No pending suggestions.</div>
                     ) : (
                         <div className="overflow-x-auto">
                             <table className="w-full text-left">
-                                <thead className="bg-gray-50 dark:bg-gray-800/50 text-xs uppercase text-gray-500 dark:text-gray-400 font-medium ">
+                                <thead className="bg-gray-50 dark:bg-zinc-700/50 text-xs uppercase text-gray-500 dark:text-zinc-400 font-medium ">
                                     <tr>
                                         <th
-                                            className="px-6 py-3 cursor-pointer select-none hover:text-gray-700 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 "
+                                            className="px-6 py-3 cursor-pointer select-none hover:text-gray-700 dark:hover:text-zinc-300 hover:bg-gray-100 dark:hover:bg-zinc-900 "
                                             onClick={() => handleSort("name")}
                                         >
                                             Name
                                             <SortIcon active={sortKey === "name"} direction={sortDirection} />
                                         </th>
                                         <th
-                                            className="px-6 py-3 cursor-pointer select-none hover:text-gray-700 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 "
+                                            className="px-6 py-3 cursor-pointer select-none hover:text-gray-700 dark:hover:text-zinc-300 hover:bg-gray-100 dark:hover:bg-zinc-900 "
                                             onClick={() => handleSort("status")}
                                         >
                                             Status
                                             <SortIcon active={sortKey === "status"} direction={sortDirection} />
                                         </th>
                                         <th
-                                            className="px-6 py-3 cursor-pointer select-none hover:text-gray-700 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 "
+                                            className="px-6 py-3 cursor-pointer select-none hover:text-gray-700 dark:hover:text-zinc-300 hover:bg-gray-100 dark:hover:bg-zinc-900 "
                                             onClick={() => handleSort("department")}
                                         >
                                             Department
@@ -453,7 +453,7 @@ export default function AdminPage() {
                                         <th className="px-6 py-3 text-right">Actions</th>
                                     </tr>
                                 </thead>
-                                <tbody className="divide-y divide-gray-200 dark:divide-gray-800 ">
+                                <tbody className="divide-y divide-gray-200 dark:divide-zinc-800 ">
                                     {sortedProfessors.map((p) => {
                                         const v = verificationMap[p.id];
                                         const isExpanded = expandedRow === p.id;
@@ -471,13 +471,13 @@ export default function AdminPage() {
                                                         <div className="flex items-center gap-2">
                                                             {hasMatches && (
                                                                 isExpanded ? (
-                                                                    <ChevronDown size={14} className="text-gray-400 dark:text-gray-500 shrink-0" />
+                                                                    <ChevronDown size={14} className="text-gray-400 dark:text-zinc-500 shrink-0" />
                                                                 ) : (
-                                                                    <ChevronRight size={14} className="text-gray-400 dark:text-gray-500 shrink-0" />
+                                                                    <ChevronRight size={14} className="text-gray-400 dark:text-zinc-500 shrink-0" />
                                                                 )
                                                             )}
                                                             <div>
-                                                                <span className="font-medium text-gray-900 dark:text-white ">
+                                                                <span className="font-medium text-gray-900 dark:text-zinc-100 ">
                                                                     {p.name}
                                                                 </span>
                                                                 {v?.isDuplicate && v.existingName && (
@@ -491,7 +491,7 @@ export default function AdminPage() {
                                                     <td className="px-6 py-4">
                                                         <StatusBadge prof={p} />
                                                     </td>
-                                                    <td className="px-6 py-4 text-gray-600 dark:text-gray-400 ">{p.department}</td>
+                                                    <td className="px-6 py-4 text-gray-600 dark:text-zinc-400 ">{p.department}</td>
                                                     <td className="px-6 py-4 text-right">
                                                         <div className="flex justify-end gap-2">
                                                             <button
@@ -530,22 +530,22 @@ export default function AdminPage() {
 
                                                 {/* Expanded row showing AITU matches */}
                                                 {isExpanded && hasMatches && (
-                                                    <tr key={`${p.id}-details`} className="bg-gray-50 dark:bg-gray-800/30 ">
+                                                    <tr key={`${p.id}-details`} className="bg-gray-50 dark:bg-zinc-700/30 ">
                                                         <td colSpan={4} className="px-6 py-3">
-                                                            <p className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-2 ">
+                                                            <p className="text-xs font-medium text-gray-500 dark:text-zinc-400 mb-2 ">
                                                                 AITU Matches ({v.matches.length}):
                                                             </p>
                                                             <div className="space-y-1">
                                                                 {v.matches.map((m, i) => (
                                                                     <div
                                                                         key={i}
-                                                                        className="text-xs text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 rounded px-3 py-1.5 border border-gray-200 dark:border-gray-700 flex items-center justify-between "
+                                                                        className="text-xs text-gray-700 dark:text-zinc-100 bg-white dark:bg-zinc-700 rounded px-3 py-1.5 border border-gray-200 dark:border-zinc-800 flex items-center justify-between "
                                                                     >
                                                                         <span className="font-medium">
                                                                             {m.nameKz} {m.surnameKz}
                                                                         </span>
                                                                         {m.department && (
-                                                                            <span className="text-gray-400 dark:text-gray-500 ml-3 truncate max-w-[300px]">
+                                                                            <span className="text-gray-400 dark:text-zinc-500 ml-3 truncate max-w-[300px]">
                                                                                 {m.department}
                                                                             </span>
                                                                         )}

@@ -26,7 +26,7 @@ export function StarRating({ rating, size = 16 }: StarRatingProps) {
                         {/* Background (Empty) Star */}
                         <Star
                             size={size}
-                            className="text-gray-200 fill-gray-100"
+                            className="text-gray-200 dark:text-zinc-800 fill-gray-100 dark:fill-zinc-800"
                             strokeWidth={1.5}
                         />
 
