@@ -69,10 +69,27 @@ export function ProfessorPageClient({ professor }: ProfessorPageClientProps) {
 
     // Determine badge text
     const getBadge = () => {
-        if (overallRating >= 4.5) return { text: "Student favorite", subtitle: "One of the most loved professors\nbased on ratings, reviews, and reliability" };
-        if (overallRating >= 3.5) return { text: "Top rated", subtitle: "Highly rated by students\nbased on teaching and proctoring reviews" };
-        if (overallRating >= 2.5) return { text: "Well reviewed", subtitle: "Positively reviewed by students\nbased on teaching and proctoring ratings" };
-        return null;
+        if (overallRating === 0) return null;
+        if (overallRating >= 4.8) return { text: "S-Tier", subtitle: "Masterclass in teaching. Guaranteed W if you show up." };
+        if (overallRating >= 4.6) return { text: "Goated", subtitle: "Incredible professor. Hard to get off the waitlist for a reason." };
+        if (overallRating >= 4.4) return { text: "Valid", subtitle: "Very solid pick. You won't regret having them on your schedule." };
+        if (overallRating >= 4.2) return { text: "W Professor", subtitle: "Good vibes and fair grading. Definitely recommend." };
+        if (overallRating >= 4.0) return { text: "Safe Bet", subtitle: "Reliable choice. Do the bare minimum and you'll be fine." };
+        if (overallRating >= 3.8) return { text: "Decent", subtitle: "Not mind-blowing but completely fine. A standard class." };
+        if (overallRating >= 3.6) return { text: "Mid", subtitle: "Pretty average experience. Neither terrible nor amazing." };
+        if (overallRating >= 3.4) return { text: "Passable", subtitle: "You will survive, but do not expect to be inspired." };
+        if (overallRating >= 3.2) return { text: "Sleep Fest", subtitle: "Lectures are a cure for insomnia, but the class is doable." };
+        if (overallRating >= 3.0) return { text: "Self Study", subtitle: "You will be relying heavily on the textbook, YouTube and hopes." };
+        if (overallRating >= 2.8) return { text: "Tough Watch", subtitle: "Lectures are confusing. Get ready to essentially teach yourself." };
+        if (overallRating >= 2.6) return { text: "Questionable", subtitle: "Grading is a mystery and instructions are often unclear." };
+        if (overallRating >= 2.4) return { text: "Rough", subtitle: "Expect a heavy workload and little to no helpful guidance." };
+        if (overallRating >= 2.2) return { text: "Cooked", subtitle: "Your GPA is in danger. Proceed with extreme caution." };
+        if (overallRating >= 2.0) return { text: "Canon Event", subtitle: "Everyone has to suffer through this class at least once." };
+        if (overallRating >= 1.8) return { text: "Avoid", subtitle: "Take literally anyone else if you have the option." };
+        if (overallRating >= 1.6) return { text: "GPA Assassin", subtitle: "Say goodbye to your academic comeback for this semester." };
+        if (overallRating >= 1.4) return { text: "Trench Work", subtitle: "Every assignment is a battle for your sanity and grades." };
+        if (overallRating >= 1.2) return { text: "Unsalvageable", subtitle: "Abandon all hope ye who enter here. It is genuinely that bad." };
+        return { text: "Well...", subtitle: "I'm not sure what to say..." };
     };
 
     const badge = getBadge();
