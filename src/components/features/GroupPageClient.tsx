@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { ProfessorTable } from "@/components/ProfessorTable";
+import { ProfessorTable } from "@/components/features/ProfessorTable";
 import { Search } from "lucide-react";
 
 interface TeacherData {

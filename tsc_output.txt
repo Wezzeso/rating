@@ -1,0 +1,6 @@
+src/app/page.tsx(1,32): error TS2307: Cannot find module '@/components/ProfessorTable' or its corresponding type declarations.
+src/components/features/GroupPageClient.tsx(4,32): error TS2307: Cannot find module '@/components/ProfessorTable' or its corresponding type declarations.
+src/components/features/ProfessorTable.tsx(7,27): error TS2307: Cannot find module './RateModal' or its corresponding type declarations.
+src/components/features/ProfessorTable.tsx(8,30): error TS2307: Cannot find module './SuggestModal' or its corresponding type declarations.
+src/components/features/ProfessorTable.tsx(9,27): error TS2307: Cannot find module './InfoModal' or its corresponding type declarations.
+src/components/modals/InfoModal.tsx(4,29): error TS2307: Cannot find module '../../teachers_data.json' or its corresponding type declarations.

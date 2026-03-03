@@ -4,9 +4,8 @@ import { useMemo, useState, useEffect } from "react";
 import { StarRating } from "@/components/ui/StarRating";
 import { ArrowDown, ArrowUp, Plus } from "lucide-react";
 import { Analytics } from "@vercel/analytics/next"
-import { RateModal } from "./RateModal";
-import { SuggestModal } from "./SuggestModal";
-import { InfoModal } from "./InfoModal";
+import { RateModal } from "../modals/RateModal";
+import { SuggestModal } from "../modals/SuggestModal";
 import { useRouter, useSearchParams } from "next/navigation";
 
 interface Professor {
@@ -44,7 +43,6 @@ export function ProfessorTable({ initialProfessors }: ProfessorTableProps) {
 
     const [selectedProfessor, setSelectedProfessor] = useState<Professor | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [isInfoModalOpen, setIsInfoModalOpen] = useState(false);
     const [isSuggestModalOpen, setIsSuggestModalOpen] = useState(false);
 
     const handleSort = (key: SortKey) => {
@@ -65,8 +63,7 @@ export function ProfessorTable({ initialProfessors }: ProfessorTableProps) {
     };
 
     const handleInfoClick = (professor: Professor) => {
-        setSelectedProfessor(professor);
-        setIsInfoModalOpen(true);
+        router.push(`/professor/${professor.id}`);
     };
 
     const handleRateSuccess = () => {
@@ -244,7 +241,7 @@ export function ProfessorTable({ initialProfessors }: ProfessorTableProps) {
                                     </div>
                                 </td>
                                 <td className="py-3 pl-4 hidden sm:table-cell text-right sm:text-left">
-                                    <div className="flex gap-3 justify-end sm:justify-start">
+                                    <div className="flex gap-3 justify-end sm:justify-start items-center">
                                         <button
                                             onClick={() => handleInfoClick(prof)}
                                             className="text-gray-400 dark:text-gray-500 hover:text-gray-800 dark:hover:text-gray-300 text-xs underline decoration-gray-300 dark:decoration-gray-600 underline-offset-2"
@@ -273,19 +270,12 @@ export function ProfessorTable({ initialProfessors }: ProfessorTableProps) {
             </div>
 
             {selectedProfessor && (
-                <>
-                    <RateModal
-                        professor={selectedProfessor}
-                        isOpen={isModalOpen}
-                        onClose={() => setIsModalOpen(false)}
-                        onSuccess={handleRateSuccess}
-                    />
-                    <InfoModal
-                        professor={selectedProfessor}
-                        isOpen={isInfoModalOpen}
-                        onClose={() => setIsInfoModalOpen(false)}
-                    />
-                </>
+                <RateModal
+                    professor={selectedProfessor}
+                    isOpen={isModalOpen}
+                    onClose={() => setIsModalOpen(false)}
+                    onSuccess={handleRateSuccess}
+                />
             )}
 
             <SuggestModal

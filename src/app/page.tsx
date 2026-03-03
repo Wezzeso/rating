@@ -1,4 +1,4 @@
-import { ProfessorTable } from "@/components/ProfessorTable";
+import { ProfessorTable } from "@/components/features/ProfessorTable";
 import { createAdminClient } from "@/lib/supabase-server";
 import { Suspense } from "react";
 

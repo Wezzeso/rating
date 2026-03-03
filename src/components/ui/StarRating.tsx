@@ -3,9 +3,10 @@ import React from "react";
 
 interface StarRatingProps {
     rating: number;
+    size?: number;
 }
 
-export function StarRating({ rating }: StarRatingProps) {
+export function StarRating({ rating, size = 16 }: StarRatingProps) {
     // Clamp rating between 0 and 5
     const clampedRating = Math.max(0, Math.min(rating, 5));
 
@@ -24,7 +25,7 @@ export function StarRating({ rating }: StarRatingProps) {
                     <div key={index} className="relative">
                         {/* Background (Empty) Star */}
                         <Star
-                            size={16}
+                            size={size}
                             className="text-gray-200 fill-gray-100"
                             strokeWidth={1.5}
                         />
@@ -35,13 +36,13 @@ export function StarRating({ rating }: StarRatingProps) {
                             style={{ width: `${fillPercentage}%` }}
                         >
                             <Star
-                                size={16}
+                                size={size}
                                 fill={color}
                                 stroke={color}
                                 strokeWidth={1.5}
                                 // Remove w/h constraint here to let SVG scale, but parent div clips it
                                 // Need to ensure SVG maintains size
-                                className="min-w-[16px]"
+                                style={{ minWidth: `${size}px` }}
                             />
                         </div>
                     </div>

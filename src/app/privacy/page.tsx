@@ -75,7 +75,14 @@ export default function PrivacyPolicy() {
                     </section>
 
                     <section>
-                        <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">5. Contact Us</h2>
+                        <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">5. Disclaimer of Liability</h2>
+                        <p>
+                            The administrators, founders, and developers of the Teacher Rating platform are not responsible or liable in any manner for any content, ratings, suggestions, or other actions made by users on the platform. All data is user-generated, and usage of this platform is entirely at your own risk.
+                        </p>
+                    </section>
+
+                    <section>
+                        <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">6. Contact Us</h2>
                         <p>
                             If you have any questions about this privacy policy or our privacy practices, please contact the administrators via telegram @wezeso.
                         </p>

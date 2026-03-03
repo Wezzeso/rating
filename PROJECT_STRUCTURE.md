@@ -15,9 +15,9 @@ Teacher Rating/
 ├── lib/                         # Shared TypeScript types
 ├── node_modules/                # npm dependencies (auto-generated)
 ├── public/                      # Static assets served at /
-├── scripts/                     # One-off utility scripts
 ├── src/                         # Application source code
 ├── supabase/                    # Database schema & migrations
+├── data/                        # Extracted teacher schedule and group data
 ├── eslint.config.mjs            # ESLint configuration
 ├── next-env.d.ts                # Next.js TypeScript declarations (auto-generated)
 ├── next.config.ts               # Next.js configuration
@@ -25,7 +25,6 @@ Teacher Rating/
 ├── package-lock.json            # Locked dependency tree
 ├── postcss.config.mjs           # PostCSS configuration
 ├── README.md                    # Project readme
-├── teachers_data.json           # Extracted teacher schedule and group data
 └── tsconfig.json                # TypeScript compiler options
 ```
 
@@ -43,7 +42,6 @@ Teacher Rating/
 | **`postcss.config.mjs`** | Registers the `@tailwindcss/postcss` plugin (Tailwind CSS v4 integration). |
 | **`next-env.d.ts`** | Auto-generated TypeScript declarations for Next.js. |
 | **`README.md`** | Project readme (1.4 KB). |
-| **`teachers_data.json`** | Static data file extracted from PDF schedule containing teacher disciplines and groups. |
 
 ---
 
@@ -52,6 +50,16 @@ Teacher Rating/
 | File | Description |
 |------|-------------|
 | **`types.ts`** | Defines three TypeScript interfaces: **`Professor`** (`id`, `name`, `department`, `is_approved`, `created_at`), **`Rating`** (`id`, `professor_id`, `user_fingerprint`, `teaching_score`, `proctoring_score`), and **`ProfessorWithRating`** (extends `Professor` with `avg_teaching_score`, `avg_proctoring_score`). |
+
+---
+
+## `data/` — Static Data files
+
+| File | Description |
+|------|-------------|
+| **`teachers_data.json`** | Static data file extracted from PDF schedule containing teacher disciplines and groups. |
+| **`teachers_data_1st_trim.json`** | Static data file for the first trimester. |
+| **`teachers_data_2nd _trim.json`** | Static data file for the second trimester. |
 
 ---
 
@@ -64,15 +72,6 @@ Teacher Rating/
 | **`next.svg`** | Next.js logo. |
 | **`vercel.svg`** | Vercel logo. |
 | **`window.svg`** | Window icon (Next.js default). |
-
----
-
-## `scripts/` — Utility Scripts
-
-| File | Description |
-|------|-------------|
-| **`generate_normalization_sql.js`** | Generates SQL statements for normalizing professor data and merging duplicates by analyzing fuzzy matches. |
-| **`import_professors.ts`** | Bulk import script that reads a `professors.csv` file (expected columns: `name`, `department`) and inserts rows into the `professors` table via Supabase. Uses the service role key (falls back to anon key with a warning). Auto-approves imported professors (`is_approved: true`). Loads env vars from `.env.local`. |
 
 ---
 
@@ -95,17 +94,20 @@ src/
 │   ├── layout.tsx               # Root layout component
 │   └── page.tsx                 # Home page (professor ratings list)
 ├── components/                  # React components
+│   ├── features/
+│   │   ├── GroupPageClient.tsx  # Client logic for groups page
+│   │   └── ProfessorTable.tsx   # Main professor ratings table
 │   ├── layout/
 │   │   ├── Header.tsx           # Site header
 │   │   └── Footer.tsx           # Site footer
-│   ├── ui/
-│   │   └── StarRating.tsx       # Reusable star-rating display
-│   ├── GroupPageClient.tsx      # Client logic for groups page
-│   ├── InfoModal.tsx            # Modal for displaying information
-│   ├── ProfessorTable.tsx       # Main professor ratings table
-│   ├── RateModal.tsx            # Modal for submitting a rating
-│   ├── SuggestModal.tsx         # Modal for suggesting a new professor
-│   └── ThemeProvider.tsx        # Next-themes provider
+│   ├── modals/
+│   │   ├── InfoModal.tsx        # Modal for displaying information
+│   │   ├── RateModal.tsx        # Modal for submitting a rating
+│   │   └── SuggestModal.tsx     # Modal for suggesting a new professor
+│   ├── providers/
+│   │   └── ThemeProvider.tsx    # Next-themes provider
+│   └── ui/
+│       └── StarRating.tsx       # Reusable star-rating display
 └── lib/                         # Supabase client utilities
     ├── supabase.ts              # Browser-side Supabase client
     └── supabase-server.ts       # Server-side Supabase clients
@@ -150,12 +152,12 @@ The core business logic file. All mutations go through these `'use server'` func
 
 | File | Description |
 |------|-------------|
-| **`ProfessorTable.tsx`** | Main data table component (200 lines, client component). Displays professors with sortable columns: Name, Teaching rating, Proctoring rating. Each row shows star ratings and a "Rate" button. Supports sorting by name, teaching, proctoring, and count in ascending/descending order. Includes a "Suggest a Professor" button. Opens `RateModal` and `SuggestModal` as needed. Refreshes data via `router.refresh()` after successful actions. |
-| **`RateModal.tsx`** | Modal dialog (134 lines) for submitting a rating. Presents two 5-star selectors (Teaching, Proctoring). At least one category must be rated. Calls `submitRating` server action. Shows loading state and toast feedback. |
-| **`SuggestModal.tsx`** | Modal dialog (85 lines) for suggesting a new professor. Simple text input for name (max 100 chars). Calls `suggestProfessor` server action. Shows loading state and toast feedback. |
-| **`InfoModal.tsx`** | Informational modal dialog for providing additional context or details to users. |
-| **`GroupPageClient.tsx`** | Client component for the groups page, managing state and interactions for searching and filtering groups. |
-| **`ThemeProvider.tsx`** | Next-themes provider component for enabling light and dark modes across the app. |
+| **`features/ProfessorTable.tsx`** | Main data table component (200 lines, client component). Displays professors with sortable columns: Name, Teaching rating, Proctoring rating. Each row shows star ratings and a "Rate" button. Supports sorting by name, teaching, proctoring, and count in ascending/descending order. Includes a "Suggest a Professor" button. Opens `RateModal` and `SuggestModal` as needed. Refreshes data via `router.refresh()` after successful actions. |
+| **`modals/RateModal.tsx`** | Modal dialog (134 lines) for submitting a rating. Presents two 5-star selectors (Teaching, Proctoring). At least one category must be rated. Calls `submitRating` server action. Shows loading state and toast feedback. |
+| **`modals/SuggestModal.tsx`** | Modal dialog (85 lines) for suggesting a new professor. Simple text input for name (max 100 chars). Calls `suggestProfessor` server action. Shows loading state and toast feedback. |
+| **`modals/InfoModal.tsx`** | Informational modal dialog for providing additional context or details to users. |
+| **`features/GroupPageClient.tsx`** | Client component for the groups page, managing state and interactions for searching and filtering groups. |
+| **`providers/ThemeProvider.tsx`** | Next-themes provider component for enabling light and dark modes across the app. |
 | **`layout/Header.tsx`** | Site header providing navigation and branding. |
 | **`layout/Footer.tsx`** | Site footer with links to privacy, terms, and copyright information. |
 

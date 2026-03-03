@@ -1,8 +1,8 @@
 import { createAdminClient } from "@/lib/supabase-server";
-import teachersData1 from "../../../teachers_data_1st_trim.json";
-import teachersData2 from "../../../teachers_data_2nd _trim.json";
-import teachersData3 from "../../../teachers_data.json";
-import { GroupPageClient } from "@/components/GroupPageClient";
+import teachersData1 from "../../../data/teachers_data_1st_trim.json";
+import teachersData2 from "../../../data/teachers_data_2nd _trim.json";
+import teachersData3 from "../../../data/teachers_data.json";
+import { GroupPageClient } from "@/components/features/GroupPageClient";
 import { Suspense } from "react";
 
 export const revalidate = 60; // Cache for 60 seconds

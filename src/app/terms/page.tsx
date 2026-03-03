@@ -69,6 +69,9 @@ export default function TermsOfUse() {
                             represent the views or official assessments of any educational institution. We do not guarantee the accuracy,
                             reliability, or validity of any ratings or scores displayed.
                         </p>
+                        <p className="mt-2">
+                            Furthermore, the administrators, founders, and developers of the Teacher Rating platform are not responsible or liable for any user-generated content, interactions, errors, omissions, or any outcomes resulting from the use or inability to use this platform. This service is provided "as is" and your use of the platform and any actions taken based on its content is strictly at your own risk.
+                        </p>
                     </section>
 
                     <section>

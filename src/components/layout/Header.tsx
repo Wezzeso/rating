@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Sun, Moon } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
+import { LogoIcon } from '../ui/LogoIcon';
 
 export function Header() {
     const [mounted, setMounted] = useState(false);
@@ -19,11 +20,8 @@ export function Header() {
             <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-4 sm:px-6 relative">
                 <div className="flex items-center gap-2">
                     <Link href="/" className="flex items-center gap-2 group">
-                        <div className="flex h-8 w-8 items-center justify-center rounded-md bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 transition-transform group-hover:scale-105">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
-                                <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
-                                <path d="M6 12v5c3 3 9 3 12 0v-5" />
-                            </svg>
+                        <div className="flex h-8 w-8 items-center justify-center rounded-md bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 transition-transform group-hover:scale-105 p-[4px]">
+                            <LogoIcon className="h-full w-full" />
                         </div>
                         <span className="text-xl font-bold tracking-tight text-gray-900 dark:text-white group-hover:text-gray-700 dark:group-hover:text-gray-300  truncate max-w-[200px] sm:max-w-none">Rate your professor</span>
                     </Link>

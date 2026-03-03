@@ -1,9 +1,10 @@
 "use client";
 
 import { X, Star } from "lucide-react";
-import teachersDataRaw from "../../teachers_data.json";
+import teachersDataRaw from "../../../data/teachers_data.json";
 import { useMemo } from "react";
 import { StarRating } from "@/components/ui/StarRating";
+import { ShareButton } from "@/components/ui/ShareButton";
 
 // The shape of our schedule data
 interface ScheduleData {
@@ -77,9 +78,16 @@ export function InfoModal({ professor, isOpen, onClose }: InfoModalProps) {
                     <X size={20} />
                 </button>
 
-                <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-1 pr-8">
-                    {professor.name}
-                </h2>
+                <div className="flex justify-between items-start mb-1 pr-8">
+                    <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                        {professor.name}
+                    </h2>
+                    <ShareButton
+                        professorId={professor.id}
+                        professorName={professor.name}
+                        className="text-gray-400 hover:text-blue-600 dark:text-gray-500 dark:hover:text-blue-400 mt-1"
+                    />
+                </div>
                 <div className="flex flex-col gap-2 mb-6">
                     <div className="flex items-center justify-between text-sm">
                         <span className="text-gray-500 dark:text-gray-400 font-medium">Teaching:</span>
