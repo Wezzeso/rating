@@ -154,15 +154,15 @@ export default async function Image(props: { params: Promise<{ id: string }> }) 
 
                 {overallRating > 0 ? (
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', background: 'white', padding: '50px 80px', borderRadius: '32px', border: '2px solid #e2e8f0', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)', marginBottom: '50px' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '30px' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '40px' }}>
                             {/* Left laurel */}
-                            <svg width="60" height="120" viewBox="0 0 36 72" fill="none" style={{ color: '#0f172a' }}>
-                                <path d="M18 4c-4 8-14 16-14 32s10 24 14 32" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" />
-                                <ellipse cx="10" cy="20" rx="5" ry="8" fill="currentColor" opacity="0.85" transform="rotate(-15 10 20)" />
-                                <ellipse cx="6" cy="34" rx="5" ry="8" fill="currentColor" opacity="0.85" transform="rotate(-5 6 34)" />
-                                <ellipse cx="8" cy="48" rx="5" ry="8" fill="currentColor" opacity="0.85" transform="rotate(10 8 48)" />
-                                <ellipse cx="14" cy="58" rx="4" ry="6" fill="currentColor" opacity="0.7" transform="rotate(20 14 58)" />
-                                <ellipse cx="14" cy="12" rx="4" ry="6" fill="currentColor" opacity="0.7" transform="rotate(-25 14 12)" />
+                            <svg width="72" height="144" viewBox="0 0 72 144" fill="none" style={{ color: '#0f172a' }}>
+                                <path d="M36 8c-8 16-28 32-28 64s20 48 28 64" stroke="currentColor" strokeWidth="5" fill="none" strokeLinecap="round" />
+                                <ellipse cx="20" cy="40" rx="10" ry="16" fill="currentColor" opacity="0.85" transform="rotate(-15 20 40)" />
+                                <ellipse cx="12" cy="68" rx="10" ry="16" fill="currentColor" opacity="0.85" transform="rotate(-5 12 68)" />
+                                <ellipse cx="16" cy="96" rx="10" ry="16" fill="currentColor" opacity="0.85" transform="rotate(10 16 96)" />
+                                <ellipse cx="28" cy="116" rx="8" ry="12" fill="currentColor" opacity="0.7" transform="rotate(20 28 116)" />
+                                <ellipse cx="28" cy="24" rx="8" ry="12" fill="currentColor" opacity="0.7" transform="rotate(-25 28 24)" />
                             </svg>
 
                             <span style={{ fontSize: 130, fontWeight: 'bold', color: '#0f172a', lineHeight: 1 }}>
@@ -171,13 +171,13 @@ export default async function Image(props: { params: Promise<{ id: string }> }) 
 
                             {/* Right laurel */}
                             <div style={{ display: 'flex', transform: 'scaleX(-1)' }}>
-                                <svg width="60" height="120" viewBox="0 0 36 72" fill="none" style={{ color: '#0f172a' }}>
-                                    <path d="M18 4c-4 8-14 16-14 32s10 24 14 32" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" />
-                                    <ellipse cx="10" cy="20" rx="5" ry="8" fill="currentColor" opacity="0.85" transform="rotate(-15 10 20)" />
-                                    <ellipse cx="6" cy="34" rx="5" ry="8" fill="currentColor" opacity="0.85" transform="rotate(-5 6 34)" />
-                                    <ellipse cx="8" cy="48" rx="5" ry="8" fill="currentColor" opacity="0.85" transform="rotate(10 8 48)" />
-                                    <ellipse cx="14" cy="58" rx="4" ry="6" fill="currentColor" opacity="0.7" transform="rotate(20 14 58)" />
-                                    <ellipse cx="14" cy="12" rx="4" ry="6" fill="currentColor" opacity="0.7" transform="rotate(-25 14 12)" />
+                                <svg width="72" height="144" viewBox="0 0 72 144" fill="none" style={{ color: '#0f172a' }}>
+                                    <path d="M36 8c-8 16-28 32-28 64s20 48 28 64" stroke="currentColor" strokeWidth="5" fill="none" strokeLinecap="round" />
+                                    <ellipse cx="20" cy="40" rx="10" ry="16" fill="currentColor" opacity="0.85" transform="rotate(-15 20 40)" />
+                                    <ellipse cx="12" cy="68" rx="10" ry="16" fill="currentColor" opacity="0.85" transform="rotate(-5 12 68)" />
+                                    <ellipse cx="16" cy="96" rx="10" ry="16" fill="currentColor" opacity="0.85" transform="rotate(10 16 96)" />
+                                    <ellipse cx="28" cy="116" rx="8" ry="12" fill="currentColor" opacity="0.7" transform="rotate(20 28 116)" />
+                                    <ellipse cx="28" cy="24" rx="8" ry="12" fill="currentColor" opacity="0.7" transform="rotate(-25 28 24)" />
                                 </svg>
                             </div>
                         </div>
