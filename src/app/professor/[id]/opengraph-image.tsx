@@ -139,24 +139,24 @@ export default async function Image(props: { params: Promise<{ id: string }> }) 
                     flexDirection: 'column',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    padding: '60px',
+                    padding: '40px',
                     fontFamily: 'sans-serif',
                 }}
             >
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '40px' }}>
-                    <h1 style={{ fontSize: 72, fontWeight: 'bold', color: '#0f172a', margin: 0, marginBottom: '10px', textAlign: 'center' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '24px' }}>
+                    <h1 style={{ fontSize: 56, fontWeight: 'bold', color: '#0f172a', margin: 0, marginBottom: '6px', textAlign: 'center' }}>
                         {professor.name}
                     </h1>
-                    <p style={{ fontSize: 32, color: '#64748b', margin: 0, textAlign: 'center' }}>
+                    <p style={{ fontSize: 24, color: '#64748b', margin: 0, textAlign: 'center' }}>
                         Teacher Ratings by Wezeso's Community
                     </p>
                 </div>
 
                 {overallRating > 0 ? (
-                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', background: 'white', padding: '50px 80px', borderRadius: '32px', border: '2px solid #e2e8f0', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)', marginBottom: '50px' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '40px' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', background: 'white', padding: '32px 64px', borderRadius: '32px', border: '2px solid #e2e8f0', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)', marginBottom: '32px' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '32px' }}>
                             {/* Left laurel */}
-                            <svg width="72" height="144" viewBox="0 0 72 144" fill="none" style={{ color: '#0f172a' }}>
+                            <svg width="48" height="96" viewBox="0 0 72 144" fill="none" style={{ color: '#0f172a' }}>
                                 <path d="M36 8c-8 16-28 32-28 64s20 48 28 64" stroke="currentColor" strokeWidth="5" fill="none" strokeLinecap="round" />
                                 <ellipse cx="20" cy="40" rx="10" ry="16" fill="currentColor" opacity="0.85" transform="rotate(-15 20 40)" />
                                 <ellipse cx="12" cy="68" rx="10" ry="16" fill="currentColor" opacity="0.85" transform="rotate(-5 12 68)" />
@@ -165,13 +165,13 @@ export default async function Image(props: { params: Promise<{ id: string }> }) 
                                 <ellipse cx="28" cy="24" rx="8" ry="12" fill="currentColor" opacity="0.7" transform="rotate(-25 28 24)" />
                             </svg>
 
-                            <span style={{ fontSize: 130, fontWeight: 'bold', color: '#0f172a', lineHeight: 1 }}>
+                            <span style={{ fontSize: 100, fontWeight: 'bold', color: '#0f172a', lineHeight: 1 }}>
                                 {overallRating.toFixed(2)}
                             </span>
 
                             {/* Right laurel */}
                             <div style={{ display: 'flex', transform: 'scaleX(-1)' }}>
-                                <svg width="72" height="144" viewBox="0 0 72 144" fill="none" style={{ color: '#0f172a' }}>
+                                <svg width="48" height="96" viewBox="0 0 72 144" fill="none" style={{ color: '#0f172a' }}>
                                     <path d="M36 8c-8 16-28 32-28 64s20 48 28 64" stroke="currentColor" strokeWidth="5" fill="none" strokeLinecap="round" />
                                     <ellipse cx="20" cy="40" rx="10" ry="16" fill="currentColor" opacity="0.85" transform="rotate(-15 20 40)" />
                                     <ellipse cx="12" cy="68" rx="10" ry="16" fill="currentColor" opacity="0.85" transform="rotate(-5 12 68)" />
@@ -183,34 +183,34 @@ export default async function Image(props: { params: Promise<{ id: string }> }) 
                         </div>
 
                         {badge && (
-                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '20px' }}>
-                                <h2 style={{ fontSize: 36, fontWeight: 'bold', color: '#0f172a', margin: 0, marginBottom: '8px', textAlign: 'center' }}>
+                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '16px' }}>
+                                <h2 style={{ fontSize: 28, fontWeight: 'bold', color: '#0f172a', margin: 0, marginBottom: '6px', textAlign: 'center' }}>
                                     {badge.text}
                                 </h2>
-                                <p style={{ fontSize: 24, color: '#64748b', margin: 0, textAlign: 'center', maxWidth: '600px', lineHeight: 1.4 }}>
+                                <p style={{ fontSize: 20, color: '#64748b', margin: 0, textAlign: 'center', maxWidth: '500px', lineHeight: 1.4 }}>
                                     {badge.subtitle}
                                 </p>
                             </div>
                         )}
                     </div>
                 ) : (
-                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '40px', marginBottom: '50px' }}>
-                        <span style={{ fontSize: 80, fontWeight: 'bold', color: '#cbd5e1', marginBottom: '16px' }}>—</span>
-                        <p style={{ fontSize: 32, color: '#94a3b8', margin: 0, textAlign: 'center' }}>No ratings yet.</p>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '32px', marginBottom: '32px' }}>
+                        <span style={{ fontSize: 64, fontWeight: 'bold', color: '#cbd5e1', marginBottom: '12px' }}>—</span>
+                        <p style={{ fontSize: 24, color: '#94a3b8', margin: 0, textAlign: 'center' }}>No ratings yet.</p>
                     </div>
                 )}
 
                 {topTags.length > 0 && (
-                    <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '15px' }}>
-                        {topTags.slice(0, 6).map((tag: string) => (
+                    <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '12px' }}>
+                        {topTags.slice(0, 5).map((tag: string) => (
                             <div
                                 key={tag}
                                 style={{
-                                    padding: '12px 24px',
+                                    padding: '8px 16px',
                                     background: '#f1f5f9',
                                     color: '#334155',
-                                    borderRadius: '16px',
-                                    fontSize: 24,
+                                    borderRadius: '12px',
+                                    fontSize: 18,
                                     fontWeight: 500,
                                     border: '1px solid #e2e8f0'
                                 }}
