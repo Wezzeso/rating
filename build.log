@@ -1,0 +1,32 @@
+
+> huina@0.1.0 build
+> next build
+
+тЦ▓ Next.js 16.1.6 (Turbopack)
+- Environments: .env
+
+  Creating an optimized production build ...
+тЬУ Compiled successfully in 3.3s
+  Running TypeScript ...
+  Collecting page data using 11 workers ...
+тЪа Using edge runtime on a page currently disables static generation for that page
+Error: Failed to collect configuration for /admin
+    at ignore-listed frames {
+  [cause]: Error: Please define the MONGODB_URI environment variable inside .env.local
+      at module evaluation (C:\Wezeso\Projects\Teacher Rating\.next\server\chunks\ssr\[root-of-the-server]__fc702296._.js:1:269)
+      at instantiateModule (C:\Wezeso\Projects\Teacher Rating\.next\server\chunks\ssr\[turbopack]_runtime.js:740:9)
+      at getOrInstantiateModuleFromParent (C:\Wezeso\Projects\Teacher Rating\.next\server\chunks\ssr\[turbopack]_runtime.js:763:12)
+      at Context.esmImport [as i] (C:\Wezeso\Projects\Teacher Rating\.next\server\chunks\ssr\[turbopack]_runtime.js:228:20)
+      at module evaluation (C:\Wezeso\Projects\Teacher Rating\.next\server\chunks\ssr\[root-of-the-server]__83ea31cf._.js:1:1416)
+      at instantiateModule (C:\Wezeso\Projects\Teacher Rating\.next\server\chunks\ssr\[turbopack]_runtime.js:740:9)
+      at getOrInstantiateModuleFromParent (C:\Wezeso\Projects\Teacher Rating\.next\server\chunks\ssr\[turbopack]_runtime.js:763:12)
+      at Context.esmImport [as i] (C:\Wezeso\Projects\Teacher Rating\.next\server\chunks\ssr\[turbopack]_runtime.js:228:20)
+      at module evaluation (C:\Wezeso\Projects\Teacher Rating\.next\server\chunks\ssr\_f8ba0007._.js:1:33)
+      at instantiateModule (C:\Wezeso\Projects\Teacher Rating\.next\server\chunks\ssr\[turbopack]_runtime.js:740:9)
+}
+
+> Build error occurred
+Error: Failed to collect page data for /admin
+    at ignore-listed frames {
+  type: 'Error'
+}

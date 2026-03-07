@@ -1,568 +1,125 @@
-"use client";
+import { LiveVisitorCount } from "./components/LiveVisitorCount";
+import { createAdminClient } from "@/lib/supabase-server";
+import dbConnect from "@/lib/mongodb";
+import Comment from "@/models/Comment";
+import { BookOpen, Users, MessageSquare, AlertCircle, TrendingUp } from "lucide-react";
+import Link from 'next/link';
 
-import React, { useState, useEffect, useMemo, useCallback, Fragment } from "react";
-import { getSupabase } from "@/lib/supabase";
-import { useRouter } from "next/navigation";
-import { toast } from "sonner";
-import {
-    Check,
-    X,
-    LogOut,
-    ArrowUp,
-    ArrowDown,
-    RefreshCw,
-    Loader2,
-    AlertTriangle,
-    CheckCircle2,
-    XCircle,
-    ChevronDown,
-    ChevronRight,
-} from "lucide-react";
-import {
-    approveProfessor,
-    rejectProfessor,
-    fetchPendingProfessors,
-    verifyTeacherInAITU,
-    checkDuplicateInDB,
-    loginAsAdmin,
-    logoutAdmin,
-    checkAdminAuth
-} from "@/app/actions";
+export const dynamic = "force-dynamic";
 
-interface Professor {
-    id: string;
-    name: string;
-    department: string;
-    created_at: string;
-    aitu_verified: boolean | null;
-    is_duplicate: boolean | null;
-}
+export default async function AdminDashboard() {
+    // Fetch stats
+    const admin = createAdminClient();
 
-interface VerificationStatus {
-    loading: boolean;
-    existsInAITU: boolean | null;
-    isDuplicate: boolean | null;
-    matches: { nameKz: string; surnameKz: string; department: string | null }[];
-    existingName?: string;
-    error?: string;
-}
+    // Total professors
+    const { count: profCount } = await admin
+        .from('professors')
+        .select('*', { count: 'exact', head: true })
+        .eq('is_approved', true);
 
-type SortKey = "name" | "department" | "created_at" | "status";
-type SortDirection = "asc" | "desc";
+    // Total ratings
+    const { count: ratingCount } = await admin
+        .from('ratings')
+        .select('*', { count: 'exact', head: true });
 
-export default function AdminPage() {
-    const router = useRouter();
-    const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-    const [loading, setLoading] = useState(true);
-    const [password, setPassword] = useState("");
-    const [professors, setProfessors] = useState<Professor[]>([]);
-    const [sortKey, setSortKey] = useState<SortKey>("name");
-    const [sortDirection, setSortDirection] = useState<SortDirection>("asc");
-    const [verificationMap, setVerificationMap] = useState<Record<string, VerificationStatus>>({});
-    const [expandedRow, setExpandedRow] = useState<string | null>(null);
+    // Total comments (MongoDB)
+    await dbConnect();
+    const commentCount = await Comment.countDocuments({ status: 'approved' });
+    const pendingCommentCount = await Comment.countDocuments({ status: 'pending' });
 
-    // Verify a single professor against AITU API + duplicate check
-    const verifyProfessor = useCallback(async (prof: Professor) => {
-        setVerificationMap((prev) => ({
-            ...prev,
-            [prof.id]: { loading: true, existsInAITU: null, isDuplicate: null, matches: [] },
-        }));
+    // Pending professors
+    const { count: pendingProfCount } = await admin
+        .from('professors')
+        .select('*', { count: 'exact', head: true })
+        .eq('is_approved', false);
 
-        try {
-            const [aituResult, dupResult] = await Promise.all([
-                verifyTeacherInAITU(prof.id, prof.name),
-                checkDuplicateInDB(prof.id, prof.name),
-            ]);
-
-            // Update local professor data with the saved results
-            setProfessors((prev) =>
-                prev.map((p) =>
-                    p.id === prof.id
-                        ? {
-                            ...p,
-                            aitu_verified: aituResult.success ? aituResult.existsInAITU : p.aitu_verified,
-                            is_duplicate: dupResult.success ? dupResult.isDuplicate : p.is_duplicate,
-                        }
-                        : p
-                )
-            );
-
-            setVerificationMap((prev) => ({
-                ...prev,
-                [prof.id]: {
-                    loading: false,
-                    existsInAITU: aituResult.success ? aituResult.existsInAITU : null,
-                    isDuplicate: dupResult.success ? dupResult.isDuplicate : null,
-                    matches: aituResult.matches || [],
-                    existingName: dupResult.existingName,
-                    error: aituResult.error || dupResult.error || undefined,
-                },
-            }));
-        } catch {
-            setVerificationMap((prev) => ({
-                ...prev,
-                [prof.id]: {
-                    loading: false,
-                    existsInAITU: null,
-                    isDuplicate: null,
-                    matches: [],
-                    error: "Verification failed",
-                },
-            }));
-        }
-    }, []);
-
-    // Verify only professors that haven't been checked yet
-    const verifyUnchecked = useCallback(
-        (profs: Professor[]) => {
-            const unchecked = profs.filter(
-                (p) =>
-                    (p.aitu_verified === null || p.aitu_verified === undefined) ||
-                    (p.is_duplicate === null || p.is_duplicate === undefined)
-            );
-            unchecked.forEach((p) => verifyProfessor(p));
-        },
-        [verifyProfessor]
-    );
-
-    // Re-verify all professors (force re-check)
-    const verifyAll = useCallback(
-        (profs: Professor[]) => {
-            profs.forEach((p) => verifyProfessor(p));
-        },
-        [verifyProfessor]
-    );
-
-    useEffect(() => {
-        const initAuth = async () => {
-            const authResult = await checkAdminAuth();
-            if (authResult.isAdmin) {
-                setIsAuthenticated(true);
-                loadPendingProfessors();
-            } else {
-                setIsAuthenticated(false);
-            }
-            setLoading(false);
-        };
-        initAuth();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
-    const loadPendingProfessors = async () => {
-        const result = await fetchPendingProfessors();
-        if (!result.success) {
-            toast.error(result.error || "Error fetching suggestions");
-        } else {
-            const profs = (result.data || []) as Professor[];
-            setProfessors(profs);
-
-            // Initialize verification status from cached DB values
-            const initialMap: Record<string, VerificationStatus> = {};
-            profs.forEach((p) => {
-                const hasAitu = p.aitu_verified !== null && p.aitu_verified !== undefined;
-                const hasDup = p.is_duplicate !== null && p.is_duplicate !== undefined;
-                if (hasAitu || hasDup) {
-                    initialMap[p.id] = {
-                        loading: false,
-                        existsInAITU: hasAitu ? p.aitu_verified : null,
-                        isDuplicate: hasDup ? p.is_duplicate : null,
-                        matches: [],
-                    };
-                }
-            });
-            setVerificationMap(initialMap);
-
-            // Only verify unchecked professors
-            verifyUnchecked(profs);
-        }
-    };
-
-    const handleSort = (key: SortKey) => {
-        if (sortKey === key) {
-            setSortDirection(sortDirection === "asc" ? "desc" : "asc");
-        } else {
-            setSortKey(key);
-            setSortDirection("asc");
-        }
-    };
-
-    const getStatusScore = (prof: Professor): number => {
-        const v = verificationMap[prof.id];
-        const dupStatus = v?.isDuplicate ?? prof.is_duplicate;
-        if (dupStatus) return 3;
-        // Use cached DB value if verification map doesn't have it
-        const aituStatus = v?.existsInAITU ?? prof.aitu_verified;
-        if (v?.loading) return 0;
-        if (aituStatus === true) return 1;
-        if (aituStatus === false) return 2;
-        return 0;
-    };
-
-    const sortedProfessors = useMemo(() => {
-        return [...professors].sort((a, b) => {
-            if (sortKey === "status") {
-                const aScore = getStatusScore(a);
-                const bScore = getStatusScore(b);
-                return sortDirection === "asc" ? aScore - bScore : bScore - aScore;
-            }
-            const aValue = a[sortKey as keyof Professor] ?? "";
-            const bValue = b[sortKey as keyof Professor] ?? "";
-            if (aValue < bValue) return sortDirection === "asc" ? -1 : 1;
-            if (aValue > bValue) return sortDirection === "asc" ? 1 : -1;
-            return 0;
-        });
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [professors, sortKey, sortDirection, verificationMap]);
-
-    const handleLogin = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setLoading(true);
-        const result = await loginAsAdmin(password);
-        if (!result.success) {
-            toast.error(result.error);
-            setLoading(false);
-        } else {
-            toast.success("Logged in successfully");
-            setPassword("");
-            setIsAuthenticated(true);
-            loadPendingProfessors();
-            setLoading(false);
-        }
-    };
-
-    const handleLogout = async () => {
-        await logoutAdmin();
-        toast.success("Logged out");
-        setIsAuthenticated(false);
-        setProfessors([]);
-        setVerificationMap({});
-    };
-
-    const handleApprove = async (id: string) => {
-        const result = await approveProfessor(id);
-        if (!result.success) {
-            toast.error(result.error || "Failed to approve");
-        } else {
-            toast.success("Professor approved");
-            setProfessors((prev) => prev.filter((p) => p.id !== id));
-            const copy = { ...verificationMap };
-            delete copy[id];
-            setVerificationMap(copy);
-            router.refresh();
-        }
-    };
-
-    const handleReject = async (id: string) => {
-        if (!confirm("Are you sure you want to reject (delete) this suggestion?")) return;
-        const result = await rejectProfessor(id);
-        if (!result.success) {
-            toast.error(result.error || "Failed to reject");
-        } else {
-            toast.success("Suggestion rejected");
-            setProfessors((prev) => prev.filter((p) => p.id !== id));
-            const copy = { ...verificationMap };
-            delete copy[id];
-            setVerificationMap(copy);
-        }
-    };
-
-    const getRowBgClass = (prof: Professor): string => {
-        const v = verificationMap[prof.id];
-        if (v?.loading) return "";
-        const dupStatus = v?.isDuplicate ?? prof.is_duplicate;
-        if (dupStatus) return "bg-yellow-50";
-        const aituStatus = v?.existsInAITU ?? prof.aitu_verified;
-        if (aituStatus === true) return "bg-green-50";
-        if (aituStatus === false) return "bg-red-50";
-        return "";
-    };
-
-    const StatusBadge = ({ prof }: { prof: Professor }) => {
-        const v = verificationMap[prof.id];
-        if (v?.loading) {
-            return (
-                <span className="inline-flex items-center gap-1 text-xs text-gray-400 dark:text-zinc-500 ">
-                    <Loader2 size={14} className="animate-spin" />
-                    Checking…
-                </span>
-            );
-        }
-        if (v?.error && v.existsInAITU === null && prof.aitu_verified === null) {
-            return (
-                <span className="inline-flex items-center gap-1 text-xs text-gray-500 dark:text-zinc-400 ">
-                    <AlertTriangle size={14} />
-                    Error
-                </span>
-            );
-        }
-        const dupStatus = v?.isDuplicate ?? prof.is_duplicate;
-        if (dupStatus) {
-            return (
-                <span className="inline-flex items-center gap-1 text-xs font-medium text-yellow-700 dark:text-yellow-500 ">
-                    <AlertTriangle size={14} />
-                    Duplicate
-                </span>
-            );
-        }
-        const aituStatus = v?.existsInAITU ?? prof.aitu_verified;
-        if (aituStatus === true) {
-            return (
-                <span className="inline-flex items-center gap-1 text-xs font-medium text-green-700 dark:text-green-500 ">
-                    <CheckCircle2 size={14} />
-                    Verified
-                </span>
-            );
-        }
-        if (aituStatus === false) {
-            return (
-                <span className="inline-flex items-center gap-1 text-xs font-medium text-red-700 dark:text-red-500 ">
-                    <XCircle size={14} />
-                    Not Found
-                </span>
-            );
-        }
-        return (
-            <span className="inline-flex items-center gap-1 text-xs text-gray-400 dark:text-zinc-600 ">
-                —
-            </span>
-        );
-    };
-
-    const SortIcon = ({ active, direction }: { active: boolean; direction: SortDirection }) => {
-        if (!active) return null;
-        return direction === "asc" ? (
-            <ArrowUp size={14} className="inline ml-1" />
-        ) : (
-            <ArrowDown size={14} className="inline ml-1" />
-        );
-    };
-
-    // --- Render ---
-
-    if (loading) {
-        return (
-            <div className="min-h-[70vh] flex items-center justify-center">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900 dark:border-zinc-800"></div>
-            </div>
-        );
-    }
-
-    if (!isAuthenticated) {
-        return (
-            <div className="min-h-[70vh] flex items-center justify-center bg-transparent px-4 py-8">
-                <div className="max-w-md w-full bg-white dark:bg-zinc-950 rounded-lg shadow-md p-8 ">
-                    <h2 className="text-2xl font-bold text-center mb-6 text-gray-900 dark:text-zinc-100">Admin Login</h2>
-                    <form onSubmit={handleLogin} className="space-y-4">
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 dark:text-zinc-100 ">Password</label>
-                            <input
-                                type="password"
-                                required
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                className="mt-1 block w-full rounded-md border border-gray-300 dark:border-zinc-800 bg-white dark:bg-zinc-950 text-gray-900 dark:text-zinc-100 px-3 py-2 focus:border-black dark:focus:border-zinc-500 focus:outline-none focus:ring-1 focus:ring-black dark:focus:ring-zinc-500 "
-                            />
-                        </div>
-                        <button
-                            type="submit"
-                            className="w-full bg-black dark:bg-white text-white dark:text-zinc-900 py-2 rounded-md hover:bg-gray-800 dark:hover:bg-zinc-200 "
-                        >
-                            Sign In
-                        </button>
-                    </form>
-                </div>
-            </div>
-        );
-    }
+    const totalPending = (pendingProfCount || 0) + pendingCommentCount;
 
     return (
-        <div className="bg-transparent py-8 px-4 sm:p-6 w-full h-full flex-1">
-            <div className="max-w-6xl mx-auto">
-                <div className="flex justify-between items-center mb-8">
-                    <h1 className="text-2xl font-bold text-gray-900 dark:text-zinc-100 ">Admin Dashboard</h1>
-                    <div className="flex items-center gap-3">
-                        <button
-                            onClick={() => verifyAll(professors)}
-                            className="flex items-center gap-1.5 text-sm text-gray-600 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-blue-400  px-3 py-1.5 rounded-md hover:bg-blue-50 dark:hover:bg-blue-900/30"
-                            title="Re-verify all teachers"
-                        >
-                            <RefreshCw size={15} />
-                            Re-verify All
-                        </button>
-                        <button
-                            onClick={handleLogout}
-                            className="flex items-center gap-2 text-sm text-gray-600 dark:text-zinc-400 hover:text-red-600 dark:hover:text-red-400 "
-                        >
-                            <LogOut size={16} />
-                            Logout
-                        </button>
-                    </div>
-                </div>
+        <div className="p-6 lg:p-10 w-full min-h-full">
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 tracking-tight">Overview</h1>
 
-                {/* Legend */}
-                <div className="flex flex-wrap gap-4 mb-4 text-xs text-gray-600 dark:text-zinc-400 ">
-                    <span className="flex items-center gap-1.5">
-                        <span className="w-3 h-3 rounded-sm bg-green-200 dark:bg-green-900 border border-green-300 dark:border-green-700 inline-block"></span>
-                        Found in AITU
-                    </span>
-                    <span className="flex items-center gap-1.5">
-                        <span className="w-3 h-3 rounded-sm bg-red-200 dark:bg-red-900 border border-red-300 dark:border-red-700 inline-block"></span>
-                        Not found in AITU
-                    </span>
-                    <span className="flex items-center gap-1.5">
-                        <span className="w-3 h-3 rounded-sm bg-yellow-200 dark:bg-yellow-900 border border-yellow-300 dark:border-yellow-700 inline-block"></span>
-                        Duplicate in DB
-                    </span>
-                </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-[180px]">
 
-                <div className="bg-white dark:bg-zinc-950 rounded-lg shadow overflow-hidden ">
-                    <div className="px-6 py-4 border-b border-gray-200 dark:border-zinc-800 ">
-                        <h2 className="font-semibold text-gray-800 dark:text-zinc-200 ">
-                            Pending Approvals ({professors.length})
-                        </h2>
-                    </div>
-
-                    {professors.length === 0 ? (
-                        <div className="p-8 text-center text-gray-500 dark:text-zinc-400 ">No pending suggestions.</div>
-                    ) : (
-                        <div className="overflow-x-auto">
-                            <table className="w-full text-left">
-                                <thead className="bg-gray-50 dark:bg-zinc-700/50 text-xs uppercase text-gray-500 dark:text-zinc-400 font-medium ">
-                                    <tr>
-                                        <th
-                                            className="px-6 py-3 cursor-pointer select-none hover:text-gray-700 dark:hover:text-zinc-300 hover:bg-gray-100 dark:hover:bg-zinc-900 "
-                                            onClick={() => handleSort("name")}
-                                        >
-                                            Name
-                                            <SortIcon active={sortKey === "name"} direction={sortDirection} />
-                                        </th>
-                                        <th
-                                            className="px-6 py-3 cursor-pointer select-none hover:text-gray-700 dark:hover:text-zinc-300 hover:bg-gray-100 dark:hover:bg-zinc-900 "
-                                            onClick={() => handleSort("status")}
-                                        >
-                                            Status
-                                            <SortIcon active={sortKey === "status"} direction={sortDirection} />
-                                        </th>
-                                        <th
-                                            className="px-6 py-3 cursor-pointer select-none hover:text-gray-700 dark:hover:text-zinc-300 hover:bg-gray-100 dark:hover:bg-zinc-900 "
-                                            onClick={() => handleSort("department")}
-                                        >
-                                            Department
-                                            <SortIcon active={sortKey === "department"} direction={sortDirection} />
-                                        </th>
-                                        <th className="px-6 py-3 text-right">Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody className="divide-y divide-gray-200 dark:divide-zinc-800 ">
-                                    {sortedProfessors.map((p) => {
-                                        const v = verificationMap[p.id];
-                                        const isExpanded = expandedRow === p.id;
-                                        const hasMatches = v && v.matches.length > 0;
-
-                                        return (
-                                            <Fragment key={p.id}>
-                                                <tr
-                                                    className={`${getRowBgClass(p)} dark:bg-opacity-10 ${hasMatches ? "cursor-pointer" : ""} `}
-                                                    onClick={() =>
-                                                        hasMatches && setExpandedRow(isExpanded ? null : p.id)
-                                                    }
-                                                >
-                                                    <td className="px-6 py-4">
-                                                        <div className="flex items-center gap-2">
-                                                            {hasMatches && (
-                                                                isExpanded ? (
-                                                                    <ChevronDown size={14} className="text-gray-400 dark:text-zinc-500 shrink-0" />
-                                                                ) : (
-                                                                    <ChevronRight size={14} className="text-gray-400 dark:text-zinc-500 shrink-0" />
-                                                                )
-                                                            )}
-                                                            <div>
-                                                                <span className="font-medium text-gray-900 dark:text-zinc-100 ">
-                                                                    {p.name}
-                                                                </span>
-                                                                {v?.isDuplicate && v.existingName && (
-                                                                    <span className="block text-xs text-yellow-600 dark:text-yellow-500 mt-0.5 ">
-                                                                        Already exists as &quot;{v.existingName}&quot;
-                                                                    </span>
-                                                                )}
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td className="px-6 py-4">
-                                                        <StatusBadge prof={p} />
-                                                    </td>
-                                                    <td className="px-6 py-4 text-gray-600 dark:text-zinc-400 ">{p.department}</td>
-                                                    <td className="px-6 py-4 text-right">
-                                                        <div className="flex justify-end gap-2">
-                                                            <button
-                                                                onClick={(e) => {
-                                                                    e.stopPropagation();
-                                                                    verifyProfessor(p);
-                                                                }}
-                                                                className="p-1.5 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 hover:bg-blue-200 dark:hover:bg-blue-900/50 "
-                                                                title="Re-verify"
-                                                            >
-                                                                <RefreshCw size={16} />
-                                                            </button>
-                                                            <button
-                                                                onClick={(e) => {
-                                                                    e.stopPropagation();
-                                                                    handleApprove(p.id);
-                                                                }}
-                                                                className="p-1.5 rounded-full bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 hover:bg-green-200 dark:hover:bg-green-900/50 "
-                                                                title="Approve"
-                                                            >
-                                                                <Check size={18} />
-                                                            </button>
-                                                            <button
-                                                                onClick={(e) => {
-                                                                    e.stopPropagation();
-                                                                    handleReject(p.id);
-                                                                }}
-                                                                className="p-1.5 rounded-full bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 hover:bg-red-200 dark:hover:bg-red-900/50 "
-                                                                title="Reject"
-                                                            >
-                                                                <X size={18} />
-                                                            </button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-
-                                                {/* Expanded row showing AITU matches */}
-                                                {isExpanded && hasMatches && (
-                                                    <tr key={`${p.id}-details`} className="bg-gray-50 dark:bg-zinc-700/30 ">
-                                                        <td colSpan={4} className="px-6 py-3">
-                                                            <p className="text-xs font-medium text-gray-500 dark:text-zinc-400 mb-2 ">
-                                                                AITU Matches ({v.matches.length}):
-                                                            </p>
-                                                            <div className="space-y-1">
-                                                                {v.matches.map((m, i) => (
-                                                                    <div
-                                                                        key={i}
-                                                                        className="text-xs text-gray-700 dark:text-zinc-100 bg-white dark:bg-zinc-700 rounded px-3 py-1.5 border border-gray-200 dark:border-zinc-800 flex items-center justify-between "
-                                                                    >
-                                                                        <span className="font-medium">
-                                                                            {m.nameKz} {m.surnameKz}
-                                                                        </span>
-                                                                        {m.department && (
-                                                                            <span className="text-gray-400 dark:text-zinc-500 ml-3 truncate max-w-[300px]">
-                                                                                {m.department}
-                                                                            </span>
-                                                                        )}
-                                                                    </div>
-                                                                ))}
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                )}
-                                            </Fragment>
-                                        );
-                                    })}
-                                </tbody>
-                            </table>
+                {/* 1. Pending Actions (Hero Card) */}
+                <div className={`col-span-1 md:col-span-2 lg:col-span-2 row-span-2 rounded-3xl p-8 flex flex-col justify-between relative overflow-hidden transition-all hover:scale-[1.01] ${totalPending > 0 ? 'bg-gradient-to-br from-orange-400 to-red-500 text-white shadow-lg shadow-red-500/20' : 'bg-gradient-to-br from-emerald-400 to-teal-500 text-white shadow-lg shadow-teal-500/20'}`}>
+                    <div className="relative z-10 flex justify-between items-start">
+                        <div>
+                            <h2 className="text-lg font-medium opacity-90 mb-1">Attention Needed</h2>
+                            <p className="text-6xl font-black tracking-tighter">{totalPending}</p>
+                            <p className="text-sm opacity-80 mt-2 font-medium">Pending items waiting for moderation</p>
                         </div>
-                    )}
+                        <div className="p-4 bg-white/20 backdrop-blur-md rounded-2xl">
+                            <AlertCircle className="w-8 h-8 text-white" />
+                        </div>
+                    </div>
+
+                    <div className="relative z-10 flex gap-3 mt-8">
+                        {pendingProfCount !== null && pendingProfCount > 0 && (
+                            <Link href="/admin/teachers" className="flex-1 bg-black/20 hover:bg-black/30 backdrop-blur-md transition-colors rounded-xl p-4 flex flex-col gap-1 items-start">
+                                <span className="text-3xl font-bold">{pendingProfCount}</span>
+                                <span className="text-xs font-semibold uppercase tracking-wider opacity-80">Teachers</span>
+                            </Link>
+                        )}
+                        {pendingCommentCount > 0 && (
+                            <Link href="/admin/comments" className="flex-1 bg-black/20 hover:bg-black/30 backdrop-blur-md transition-colors rounded-xl p-4 flex flex-col gap-1 items-start">
+                                <span className="text-3xl font-bold">{pendingCommentCount}</span>
+                                <span className="text-xs font-semibold uppercase tracking-wider opacity-80">Comments</span>
+                            </Link>
+                        )}
+                        {totalPending === 0 && (
+                            <div className="w-full bg-black/10 backdrop-blur-md rounded-xl p-4 flex items-center justify-center">
+                                <span className="text-sm font-semibold opacity-90">Маладес</span>
+                            </div>
+                        )}
+                    </div>
+                    {/* Decorative background element */}
+                    <div className="absolute -bottom-24 -right-24 w-64 h-64 bg-white/10 rounded-full blur-3xl pointer-events-none"></div>
                 </div>
+
+                {/* 2. Live Visitors Widget */}
+                <LiveVisitorCount />
+
+                {/* 3. Total Ratings */}
+                <div className="col-span-1 border border-zinc-200 dark:border-zinc-800/50 bg-white/50 dark:bg-zinc-900/50 backdrop-blur-md rounded-3xl p-6 flex flex-col justify-between transition-all hover:bg-white dark:hover:bg-zinc-900 hover:shadow-sm">
+                    <div className="flex justify-between items-start">
+                        <div className="p-3 bg-blue-50 dark:bg-blue-900/20 rounded-2xl text-blue-600 dark:text-blue-400">
+                            <TrendingUp className="w-6 h-6" />
+                        </div>
+                    </div>
+                    <div>
+                        <p className="text-4xl font-bold text-gray-900 dark:text-white tracking-tight">{ratingCount || 0}</p>
+                        <p className="text-sm font-medium text-gray-500 dark:text-zinc-400 mt-1">Total Ratings</p>
+                    </div>
+                </div>
+
+                {/* 4. Total Comments */}
+                <div className="col-span-1 border border-zinc-200 dark:border-zinc-800/50 bg-white/50 dark:bg-zinc-900/50 backdrop-blur-md rounded-3xl p-6 flex flex-col justify-between transition-all hover:bg-white dark:hover:bg-zinc-900 hover:shadow-sm">
+                    <div className="flex justify-between items-start">
+                        <div className="p-3 bg-purple-50 dark:bg-purple-900/20 rounded-2xl text-purple-600 dark:text-purple-400">
+                            <MessageSquare className="w-6 h-6" />
+                        </div>
+                    </div>
+                    <div>
+                        <p className="text-4xl font-bold text-gray-900 dark:text-white tracking-tight">{commentCount}</p>
+                        <p className="text-sm font-medium text-gray-500 dark:text-zinc-400 mt-1">Approved Comments</p>
+                    </div>
+                </div>
+
+                {/* 5. Approved Professors */}
+                <div className="col-span-1 md:col-span-2 lg:col-span-2 border border-zinc-200 dark:border-zinc-800/50 bg-white/50 dark:bg-zinc-900/50 backdrop-blur-md rounded-3xl p-6 flex items-center gap-6 transition-all hover:bg-white dark:hover:bg-zinc-900 hover:shadow-sm overflow-hidden relative">
+                    <div className="p-5 bg-emerald-50 dark:bg-emerald-900/20 rounded-[2rem] text-emerald-600 dark:text-emerald-400 shrink-0 z-10">
+                        <Users className="w-8 h-8" />
+                    </div>
+                    <div className="z-10">
+                        <p className="text-4xl font-bold text-gray-900 dark:text-white tracking-tight">{profCount || 0}</p>
+                        <p className="text-sm font-medium text-gray-500 dark:text-zinc-400 mt-1">Approved Professors</p>
+                    </div>
+                    <div className="absolute -right-8 -top-8 text-zinc-100 dark:text-zinc-800/50 rotate-12 pointer-events-none">
+                        <Users className="w-48 h-48" />
+                    </div>
+                </div>
+
             </div>
         </div>
     );

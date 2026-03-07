@@ -1,12 +1,20 @@
 "use client";
 
-import { useState, useMemo } from "react";
-import { ArrowLeft, BookOpen, Shield, GraduationCap, Users, Tag } from "lucide-react";
+import { useState, useMemo, useEffect } from "react";
+import { ArrowLeft, BookOpen, Shield, GraduationCap, Users, Tag, Send, Edit2, Trash2, X, MessageSquare } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { StarRating } from "@/components/ui/StarRating";
 import { ShareButton } from "@/components/ui/ShareButton";
 import { RateModal } from "@/components/modals/RateModal";
 import teachersDataRaw from "../../../data/teachers_data.json";
+import {
+    submitComment,
+    fetchApprovedComments,
+    fetchUserComment,
+    updateComment,
+    deleteComment
+} from "@/app/actions";
+import { toast } from "sonner";
 
 interface ScheduleData {
     teacherName: string;
@@ -33,6 +41,82 @@ interface ProfessorPageClientProps {
 export function ProfessorPageClient({ professor }: ProfessorPageClientProps) {
     const router = useRouter();
     const [isRateModalOpen, setIsRateModalOpen] = useState(false);
+
+    // Comments State
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const [comments, setComments] = useState<any[]>([]);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const [userComment, setUserComment] = useState<any>(null);
+    const [commentText, setCommentText] = useState("");
+    const [isEditing, setIsEditing] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [commentsLoading, setCommentsLoading] = useState(true);
+
+    useEffect(() => {
+        loadCommentsData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [professor.id]);
+
+    const loadCommentsData = async () => {
+        setCommentsLoading(true);
+        const [approvedRes, userRes] = await Promise.all([
+            fetchApprovedComments(professor.id),
+            fetchUserComment(professor.id)
+        ]);
+
+        if (approvedRes.success && approvedRes.data) {
+            setComments(approvedRes.data);
+        }
+        if (userRes.success && userRes.data) {
+            setUserComment(userRes.data);
+        }
+        setCommentsLoading(false);
+    };
+
+    const handleCommentSubmit = async () => {
+        if (!commentText.trim()) return;
+        setIsSubmitting(true);
+
+        if (isEditing && userComment) {
+            const res = await updateComment({ commentId: userComment.id, text: commentText });
+            if (res.success) {
+                toast.success("Comment updated successfully (pending approval)");
+                setIsEditing(false);
+                setCommentText("");
+                loadCommentsData();
+            } else {
+                toast.error(res.error || "Failed to edit comment");
+            }
+        } else {
+            const res = await submitComment({ professorId: professor.id, text: commentText });
+            if (res.success) {
+                toast.success("Comment submitted successfully (pending approval)");
+                setCommentText("");
+                loadCommentsData();
+            } else {
+                toast.error(res.error || "Failed to submit comment");
+            }
+        }
+        setIsSubmitting(false);
+    };
+
+    const handleDeleteComment = async () => {
+        if (!userComment) return;
+        if (!confirm("Are you sure you want to delete your comment?")) return;
+
+        setIsSubmitting(true);
+        const res = await deleteComment(userComment.id);
+        if (res.success) {
+            toast.success("Comment deleted");
+            setUserComment(null);
+            setCommentText("");
+            setIsEditing(false);
+            setComments(prev => prev.filter(c => c.id !== userComment.id));
+        } else {
+            toast.error(res.error || "Failed to delete comment");
+        }
+        setIsSubmitting(false);
+    };
 
     // Calculate overall rating
     const overallRating = useMemo(() => {
@@ -143,7 +227,6 @@ export function ProfessorPageClient({ professor }: ProfessorPageClientProps) {
         if (effectiveRating >= 1.1) return { text: "Why?", subtitle: "Why would you do this to yourself?" };
         if (effectiveRating >= 0.8) return { text: "Run", subtitle: "Negative territory. Even the tags scream danger." };
         if (effectiveRating >= 0.5) return { text: "Hazardous", subtitle: "Your presence in this class is an actual health risk." };
-        if (effectiveRating >= 0.0) return { text: "No rating", subtitle: "No rating yet. Be the first to rate this professor." };
         return { text: "Well...", subtitle: "I'm not sure what to say..." };
     };
 
@@ -342,13 +425,113 @@ export function ProfessorPageClient({ professor }: ProfessorPageClientProps) {
                 </button>
             </div>
 
-            {/* Comments section — under construction banner */}
-            <div className="pt-8">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-zinc-100 mb-4">Comments</h3>
-                <div className="rounded-xl bg-gray-50 dark:bg-zinc-950/50 p-8 text-center">
-                    <span className="text-2xl mb-3 block">🚧</span>
-                    <p className="text-gray-600 dark:text-zinc-400 font-medium text-sm">Under work</p>
-                    <p className="text-gray-400 dark:text-zinc-500 text-xs mt-1">Добавлю позже отвечаю))</p>
+            {/* Comments section */}
+            <div className="pt-8 mb-12">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-zinc-100 mb-6">Comments</h3>
+
+                {/* Comment Input */}
+                <div className="bg-gray-50 dark:bg-zinc-900/40 rounded-2xl p-4 sm:p-6 mb-8 border border-gray-100 dark:border-zinc-800">
+                    {userComment && !isEditing ? (
+                        <div className="flex flex-col gap-3">
+                            <div className="flex justify-between items-start">
+                                <span className="text-xs font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400 flex items-center gap-1.5">
+                                    Your Comment
+                                    <span className={`px-2 py-0.5 rounded-full text-[10px] ${userComment.status === 'approved' ? 'bg-green-100 text-green-700 dark:bg-green-900/30' :
+                                        userComment.status === 'pending' ? 'bg-amber-100 text-amber-700 dark:bg-amber-900/30' :
+                                            'bg-red-100 text-red-700 dark:bg-red-900/30'
+                                        }`}>
+                                        {userComment.status}
+                                    </span>
+                                </span>
+                                <div className="flex gap-2">
+                                    <button
+                                        onClick={() => {
+                                            setCommentText(userComment.text);
+                                            setIsEditing(true);
+                                        }}
+                                        className="p-1.5 text-gray-500 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/30 rounded-lg transition-colors"
+                                        title="Edit"
+                                        disabled={isSubmitting}
+                                    >
+                                        <Edit2 size={16} />
+                                    </button>
+                                    <button
+                                        onClick={handleDeleteComment}
+                                        className="p-1.5 text-gray-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/30 rounded-lg transition-colors"
+                                        title="Delete"
+                                        disabled={isSubmitting}
+                                    >
+                                        <Trash2 size={16} />
+                                    </button>
+                                </div>
+                            </div>
+                            <p className="text-gray-800 dark:text-zinc-200">{userComment.text}</p>
+                            {userComment.status === 'pending' && <p className="text-xs text-amber-600 dark:text-amber-500/80 mt-1">Pending review.</p>}
+                            {userComment.status === 'rejected' && <p className="text-xs text-red-600 dark:text-red-500/80 mt-1">This comment was rejected and is not public.</p>}
+                        </div>
+                    ) : (
+                        <div className="flex flex-col gap-3">
+                            {isEditing && (
+                                <div className="flex justify-between items-center mb-1">
+                                    <span className="text-xs font-semibold text-blue-600 dark:text-blue-400">Editing your comment</span>
+                                    <button
+                                        onClick={() => {
+                                            setIsEditing(false);
+                                            setCommentText("");
+                                        }}
+                                        className="text-xs text-gray-500 hover:text-gray-900 dark:hover:text-zinc-300 flex items-center gap-1"
+                                    >
+                                        <X size={14} /> Cancel
+                                    </button>
+                                </div>
+                            )}
+                            <div className="relative">
+                                <textarea
+                                    className="w-full bg-white dark:bg-zinc-950 border border-gray-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-sm text-gray-900 dark:text-zinc-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-zinc-600 resize-none min-h-[100px]"
+                                    placeholder="Write a comment about this professor..."
+                                    maxLength={100}
+                                    value={commentText}
+                                    onChange={(e) => setCommentText(e.target.value)}
+                                    disabled={isSubmitting}
+                                ></textarea>
+                                <div className="absolute bottom-3 right-3 flex items-center gap-3">
+                                    <span className={`text-xs ${commentText.length >= 100 ? 'text-red-500 font-medium' : 'text-gray-400'}`}>
+                                        {commentText.length}/100
+                                    </span>
+                                    <button
+                                        onClick={handleCommentSubmit}
+                                        disabled={!commentText.trim() || isSubmitting}
+                                        className="p-2 bg-black dark:bg-white text-white dark:text-zinc-900 rounded-lg disabled:opacity-50 hover:bg-gray-800 dark:hover:bg-zinc-200 transition-colors"
+                                    >
+                                        {isSubmitting ? <span className="px-1 text-xs">...</span> : <Send size={16} />}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                </div>
+
+                {/* Comments List */}
+                <div className="space-y-4">
+                    {commentsLoading ? (
+                        <div className="py-8 text-center text-gray-400"><span className="animate-pulse">Loading comments...</span></div>
+                    ) : comments.length > 0 ? (
+                        comments.map((comment, index) => (
+                            <div key={comment.id || index} className="pb-5 border-b border-gray-100 dark:border-zinc-800 last:border-0">
+                                <p className="text-gray-800 dark:text-zinc-200 text-sm leading-relaxed mb-2 break-words">
+                                    "{comment.text}"
+                                </p>
+                                <span className="text-xs text-gray-400 dark:text-zinc-500">
+                                    {new Date(comment.createdAt).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })}
+                                </span>
+                            </div>
+                        ))
+                    ) : (
+                        <div className="py-12 border border-dashed border-gray-200 dark:border-zinc-800 rounded-xl text-center flex flex-col items-center justify-center bg-gray-50/50 dark:bg-zinc-900/20">
+                            <MessageSquare className="w-8 h-8 text-gray-300 dark:text-zinc-700 mb-3" />
+                            <p className="text-gray-500 dark:text-zinc-400 text-sm">No comments yet. Be the first to share your thoughts!</p>
+                        </div>
+                    )}
                 </div>
             </div>
 

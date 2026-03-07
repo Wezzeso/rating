@@ -3,6 +3,8 @@
 import { createAdminClient } from '@/lib/supabase-server';
 import { headers } from 'next/headers';
 import crypto from 'crypto';
+import dbConnect from '@/lib/mongodb';
+import Comment from '@/models/Comment';
 
 // ---------------------------------------------------------------------------
 // Rate Limiting (in-memory, per-instance — sufficient for most deployments)
@@ -61,6 +63,7 @@ async function getClientIp(): Promise<string> {
 
 /** Check if the IP is a known proxy or VPN. */
 async function isIpProxy(ip: string): Promise<boolean> {
+    if (process.env.NODE_ENV === 'development') return false;
     if (ip === 'unknown' || ip === '127.0.0.1' || ip === '::1') return false;
 
     try {
@@ -578,5 +581,214 @@ export async function checkDuplicateInDB(professorId: string, name: string): Pro
     } catch (err) {
         console.error('[checkDuplicateInDB] Error:', err);
         return { success: false, isDuplicate: false, error: 'Unexpected error.' };
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Comment Actions (MongoDB)
+// ---------------------------------------------------------------------------
+
+export async function submitComment(data: {
+    professorId: string;
+    text: string;
+}): Promise<{ success: boolean; error?: string }> {
+    try {
+        const { professorId, text } = data;
+
+        if (!professorId || typeof professorId !== 'string' || !UUID_REGEX.test(professorId)) {
+            return { success: false, error: 'Invalid professor ID.' };
+        }
+
+        if (!text || typeof text !== 'string' || text.trim().length === 0) {
+            return { success: false, error: 'Comment text cannot be empty.' };
+        }
+
+        if (text.length > 100) {
+            return { success: false, error: 'Comment cannot be more than 100 characters.' };
+        }
+
+        const ip = await getClientIp();
+        const fingerprint = await getClientFingerprint();
+
+        if (await isIpProxy(ip)) {
+            return { success: false, error: 'Proxy or VPN detected. Please disable it to submit a comment.' };
+        }
+
+        if (!checkRateLimit(`comment:${fingerprint}`, 3, 60_000)) {
+            return { success: false, error: 'Too many comments. Please try again in a minute.' };
+        }
+
+        await dbConnect();
+
+        // Check if user already commented for this professor
+        const existingComment = await Comment.findOne({ professorId, userFingerprint: fingerprint });
+        if (existingComment) {
+            return { success: false, error: 'You have already submitted a comment for this professor. You can edit or delete it instead.' };
+        }
+
+        await Comment.create({
+            professorId,
+            userFingerprint: fingerprint,
+            text: text.trim(),
+            status: 'pending', // Auto-moderation might override this later or admin will approve
+        });
+
+        return { success: true };
+    } catch (err) {
+        console.error('[submitComment] Error:', err);
+        return { success: false, error: 'An unexpected error occurred.' };
+    }
+}
+
+export async function fetchApprovedComments(professorId: string): Promise<{
+    success: boolean;
+    data?: any[];
+    error?: string;
+}> {
+    try {
+        if (!professorId || typeof professorId !== 'string' || !UUID_REGEX.test(professorId)) {
+            return { success: false, error: 'Invalid professor ID.' };
+        }
+
+        await dbConnect();
+
+        const comments = await Comment.find({
+            professorId,
+            status: 'approved',
+        })
+            .sort({ createdAt: -1 })
+            .lean();
+
+        // We sanitize output to not leak userFingerprint to everyone
+        const sanitizedComments = comments.map(c => ({
+            id: c._id.toString(),
+            text: c.text,
+            createdAt: c.createdAt,
+            status: c.status
+        }));
+
+        return { success: true, data: sanitizedComments };
+    } catch (err) {
+        console.error('[fetchApprovedComments] Error:', err);
+        return { success: false, error: 'An unexpected error occurred.' };
+    }
+}
+
+export async function fetchUserComment(professorId: string): Promise<{
+    success: boolean;
+    data?: any;
+    error?: string;
+}> {
+    try {
+        if (!professorId) return { success: false, error: 'Invalid professor ID' };
+
+        await dbConnect();
+        const fingerprint = await getClientFingerprint();
+
+        const comment = await Comment.findOne({
+            professorId,
+            userFingerprint: fingerprint,
+        }).lean();
+
+        if (!comment) {
+            return { success: true, data: null };
+        }
+
+        return {
+            success: true,
+            data: {
+                id: comment._id.toString(),
+                text: comment.text,
+                status: comment.status,
+                createdAt: comment.createdAt
+            }
+        };
+    } catch (err) {
+        console.error('[fetchUserComment] Error:', err);
+        return { success: false, error: 'Unexpected error.' };
+    }
+}
+
+export async function updateComment(data: {
+    commentId: string;
+    text: string;
+}): Promise<{ success: boolean; error?: string }> {
+    try {
+        const { commentId, text } = data;
+
+        if (!commentId || !text || text.trim().length === 0) {
+            return { success: false, error: 'Invalid data.' };
+        }
+
+        if (text.length > 100) {
+            return { success: false, error: 'Comment cannot be more than 100 characters.' };
+        }
+
+        const ip = await getClientIp();
+        const fingerprint = await getClientFingerprint();
+
+        if (await isIpProxy(ip)) {
+            return { success: false, error: 'Proxy or VPN detected. Please disable it to update a comment.' };
+        }
+
+        if (!checkRateLimit(`comment:${fingerprint}`, 3, 60_000)) {
+            return { success: false, error: 'Too many requests' };
+        }
+
+        await dbConnect();
+
+        const comment = await Comment.findById(commentId);
+        if (!comment) {
+            return { success: false, error: 'Comment not found.' };
+        }
+
+        if (comment.userFingerprint !== fingerprint) {
+            return { success: false, error: 'Unauthorized.' };
+        }
+
+        comment.text = text.trim();
+        comment.status = 'pending'; // Reset status to pending after edit
+        await comment.save();
+
+        return { success: true };
+    } catch (err) {
+        console.error('[updateComment] Error:', err);
+        return { success: false, error: 'Unexpected error.' };
+    }
+}
+
+export async function deleteComment(commentId: string): Promise<{ success: boolean; error?: string }> {
+    try {
+        if (!commentId) {
+            return { success: false, error: 'Invalid data.' };
+        }
+
+        const fingerprint = await getClientFingerprint();
+
+        if (!checkRateLimit(`comment:${fingerprint}`, 5, 60_000)) {
+            return { success: false, error: 'Too many requests' };
+        }
+
+        await dbConnect();
+
+        const comment = await Comment.findById(commentId);
+        if (!comment) {
+            return { success: false, error: 'Comment not found.' };
+        }
+
+        if (comment.userFingerprint !== fingerprint) {
+            // Check if admin is deleting it
+            const authResult = await verifyAdmin();
+            if (!authResult.isAdmin) {
+                return { success: false, error: 'Unauthorized.' };
+            }
+        }
+
+        await comment.deleteOne();
+
+        return { success: true };
+    } catch (err) {
+        console.error('[deleteComment] Error:', err);
+        return { success: false, error: 'Unexpected error.' };
     }
 }

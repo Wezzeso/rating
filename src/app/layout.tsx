@@ -5,6 +5,7 @@ import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
+import { LiveVisitorTracker } from "@/components/features/LiveVisitorTracker";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,6 +27,7 @@ export default function RootLayout({
           <main className="flex-1 w-full max-w-5xl mx-auto">{children}</main>
           <Footer />
           <Toaster />
+          <LiveVisitorTracker />
         </ThemeProvider>
       </body>
     </html>
