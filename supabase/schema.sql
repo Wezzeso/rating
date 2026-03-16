@@ -19,11 +19,12 @@ CREATE TABLE IF NOT EXISTS public.professors (
 CREATE TABLE IF NOT EXISTS public.ratings (
   id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
   professor_id uuid NOT NULL REFERENCES public.professors(id) ON DELETE CASCADE,
-  user_fingerprint text NOT NULL,
+  user_id uuid REFERENCES auth.users(id),
+  user_fingerprint text,
   teaching integer CHECK (teaching IS NULL OR (teaching >= 1 AND teaching <= 5)),
   proctoring integer CHECK (proctoring IS NULL OR (proctoring >= 1 AND proctoring <= 5)),
   tags text[],
-  UNIQUE(professor_id, user_fingerprint)
+  UNIQUE(professor_id, user_id)
 );
 
 -- Ensure tags array is not larger than 3

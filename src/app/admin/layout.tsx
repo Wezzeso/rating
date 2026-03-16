@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AdminGuard } from "@/components/admin/AdminGuard";
-import { LayoutDashboard, Users, MessageSquare, LogOut } from "lucide-react";
+import { LayoutDashboard, Users, MessageSquare, LogOut, ShieldAlert } from "lucide-react";
 import { logoutAdmin } from "@/app/actions";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
@@ -62,6 +62,28 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                         >
                             <MessageSquare size={18} />
                             Comments
+                        </Link>
+
+                        <Link
+                            href="/admin/requests"
+                            className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm transition-colors ${pathname.startsWith("/admin/requests")
+                                ? "bg-black text-white dark:bg-white dark:text-black font-medium"
+                                : "text-gray-600 dark:text-zinc-400 hover:bg-gray-100 dark:hover:bg-zinc-900"
+                                }`}
+                        >
+                            <ShieldAlert size={18} />
+                            Removals
+                        </Link>
+
+                        <Link
+                            href="/admin/suggestions"
+                            className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm transition-colors ${pathname.startsWith("/admin/suggestions")
+                                ? "bg-black text-white dark:bg-white dark:text-black font-medium"
+                                : "text-gray-600 dark:text-zinc-400 hover:bg-gray-100 dark:hover:bg-zinc-900"
+                                }`}
+                        >
+                            <MessageSquare size={18} />
+                            Suggestions
                         </Link>
                     </nav>
 

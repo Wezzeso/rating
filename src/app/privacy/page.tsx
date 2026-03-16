@@ -19,6 +19,9 @@ export default function PrivacyPolicy() {
                             your data. This application is designed to allow students to anonymously rate professors on
                             Teaching and Proctoring.
                         </p>
+                        <p className="mt-2 text-blue-600 dark:text-blue-400 font-bold">
+                            All data on this platform is provided and sent by users only. The owner of the platform is not responsible for the accuracy or nature of user-generated content.
+                        </p>
                     </section>
 
                     <section>
@@ -76,15 +79,15 @@ export default function PrivacyPolicy() {
 
                     <section>
                         <h2 className="text-2xl font-semibold text-gray-900 dark:text-zinc-100 mb-4">5. Disclaimer of Liability</h2>
-                        <p>
-                            The administrators, founders, and developers of the Teacher Rating platform are not responsible or liable in any manner for any content, ratings, suggestions, or other actions made by users on the platform. All data is user-generated, and usage of this platform is entirely at your own risk.
+                        <p className="font-bold text-red-600 dark:text-red-400">
+                            The owner, founders, and developers of the Teacher Rating platform are NOT responsible or liable in any manner for any content, ratings, suggestions, or other actions made by users on the platform. All data is user-generated and provided by users only. Usage of this platform is entirely at your own risk. The owner does not take responsibility for anything related to the platform's use.
                         </p>
                     </section>
 
                     <section>
-                        <h2 className="text-2xl font-semibold text-gray-900 dark:text-zinc-100 mb-4">6. Contact Us</h2>
+                        <h2 className="text-2xl font-semibold text-gray-900 dark:text-zinc-100 mb-4">6. Information</h2>
                         <p>
-                            If you have any questions about this privacy policy or our privacy practices, please contact the administrators via telegram @wezeso.
+                            If you have any questions about this privacy policy or our practices, please contact the platform administration.
                         </p>
                     </section>
                 </div>

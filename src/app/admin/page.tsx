@@ -1,8 +1,9 @@
 import { LiveVisitorCount } from "./components/LiveVisitorCount";
 import { createAdminClient } from "@/lib/supabase-server";
 import dbConnect from "@/lib/mongodb";
-import Comment from "@/models/Comment";
-import { BookOpen, Users, MessageSquare, AlertCircle, TrendingUp } from "lucide-react";
+import CommentModel from "@/models/Comment";
+import RemovalRequest from "@/models/RemovalRequest";
+import { BookOpen, Users, MessageSquare, AlertCircle, TrendingUp, ShieldAlert } from "lucide-react";
 import Link from 'next/link';
 
 export const dynamic = "force-dynamic";
@@ -24,8 +25,9 @@ export default async function AdminDashboard() {
 
     // Total comments (MongoDB)
     await dbConnect();
-    const commentCount = await Comment.countDocuments({ status: 'approved' });
-    const pendingCommentCount = await Comment.countDocuments({ status: 'pending' });
+    const commentCount = await CommentModel.countDocuments({ status: 'approved' });
+    const pendingCommentCount = await CommentModel.countDocuments({ status: 'pending' });
+    const pendingRemovalCount = await RemovalRequest.countDocuments({ status: 'pending' });
 
     // Pending professors
     const { count: pendingProfCount } = await admin
@@ -33,7 +35,7 @@ export default async function AdminDashboard() {
         .select('*', { count: 'exact', head: true })
         .eq('is_approved', false);
 
-    const totalPending = (pendingProfCount || 0) + pendingCommentCount;
+    const totalPending = (pendingProfCount || 0) + pendingCommentCount + pendingRemovalCount;
 
     return (
         <div className="p-6 lg:p-10 w-full min-h-full">
@@ -54,24 +56,24 @@ export default async function AdminDashboard() {
                         </div>
                     </div>
 
-                    <div className="relative z-10 flex gap-3 mt-8">
-                        {pendingProfCount !== null && pendingProfCount > 0 && (
-                            <Link href="/admin/teachers" className="flex-1 bg-black/20 hover:bg-black/30 backdrop-blur-md transition-colors rounded-xl p-4 flex flex-col gap-1 items-start">
-                                <span className="text-3xl font-bold">{pendingProfCount}</span>
-                                <span className="text-xs font-semibold uppercase tracking-wider opacity-80">Teachers</span>
-                            </Link>
-                        )}
-                        {pendingCommentCount > 0 && (
-                            <Link href="/admin/comments" className="flex-1 bg-black/20 hover:bg-black/30 backdrop-blur-md transition-colors rounded-xl p-4 flex flex-col gap-1 items-start">
-                                <span className="text-3xl font-bold">{pendingCommentCount}</span>
-                                <span className="text-xs font-semibold uppercase tracking-wider opacity-80">Comments</span>
-                            </Link>
-                        )}
-                        {totalPending === 0 && (
-                            <div className="w-full bg-black/10 backdrop-blur-md rounded-xl p-4 flex items-center justify-center">
-                                <span className="text-sm font-semibold opacity-90">Маладес</span>
-                            </div>
-                        )}
+                    <div className="relative z-10 flex flex-wrap gap-3 mt-8">
+                        <Link href="/admin/teachers" className="flex-1 min-w-[120px] bg-black/20 hover:bg-black/30 backdrop-blur-md transition-colors rounded-xl p-4 flex flex-col gap-1 items-start relative overflow-hidden group">
+                            <span className="text-3xl font-bold">{pendingProfCount || 0}</span>
+                            <span className="text-xs font-semibold uppercase tracking-wider opacity-80">Teachers</span>
+                            {pendingProfCount !== null && pendingProfCount > 0 && <div className="absolute top-2 right-2 w-2 h-2 bg-white rounded-full animate-pulse shadow-sm shadow-white/50" />}
+                        </Link>
+
+                        <Link href="/admin/comments" className="flex-1 min-w-[120px] bg-black/20 hover:bg-black/30 backdrop-blur-md transition-colors rounded-xl p-4 flex flex-col gap-1 items-start relative overflow-hidden group">
+                            <span className="text-3xl font-bold">{pendingCommentCount}</span>
+                            <span className="text-xs font-semibold uppercase tracking-wider opacity-80">Comments</span>
+                            {pendingCommentCount > 0 && <div className="absolute top-2 right-2 w-2 h-2 bg-white rounded-full animate-pulse shadow-sm shadow-white/50" />}
+                        </Link>
+
+                        <Link href="/admin/requests" className="flex-1 min-w-[120px] bg-black/20 hover:bg-black/30 backdrop-blur-md transition-colors rounded-xl p-4 flex flex-col gap-1 items-start relative overflow-hidden group">
+                            <span className="text-3xl font-bold">{pendingRemovalCount}</span>
+                            <span className="text-xs font-semibold uppercase tracking-wider opacity-80">Removals</span>
+                            {pendingRemovalCount > 0 && <div className="absolute top-2 right-2 w-2 h-2 bg-white rounded-full animate-pulse shadow-sm shadow-white/50" />}
+                        </Link>
                     </div>
                     {/* Decorative background element */}
                     <div className="absolute -bottom-24 -right-24 w-64 h-64 bg-white/10 rounded-full blur-3xl pointer-events-none"></div>

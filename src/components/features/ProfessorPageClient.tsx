@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useMemo, useEffect } from "react";
-import { ArrowLeft, BookOpen, Shield, GraduationCap, Users, Tag, Send, Edit2, Trash2, X, MessageSquare } from "lucide-react";
+import { ArrowLeft, BookOpen, Shield, GraduationCap, Users, Tag, Send, Edit2, Trash2, X, MessageSquare, Check } from "lucide-react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { StarRating } from "@/components/ui/StarRating";
 import { ShareButton } from "@/components/ui/ShareButton";
 import { RateModal } from "@/components/modals/RateModal";
@@ -12,7 +13,8 @@ import {
     fetchApprovedComments,
     fetchUserComment,
     updateComment,
-    deleteComment
+    deleteComment,
+    fetchUserRating
 } from "@/app/actions";
 import { toast } from "sonner";
 
@@ -51,6 +53,7 @@ export function ProfessorPageClient({ professor }: ProfessorPageClientProps) {
     const [isEditing, setIsEditing] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [commentsLoading, setCommentsLoading] = useState(true);
+    const [isRated, setIsRated] = useState(false);
 
     useEffect(() => {
         loadCommentsData();
@@ -59,9 +62,10 @@ export function ProfessorPageClient({ professor }: ProfessorPageClientProps) {
 
     const loadCommentsData = async () => {
         setCommentsLoading(true);
-        const [approvedRes, userRes] = await Promise.all([
+        const [approvedRes, userRes, ratingRes] = await Promise.all([
             fetchApprovedComments(professor.id),
-            fetchUserComment(professor.id)
+            fetchUserComment(professor.id),
+            fetchUserRating(professor.id)
         ]);
 
         if (approvedRes.success && approvedRes.data) {
@@ -69,6 +73,9 @@ export function ProfessorPageClient({ professor }: ProfessorPageClientProps) {
         }
         if (userRes.success && userRes.data) {
             setUserComment(userRes.data);
+        }
+        if (ratingRes.success && ratingRes.data) {
+            setIsRated(true);
         }
         setCommentsLoading(false);
     };
@@ -233,197 +240,158 @@ export function ProfessorPageClient({ professor }: ProfessorPageClientProps) {
     const badge = getBadge();
 
     return (
-        <div className="py-6 sm:py-12 px-4 sm:px-6 w-full">
+        <div className="max-w-4xl mx-auto py-8 sm:py-12 px-4 sm:px-6">
             {/* Back button */}
-            <button
-                onClick={() => router.push("/")}
-                className="flex items-center gap-2 text-sm text-gray-500 dark:text-zinc-400 hover:text-gray-900 dark:hover:text-zinc-100 mb-8 group"
-            >
-                <ArrowLeft size={16} className="group-hover:-translate-x-0.5 transition-transform" />
-                Back to all professors
-            </button>
-
-            {/* Professor name header */}
-            <div className="flex items-center justify-between mb-8">
-                <h1 className="text-2xl sm:text-3xl font-semibold text-gray-900 dark:text-zinc-100 tracking-tight">
-                    {professor.name}
-                </h1>
-                <ShareButton
-                    professorId={professor.id}
-                    professorName={professor.name}
-                    showText
-                    className="text-sm text-gray-500 dark:text-zinc-400 hover:text-gray-900 dark:hover:text-zinc-100 px-3 py-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-zinc-900 transition-colors"
-                />
-            </div>
-
-            {/* Airbnb-style rating card */}
-            <div className="rounded-2xl overflow-hidden mb-8">
-                {/* Main score section */}
-                {overallRating > 0 && (
-                    <div className="flex flex-col items-center justify-center py-10 sm:py-14 px-4">
-                        {/* Laurel + Score */}
-                        <div className="flex items-center gap-2 sm:gap-3 mb-0">
-                            {/* Left laurel */}
-                            <svg width="36" height="72" viewBox="0 0 36 72" fill="none" className="text-gray-900 dark:text-zinc-100">
-                                <path d="M18 4c-4 8-14 16-14 32s10 24 14 32" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" />
-                                <ellipse cx="10" cy="20" rx="5" ry="8" fill="currentColor" opacity="0.85" transform="rotate(-15 10 20)" />
-                                <ellipse cx="6" cy="34" rx="5" ry="8" fill="currentColor" opacity="0.85" transform="rotate(-5 6 34)" />
-                                <ellipse cx="8" cy="48" rx="5" ry="8" fill="currentColor" opacity="0.85" transform="rotate(10 8 48)" />
-                                <ellipse cx="14" cy="58" rx="4" ry="6" fill="currentColor" opacity="0.7" transform="rotate(20 14 58)" />
-                                <ellipse cx="14" cy="12" rx="4" ry="6" fill="currentColor" opacity="0.7" transform="rotate(-25 14 12)" />
-                            </svg>
-
-                            <span className="text-6xl sm:text-7xl font-bold text-gray-900 dark:text-zinc-100 tabular-nums">
-                                {overallRating.toFixed(2)}
-                            </span>
-
-                            {/* Right laurel (mirrored) */}
-                            <svg width="36" height="72" viewBox="0 0 36 72" fill="none" className="text-gray-900 dark:text-zinc-100" style={{ transform: "scaleX(-1)" }}>
-                                <path d="M18 4c-4 8-14 16-14 32s10 24 14 32" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" />
-                                <ellipse cx="10" cy="20" rx="5" ry="8" fill="currentColor" opacity="0.85" transform="rotate(-15 10 20)" />
-                                <ellipse cx="6" cy="34" rx="5" ry="8" fill="currentColor" opacity="0.85" transform="rotate(-5 6 34)" />
-                                <ellipse cx="8" cy="48" rx="5" ry="8" fill="currentColor" opacity="0.85" transform="rotate(10 8 48)" />
-                                <ellipse cx="14" cy="58" rx="4" ry="6" fill="currentColor" opacity="0.7" transform="rotate(20 14 58)" />
-                                <ellipse cx="14" cy="12" rx="4" ry="6" fill="currentColor" opacity="0.7" transform="rotate(-25 14 12)" />
-                            </svg>
-                        </div>
-
-                        {/* Badge text */}
-                        {badge && (
-                            <div className="text-center">
-                                <h2 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-zinc-100 mb-1">
-                                    {badge.text}
-                                </h2>
-                                <p className="text-sm text-gray-500 dark:text-zinc-400 whitespace-pre-line leading-relaxed max-w-xs mx-auto">
-                                    {badge.subtitle}
-                                </p>
-                            </div>
-                        )}
-                    </div>
-                )}
-
-                {overallRating === 0 && (
-                    <div className="flex flex-col items-center justify-center py-10 sm:py-14 px-4 text-center">
-                        <span className="text-5xl sm:text-6xl font-bold text-gray-300 dark:text-zinc-600 mb-3">—</span>
-                        <p className="text-gray-500 dark:text-zinc-400 text-sm">No ratings yet. Be the first to rate!</p>
-                    </div>
-                )}
-
-                {/* Category breakdown */}
-                <div className="flex justify-center gap-1 sm:gap-2">
-                    {/* Teaching */}
-                    <div className="px-6 py-5 sm:py-6 flex items-center gap-4">
-                        <BookOpen size={20} className="text-gray-400 dark:text-zinc-500 shrink-0" />
-                        <div>
-                            <span className="text-sm font-medium text-gray-900 dark:text-zinc-100">Teaching</span>
-                            <div className="flex items-center gap-2 mt-1">
-                                <span className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-zinc-100 tabular-nums">
-                                    {professor.teaching_count > 0 ? Number(professor.teaching_rating).toFixed(1) : "—"}
-                                </span>
-                                <div className="flex flex-col">
-                                    <StarRating rating={professor.teaching_rating} size={14} />
-                                    <span className="text-xs text-gray-400 dark:text-zinc-500">({professor.teaching_count})</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Proctoring */}
-                    <div className="px-6 py-5 sm:py-6 flex items-center gap-4">
-                        <Shield size={20} className="text-gray-400 dark:text-zinc-500 shrink-0" />
-                        <div>
-                            <span className="text-sm font-medium text-gray-900 dark:text-zinc-100">Proctoring</span>
-                            <div className="flex items-center gap-2 mt-1">
-                                <span className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-zinc-100 tabular-nums">
-                                    {professor.proctoring_count > 0 ? Number(professor.proctoring_rating).toFixed(1) : "—"}
-                                </span>
-                                <div className="flex flex-col">
-                                    <StarRating rating={professor.proctoring_rating} size={14} />
-                                    <span className="text-xs text-gray-400 dark:text-zinc-500">({professor.proctoring_count})</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {/* Professor Information List */}
-            {((professor.top_tags && professor.top_tags.length > 0) || scheduleInfo) && (
-                <div className="mb-8 pt-8 border-t border-gray-100 dark:border-zinc-800">
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-zinc-100 mb-8">Professor Information</h3>
-                    <div className="flex flex-col gap-2 sm:gap-5">
-                        {/* Tags */}
-                        {professor.top_tags && professor.top_tags.length > 0 && (
-                            <div>
-                                <div className="flex items-center gap-2 mb-4">
-                                    <Tag size={18} className="text-gray-400 dark:text-zinc-500" />
-                                    <span className="text-sm font-medium text-gray-700 dark:text-zinc-100">Top Tags</span>
-                                </div>
-                                <div className="flex flex-wrap gap-3">
-                                    {professor.top_tags.map(tag => (
-                                        <span
-                                            key={tag}
-                                            className="px-6 py-1.5 rounded-full text-xs font-medium bg-gray-100 dark:bg-zinc-800 text-gray-700 dark:text-zinc-100"
-                                        >
-                                            {tag}
-                                        </span>
-                                    ))}
-                                </div>
-                            </div>
-                        )}
-
-                        {/* Schedule Information */}
-                        {scheduleInfo && (
-                            <>
-                                {/* Disciplines */}
-                                {scheduleInfo.disciplines.length > 0 && (
-                                    <div>
-                                        <div className="flex items-center gap-2 mb-4">
-                                            <GraduationCap size={18} className="text-gray-400 dark:text-zinc-500" />
-                                            <span className="text-sm font-medium text-gray-700 dark:text-zinc-100">Disciplines</span>
-                                        </div>
-                                        <div className="flex flex-wrap gap-3">
-                                            {scheduleInfo.disciplines.map((disc, idx) => (
-                                                <span key={idx} className="px-6 py-1.5 rounded-full text-xs font-medium bg-gray-100 dark:bg-zinc-800 text-gray-700 dark:text-zinc-100">
-                                                    {disc}
-                                                </span>
-                                            ))}
-                                        </div>
-                                    </div>
-                                )}
-
-                                {/* Groups */}
-                                {scheduleInfo.groups.length > 0 && (
-                                    <div>
-                                        <div className="flex items-center gap-2 mb-4">
-                                            <Users size={18} className="text-gray-400 dark:text-zinc-500" />
-                                            <span className="text-sm font-medium text-gray-700 dark:text-zinc-100">Groups</span>
-                                        </div>
-                                        <div className="flex flex-wrap gap-3">
-                                            {scheduleInfo.groups.map((group, idx) => (
-                                                <span key={idx} className="px-6 py-1.5 rounded-full text-xs font-medium bg-gray-100 dark:bg-zinc-800 text-gray-700 dark:text-zinc-100">
-                                                    {group}
-                                                </span>
-                                            ))}
-                                        </div>
-                                    </div>
-                                )}
-                            </>
-                        )}
-                    </div>
-                </div>
-            )}
-
-            {/* Rate button */}
             <div className="mb-8">
                 <button
-                    onClick={() => setIsRateModalOpen(true)}
-                    className="w-full sm:w-auto bg-gray-900 dark:bg-white text-white dark:text-zinc-900 px-8 py-3 rounded-xl font-medium text-sm hover:bg-gray-800 dark:hover:bg-zinc-200 transition-colors"
-                    style={{ paddingLeft: '3rem', paddingRight: '3rem' }}
+                    onClick={() => router.push("/")}
+                    className="flex items-center gap-2 text-sm text-gray-500 dark:text-zinc-400 hover:text-gray-900 dark:hover:text-zinc-100 group transition-colors"
                 >
-                    Rate this professor
+                    <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
+                    Back to all professors
                 </button>
             </div>
+
+            {/* Header Section */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10">
+                <div className="flex items-center gap-3">
+                    <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-zinc-100 tracking-tight">
+                        {professor.name}
+                    </h1>
+                    {isRated && (
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded-lg text-xs font-bold uppercase tracking-wider border border-green-200 dark:border-green-900/50">
+                            <Check size={12} strokeWidth={3} />
+                            Rated
+                        </span>
+                    )}
+                </div>
+                <div className="flex items-center gap-3">
+                    <ShareButton
+                        professorId={professor.id}
+                        professorName={professor.name}
+                        showText
+                        className="text-sm font-medium text-gray-600 dark:text-zinc-300 px-4 py-2 rounded-xl bg-gray-100 dark:bg-zinc-800 hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors"
+                    />
+                </div>
+            </div>
+
+            {/* Metrics Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                {/* Overall Rating */}
+                <div className="bg-gray-50 dark:bg-zinc-900/40 rounded-3xl p-8 border border-gray-100 dark:border-zinc-800 flex flex-col items-center justify-center text-center">
+                    <span className="text-sm font-semibold text-gray-500 dark:text-zinc-500 uppercase tracking-wider mb-2">Overall Score</span>
+                    <div className="text-5xl font-black text-gray-900 dark:text-zinc-100 tabular-nums mb-2">
+                        {overallRating > 0 ? overallRating.toFixed(2) : "—"}
+                    </div>
+                    {badge && (
+                        <span className="inline-block px-3 py-1 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 rounded-full text-xs font-bold uppercase tracking-tight">
+                            {badge.text}
+                        </span>
+                    )}
+                </div>
+
+                {/* Teaching Rating */}
+                <div className="bg-white dark:bg-zinc-900/20 rounded-3xl p-8 border border-gray-100 dark:border-zinc-800 flex flex-col items-center justify-center text-center">
+                    <BookOpen size={20} className="text-blue-500 mb-3" />
+                    <span className="text-sm font-semibold text-gray-500 dark:text-zinc-500 uppercase tracking-wider mb-2">Teaching</span>
+                    <div className="text-3xl font-bold text-gray-900 dark:text-zinc-100 tabular-nums mb-1">
+                        {professor.teaching_count > 0 ? Number(professor.teaching_rating).toFixed(1) : "—"}
+                    </div>
+                    <div className="flex flex-col items-center gap-1">
+                        <StarRating rating={professor.teaching_rating} size={14} />
+                        <span className="text-xs text-gray-400 dark:text-zinc-600">({professor.teaching_count} ratings)</span>
+                    </div>
+                </div>
+
+                {/* Proctoring Rating */}
+                <div className="bg-white dark:bg-zinc-900/20 rounded-3xl p-8 border border-gray-100 dark:border-zinc-800 flex flex-col items-center justify-center text-center">
+                    <Shield size={20} className="text-purple-500 mb-3" />
+                    <span className="text-sm font-semibold text-gray-500 dark:text-zinc-500 uppercase tracking-wider mb-2">Proctoring</span>
+                    <div className="text-3xl font-bold text-gray-900 dark:text-zinc-100 tabular-nums mb-1">
+                        {professor.proctoring_count > 0 ? Number(professor.proctoring_rating).toFixed(1) : "—"}
+                    </div>
+                    <div className="flex flex-col items-center gap-1">
+                        <StarRating rating={professor.proctoring_rating} size={14} />
+                        <span className="text-xs text-gray-400 dark:text-zinc-600">({professor.proctoring_count} ratings)</span>
+                    </div>
+                </div>
+            </div>
+
+            {/* Information Grid */}
+            <div className="bg-white dark:bg-zinc-900/20 rounded-3xl p-8 border border-gray-100 dark:border-zinc-800 mb-10">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                    {/* Tags */}
+                    {professor.top_tags && professor.top_tags.length > 0 && (
+                        <div>
+                            <div className="flex items-center gap-2 mb-4">
+                                <Tag size={18} className="text-gray-400 dark:text-zinc-500" />
+                                <h3 className="text-sm font-bold text-gray-900 dark:text-zinc-100 uppercase tracking-wider">Top Tags</h3>
+                            </div>
+                            <div className="flex flex-wrap gap-2">
+                                {professor.top_tags.map(tag => (
+                                    <span key={tag} className="px-4 py-1.5 rounded-xl text-xs font-medium bg-gray-50 dark:bg-zinc-800 text-gray-600 dark:text-zinc-300 border border-transparent dark:border-zinc-700">
+                                        {tag}
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Disciplines & Groups */}
+                    {scheduleInfo && (
+                        <div className="space-y-6">
+                            {(scheduleInfo.disciplines.length > 0 || scheduleInfo.groups.length > 0) && (
+                                <>
+                                    {scheduleInfo.disciplines.length > 0 && (
+                                        <div>
+                                            <div className="flex items-center gap-2 mb-4">
+                                                <GraduationCap size={18} className="text-gray-400 dark:text-zinc-500" />
+                                                <h3 className="text-sm font-bold text-gray-900 dark:text-zinc-100 uppercase tracking-wider">Disciplines</h3>
+                                            </div>
+                                            <div className="flex flex-wrap gap-2">
+                                                {scheduleInfo.disciplines.map((disc, idx) => (
+                                                    <span key={idx} className="px-4 py-1.5 rounded-xl text-xs font-medium bg-gray-50 dark:bg-zinc-800 text-gray-600 dark:text-zinc-300 border border-transparent dark:border-zinc-700">
+                                                        {disc}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+                                    {scheduleInfo.groups.length > 0 && (
+                                        <div>
+                                            <div className="flex items-center gap-2 mb-4">
+                                                <Users size={18} className="text-gray-400 dark:text-zinc-500" />
+                                                <h3 className="text-sm font-bold text-gray-900 dark:text-zinc-100 uppercase tracking-wider">Groups</h3>
+                                            </div>
+                                            <div className="flex flex-wrap gap-2">
+                                                {scheduleInfo.groups.map((group, idx) => (
+                                                    <span key={idx} className="px-4 py-1.5 rounded-xl text-xs font-medium bg-gray-50 dark:bg-zinc-800 text-gray-600 dark:text-zinc-300 border border-transparent dark:border-zinc-700">
+                                                        {group}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+                                </>
+                            )}
+                        </div>
+                    )}
+                </div>
+            </div>
+
+            {/* Action Section */}
+            <div className="flex justify-center mb-16">
+                <button
+                    onClick={() => setIsRateModalOpen(true)}
+                    className={`w-full sm:w-auto min-w-[240px] px-8 py-4 rounded-2xl font-bold text-sm shadow-xl transition-all active:scale-[0.98] ${isRated
+                        ? "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 border border-green-200 dark:border-green-900/30 hover:bg-green-200 dark:hover:bg-green-900/40 shadow-green-500/5"
+                        : "bg-black dark:bg-white text-white dark:text-zinc-900 hover:opacity-90 shadow-black/10 dark:shadow-white/5"
+                        }`}
+                >
+                    {isRated ? "View your rating" : "Rate this professor"}
+                </button>
+            </div>
+
 
             {/* Comments section */}
             <div className="pt-8 mb-12">

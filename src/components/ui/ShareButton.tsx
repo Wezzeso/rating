@@ -22,7 +22,7 @@ export function ShareButton({ professorId, professorName, className = "", showTe
             try {
                 await navigator.share({
                     title: `Rate ${professorName}`,
-                    text: `Check out ratings for ${professorName} by Wezeso's Community!`,
+                    text: `Check out ratings for ${professorName}!`,
                     url: url,
                 });
             } catch (error) {

@@ -21,7 +21,7 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
 
     return {
         title: `${professor.name} — Professor Ratings`,
-        description: `View teaching and proctoring ratings for ${professor.name} on Wezeso.`,
+        description: `View teaching and proctoring ratings for ${professor.name} on the Teacher Rating platform.`,
     };
 }
 

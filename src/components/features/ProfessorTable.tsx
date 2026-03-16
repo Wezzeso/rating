@@ -2,7 +2,7 @@
 
 import { useMemo, useState, useEffect } from "react";
 import { StarRating } from "@/components/ui/StarRating";
-import { ArrowDown, ArrowUp, Plus } from "lucide-react";
+import { ArrowDown, ArrowUp, Plus, Check } from "lucide-react";
 import { Analytics } from "@vercel/analytics/next"
 import { RateModal } from "../modals/RateModal";
 import { SuggestModal } from "../modals/SuggestModal";
@@ -22,12 +22,13 @@ interface Professor {
 
 interface ProfessorTableProps {
     initialProfessors: Professor[];
+    ratedProfessorIds?: string[];
 }
 
 type SortKey = "name" | "teaching_rating" | "proctoring_rating" | null;
 type SortDirection = "asc" | "desc";
 
-export function ProfessorTable({ initialProfessors }: ProfessorTableProps) {
+export function ProfessorTable({ initialProfessors, ratedProfessorIds = [] }: ProfessorTableProps) {
     const router = useRouter();
     const searchParams = useSearchParams();
     const [searchQuery, setSearchQuery] = useState(searchParams.get("q") || "");
@@ -188,13 +189,23 @@ export function ProfessorTable({ initialProfessors }: ProfessorTableProps) {
                             >
                                 <td className="sm:py-3 pr-4 font-medium text-gray-900 dark:text-zinc-100 flex flex-col justify-center sm:table-cell">
                                     <div className="flex justify-between items-center w-full">
-                                        <div>
-                                            <div className="text-lg sm:text-sm">{prof.name}</div>
-                                            {prof.disciplines && prof.disciplines.length > 0 && (
-                                                <div className="text-xs text-gray-500 dark:text-zinc-400 font-normal mt-0.5">
-                                                    {prof.disciplines.join(", ")}
+                                        <div className="flex items-center gap-2">
+                                            <div>
+                                                <div className="text-lg sm:text-sm flex items-center gap-2">
+                                                    {prof.name}
+                                                    {ratedProfessorIds.includes(prof.id) && (
+                                                        <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded-md text-[10px] font-bold uppercase tracking-wider border border-green-200 dark:border-green-900/50">
+                                                            <Check size={10} strokeWidth={3} />
+                                                            Rated
+                                                        </span>
+                                                    )}
                                                 </div>
-                                            )}
+                                                {prof.disciplines && prof.disciplines.length > 0 && (
+                                                    <div className="text-xs text-gray-500 dark:text-zinc-400 font-normal mt-0.5">
+                                                        {prof.disciplines.join(", ")}
+                                                    </div>
+                                                )}
+                                            </div>
                                         </div>
                                         <div className="flex gap-2 sm:hidden">
                                             <button

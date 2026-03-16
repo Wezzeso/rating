@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect, useMemo, useCallback, Fragment } from "react";
-import { getSupabase } from "@/lib/supabase";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import {
@@ -23,7 +22,6 @@ import {
     approveProfessor,
     rejectProfessor,
     fetchPendingProfessors,
-    verifyTeacherInAITU,
     checkDuplicateInDB,
     loginAsAdmin,
     logoutAdmin,
@@ -35,15 +33,12 @@ interface Professor {
     name: string;
     department: string;
     created_at: string;
-    aitu_verified: boolean | null;
     is_duplicate: boolean | null;
 }
 
 interface VerificationStatus {
     loading: boolean;
-    existsInAITU: boolean | null;
     isDuplicate: boolean | null;
-    matches: { nameKz: string; surnameKz: string; department: string | null }[];
     existingName?: string;
     error?: string;
 }
@@ -62,18 +57,15 @@ export default function AdminPage() {
     const [verificationMap, setVerificationMap] = useState<Record<string, VerificationStatus>>({});
     const [expandedRow, setExpandedRow] = useState<string | null>(null);
 
-    // Verify a single professor against AITU API + duplicate check
+    // Check duplicate status
     const verifyProfessor = useCallback(async (prof: Professor) => {
         setVerificationMap((prev) => ({
             ...prev,
-            [prof.id]: { loading: true, existsInAITU: null, isDuplicate: null, matches: [] },
+            [prof.id]: { loading: true, isDuplicate: null },
         }));
 
         try {
-            const [aituResult, dupResult] = await Promise.all([
-                verifyTeacherInAITU(prof.id, prof.name),
-                checkDuplicateInDB(prof.id, prof.name),
-            ]);
+            const dupResult = await checkDuplicateInDB(prof.id, prof.name);
 
             // Update local professor data with the saved results
             setProfessors((prev) =>
@@ -81,7 +73,6 @@ export default function AdminPage() {
                     p.id === prof.id
                         ? {
                             ...p,
-                            aitu_verified: aituResult.success ? aituResult.existsInAITU : p.aitu_verified,
                             is_duplicate: dupResult.success ? dupResult.isDuplicate : p.is_duplicate,
                         }
                         : p
@@ -92,11 +83,9 @@ export default function AdminPage() {
                 ...prev,
                 [prof.id]: {
                     loading: false,
-                    existsInAITU: aituResult.success ? aituResult.existsInAITU : null,
                     isDuplicate: dupResult.success ? dupResult.isDuplicate : null,
-                    matches: aituResult.matches || [],
                     existingName: dupResult.existingName,
-                    error: aituResult.error || dupResult.error || undefined,
+                    error: dupResult.error || undefined,
                 },
             }));
         } catch {
@@ -104,10 +93,8 @@ export default function AdminPage() {
                 ...prev,
                 [prof.id]: {
                     loading: false,
-                    existsInAITU: null,
                     isDuplicate: null,
-                    matches: [],
-                    error: "Verification failed",
+                    error: "Check failed",
                 },
             }));
         }
@@ -118,7 +105,6 @@ export default function AdminPage() {
         (profs: Professor[]) => {
             const unchecked = profs.filter(
                 (p) =>
-                    (p.aitu_verified === null || p.aitu_verified === undefined) ||
                     (p.is_duplicate === null || p.is_duplicate === undefined)
             );
             unchecked.forEach((p) => verifyProfessor(p));
@@ -160,14 +146,11 @@ export default function AdminPage() {
             // Initialize verification status from cached DB values
             const initialMap: Record<string, VerificationStatus> = {};
             profs.forEach((p) => {
-                const hasAitu = p.aitu_verified !== null && p.aitu_verified !== undefined;
                 const hasDup = p.is_duplicate !== null && p.is_duplicate !== undefined;
-                if (hasAitu || hasDup) {
+                if (hasDup) {
                     initialMap[p.id] = {
                         loading: false,
-                        existsInAITU: hasAitu ? p.aitu_verified : null,
                         isDuplicate: hasDup ? p.is_duplicate : null,
-                        matches: [],
                     };
                 }
             });
@@ -190,12 +173,8 @@ export default function AdminPage() {
     const getStatusScore = (prof: Professor): number => {
         const v = verificationMap[prof.id];
         const dupStatus = v?.isDuplicate ?? prof.is_duplicate;
-        if (dupStatus) return 3;
-        // Use cached DB value if verification map doesn't have it
-        const aituStatus = v?.existsInAITU ?? prof.aitu_verified;
         if (v?.loading) return 0;
-        if (aituStatus === true) return 1;
-        if (aituStatus === false) return 2;
+        if (dupStatus) return 3;
         return 0;
     };
 
@@ -272,9 +251,6 @@ export default function AdminPage() {
         if (v?.loading) return "";
         const dupStatus = v?.isDuplicate ?? prof.is_duplicate;
         if (dupStatus) return "bg-amber-50/50 dark:bg-amber-900/10";
-        const aituStatus = v?.existsInAITU ?? prof.aitu_verified;
-        if (aituStatus === true) return "bg-emerald-50/50 dark:bg-emerald-900/10";
-        if (aituStatus === false) return "bg-red-50/50 dark:bg-red-900/10";
         return "";
     };
 
@@ -288,7 +264,7 @@ export default function AdminPage() {
                 </span>
             );
         }
-        if (v?.error && v.existsInAITU === null && prof.aitu_verified === null) {
+        if (v?.error) {
             return (
                 <span className="inline-flex items-center gap-1 text-xs text-gray-500 dark:text-zinc-400 ">
                     <AlertTriangle size={14} />
@@ -302,23 +278,6 @@ export default function AdminPage() {
                 <span className="inline-flex items-center gap-1 text-xs font-medium text-yellow-700 dark:text-yellow-500 ">
                     <AlertTriangle size={14} />
                     Duplicate
-                </span>
-            );
-        }
-        const aituStatus = v?.existsInAITU ?? prof.aitu_verified;
-        if (aituStatus === true) {
-            return (
-                <span className="inline-flex items-center gap-1 text-xs font-medium text-green-700 dark:text-green-500 ">
-                    <CheckCircle2 size={14} />
-                    Verified
-                </span>
-            );
-        }
-        if (aituStatus === false) {
-            return (
-                <span className="inline-flex items-center gap-1 text-xs font-medium text-red-700 dark:text-red-500 ">
-                    <XCircle size={14} />
-                    Not Found
                 </span>
             );
         }
@@ -387,10 +346,10 @@ export default function AdminPage() {
                     <button
                         onClick={() => verifyAll(professors)}
                         className="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2.5 bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-100 dark:hover:bg-indigo-500/20 border border-indigo-100 dark:border-indigo-500/20 rounded-xl text-sm font-semibold transition-all shadow-sm hover:shadow"
-                        title="Re-verify all teachers"
+                        title="Check for duplicates"
                     >
                         <RefreshCw size={16} />
-                        <span>Re-verify All</span>
+                        <span>Check Duplicates</span>
                     </button>
                     {/* The logout is duplicated in the layout but user kept it here, styling it to match */}
                     <button
@@ -405,14 +364,6 @@ export default function AdminPage() {
 
             {/* Legend */}
             <div className="flex flex-wrap gap-4 mb-6 text-sm font-medium text-gray-600 dark:text-zinc-400">
-                <span className="flex items-center gap-2 bg-white/50 dark:bg-zinc-900/50 px-3 py-1.5 rounded-lg border border-gray-200/60 dark:border-zinc-800/60">
-                    <span className="w-3 h-3 rounded-full bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.5)]"></span>
-                    Found in AITU
-                </span>
-                <span className="flex items-center gap-2 bg-white/50 dark:bg-zinc-900/50 px-3 py-1.5 rounded-lg border border-gray-200/60 dark:border-zinc-800/60">
-                    <span className="w-3 h-3 rounded-full bg-red-400 shadow-[0_0_10px_rgba(248,113,113,0.5)]"></span>
-                    Not found in AITU
-                </span>
                 <span className="flex items-center gap-2 bg-white/50 dark:bg-zinc-900/50 px-3 py-1.5 rounded-lg border border-gray-200/60 dark:border-zinc-800/60">
                     <span className="w-3 h-3 rounded-full bg-amber-400 shadow-[0_0_10px_rgba(251,191,36,0.5)]"></span>
                     Duplicate in DB
@@ -463,28 +414,14 @@ export default function AdminPage() {
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-gray-200 dark:divide-zinc-800 ">
-                                {sortedProfessors.map((p) => {
-                                    const v = verificationMap[p.id];
-                                    const isExpanded = expandedRow === p.id;
-                                    const hasMatches = v && v.matches.length > 0;
+                                    {sortedProfessors.map((p) => {
+                                        const v = verificationMap[p.id];
 
                                     return (
                                         <Fragment key={p.id}>
-                                            <tr
-                                                className={`${getRowBgClass(p)} dark:bg-opacity-10 ${hasMatches ? "cursor-pointer" : ""} `}
-                                                onClick={() =>
-                                                    hasMatches && setExpandedRow(isExpanded ? null : p.id)
-                                                }
-                                            >
+                                            <tr className={getRowBgClass(p)}>
                                                 <td className="px-6 py-4">
                                                     <div className="flex items-center gap-2">
-                                                        {hasMatches && (
-                                                            isExpanded ? (
-                                                                <ChevronDown size={14} className="text-gray-400 dark:text-zinc-500 shrink-0" />
-                                                            ) : (
-                                                                <ChevronRight size={14} className="text-gray-400 dark:text-zinc-500 shrink-0" />
-                                                            )
-                                                        )}
                                                         <div>
                                                             <span className="font-medium text-gray-900 dark:text-zinc-100 ">
                                                                 {p.name}
@@ -537,33 +474,6 @@ export default function AdminPage() {
                                                 </td>
                                             </tr>
 
-                                            {/* Expanded row showing AITU matches */}
-                                            {isExpanded && hasMatches && (
-                                                <tr key={`${p.id}-details`} className="bg-gray-50 dark:bg-zinc-700/30 ">
-                                                    <td colSpan={4} className="px-6 py-3">
-                                                        <p className="text-xs font-medium text-gray-500 dark:text-zinc-400 mb-2 ">
-                                                            AITU Matches ({v.matches.length}):
-                                                        </p>
-                                                        <div className="space-y-1">
-                                                            {v.matches.map((m, i) => (
-                                                                <div
-                                                                    key={i}
-                                                                    className="text-xs text-gray-700 dark:text-zinc-100 bg-white dark:bg-zinc-700 rounded px-3 py-1.5 border border-gray-200 dark:border-zinc-800 flex items-center justify-between "
-                                                                >
-                                                                    <span className="font-medium">
-                                                                        {m.nameKz} {m.surnameKz}
-                                                                    </span>
-                                                                    {m.department && (
-                                                                        <span className="text-gray-400 dark:text-zinc-500 ml-3 truncate max-w-[300px]">
-                                                                            {m.department}
-                                                                        </span>
-                                                                    )}
-                                                                </div>
-                                                            ))}
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            )}
                                         </Fragment>
                                     );
                                 })}

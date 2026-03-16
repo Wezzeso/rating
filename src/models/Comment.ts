@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 export interface IComment extends mongoose.Document {
     professorId: string;
-    userFingerprint: string;
+    userId: string;
     text: string;
     status: 'pending' | 'approved' | 'rejected';
     createdAt: Date;
@@ -15,9 +15,9 @@ const CommentSchema = new mongoose.Schema<IComment>(
             required: [true, 'Please provide a professor ID'],
             index: true,
         },
-        userFingerprint: {
+        userId: {
             type: String,
-            required: [true, 'Please provide a user fingerprint'],
+            required: [true, 'Please provide a user ID'],
         },
         text: {
             type: String,
@@ -38,6 +38,6 @@ const CommentSchema = new mongoose.Schema<IComment>(
 );
 
 // Enforce 1 comment per user per professor
-CommentSchema.index({ professorId: 1, userFingerprint: 1 }, { unique: true });
+CommentSchema.index({ professorId: 1, userId: 1 }, { unique: true });
 
 export default mongoose.models.Comment || mongoose.model<IComment>('Comment', CommentSchema);

@@ -1,10 +1,11 @@
 'use server';
 
-import { createAdminClient } from '@/lib/supabase-server';
+import { createAdminClient, createServerComponentClient } from '@/lib/supabase-server';
 import { headers } from 'next/headers';
 import crypto from 'crypto';
 import dbConnect from '@/lib/mongodb';
 import Comment from '@/models/Comment';
+import Suggestion from '@/models/Suggestion';
 
 // ---------------------------------------------------------------------------
 // Rate Limiting (in-memory, per-instance — sufficient for most deployments)
@@ -121,6 +122,13 @@ async function verifyAdmin(): Promise<{ isAdmin: true } | { isAdmin: false; erro
     return { isAdmin: true };
 }
 
+/** Get the currently authenticated Supabase user. */
+async function getAuthUser() {
+    const supabase = await createServerComponentClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    return user;
+}
+
 /** Server action to log in as admin via a UI form */
 export async function loginAsAdmin(password: string): Promise<{ success: boolean; error?: string }> {
     const adminPassword = process.env.ADMIN_PASSWORD;
@@ -224,15 +232,20 @@ export async function submitRating(data: {
             return { success: false, error: 'You can only select up to 3 tags.' };
         }
 
+        // --- Auth Check ---
+        const user = await getAuthUser();
+        if (!user) {
+            return { success: false, error: 'You must be logged in to rate.' };
+        }
+
         // --- Rate Limiting & Proxy Check ---
         const ip = await getClientIp();
-        const fingerprint = await getClientFingerprint();
 
         if (await isIpProxy(ip)) {
             return { success: false, error: 'Proxy or VPN detected. Please disable it to submit a rating.' };
         }
 
-        if (!checkRateLimit(`rate:${fingerprint}`, 5, 60_000)) {
+        if (!checkRateLimit(`rate:${user.id}`, 5, 60_000)) {
             return { success: false, error: 'Too many ratings. Please try again in a minute.' };
         }
 
@@ -253,7 +266,8 @@ export async function submitRating(data: {
 
         const { error: insertError } = await admin.from('ratings').insert({
             professor_id: professorId,
-            user_fingerprint: fingerprint,
+            user_id: user.id,
+            user_fingerprint: null, // Wipe fingerprint or keep for legacy? Schema allowed null.
             teaching: teachingScore,
             proctoring: proctoringScore,
             tags: tagsToInsert.length > 0 ? tagsToInsert : null,
@@ -270,6 +284,72 @@ export async function submitRating(data: {
         return { success: true };
     } catch (err) {
         console.error('[submitRating] Unexpected error');
+        return { success: false, error: 'An unexpected error occurred.' };
+    }
+}
+
+/** Check if the current user has already rated a professor. */
+export async function fetchUserRating(professorId: string): Promise<{
+    success: boolean;
+    data?: any;
+    error?: string;
+}> {
+    try {
+        if (!professorId || !UUID_REGEX.test(professorId)) {
+            return { success: false, error: 'Invalid professor ID.' };
+        }
+
+        const user = await getAuthUser();
+        if (!user) {
+            return { success: true, data: null };
+        }
+
+        const admin = createAdminClient();
+        const { data, error } = await admin
+            .from('ratings')
+            .select('*')
+            .eq('professor_id', professorId)
+            .eq('user_id', user.id)
+            .single();
+
+        if (error && error.code !== 'PGRST116') { // PGRST116 is "no rows returned"
+            console.error('[fetchUserRating] Error:', error.message);
+            return { success: false, error: 'Failed to fetch rating.' };
+        }
+
+        return { success: true, data: data || null };
+    } catch (err) {
+        console.error('[fetchUserRating] Unexpected error');
+        return { success: false, error: 'An unexpected error occurred.' };
+    }
+}
+
+/** Fetch all professor IDs rated by the current user. */
+export async function fetchUserRatedProfessorIds(): Promise<{
+    success: boolean;
+    data?: string[];
+    error?: string;
+}> {
+    try {
+        const user = await getAuthUser();
+        if (!user) {
+            return { success: true, data: [] };
+        }
+
+        const admin = createAdminClient();
+        const { data, error } = await admin
+            .from('ratings')
+            .select('professor_id')
+            .eq('user_id', user.id);
+
+        if (error) {
+            console.error('[fetchUserRatedProfessorIds] Error:', error.message);
+            return { success: false, error: 'Failed to fetch rated professors.' };
+        }
+
+        return { success: true, data: data.map(r => r.professor_id) };
+    } catch (err) {
+        console.error('[fetchUserRatedProfessorIds] Unexpected error');
         return { success: false, error: 'An unexpected error occurred.' };
     }
 }
@@ -399,7 +479,7 @@ export async function rejectProfessor(id: string): Promise<{ success: boolean; e
  */
 export async function fetchPendingProfessors(): Promise<{
     success: boolean;
-    data?: { id: string; name: string; department: string; created_at: string; aitu_verified: boolean | null; is_duplicate: boolean | null }[];
+    data?: { id: string; name: string; department: string; created_at: string; is_duplicate: boolean | null }[];
     error?: string;
 }> {
     try {
@@ -411,7 +491,7 @@ export async function fetchPendingProfessors(): Promise<{
         const admin = createAdminClient();
         const { data, error } = await admin
             .from('professors')
-            .select('id, name, department, created_at, aitu_verified, is_duplicate')
+            .select('id, name, department, created_at, is_duplicate')
             .eq('is_approved', false)
             .order('created_at', { ascending: false });
 
@@ -428,104 +508,8 @@ export async function fetchPendingProfessors(): Promise<{
 }
 
 // ---------------------------------------------------------------------------
-// Teacher Verification (AITU API + Duplicate Check)
+// Duplicate Check
 // ---------------------------------------------------------------------------
-
-const AITU_TEACHER_API =
-    'https://du.astanait.edu.kz:8765/astanait-teacher-module/api/v1/teacher/pps/get-all-teachers';
-
-interface AITUTeacher {
-    id: number;
-    userId: number;
-    nameKz: string;
-    surnameKz: string;
-    patronymicKz: string;
-    department: { id: number; titleEn: string; titleRu: string; titleKz: string } | null;
-}
-
-interface AITUApiResponse {
-    total_number: number;
-    number_of_pages: number;
-    list: AITUTeacher[];
-    current_page: number;
-}
-
-/**
- * Verify a teacher name against the AITU teacher database.
- * Splits the name into parts and queries the API with each part.
- * Saves the result to the DB so it doesn't need to be re-checked.
- * Requires authenticated admin.
- */
-export async function verifyTeacherInAITU(professorId: string, name: string): Promise<{
-    success: boolean;
-    existsInAITU: boolean;
-    matches: { nameKz: string; surnameKz: string; department: string | null }[];
-    error?: string;
-}> {
-    try {
-        const adminCheck = await verifyAdmin();
-        if (!adminCheck.isAdmin) {
-            return { success: false, existsInAITU: false, matches: [], error: adminCheck.error };
-        }
-
-        if (!professorId || !UUID_REGEX.test(professorId)) {
-            return { success: false, existsInAITU: false, matches: [], error: 'Invalid professor ID.' };
-        }
-
-        const parts = name.trim().split(/\s+/).filter(Boolean);
-        if (parts.length === 0) {
-            return { success: false, existsInAITU: false, matches: [], error: 'Name is empty.' };
-        }
-
-        // Query the API with each name part in parallel
-        const allMatches = new Map<number, AITUTeacher>();
-
-        const results = await Promise.all(
-            parts.map(async (part) => {
-                try {
-                    const url = `${AITU_TEACHER_API}?fullName=${encodeURIComponent(part)}`;
-                    const res = await fetch(url);
-                    if (!res.ok) return [];
-                    const data: AITUApiResponse = await res.json();
-                    return data.list || [];
-                } catch {
-                    return [];
-                }
-            })
-        );
-
-        // Merge into a single map keyed by teacher id
-        for (const list of results) {
-            for (const teacher of list) {
-                allMatches.set(teacher.id, teacher);
-            }
-        }
-
-        const matchesArr = Array.from(allMatches.values()).map((t) => ({
-            nameKz: t.nameKz,
-            surnameKz: t.surnameKz,
-            department: t.department?.titleEn ?? null,
-        }));
-
-        const existsInAITU = matchesArr.length > 0;
-
-        // Save result to DB so we don't re-check next time
-        const admin = createAdminClient();
-        await admin
-            .from('professors')
-            .update({ aitu_verified: existsInAITU })
-            .eq('id', professorId);
-
-        return {
-            success: true,
-            existsInAITU,
-            matches: matchesArr,
-        };
-    } catch (err) {
-        console.error('[verifyTeacherInAITU] Error:', err);
-        return { success: false, existsInAITU: false, matches: [], error: 'Failed to reach AITU API.' };
-    }
-}
 
 /**
  * Check if a professor with a similar name already exists (approved) in the DB.
@@ -607,28 +591,33 @@ export async function submitComment(data: {
             return { success: false, error: 'Comment cannot be more than 100 characters.' };
         }
 
+        // --- Auth Check ---
+        const user = await getAuthUser();
+        if (!user) {
+            return { success: false, error: 'You must be logged in to comment.' };
+        }
+
         const ip = await getClientIp();
-        const fingerprint = await getClientFingerprint();
 
         if (await isIpProxy(ip)) {
             return { success: false, error: 'Proxy or VPN detected. Please disable it to submit a comment.' };
         }
 
-        if (!checkRateLimit(`comment:${fingerprint}`, 3, 60_000)) {
+        if (!checkRateLimit(`comment:${user.id}`, 3, 60_000)) {
             return { success: false, error: 'Too many comments. Please try again in a minute.' };
         }
 
         await dbConnect();
 
         // Check if user already commented for this professor
-        const existingComment = await Comment.findOne({ professorId, userFingerprint: fingerprint });
+        const existingComment = await Comment.findOne({ professorId, userId: user.id });
         if (existingComment) {
             return { success: false, error: 'You have already submitted a comment for this professor. You can edit or delete it instead.' };
         }
 
         await Comment.create({
             professorId,
-            userFingerprint: fingerprint,
+            userId: user.id,
             text: text.trim(),
             status: 'pending', // Auto-moderation might override this later or admin will approve
         });
@@ -683,11 +672,14 @@ export async function fetchUserComment(professorId: string): Promise<{
         if (!professorId) return { success: false, error: 'Invalid professor ID' };
 
         await dbConnect();
-        const fingerprint = await getClientFingerprint();
+        const user = await getAuthUser();
+        if (!user) {
+            return { success: true, data: null };
+        }
 
         const comment = await Comment.findOne({
             professorId,
-            userFingerprint: fingerprint,
+            userId: user.id,
         }).lean();
 
         if (!comment) {
@@ -724,14 +716,19 @@ export async function updateComment(data: {
             return { success: false, error: 'Comment cannot be more than 100 characters.' };
         }
 
+        // --- Auth Check ---
+        const user = await getAuthUser();
+        if (!user) {
+            return { success: false, error: 'Unauthorized.' };
+        }
+
         const ip = await getClientIp();
-        const fingerprint = await getClientFingerprint();
 
         if (await isIpProxy(ip)) {
             return { success: false, error: 'Proxy or VPN detected. Please disable it to update a comment.' };
         }
 
-        if (!checkRateLimit(`comment:${fingerprint}`, 3, 60_000)) {
+        if (!checkRateLimit(`comment:${user.id}`, 3, 60_000)) {
             return { success: false, error: 'Too many requests' };
         }
 
@@ -742,7 +739,7 @@ export async function updateComment(data: {
             return { success: false, error: 'Comment not found.' };
         }
 
-        if (comment.userFingerprint !== fingerprint) {
+        if (comment.userId !== user.id) {
             return { success: false, error: 'Unauthorized.' };
         }
 
@@ -763,10 +760,14 @@ export async function deleteComment(commentId: string): Promise<{ success: boole
             return { success: false, error: 'Invalid data.' };
         }
 
-        const fingerprint = await getClientFingerprint();
-
-        if (!checkRateLimit(`comment:${fingerprint}`, 5, 60_000)) {
-            return { success: false, error: 'Too many requests' };
+        // --- Auth Check ---
+        const user = await getAuthUser();
+        if (!user) {
+            // Check if admin is deleting it
+            const authResult = await verifyAdmin();
+            if (!authResult.isAdmin) {
+                return { success: false, error: 'Unauthorized.' };
+            }
         }
 
         await dbConnect();
@@ -776,12 +777,17 @@ export async function deleteComment(commentId: string): Promise<{ success: boole
             return { success: false, error: 'Comment not found.' };
         }
 
-        if (comment.userFingerprint !== fingerprint) {
-            // Check if admin is deleting it
-            const authResult = await verifyAdmin();
-            if (!authResult.isAdmin) {
-                return { success: false, error: 'Unauthorized.' };
+        if (user) {
+            // User is logged in, check if it's their comment
+            if (comment.userId !== user.id) {
+                // If not their comment, check if they are admin
+                const authResult = await verifyAdmin();
+                if (!authResult.isAdmin) {
+                    return { success: false, error: 'Unauthorized.' };
+                }
             }
+        } else {
+            // user is null, but we already checked verifyAdmin above if user is null
         }
 
         await comment.deleteOne();
@@ -790,5 +796,105 @@ export async function deleteComment(commentId: string): Promise<{ success: boole
     } catch (err) {
         console.error('[deleteComment] Error:', err);
         return { success: false, error: 'Unexpected error.' };
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Suggestion Actions (MongoDB)
+// ---------------------------------------------------------------------------
+
+export async function submitSuggestion(text: string): Promise<{ success: boolean; error?: string }> {
+    try {
+        if (!text || typeof text !== 'string' || text.trim().length === 0) {
+            return { success: false, error: 'Suggestion text cannot be empty.' };
+        }
+
+        if (text.length > 500) {
+            return { success: false, error: 'Suggestion cannot be more than 500 characters.' };
+        }
+
+        // --- Auth Check ---
+        const user = await getAuthUser();
+        if (!user) {
+            return { success: false, error: 'You must be logged in to submit a suggestion.' };
+        }
+
+        const ip = await getClientIp();
+
+        if (await isIpProxy(ip)) {
+            return { success: false, error: 'Proxy or VPN detected. Please disable it to submit a suggestion.' };
+        }
+
+        if (!checkRateLimit(`suggestion:${user.id}`, 3, 60_000)) {
+            return { success: false, error: 'Too many suggestions. Please try again in a minute.' };
+        }
+
+        await dbConnect();
+
+        await Suggestion.create({
+            userId: user.id,
+            text: text.trim(),
+            status: 'pending',
+        });
+
+        return { success: true };
+    } catch (err) {
+        console.error('[submitSuggestion] Error:', err);
+        return { success: false, error: 'An unexpected error occurred.' };
+    }
+}
+
+export async function fetchSuggestions(): Promise<{
+    success: boolean;
+    data?: any[];
+    error?: string;
+}> {
+    try {
+        const authResult = await verifyAdmin();
+        if (!authResult.isAdmin) {
+            return { success: false, error: authResult.error };
+        }
+
+        await dbConnect();
+
+        const suggestions = await Suggestion.find({})
+            .sort({ createdAt: -1 })
+            .lean();
+
+        const sanitized = suggestions.map((s: any) => ({
+            id: s._id.toString(),
+            text: s.text,
+            status: s.status,
+            createdAt: s.createdAt,
+        }));
+
+        return { success: true, data: sanitized };
+    } catch (err) {
+        console.error('[fetchSuggestions] Error:', err);
+        return { success: false, error: 'An unexpected error occurred.' };
+    }
+}
+
+export async function manageSuggestion(id: string, status: 'read' | 'archived' | 'pending'): Promise<{ success: boolean; error?: string }> {
+    try {
+        const authResult = await verifyAdmin();
+        if (!authResult.isAdmin) {
+            return { success: false, error: authResult.error };
+        }
+
+        await dbConnect();
+
+        const suggestion = await Suggestion.findById(id);
+        if (!suggestion) {
+            return { success: false, error: 'Suggestion not found.' };
+        }
+
+        suggestion.status = status;
+        await suggestion.save();
+
+        return { success: true };
+    } catch (err) {
+        console.error('[manageSuggestion] Error:', err);
+        return { success: false, error: 'An unexpected error occurred.' };
     }
 }

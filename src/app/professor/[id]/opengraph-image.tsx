@@ -148,7 +148,7 @@ export default async function Image(props: { params: Promise<{ id: string }> }) 
                         {professor.name}
                     </h1>
                     <p style={{ fontSize: 24, color: '#64748b', margin: 0, textAlign: 'center' }}>
-                        Teacher Ratings by Wezeso's Community
+                        Teacher Ratings
                     </p>
                 </div>
 
