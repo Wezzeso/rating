@@ -126,3 +126,6 @@ AS $$
   GROUP BY
     p.id;
 $$;
+-- 8. ENABLE REALTIME
+ALTER PUBLICATION supabase_realtime ADD TABLE public.professors;
+ALTER PUBLICATION supabase_realtime ADD TABLE public.ratings;

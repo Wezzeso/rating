@@ -1,31 +1,10 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { ref, onValue } from 'firebase/database';
-import { db } from '@/lib/firebase';
+import { usePresence } from '@/components/providers/PresenceProvider';
 import { Activity } from 'lucide-react';
 
 export function LiveVisitorCount() {
-    const [count, setCount] = useState<number>(0);
-
-    useEffect(() => {
-        if (!db) return;
-        const visitorsRef = ref(db, 'visitors');
-
-        const unsubscribe = onValue(visitorsRef, (snapshot) => {
-            const data = snapshot.val();
-            if (data) {
-                // Count how many valid visitor objects exist
-                const visitorKeys = Object.keys(data);
-                const activeCount = visitorKeys.filter(key => data[key]?.online).length;
-                setCount(activeCount);
-            } else {
-                setCount(0);
-            }
-        });
-
-        return () => unsubscribe();
-    }, []);
+    const { visitorCount } = usePresence();
 
     return (
         <div className="col-span-1 md:col-span-1 lg:col-span-2 bg-zinc-900 border border-zinc-800 dark:bg-black text-white rounded-3xl p-6 md:p-8 flex flex-col justify-between overflow-hidden relative shadow-lg transition-all hover:scale-[1.01] hover:shadow-xl">
@@ -44,7 +23,7 @@ export function LiveVisitorCount() {
             </div>
 
             <div className="relative z-10 z-[2]">
-                <p className="text-5xl font-black tracking-tighter text-white">{count}</p>
+                <p className="text-5xl font-black tracking-tighter text-white">{visitorCount}</p>
                 <p className="text-sm font-medium text-zinc-300 mt-2">Active Visitors on Site</p>
             </div>
 

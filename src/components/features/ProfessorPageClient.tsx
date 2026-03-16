@@ -7,6 +7,7 @@ import Link from "next/link";
 import { StarRating } from "@/components/ui/StarRating";
 import { ShareButton } from "@/components/ui/ShareButton";
 import { RateModal } from "@/components/modals/RateModal";
+import { useSupabaseBroadcast } from "@/hooks/useSupabaseBroadcast";
 import teachersDataRaw from "../../../data/teachers_data.json";
 import {
     submitComment,
@@ -59,6 +60,15 @@ export function ProfessorPageClient({ professor }: ProfessorPageClientProps) {
         loadCommentsData();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [professor.id]);
+
+    // Subscribe to real-time rating updates
+    useSupabaseBroadcast(
+        `professor:${professor.id}`,
+        'rating_updated',
+        (payload) => {
+            loadCommentsData();
+        }
+    );
 
     const loadCommentsData = async () => {
         setCommentsLoading(true);
@@ -244,11 +254,11 @@ export function ProfessorPageClient({ professor }: ProfessorPageClientProps) {
             {/* Back button */}
             <div className="mb-8">
                 <button
-                    onClick={() => router.push("/")}
+                    onClick={() => router.back()}
                     className="flex items-center gap-2 text-sm text-gray-500 dark:text-zinc-400 hover:text-gray-900 dark:hover:text-zinc-100 group transition-colors"
                 >
                     <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
-                    Back to all professors
+                    Back
                 </button>
             </div>
 

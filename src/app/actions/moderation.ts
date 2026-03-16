@@ -31,6 +31,7 @@ export async function fetchPendingComments(): Promise<{
             status: c.status,
             createdAt: c.createdAt,
             userFingerprint: c.userFingerprint, // Admins can see footprint to track spam
+            userEmail: c.userEmail,
         }));
 
         return { success: true, data: sanitized };

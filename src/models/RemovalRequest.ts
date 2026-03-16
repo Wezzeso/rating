@@ -48,8 +48,4 @@ const RemovalRequestSchema = new mongoose.Schema<IRemovalRequest>(
     }
 );
 
-if (mongoose.models.RemovalRequest) {
-    delete mongoose.models.RemovalRequest;
-}
-
-export default mongoose.model<IRemovalRequest>('RemovalRequest', RemovalRequestSchema);
+export default mongoose.models.RemovalRequest || mongoose.model<IRemovalRequest>('RemovalRequest', RemovalRequestSchema);

@@ -25,7 +25,8 @@ interface PendingComment {
     text: string;
     status: string;
     createdAt: string;
-    userFingerprint: string;
+    userEmail?: string;
+    userFingerprint?: string;
 }
 
 export default function CommentsModerationPage() {
@@ -182,11 +183,16 @@ export default function CommentsModerationPage() {
                                     </div>
                                     <div className="flex flex-wrap items-center gap-3 text-xs font-medium">
                                         <span className="text-gray-600 dark:text-zinc-400 bg-gray-100 dark:bg-zinc-800/80 px-3 py-1.5 rounded-lg border border-gray-200 dark:border-zinc-700/50 flex items-center gap-1.5">
-                                            <span className="w-2 h-2 rounded-full bg-blue-400"></span> Prof: {comment.professorId.slice(0, 8)}...
+                                            <span className="w-2 h-2 rounded-full bg-blue-400"></span> Prof: {comment.professorId?.slice(0, 8) || "Unknown"}...
                                         </span>
                                         <span className="text-gray-600 dark:text-zinc-400 bg-gray-100 dark:bg-zinc-800/80 px-3 py-1.5 rounded-lg border border-gray-200 dark:border-zinc-700/50 flex items-center gap-1.5">
-                                            <span className="w-2 h-2 rounded-full bg-purple-400"></span> User: {comment.userFingerprint.slice(0, 8)}...
+                                            <span className="w-2 h-2 rounded-full bg-purple-400"></span> User: {comment.userFingerprint?.slice(0, 8) || "Unknown"}...
                                         </span>
+                                        {comment.userEmail && (
+                                            <span className="text-gray-600 dark:text-zinc-400 bg-gray-100 dark:bg-zinc-800/80 px-3 py-1.5 rounded-lg border border-gray-200 dark:border-zinc-700/50 flex items-center gap-1.5">
+                                                <span className="w-2 h-2 rounded-full bg-emerald-400"></span> {comment.userEmail}
+                                            </span>
+                                        )}
                                         <span className="text-gray-400 dark:text-zinc-500 ml-1">
                                             {new Date(comment.createdAt).toLocaleString()}
                                         </span>

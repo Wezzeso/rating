@@ -6,7 +6,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { AuthProvider } from "@/components/providers/AuthProvider";
-import { LiveVisitorTracker } from "@/components/features/LiveVisitorTracker";
+import { PresenceProvider } from "@/components/providers/PresenceProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,11 +25,12 @@ export default function RootLayout({
       <body className={`${inter.className} antialiased flex flex-col min-h-screen bg-background text-foreground`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <AuthProvider>
-            <Header />
-            <main className="flex-1 w-full">{children}</main>
-            <Footer />
+            <PresenceProvider>
+              <Header />
+              <main className="flex-1 w-full">{children}</main>
+              <Footer />
+            </PresenceProvider>
             <Toaster />
-            <LiveVisitorTracker />
           </AuthProvider>
         </ThemeProvider>
       </body>

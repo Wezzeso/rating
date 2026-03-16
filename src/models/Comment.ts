@@ -3,8 +3,10 @@ import mongoose from 'mongoose';
 export interface IComment extends mongoose.Document {
     professorId: string;
     userId: string;
+    userEmail?: string;
     text: string;
     status: 'pending' | 'approved' | 'rejected';
+    userFingerprint?: string;
     createdAt: Date;
 }
 
@@ -30,6 +32,14 @@ const CommentSchema = new mongoose.Schema<IComment>(
             enum: ['pending', 'approved', 'rejected'],
             default: 'pending',
             index: true,
+        },
+        userFingerprint: {
+            type: String,
+            required: false,
+        },
+        userEmail: {
+            type: String,
+            required: false,
         },
     },
     {

@@ -607,6 +607,7 @@ export async function submitComment(data: {
             return { success: false, error: 'Too many comments. Please try again in a minute.' };
         }
 
+        const fingerprint = await getClientFingerprint();
         await dbConnect();
 
         // Check if user already commented for this professor
@@ -618,7 +619,9 @@ export async function submitComment(data: {
         await Comment.create({
             professorId,
             userId: user.id,
+            userEmail: user.email,
             text: text.trim(),
+            userFingerprint: fingerprint,
             status: 'pending', // Auto-moderation might override this later or admin will approve
         });
 
@@ -648,7 +651,7 @@ export async function fetchApprovedComments(professorId: string): Promise<{
             .sort({ createdAt: -1 })
             .lean();
 
-        // We sanitize output to not leak userFingerprint to everyone
+        // We sanitize output to not leak userFingerprint or userEmail to everyone
         const sanitizedComments = comments.map(c => ({
             id: c._id.toString(),
             text: c.text,
