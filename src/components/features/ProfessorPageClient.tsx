@@ -43,6 +43,7 @@ interface ProfessorPageClientProps {
 
 export function ProfessorPageClient({ professor }: ProfessorPageClientProps) {
     const router = useRouter();
+    const [localProfessor, setLocalProfessor] = useState(professor);
     const [isRateModalOpen, setIsRateModalOpen] = useState(false);
 
     // Comments State
@@ -57,9 +58,10 @@ export function ProfessorPageClient({ professor }: ProfessorPageClientProps) {
     const [isRated, setIsRated] = useState(false);
 
     useEffect(() => {
+        setLocalProfessor(professor);
         loadCommentsData();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [professor.id]);
+    }, [professor.id, professor]);
 
     // Subscribe to real-time rating updates
     useSupabaseBroadcast(
@@ -86,6 +88,7 @@ export function ProfessorPageClient({ professor }: ProfessorPageClientProps) {
         }
         if (ratingRes.success && ratingRes.data) {
             setIsRated(true);
+            // Optionally update localProfessor with the actual data from DB if counts/ratings differ
         }
         setCommentsLoading(false);
     };
@@ -138,35 +141,35 @@ export function ProfessorPageClient({ professor }: ProfessorPageClientProps) {
     // Calculate overall rating
     const overallRating = useMemo(() => {
         const ratings: number[] = [];
-        if (professor.teaching_count > 0) ratings.push(professor.teaching_rating);
-        if (professor.proctoring_count > 0) ratings.push(professor.proctoring_rating);
+        if (localProfessor.teaching_count > 0) ratings.push(localProfessor.teaching_rating);
+        if (localProfessor.proctoring_count > 0) ratings.push(localProfessor.proctoring_rating);
         if (ratings.length === 0) return 0;
         return ratings.reduce((a, b) => a + b, 0) / ratings.length;
-    }, [professor]);
+    }, [localProfessor]);
 
-    const totalReviews = professor.teaching_count + professor.proctoring_count;
+    const totalReviews = localProfessor.teaching_count + localProfessor.proctoring_count;
 
     // Schedule data lookup
     const scheduleInfo = useMemo(() => {
         let match = teachersData.find(
-            t => t.teacherName.toLowerCase() === professor.name.toLowerCase()
+            t => t.teacherName.toLowerCase() === localProfessor.name.toLowerCase()
         );
         if (!match) {
             match = teachersData.find(t => {
                 const parts1 = t.teacherName.toLowerCase().split(/[ \-]/);
-                const parts2 = professor.name.toLowerCase().split(/[ \-]/);
+                const parts2 = localProfessor.name.toLowerCase().split(/[ \-]/);
                 const intersection = parts1.filter(p => parts2.includes(p));
                 return intersection.length >= 2;
             });
         }
         if (!match) {
             match = teachersData.find(
-                t => t.teacherName.toLowerCase().includes(professor.name.toLowerCase()) ||
-                    professor.name.toLowerCase().includes(t.teacherName.toLowerCase())
+                t => t.teacherName.toLowerCase().includes(localProfessor.name.toLowerCase()) ||
+                    localProfessor.name.toLowerCase().includes(t.teacherName.toLowerCase())
             );
         }
         return match || null;
-    }, [professor]);
+    }, [localProfessor]);
 
     const TAG_MARKS: Record<string, number> = {
         "Best teacher": 0.5,
@@ -189,9 +192,9 @@ export function ProfessorPageClient({ professor }: ProfessorPageClientProps) {
     };
 
     const tagScore = useMemo(() => {
-        if (!professor.top_tags) return 0;
-        return professor.top_tags.reduce((sum, tag) => sum + (TAG_MARKS[tag] || 0), 0);
-    }, [professor.top_tags]);
+        if (!localProfessor.top_tags) return 0;
+        return localProfessor.top_tags.reduce((sum: number, tag: string) => sum + (TAG_MARKS[tag] || 0), 0);
+    }, [localProfessor.top_tags]);
 
     // Determine badge text
     const getBadge = () => {
@@ -266,7 +269,7 @@ export function ProfessorPageClient({ professor }: ProfessorPageClientProps) {
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10">
                 <div className="flex items-center gap-3">
                     <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-zinc-100 tracking-tight">
-                        {professor.name}
+                        {localProfessor.name}
                     </h1>
                     {isRated && (
                         <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded-lg text-xs font-bold uppercase tracking-wider border border-green-200 dark:border-green-900/50">
@@ -277,8 +280,8 @@ export function ProfessorPageClient({ professor }: ProfessorPageClientProps) {
                 </div>
                 <div className="flex items-center gap-3">
                     <ShareButton
-                        professorId={professor.id}
-                        professorName={professor.name}
+                        professorId={localProfessor.id}
+                        professorName={localProfessor.name}
                         showText
                         className="text-sm font-medium text-gray-600 dark:text-zinc-300 px-4 py-2 rounded-xl bg-gray-100 dark:bg-zinc-800 hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors"
                     />
@@ -305,11 +308,11 @@ export function ProfessorPageClient({ professor }: ProfessorPageClientProps) {
                     <BookOpen size={20} className="text-blue-500 mb-3" />
                     <span className="text-sm font-semibold text-gray-500 dark:text-zinc-500 uppercase tracking-wider mb-2">Teaching</span>
                     <div className="text-3xl font-bold text-gray-900 dark:text-zinc-100 tabular-nums mb-1">
-                        {professor.teaching_count > 0 ? Number(professor.teaching_rating).toFixed(1) : "—"}
+                        {localProfessor.teaching_count > 0 ? Number(localProfessor.teaching_rating).toFixed(1) : "—"}
                     </div>
                     <div className="flex flex-col items-center gap-1">
-                        <StarRating rating={professor.teaching_rating} size={14} />
-                        <span className="text-xs text-gray-400 dark:text-zinc-600">({professor.teaching_count} ratings)</span>
+                        <StarRating rating={localProfessor.teaching_rating} size={14} />
+                        <span className="text-xs text-gray-400 dark:text-zinc-600">({localProfessor.teaching_count} ratings)</span>
                     </div>
                 </div>
 
@@ -318,11 +321,11 @@ export function ProfessorPageClient({ professor }: ProfessorPageClientProps) {
                     <Shield size={20} className="text-purple-500 mb-3" />
                     <span className="text-sm font-semibold text-gray-500 dark:text-zinc-500 uppercase tracking-wider mb-2">Proctoring</span>
                     <div className="text-3xl font-bold text-gray-900 dark:text-zinc-100 tabular-nums mb-1">
-                        {professor.proctoring_count > 0 ? Number(professor.proctoring_rating).toFixed(1) : "—"}
+                        {localProfessor.proctoring_count > 0 ? Number(localProfessor.proctoring_rating).toFixed(1) : "—"}
                     </div>
                     <div className="flex flex-col items-center gap-1">
-                        <StarRating rating={professor.proctoring_rating} size={14} />
-                        <span className="text-xs text-gray-400 dark:text-zinc-600">({professor.proctoring_count} ratings)</span>
+                        <StarRating rating={localProfessor.proctoring_rating} size={14} />
+                        <span className="text-xs text-gray-400 dark:text-zinc-600">({localProfessor.proctoring_count} ratings)</span>
                     </div>
                 </div>
             </div>
@@ -331,14 +334,14 @@ export function ProfessorPageClient({ professor }: ProfessorPageClientProps) {
             <div className="bg-white dark:bg-zinc-900/20 rounded-3xl p-8 border border-gray-100 dark:border-zinc-800 mb-10">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                     {/* Tags */}
-                    {professor.top_tags && professor.top_tags.length > 0 && (
+                    {localProfessor.top_tags && localProfessor.top_tags.length > 0 && (
                         <div>
                             <div className="flex items-center gap-2 mb-4">
                                 <Tag size={18} className="text-gray-400 dark:text-zinc-500" />
                                 <h3 className="text-sm font-bold text-gray-900 dark:text-zinc-100 uppercase tracking-wider">Top Tags</h3>
                             </div>
                             <div className="flex flex-wrap gap-2">
-                                {professor.top_tags.map(tag => (
+                                {localProfessor.top_tags.map(tag => (
                                     <span key={tag} className="px-4 py-1.5 rounded-xl text-xs font-medium bg-gray-50 dark:bg-zinc-800 text-gray-600 dark:text-zinc-300 border border-transparent dark:border-zinc-700">
                                         {tag}
                                     </span>
@@ -515,11 +518,31 @@ export function ProfessorPageClient({ professor }: ProfessorPageClientProps) {
 
             {/* Rate Modal */}
             <RateModal
-                professor={professor}
+                professor={localProfessor}
                 isOpen={isRateModalOpen}
                 onClose={() => setIsRateModalOpen(false)}
-                onSuccess={() => {
-                    window.location.reload();
+                onSuccess={(data) => {
+                    setIsRated(true);
+                    setLocalProfessor(prev => {
+                        const newProf = { ...prev };
+                        if (data.teaching !== null) {
+                            const currentSum = prev.teaching_rating * prev.teaching_count;
+                            newProf.teaching_count = prev.teaching_count + 1;
+                            newProf.teaching_rating = (currentSum + data.teaching) / newProf.teaching_count;
+                        }
+                        if (data.proctoring !== null) {
+                            const currentSum = prev.proctoring_rating * prev.proctoring_count;
+                            newProf.proctoring_count = prev.proctoring_count + 1;
+                            newProf.proctoring_rating = (currentSum + data.proctoring) / newProf.proctoring_count;
+                        }
+                        // Simple tag update (adding new tags if they are not already there)
+                        if (data.tags && data.tags.length > 0) {
+                            const currentTags = prev.top_tags || [];
+                            const combined = Array.from(new Set([...currentTags, ...data.tags])).slice(0, 3);
+                            newProf.top_tags = combined;
+                        }
+                        return newProf;
+                    });
                 }}
             />
         </div>

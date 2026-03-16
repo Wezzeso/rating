@@ -267,7 +267,8 @@ export async function submitRating(data: {
         const { error: insertError } = await admin.from('ratings').insert({
             professor_id: professorId,
             user_id: user.id,
-            user_fingerprint: null, // Wipe fingerprint or keep for legacy? Schema allowed null.
+            user_email: user.email,
+            user_fingerprint: null,
             teaching: teachingScore,
             proctoring: proctoringScore,
             tags: tagsToInsert.length > 0 ? tagsToInsert : null,
@@ -275,10 +276,13 @@ export async function submitRating(data: {
 
         if (insertError) {
             if (insertError.code === '23505') {
-                return { success: false, error: 'You have already rated this professor.' };
+                return { success: false, error: 'You (or someone with your email) has already rated this professor.' };
             }
-            console.error('[submitRating] Insert error:', insertError.code);
-            return { success: false, error: 'An error occurred. Please try again.' };
+            if (insertError.code === '42883' && insertError.message?.includes('realtime.broadcast')) {
+                return { success: false, error: 'Database Error: A real-time notification trigger is broken. Please contact an admin to fix the "realtime.broadcast" function or drop the trigger on the ratings table.' };
+            }
+            console.error('[submitRating] Insert error:', insertError.code, insertError.message);
+            return { success: false, error: `An error occurred (${insertError.code}): ${insertError.message}` };
         }
 
         return { success: true };
@@ -309,7 +313,7 @@ export async function fetchUserRating(professorId: string): Promise<{
             .from('ratings')
             .select('*')
             .eq('professor_id', professorId)
-            .eq('user_id', user.id)
+            .or(`user_id.eq.${user.id},user_email.eq.${user.email}`)
             .single();
 
         if (error && error.code !== 'PGRST116') { // PGRST116 is "no rows returned"
@@ -340,7 +344,7 @@ export async function fetchUserRatedProfessorIds(): Promise<{
         const { data, error } = await admin
             .from('ratings')
             .select('professor_id')
-            .eq('user_id', user.id);
+            .or(`user_id.eq.${user.id},user_email.eq.${user.email}`);
 
         if (error) {
             console.error('[fetchUserRatedProfessorIds] Error:', error.message);

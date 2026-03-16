@@ -15,7 +15,7 @@ interface RateModalProps {
     };
     isOpen: boolean;
     onClose: () => void;
-    onSuccess: () => void;
+    onSuccess: (data: any) => void;
 }
 
 export function RateModal({ professor, isOpen, onClose, onSuccess }: RateModalProps) {
@@ -90,7 +90,11 @@ export function RateModal({ professor, isOpen, onClose, onSuccess }: RateModalPr
                 toast.error(result.error || "An error occurred.");
             } else {
                 toast.success("Rating submitted!");
-                onSuccess();
+                onSuccess({
+                    teaching: teachingRating === 0 ? null : teachingRating,
+                    proctoring: proctoringRating === 0 ? null : proctoringRating,
+                    tags: selectedTags
+                });
                 onClose();
                 setTeachingRating(0);
                 setProctoringRating(0);
