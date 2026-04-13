@@ -2,7 +2,7 @@ import { ProfessorTable } from "@/components/features/ProfessorTable";
 import { createAdminClient, createServerComponentClient } from "@/lib/supabase-server";
 import { Suspense } from "react";
 import Link from "next/link";
-import { MessageSquarePlus } from "lucide-react";
+import { GraduationCap, MessageSquarePlus } from "lucide-react";
 import { fetchUserRatedProfessorIds } from "@/app/actions";
 
 export const revalidate = 60; // Cache for 60 seconds to prevent DoS via repeated page loads
@@ -43,9 +43,23 @@ export default async function ProfessorsPage() {
   return (
     <div className="py-8 sm:py-16 px-4 sm:px-6 w-full max-w-5xl mx-auto">
       <div className="w-full">
-        <h1 className="text-3xl font-semibold mb-6 sm:mb-8 text-gray-900 dark:text-zinc-100 tracking-tight">
-          Professor Ratings
-        </h1>
+        <div className="mb-6 sm:mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <h1 className="text-3xl font-semibold text-gray-900 dark:text-zinc-100 tracking-tight">
+              Professor Ratings
+            </h1>
+            <p className="mt-2 text-sm text-gray-500 dark:text-zinc-400 max-w-2xl">
+              Search every approved professor, or jump to a dedicated discipline page to browse by subject.
+            </p>
+          </div>
+          <Link
+            href="/disciplines"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 text-sm text-gray-600 dark:text-zinc-100 hover:text-gray-900 dark:hover:text-zinc-100 border border-gray-200 dark:border-zinc-800 rounded-md px-3 py-2 hover:bg-gray-50 dark:hover:bg-zinc-900 transition-colors"
+          >
+            <GraduationCap size={16} />
+            Browse by Discipline
+          </Link>
+        </div>
         <Suspense fallback={<div className="py-8 text-center text-gray-500">Loading professors...</div>}>
           <ProfessorTable initialProfessors={approvedProfessors} ratedProfessorIds={ratedProfessorIds} />
         </Suspense>

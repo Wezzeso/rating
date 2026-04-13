@@ -43,6 +43,11 @@ export function Header() {
             : user.email
         : '';
 
+    const navigationLinks = [
+        { href: '/groups', label: 'Find My Group' },
+        { href: '/disciplines', label: 'Disciplines' },
+    ];
+
     return (
         <header className="sticky top-0 z-50 w-full border-b border-gray-200 dark:border-zinc-800 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md ">
             <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-4 sm:px-6 relative">
@@ -54,23 +59,31 @@ export function Header() {
                         <span className="text-xl font-bold tracking-tight text-gray-900 dark:text-zinc-100 group-hover:text-gray-700 dark:group-hover:text-zinc-300  truncate max-w-[200px] sm:max-w-none">Rate your professor</span>
                     </Link>
 
-                    <Link
-                        href="/groups"
-                        className="text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors"
-                    >
-                        Find My Group
-                    </Link>
+                    <nav className="hidden sm:flex items-center gap-4 ml-3">
+                        {navigationLinks.map((link) => (
+                            <Link
+                                key={link.href}
+                                href={link.href}
+                                className="text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors"
+                            >
+                                {link.label}
+                            </Link>
+                        ))}
+                    </nav>
                 </div>
 
                 <div className="flex items-center gap-3">
                     {/* Mobile Navigation */}
                     <nav className="sm:hidden flex items-center mr-1 gap-2">
-                        <Link
-                            href="/groups"
-                            className="text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors"
-                        >
-                            Groups
-                        </Link>
+                        {navigationLinks.map((link) => (
+                            <Link
+                                key={link.href}
+                                href={link.href}
+                                className="text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors"
+                            >
+                                {link.label === 'Find My Group' ? 'Groups' : link.label}
+                            </Link>
+                        ))}
                         <Link
                             href="/"
                             className="text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors"
